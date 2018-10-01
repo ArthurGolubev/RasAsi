@@ -72,7 +72,7 @@ def download():
         logFile.close
 
 if __name__ != '__main__':
-    print('ЗАПУСК МОДУЛЯ')
+    print(f'ЗАПУСК МОДУЛЯ - {__name__}')
 else:
     print('ВЫ ТЕСТИРУЕТЕ МОДУЛЬ')
     # download()

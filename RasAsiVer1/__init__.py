@@ -16,4 +16,5 @@ RasAsiVer1.Download_Packeg.downloadScript.a2
 RasAsiVer1.a2
 """
 from .Download_Packeg import download, prost
+from .Download_Packeg import copyfun, prost2
 
