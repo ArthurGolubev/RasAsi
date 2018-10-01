@@ -73,4 +73,6 @@ def download():
 
 if __name__ != '__main__':
     print('ЗАПУСК МОДУЛЯ')
+else:
+    print('ВЫ ТЕСТИРУЕТЕ МОДУЛЬ')
     # download()
