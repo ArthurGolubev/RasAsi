@@ -1,4 +1,5 @@
-import os, urllib.request, time
+import os.makedirs, os.chdir, os.listdir
+import urllib.request, time, datetime.timedelta
 
 def prost():
     print('privet!!')
@@ -25,7 +26,7 @@ def download():
                 elapsedTime = time.time() - startTime
                 print(f'скачался файл номер {i} - {list1[7]}\n')
                 logFile.write(f'скачался файл номер {i} - {list1[7]}\n')
-                logFile.write(f'Время скачивания {elapsedTime}\n')
+                logFile.write(f'Время скачивания {datetime.timedelta(elapsedTime)}\n')
             except FileExistsError:                                                                                     #Если папка уже существует (создалоась при первой итерации для уникального названия директории)
                 os.chdir(f'D:\REMOTE SENSING IMG\DigitalGlobe\{list1[3]}\{list1[4]}\{list1[5]}')
                 file1_number.extend(os.listdir())                                                                       #расширяемый список всех скачаных файлов (итерация 1 - файл1, файл2. итерация 2 - файл1, файл2, файл1, файл2, файл3)
@@ -55,7 +56,7 @@ def download():
                 elapsedTime = time.time() - startTime
                 print(f'скачался файл номер {i+1} - {list1[7]}\n')
                 logFile.write(f'скачался файл номер {i+1} - {list1[7]}\n')
-                logFile.write(f'Время скачивания {elapsedTime}\n')
+                logFile.write(f'Время скачивания {datetime.timedelta(elapsedTime)}\n')
                 logFile.close()
         logFile = open('D:\REMOTE SENSING IMG\logFile.txt', 'a')                                                        #Общий лог за скачивание
         logFile.write('\n\n')
