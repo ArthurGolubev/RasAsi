@@ -8,24 +8,18 @@ RasAsiVer1.prost2()
 """
 необходим список всех доступных операций
 """
-
-
-def test1():
-    print(1)
-print(dir(RasAsiVer1))
-capabilities_1 = dir(RasAsiVer1)
-print(len(capabilities_1))
-for i in range(len(capabilities_1)-1):
-    print(i)
-    if capabilities_1[i].endswith('__'):
-        capabilities_1.remove(capabilities_1[i])
-    print(capabilities_1[i])
-print(f'{capabilities_1} mark #1')
+capabilities1 = []
+for i in dir(RasAsiVer1):
+    if i.startswith('_') == false:
+        capabilities1.append(i)
+print(f'Список доступных команд (тест1)\n{capabilities1}')
 
 """
 почитать документацию
 dir()
 """
-# help(list)
+
+#добавить вывод доступных команд построено с нумерацией
+#создать словарик с ключами - нумерацией и содержанием - доступными функциями
 
 
