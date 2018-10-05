@@ -1,6 +1,5 @@
 from .downloadScript_03 import download, prost
 from .file_transfer import copyfun, prost2
-# from RasAsiVer1 import mainMenu
 
 def listOfOrder():
     variable1 = 0
@@ -21,6 +20,7 @@ def listOfOrder():
         else:
             print('Вы ввели не верную команду\nпопробуйте сново\n[press any key]')
             pass
+
 """
 получается достаёт из текущей папки скрипт downloadScript_03
 и импортирует из него переменную a2

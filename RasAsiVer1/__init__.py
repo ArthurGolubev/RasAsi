@@ -1,3 +1,17 @@
+from .Download_Packeg import listOfOrder, download, prost, copyfun, prost2
+def mainMenu():
+    variable1 = 0
+    while variable1==0:
+        print('Список доступных команд:\n1 - Download_Packeg\n2 - stop')
+        comand1 = input('Выберете пакет\t')
+        if comand1 == '1':
+            listOfOrder()
+        elif comand1 == '2':
+            pass
+        else:
+            print('Вы ввели не верную команду\nпопробуйте сново\n[press any key]')
+            pass
+
 """
 Импортируется пакет (библиотека) RasAsiVer1
 Это инициализирует в ней файл __init__.py (RasAsiVer1/__init__.py)
@@ -15,18 +29,3 @@ RasAsiVer1.Download_Packeg.downloadScript.a2
 мы можем обращатся к переменной просто
 RasAsiVer1.a2
 """
-from .Download_Packeg import listOfOrder, download, prost, copyfun, prost2
-def mainMenu():
-    variable1 = 0
-    while variable1==0:
-        print('Список доступных команд:\n1 - Download_Packeg\n2 - stop')
-        comand1 = input('Выберете пакет\t')
-        if comand1 == '1':
-            listOfOrder()
-        elif comand1 == '2':
-            pass
-        else:
-            print('Вы ввели не верную команду\nпопробуйте сново\n[press any key]')
-            pass
-
-
