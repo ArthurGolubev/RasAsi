@@ -1,4 +1,4 @@
-from .downloadScript_03 import download, prost
+from .downloadScript_03 import listOfOrder, download, prost
 from .file_transfer import copyfun, prost2
 """
 получается достаёт из текущей папки скрипт downloadScript_03

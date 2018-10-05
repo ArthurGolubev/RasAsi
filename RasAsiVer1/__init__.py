@@ -15,6 +15,5 @@ RasAsiVer1.Download_Packeg.downloadScript.a2
 мы можем обращатся к переменной просто
 RasAsiVer1.a2
 """
-from .Download_Packeg import download, prost
-from .Download_Packeg import copyfun, prost2
+from .Download_Packeg import listOfOrder, download, prost, copyfun, prost2
 

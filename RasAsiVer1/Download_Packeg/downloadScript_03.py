@@ -1,5 +1,11 @@
 import urllib.request, time, os, datetime
 
+def listOfOrder():
+    DownloadP = {1:prost(), 2:download()}
+    print('Доступные функции модуля Download')
+    for i in range(0, len(DownloadP)):
+        print(f'{i+1} - {DownloadP[i+1]}')
+
 def prost():
     print('privet from download!!')
 def download():
