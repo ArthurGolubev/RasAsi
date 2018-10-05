@@ -7,8 +7,7 @@ RasAsiVer1.prost2()
 """
 необходим список всех доступных операций
 """
-RasAsiVer1.listOfOrder()
-
+RasAsiVer1.mainMenu()
 """
 почитать документацию
 dir()
