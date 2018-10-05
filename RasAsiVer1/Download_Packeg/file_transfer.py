@@ -14,7 +14,7 @@ def copyfun():
     numberFile = 0
 
 def prost2():
-    print('privet_filetransfer')
+    print('privet from transfer')
 
 if __name__ != '__main__':
     print(f'ЗАПУСК МОДУЛЯ - {__name__}')

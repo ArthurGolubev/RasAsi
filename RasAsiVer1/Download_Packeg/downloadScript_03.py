@@ -1,8 +1,7 @@
-import os.makedirs, os.chdir, os.listdir
-import urllib.request, time, datetime.timedelta
+import urllib.request, time, os, datetime
 
 def prost():
-    print('privet!!')
+    print('privet from download!!')
 def download():
     file1_number = []
     with open('D:\REMOTE SENSING IMG\purl_list.txt', 'r') as file1:
