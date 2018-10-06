@@ -15,13 +15,11 @@ def copyfun():
     creatLogName = f'{TimeNow.day}-{TimeNow.month}-{TimeNow.year}_{TimeNow.hour}-{TimeNow.minute}'
     with open(rf'F:\REMOTE SENSING DATA\logFile_{creatLogName}.txt', 'w') as logFile:
         for i in newDirInPHHD:
-            startTime = datetime.datetime.now()
             shutil.copytree(rf'G:\REMOTE SENSING IMG\DigitalGlobe\{i}', rf'F:\REMOTE SENSING DATA\{i}')
-            endTime = datetime.datetime.now()
-            elapsedTime = endTime - startTime
-            logFile.write(f'Время копирования файлов - {elapsedTime}')
-            logFile.write(f'Время выполнения функции copyfun - {endTime - TimeNow}')
-
+        endTime = datetime.datetime.now()
+        elapsedTime = endTime - TimeNow
+        logFile.write(f'Время копирования файлов - {elapsedTime}\n')
+        print('Done!')
     option1 = input('Задача завершина\nОткрыть файл-лог? (1/0)\t')
     if int(option1):
         os.startfile(rf'F:\REMOTE SENSING DATA\logFile_{creatLogName}.txt')
