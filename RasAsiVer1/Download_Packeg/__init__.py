@@ -8,9 +8,10 @@ def listOfOrder():
         comand1 = input('Введите команду:\t')
         if comand1 == '1':
             prost()
-            pass
+            input('[press Enter]')
         elif comand1 == '2':
             prost2()
+            input('[press Enter]')
         elif comand1 == '3':
             download()
         elif comand1 == '4':
@@ -18,8 +19,8 @@ def listOfOrder():
         elif comand1 == '5':
             return 0
         else:
-            print('Вы ввели не верную команду\nпопробуйте сново\n[press any key]')
-            pass
+            print('Вы ввели не верную команду\nпопробуйте сново\n[press Enter]')
+            input() #ожидание пользователя
 
 """
 получается достаёт из текущей папки скрипт downloadScript_03

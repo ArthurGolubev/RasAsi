@@ -67,11 +67,19 @@ def download():
         v2 = 0
         for i2 in listdir1:                                                                                             #Если скачивалось в 2 и более директории
             os.chdir(f'D:\REMOTE SENSING IMG\DigitalGlobe\{list1[3]}\{i2}')
-            logFile.write(f'Директория {os.getcwd()}\n файлов - {len(os.listdir())}\n')
+            logFile.write(f'Директория {os.getcwd()}\nфайлов - {len(os.listdir())}\n')
             v2 += len(os.listdir())
         logFile.write(f'Общее время выполнение программы - {datetime.timedelta(seconds = overallTime//1)}\n')
         logFile.write(f'Скачано файлов {v2} из {links_number}')
         logFile.close
+
+    option1 = input('Задача завершина\nОткрыть файл-лог? (1/0)\t')
+    if int(option1):
+        os.startfile('D:\REMOTE SENSING IMG\logFile.txt')
+    else:
+        return 0
+
+
 
 if __name__ != '__main__':
     print(f'ЗАПУСК МОДУЛЯ - {__name__}')
