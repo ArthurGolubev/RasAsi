@@ -1,4 +1,4 @@
-import os, shutil, datetime
+import os, shutil, datetime, time
 
 
 def copyfun():
@@ -14,6 +14,7 @@ def copyfun():
 
     creatLogName = f'{TimeNow.day}-{TimeNow.month}-{TimeNow.year}_{TimeNow.hour}-{TimeNow.minute}'
     with open(rf'F:\REMOTE SENSING DATA\logFile_{creatLogName}.txt', 'w') as logFile:
+        logFile.write(f'Запуск программы\n{time.ctime()}\n')
         for i in newDirInPHHD:
             shutil.copytree(rf'G:\REMOTE SENSING IMG\DigitalGlobe\{i}', rf'F:\REMOTE SENSING DATA\{i}')
         endTime = datetime.datetime.now()
