@@ -65,6 +65,10 @@ def download():
         overallTime = time.time() - overallTime
         listdir1 = os.listdir()
         v2 = 0
+
+        """
+        посмотреть путь для просмотра файлов
+        """
         for i2 in listdir1:                                                                                             #Если скачивалось в 2 и более директории
             os.chdir(f'D:\REMOTE SENSING IMG\DigitalGlobe\{list1[3]}\{i2}')
             logFile.write(f'Директория {os.getcwd()}\nфайлов - {len(os.listdir())}\n')
@@ -80,10 +84,8 @@ def download():
         return 0
 
 
-
 if __name__ != '__main__':
     print(f'ЗАПУСК МОДУЛЯ - {__name__}')
-    # print(dict())
 else:
     print('ВЫ ТЕСТИРУЕТЕ МОДУЛЬ')
-    # download()
+    download()

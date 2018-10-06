@@ -1,17 +1,19 @@
 from .downloadScript_03 import download, prost
 from .file_transfer import copyfun, prost2
 
+
 def listOfOrder():
     variable1 = 0
     while variable1 == 0:
-        print('Доступные команды:\n1 - prost\n2 - prost 2\n3 - download\n4 - copyfun\n5 - back to main\n\n')
-        comand1 = input('Введите команду:\t')
+        print('\n-|Download_Packeg|-'
+              '\nДоступные команды:\n1 - prost\n2 - prost 2\n3 - download\n4 - copyfun\n5 - back to main')
+        comand1 = input('\nВведите команду:\t')
         if comand1 == '1':
             prost()
-            input('[press Enter]')
+            input('...[press Enter]...')
         elif comand1 == '2':
             prost2()
-            input('[press Enter]')
+            input('...[press Enter]...')
         elif comand1 == '3':
             download()
         elif comand1 == '4':
@@ -19,8 +21,9 @@ def listOfOrder():
         elif comand1 == '5':
             return 0
         else:
-            print('Вы ввели не верную команду\nпопробуйте сново\n[press Enter]')
-            input() #ожидание пользователя
+            print('\nВы ввели не верную команду\nпопробуйте сново')
+            input('...[press Enter]...')
+
 
 """
 получается достаёт из текущей папки скрипт downloadScript_03

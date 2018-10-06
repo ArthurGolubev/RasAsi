@@ -1,16 +1,24 @@
 from .Download_Packeg import listOfOrder, download, prost, copyfun, prost2
+import datetime
+
+startTimeRasAsi = datetime.datetime.now()
+
+
 def mainMenu():
     variable1 = 0
     while variable1==0:
-        print('Список доступных команд:\n1 - Download_Packeg\n2 - stop')
+        print('\nСписок доступных команд:\n1 - Download_Packeg\n2 - program runtime\n0 - stop')
         comand1 = input('Выберете пакет\t')
         if comand1 == '1':
             listOfOrder()
-        elif comand1 == '2':
+        elif comand1 == '0':
             raise SystemExit
+        elif comand1 == '2':
+            print(datetime.datetime.now() - startTimeRasAsi)
+            input('...[press Enter]...\n')
         else:
-            print('Вы ввели не верную команду\nпопробуйте сново\n[press any key]')
-            pass
+            print('\nВы ввели не верную команду\nпопробуйте сново')
+            input('...[press Enter]...')
 
 """
 Импортируется пакет (библиотека) RasAsiVer1
