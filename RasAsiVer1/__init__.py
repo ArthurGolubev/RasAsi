@@ -7,7 +7,7 @@ def mainMenu():
         if comand1 == '1':
             listOfOrder()
         elif comand1 == '2':
-            pass
+            raise SystemExit
         else:
             print('Вы ввели не верную команду\nпопробуйте сново\n[press any key]')
             pass
