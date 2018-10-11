@@ -76,7 +76,7 @@ def download():
         logFile.write(f'Общее время выполнение программы - {datetime.timedelta(seconds = overallTime//1)}\n')
         logFile.write(f'Скачано файлов {v2} из {links_number}')
         logFile.close
-
+    print('Done!')
     option1 = input('Задача завершина\nОткрыть файл-лог? (1/0)\t')
     if int(option1):
         os.startfile('D:\REMOTE SENSING IMG\logFile.txt')

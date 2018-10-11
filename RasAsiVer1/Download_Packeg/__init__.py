@@ -6,7 +6,7 @@ def listOfOrder():
     variable1 = 0
     while variable1 == 0:
         print('\n-|Download_Packeg|-'
-              '\nДоступные команды:\n1 - prost\n2 - prost 2\n3 - download\n4 - copyfun\n5 - back to main')
+              '\nДоступные команды:\n1 - prost\n2 - prost 2\n3 - download\n4 - copyfun\n0 - back to main')
         comand1 = input('\nВведите команду:\t')
         if comand1 == '1':
             prost()
@@ -16,9 +16,11 @@ def listOfOrder():
             input('...[press Enter]...')
         elif comand1 == '3':
             download()
+            input('...[press Enter]...')
         elif comand1 == '4':
             copyfun()
-        elif comand1 == '5':
+            input('...[press Enter]...')
+        elif comand1 == '0':
             return 0
         else:
             print('\nВы ввели не верную команду\nпопробуйте сново')
