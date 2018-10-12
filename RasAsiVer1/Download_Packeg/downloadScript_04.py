@@ -83,6 +83,7 @@ def downloadFuc(list1, string1, i, links_number, createlogName):
         urllib.request.urlretrieve(f'{string1}', f'{i}_{list1[7]}')
         elapsedTime = time.time() - startTime
         print(f'скачался файл номер {i} - {list1[7]}\n')
+        print(f'...Processing {i//(links_number//100)%...}')
         file1Size = (os.path.getsize(f'{i}_{list1[7]}')) // 1024 // 1024
         logFile.write(f'скачался файл номер {i} - {list1[7]}\n')
         logFile.write(f'Время скачивания {datetime.timedelta(seconds=elapsedTime//1)}\n')
