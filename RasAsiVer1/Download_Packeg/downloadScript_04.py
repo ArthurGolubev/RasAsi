@@ -23,14 +23,13 @@ def download():
                 os.makedirs(f'D:\REMOTE SENSING IMG\DigitalGlobe\{list1[3]}\{list1[4]}\{list1[5]}')
                 os.chdir(f'D:\REMOTE SENSING IMG\DigitalGlobe\{list1[3]}\{list1[4]}\{list1[5]}')
 
-                downloadFuc(list1, string1, i, links_number)                                                            #Скорее всего не будет работать, потому что в ней локальные переменные. Нужно передать в неё переменные -string1, list1, i
+                downloadFuc(list1, string1, i, links_number, createlogName)                                                            #Скорее всего не будет работать, потому что в ней локальные переменные. Нужно передать в неё переменные -string1, list1, i
 
             except FileExistsError:                                                                                     #Если папка уже существует (создалоась при первой итерации для уникального названия директории)
                 os.chdir(f'D:\REMOTE SENSING IMG\DigitalGlobe\{list1[3]}\{list1[4]}\{list1[5]}')
                 file1_number.extend(os.listdir())                                                                       #расширяемый список всех скачаных файлов (итерация 1 - файл1, файл2. итерация 2 - файл1, файл2, файл1, файл2, файл3)
-                print(f'файлов в папке - {len(set(file1_number))}')                                                     #длинна множества set уникальных имён файлов
+                print(f'файлов в папке - {len(set(file1_number))}\n')                                                   #длинна множества set уникальных имён файлов
                 v1 = len(set(file1_number))                                                                             #количество уникальных имён (скачанных файлов), а значит пройденных итераций по строкам файла с сылками
-                print('mark #2 ', v1)
                 """
                 парсит количество файлов в папке по текущей ссылке. Добавляет уникальные элементы в множество set
                 каждый раз обнавляет переменную v1
@@ -44,9 +43,10 @@ def download():
                 следующего по счёту в эту папку
                 """
                 if i < v1-1:
-                    print(f'файл {list1[7]} пропущен\n')
+                    print(f'файл {list1[7]} пропущен')
                     continue                                                                                            #пропуск итераций до последнего скачанного файла
-                downloadFuc(list1, string1, i, links_number)
+
+                downloadFuc(list1, string1, i, links_number, createlogName)
 
         with open(fr'D:\REMOTE SENSING IMG\logFile{createlogName}.txt', 'a') as logFile:                                #Общий лог за скачивание
             logFile.write('\n\n')
@@ -75,10 +75,10 @@ def download():
         return 0
 
 
-def downloadFuc(list1, string1, i, links_number):
+def downloadFuc(list1, string1, i, links_number, createlogName):
     with open(fr'D:\REMOTE SENSING IMG\logFile{createlogName}.txt', 'a') as logFile:
-        print(f'Итерация №{i+1} из {links_number}\n mark #1')                                                          #Позволяет перекачать последний файл в последовательности
-        logFile.write(f'Итерация №{i+1} из {links_number}\n mark #1\n\n')                                              #Нужно в случае, если последний запуск программы был прерван на середине загрузки файла
+        print(f'Итерация №{i+1} из {links_number}\n')                                                          #Позволяет перекачать последний файл в последовательности
+        logFile.write(f'Итерация №{i+1} из {links_number}\n')                                              #Нужно в случае, если последний запуск программы был прерван на середине загрузки файла
         startTime = time.time()
         urllib.request.urlretrieve(f'{string1}', f'{i}_{list1[7]}')
         elapsedTime = time.time() - startTime
@@ -86,7 +86,7 @@ def downloadFuc(list1, string1, i, links_number):
         file1Size = (os.path.getsize(f'{i}_{list1[7]}')) // 1024 // 1024
         logFile.write(f'скачался файл номер {i} - {list1[7]}\n')
         logFile.write(f'Время скачивания {datetime.timedelta(seconds=elapsedTime//1)}\n')
-        logFile.write(f'Размер файла - {file1Size} MB\n')
+        logFile.write(f'Размер файла - {file1Size} MB\n\n')
 
 
 if __name__ != '__main__':
