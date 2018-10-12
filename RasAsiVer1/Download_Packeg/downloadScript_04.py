@@ -54,13 +54,18 @@ def download():
             overallTime = time.time() - overallTime
             listdir1 = os.listdir()
             v2 = 0
-
             for i2 in listdir1:                                                                                         #Если скачивалось в 2 и более директории
+                sizeDir = 0
                 os.chdir(f'D:\REMOTE SENSING IMG\DigitalGlobe\{list1[3]}\{list1[4]}\{i2}')
+                for i3 in os.listdir():
+                    sizeDir = sizeDir + os.path.getsize(i3)
                 logFile.write(f'Директория {os.getcwd()}\nфайлов - {len(os.listdir())}\n')
+                logFile.write(f'Размер директории - {sizeDir/1024} GB')
+                allSize = allSize + sizeDir
                 v2 += len(os.listdir())
             logFile.write(f'Общее время выполнение программы - {datetime.timedelta(seconds = overallTime//1)}\n')
             logFile.write(f'Скачано файлов {v2} из {links_number}')
+            logFile.write(f'Скачано {allSize} GB')
 
     print('Done!')
     option1 = input('Задача завершина\nОткрыть файл-лог? (1/0)\t')
