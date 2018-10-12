@@ -12,8 +12,8 @@ def copyfun():
     newDirInPHHD = listDirPHDD.difference(listDirPC)
     os.chdir(r'G:\REMOTE SENSING IMG\DigitalGlobe')
 
-    creatLogName = f'{TimeNow.day}-{TimeNow.month}-{TimeNow.year}_{TimeNow.hour}-{TimeNow.minute}'
-    with open(rf'F:\REMOTE SENSING DATA\logFile_{creatLogName}.txt', 'w') as logFile:
+    createLogName = f'{TimeNow.day}-{TimeNow.month}-{TimeNow.year}_{TimeNow.hour}-{TimeNow.minute}'
+    with open(rf'F:\REMOTE SENSING DATA\logFile_{createLogName}.txt', 'w') as logFile:
         logFile.write(f'Запуск программы\n{time.ctime()}\n')
         for i in newDirInPHHD:
             shutil.copytree(rf'G:\REMOTE SENSING IMG\DigitalGlobe\{i}', rf'F:\REMOTE SENSING DATA\{i}')

@@ -10,21 +10,43 @@ def download():
         links_number = len(file1.readlines())                                                                           #пробегает по всем строчкам, возвращает количество
         file1.seek(0)                                                                                                   #Возвращает курсор в начало файла
         overallTime = time.time()                                                                                       #Присваевает начальное время запуска программы в секундах с начала эпохи переменной overallTime
-        logFile = open(f'D:\REMOTE SENSING IMG\logFile.txt', 'a')
+        TimeNow = datetime.datetime.now()
+        createlogName = f'{TimeNow.day}-{TimeNow.month}-{TimeNow.year}_{TimeNow.hour}-{TimeNow.minute}'
+        logFile = open(f'D:\REMOTE SENSING IMG\logFile{createlogName}.txt', 'a')
         logFile.write(f'Запуск программы\n{time.ctime()}\n')                                                            #записывает в файл текущую датувремя в понятной отформатированой форме
         logFile.close()
         for i in range(links_number - 1):                                                                               #считает i с 0, следовательно цифру количества ссылок (которая считается с 1, а не с 0) нужно убавить на 1
-            logFile = open('D:\REMOTE SENSING IMG\logFile.txt', 'a')
+            """
+            нижную строчку тоже можно записать в функцию downloadFun
+            """
+            # logFile = open(fr'D:\REMOTE SENSING IMG\logFile{createlogName}.txt', 'a')
             string1 = file1.readline().strip()                                                                          # .strip() удаляет лишние элементы в строке, такие как не явно присутствующий символ переноса на следующую строку /n
             list1 = string1.split('/')                                                                                  #Делит строку URL-пути на список из названий
             try:                                                                                                        #Если такой папки нет - создаёт (нужно для первой ииерации при каждом новом названии директории)
                 os.makedirs(f'D:\REMOTE SENSING IMG\DigitalGlobe\{list1[3]}\{list1[4]}\{list1[5]}')
                 os.chdir(f'D:\REMOTE SENSING IMG\DigitalGlobe\{list1[3]}\{list1[4]}\{list1[5]}')
                 print(f'Итерация №{i+1} из {links_number}\n mark #1')
-                logFile.write(f'Итерация №{i+1} из {links_number}\n mark #1\n\n')
-                startTime = time.time()
-                urllib.request.urlretrieve(f'{string1}', f'{i}_{list1[7]}')
-                elapsedTime = time.time() - startTime
+                """
+                нижную строчку тоже можно записать в функцию downloadFun
+                """
+                # logFile.write(f'Итерация №{i+1} из {links_number}\n mark #1\n\n')
+                """
+                Возможно вынести в отдельную функцию нижестоящие 4 строчки
+                """
+                downloadFuc(list1, string1, i, links_number)                                                            #Скорее всего не будет работать, потому что в ней локальные переменные. Нужно передать в неё переменные -string1, list1, i
+                # startTime = time.time()
+                # urllib.request.urlretrieve(f'{string1}', f'{i}_{list1[7]}')
+                # elapsedTime = time.time() - startTime
+                # file1Size = (os.path.getsize(f'{i}_{list1[7]}'))//1024//1024
+                """
+                Хочу посчитать размер данного файла
+                возможно вынести в отдельную функцию
+                """
+                # file1Size = os.path.getsize(f'{i}_{list1[7]}')
+
+                """
+                
+                """
                 print(f'скачался файл номер {i} - {list1[7]}\n')
                 logFile.write(f'скачался файл номер {i} - {list1[7]}\n')
                 logFile.write(f'Время скачивания {datetime.timedelta(seconds=elapsedTime//1)}\n')
@@ -58,8 +80,8 @@ def download():
                 print(f'скачался файл номер {i+1} - {list1[7]}\n')
                 logFile.write(f'скачался файл номер {i+1} - {list1[7]}\n')
                 logFile.write(f'Время скачивания {datetime.timedelta(seconds=elapsedTime//1)}\n')
-                logFile.close()
-        logFile = open('D:\REMOTE SENSING IMG\logFile.txt', 'a')                                                        #Общий лог за скачивание
+            logFile.close()
+        logFile = open(fr'D:\REMOTE SENSING IMG\logFile{createlogName}.txt', 'a')                                       #Общий лог за скачивание
         logFile.write('\n\n')
         os.chdir(f'D:\REMOTE SENSING IMG\DigitalGlobe\{list1[3]}')
         overallTime = time.time() - overallTime
@@ -82,6 +104,17 @@ def download():
         os.startfile('D:\REMOTE SENSING IMG\logFile.txt')
     else:
         return 0
+
+def downloadFuc(list1, string1, i, link_numbers):
+    with open(fr'D:\REMOTE SENSING IMG\logFile{createlogName}.txt', 'a') as logFile:
+        logFile.write(f'Итерация №{i+1} из {links_number}\n mark #1\n\n')
+        startTime = time.time()
+        urllib.request.urlretrieve(f'{string1}', f'{i}_{list1[7]}')
+        elapsedTime = time.time() - startTime
+        file1Size = (os.path.getsize(f'{i}_{list1[7]}')) // 1024 // 1024
+    """
+    Сюда нужно перенести и запись в лог времени скачивания
+    """
 
 
 if __name__ != '__main__':
