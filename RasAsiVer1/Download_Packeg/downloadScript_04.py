@@ -8,7 +8,7 @@ def download():
     file1_number = []
     os.chdir(fr'D:\REMOTE SENSING IMG\to_download\purl_list')
     listdir0 = os.listdir()
-    print('Доступнs файлы с ссылками:')
+    print('Доступны файлы с ссылками:')
     variable1 = 0
     for i in listdir0:
         print(f'{variable1} - {i}')
