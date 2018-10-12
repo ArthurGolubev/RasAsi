@@ -6,13 +6,21 @@ def prost():
 
 def download():
     file1_number = []
-    with open('D:\REMOTE SENSING IMG\purl_list.txt', 'r') as file1:
+    os.chdir(fr'D:\REMOTE SENSING IMG\to_download\purl_list')
+    listdir0 = os.listdir()
+    print('Доступнs файлы с ссылками:')
+    variable1 = 0
+    for i in listdir0:
+        print(f'{variable1} - {i}')
+        variable1 = variable1 + 1
+    variable2 = int(input('\nУкажите порядковый номер файла\t'))
+    with open(rf'D:\REMOTE SENSING IMG\to_download\purl_list\{listdir0[variable2]}', 'r') as file1:
         links_number = len(file1.readlines())                                                                           #пробегает по всем строчкам, возвращает количество
         file1.seek(0)                                                                                                   #Возвращает курсор в начало файла
         overallTime = time.time()                                                                                       #Присваевает начальное время запуска программы в секундах с начала эпохи переменной overallTime
         TimeNow = datetime.datetime.now()
         createlogName = f'{TimeNow.day}-{TimeNow.month}-{TimeNow.year}_time-{TimeNow.hour}-{TimeNow.minute}'
-        logFile = open(f'D:\REMOTE SENSING IMG\logFile{createlogName}.txt', 'a')
+        logFile = open(rf'D:\REMOTE SENSING IMG\to_download\logFile{createlogName}.txt', 'a')
         logFile.write(f'Запуск программы\n{time.ctime()}\n')                                                            #записывает в файл текущую датувремя в понятной отформатированой форме
         logFile.close()
         for i in range(links_number - 1):                                                                               #считает i с 0, следовательно цифру количества ссылок (которая считается с 1, а не с 0) нужно убавить на 1
@@ -48,7 +56,7 @@ def download():
 
                 downloadFuc(list1, string1, i, links_number, createlogName)
 
-        with open(fr'D:\REMOTE SENSING IMG\logFile{createlogName}.txt', 'a') as logFile:                                #Общий лог за скачивание
+        with open(fr'D:\REMOTE SENSING IMG\to_download\logFile{createlogName}.txt', 'a') as logFile:                                #Общий лог за скачивание
             logFile.write('\n\n')
             os.chdir(f'D:\REMOTE SENSING IMG\DigitalGlobe\{list1[3]}')
             overallTime = time.time() - overallTime
@@ -74,13 +82,13 @@ def download():
     print('Done!')
     option1 = input('Задача завершина\nОткрыть файл-лог? (1/0)\t')
     if int(option1):
-        os.startfile(fr'D:\REMOTE SENSING IMG\logFile{createlogName}.txt')
+        os.startfile(fr'D:\REMOTE SENSING IMG\to_download\logFile{createlogName}.txt')
     else:
         return 0
 
 
 def downloadFuc(list1, string1, i, links_number, createlogName):
-    with open(fr'D:\REMOTE SENSING IMG\logFile{createlogName}.txt', 'a') as logFile:
+    with open(fr'D:\REMOTE SENSING IMG\to_download\logFile{createlogName}.txt', 'a') as logFile:
         print(f'Итерация №{i+1} из {links_number}\n')                                                                  #Позволяет перекачать последний файл в последовательности
         logFile.write(f'Итерация №{i+1} из {links_number}\n')                                                          #Нужно в случае, если последний запуск программы был прерван на середине загрузки файла
         startTime = time.time()
