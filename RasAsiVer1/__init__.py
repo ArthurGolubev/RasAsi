@@ -1,10 +1,10 @@
 # from .Download_Packeg import listOfOrder as listOfOrder_Download_Packeg
 # from .External_Packeg import listOfOrder as listOfOrder_External_Packeg
 from .External_Packeg.electricity_monitoring import electricity_monitoringFunction
-import datetime, sys
+from sys import platform
+import datetime
 
 
-platform = sys.platform
 startTimeRasAsi = datetime.datetime.now()
 
 
