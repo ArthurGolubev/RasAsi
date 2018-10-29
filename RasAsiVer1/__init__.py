@@ -1,21 +1,28 @@
 from .Download_Packeg import listOfOrder as listOfOrder_Download_Packeg
-from .ProcessManagement_Packeg import listOfOrder as listOfOrder_ProcessManagement_Packeg
-import datetime
+from .External_Packeg import listOfOrder as listOfOrder_External_Packeg
+from .External_Packeg.electricity_monitoring import electricity_monitoringFunction
+import datetime, sys
 
+
+platform = sys.platform
 startTimeRasAsi = datetime.datetime.now()
 
 
 def mainMenu():
     variable1 = 0
-    while variable1==0:
-        print('\nСписок доступных команд:\n1 - Download_Packeg\n2 - ProcessManagement_Packeg\n3 - program runtime\n0 - stop')
+    print('FROM mainMenu')
+    if platform == 'linux':
+        electricity_monitoringFunction()
+    while variable1 == 0:
+        print('FROM cycle')
+        print('\nСписок доступных команд:\n1 - Download_Packeg\n2 - External_Packeg\n3 - program runtime\n0 - stop')
         comand1 = input('Выберете пакет\t')
         if comand1 == '1':
             listOfOrder_Download_Packeg()
         elif comand1 == '0':
             raise SystemExit
         elif comand1 == '2':
-            listOfOrder_ProcessManagement_Packeg()
+            listOfOrder_External_Packeg()
         elif comand1 == '3':
             print(datetime.datetime.now() - startTimeRasAsi)
         else:

@@ -1,11 +1,12 @@
 from .pid_Info import prost3
 from .PrintHelp import help1
+# from .electricity_monitoring import electricity_monitoringFunction
 
 
 def listOfOrder():
     variable1 = 0
     while variable1 == 0:
-        print('\n-|ProcessManagement_Packeg|-'
+        print('\n-|External_Packeg|-'
               '\nДоступные команды:\n1 - prost3\n2 - getpid ERDAS\n3 - PrintHelp\n0 - back to main')
         comand1 = input('\nВведите команжу:\t')
 
