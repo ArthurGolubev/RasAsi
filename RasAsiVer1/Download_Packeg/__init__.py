@@ -1,5 +1,5 @@
 from .downloadScript_04 import download, prost
-from .file_transfer import copyfun, prost2
+# from .file_transfer import copyfun, prost2
 
 
 def listOfOrder():
@@ -11,14 +11,14 @@ def listOfOrder():
         if comand1 == '1':
             prost()
             input('...[press Enter]...')
-        elif comand1 == '2':
-            prost2()
+        # elif comand1 == '2':
+        #     prost2()
             input('...[press Enter]...')
         elif comand1 == '3':
             download()
             input('...[press Enter]...')
-        elif comand1 == '4':
-            copyfun()
+        # elif comand1 == '4':
+        #     copyfun()
             input('...[press Enter]...')
         elif comand1 == '0':
             return 0
