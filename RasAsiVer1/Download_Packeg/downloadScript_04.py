@@ -20,12 +20,8 @@ def download():
         print(f'{variable1} - {i}')
         variable1 = variable1 + 1
     variable2 = int(input('\nУкажите порядковый номер файла\t'))
-    stringTest = f'{keypath1}\{listdir0[variable2]}'
-    print(os.path.normpath(stringTest))
-    stringTest2 = r'C:\\Documents/File'
-    print(os.path.normpath(stringTest2))
-    print(os.path.normpath(f'{keypath1}\{listdir0[variable2]}'))
-    # with open(os.path.normpath(rf'{keypath1}\{listdir0[variable2]}'), 'r') as file1:
+    print(os.path.join({keypath1}, {listdir0[variable2]}))
+    # with open(os.path.join({keypath1}, {listdir0[variable2]}), 'r') as file1:
     #     links_number = len(file1.readlines())                                                                           #пробегает по всем строчкам, возвращает количество
     #     file1.seek(0)                                                                                                   #Возвращает курсор в начало файла
     #     overallTime = time.time()                                                                                       #Присваевает начальное время запуска программы в секундах с начала эпохи переменной overallTime
