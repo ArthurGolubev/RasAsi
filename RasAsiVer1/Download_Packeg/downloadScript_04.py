@@ -12,7 +12,7 @@ def download():
         keypath1 = r'/media/pi/PORTABLE HDD/REMOTE SENSING IMG/to_download'
     print(f'keypath1 - {keypath1}')
     file1_number = []
-    os.chdir(fr'{keypath1}')
+    os.chdir(os.path.join(keypath1, 'purl_list'))
     print(os.listdir())
     listdir0 = os.listdir()
     print('Доступны файлы с ссылками:')
