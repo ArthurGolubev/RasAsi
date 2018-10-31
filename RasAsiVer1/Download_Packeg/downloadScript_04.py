@@ -20,7 +20,7 @@ def download():
         print(f'{variable1} - {i}')
         variable1 = variable1 + 1
     variable2 = int(input('\nУкажите порядковый номер файла\t'))
-    print(os.path.normpath(rf'{keypath1}\{listdir0[variable2]}'))
+    print(os.path.normpath(f'{keypath1}\{listdir0[variable2]}'))
     # with open(os.path.normpath(rf'{keypath1}\{listdir0[variable2]}'), 'r') as file1:
     #     links_number = len(file1.readlines())                                                                           #пробегает по всем строчкам, возвращает количество
     #     file1.seek(0)                                                                                                   #Возвращает курсор в начало файла
