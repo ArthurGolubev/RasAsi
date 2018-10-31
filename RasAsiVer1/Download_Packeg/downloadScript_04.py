@@ -22,7 +22,7 @@ def download():
         variable1 = variable1 + 1
     variable2 = int(input('\nУкажите порядковый номер файла\t'))
     print(os.path.join(keypath1, listdir0[variable2]))
-    with open(os.path.join(keypath1, 'purl_list', listdir0[variable2]-1), 'r') as file1:
+    with open(os.path.join(keypath1, 'purl_list', listdir0[variable2-1]), 'r') as file1:
         links_number = len(file1.readlines())                                                                           #пробегает по всем строчкам, возвращает количество
         file1.seek(0)                                                                                                   #Возвращает курсор в начало файла
         overallTime = time.time()                                                                                       #Присваевает начальное время запуска программы в секундах с начала эпохи переменной overallTime
