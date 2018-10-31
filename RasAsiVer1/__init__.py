@@ -18,8 +18,7 @@ def mainMenu():
         print('\nСписок доступных команд:\n1 - Download_Packeg\n2 - External_Packeg\n3 - program runtime\n0 - stop')
         comand1 = input('Выберете пакет\t')
         if comand1 == '1':
-            pass
-            # listOfOrder_Download_Packeg()
+            listOfOrder_Download_Packeg()
         elif comand1 == '0':
             raise SystemExit
         # elif comand1 == '2':
