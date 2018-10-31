@@ -7,9 +7,9 @@ def prost():
 
 def download():
     if platform == 'win32':
-        keypath1 = fr'D:\REMOTE SENSING IMG\to_download\purl_list'
+        keypath1 = fr'D:\REMOTE SENSING IMG\Download'
     elif platform == 'linux':
-        keypath1 = r'/media/pi/PORTABLE HDD/REMOTE SENSING IMG/to_download'
+        keypath1 = r'/media/pi/PORTABLE HDD/REMOTE SENSING IMG/Download'
     print(f'keypath1 - {keypath1}')
     file1_number = []
     os.chdir(os.path.join(keypath1, 'purl_list'))
@@ -21,7 +21,7 @@ def download():
         print(f'{variable1} - {i}')
         variable1 = variable1 + 1
     variable2 = int(input('\nУкажите порядковый номер файла\t'))
-    print(os.path.join(keypath1, listdir0[variable2]))
+    print(listdir0[variable2-1])
     with open(os.path.join(keypath1, 'purl_list', listdir0[variable2-1]), 'r') as file1:
         links_number = len(file1.readlines())                                                                           #пробегает по всем строчкам, возвращает количество
         file1.seek(0)                                                                                                   #Возвращает курсор в начало файла
@@ -29,7 +29,7 @@ def download():
         TimeNow = datetime.datetime.now()
         createlogName = f'{TimeNow.day}-{TimeNow.month}-{TimeNow.year}_time-{TimeNow.hour}-{TimeNow.minute}'
         logFile = open(os.path.join(keypath1, f'logFile{createlogName}.txt'), 'a')
-        logFile.write(f'Запуск программы\n{time.ctime()}\n')                                                            #записывает в файл текущую датувремя в понятной отформатированой форме
+        logFile.write(f'Запуск программы\n{time.ctime()}\n\n')                                                            #записывает в файл текущую датувремя в понятной отформатированой форме
         logFile.close()
         for i in range(links_number - 1):                                                                               #считает i с 0, следовательно цифру количества ссылок (которая считается с 1, а не с 0) нужно убавить на 1
 
@@ -37,7 +37,7 @@ def download():
             list1 = string1.split('/')                                                                                  #Делит строку URL-пути на список из названий
             try:                                                                                                        #Если такой папки нет - создаёт (нужно для первой ииерации при каждом новом названии директории)
                 os.makedirs(os.path.join(keypath1, list1[3], list1[4], list1[5]))
-                os.chdir(os.path.join(keypath1, list1[3], list1[4], list1[5]))
+                os.chdir(os.path.join(keypath1, 'DigitalGlobe', list1[3], list1[4], list1[5]))
 
                 downloadFuc(list1, string1, i, links_number, createlogName, keypath1)
 
