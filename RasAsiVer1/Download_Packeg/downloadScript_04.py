@@ -36,13 +36,13 @@ def download():
             string1 = file1.readline().strip()                                                                          # .strip() удаляет лишние элементы в строке, такие как не явно присутствующий символ переноса на следующую строку /n
             list1 = string1.split('/')                                                                                  #Делит строку URL-пути на список из названий
             try:                                                                                                        #Если такой папки нет - создаёт (нужно для первой ииерации при каждом новом названии директории)
-                os.makedirs(os.path.join(keypath1, list1[3], list1[4], list1[5]))
+                os.makedirs(os.path.join(keypath1, 'DigitalGlobe', list1[3], list1[4], list1[5]))
                 os.chdir(os.path.join(keypath1, 'DigitalGlobe', list1[3], list1[4], list1[5]))
 
                 downloadFuc(list1, string1, i, links_number, createlogName, keypath1)
 
             except FileExistsError:                                                                                     #Если папка уже существует (создалоась при первой итерации для уникального названия директории)
-                os.chdir(os.path.join(keypath1, list1[3], list1[4], list1[5]))
+                os.chdir(os.path.join(keypath1, 'DigitalGlobe', list1[3], list1[4], list1[5]))
                 file1_number.extend(os.listdir())                                                                       #расширяемый список всех скачаных файлов (итерация 1 - файл1, файл2. итерация 2 - файл1, файл2, файл1, файл2, файл3)
                 print(f'файлов в папке - {len(set(file1_number))}\n')                                                   #длинна множества set уникальных имён файлов
                 v1 = len(set(file1_number))                                                                             #количество уникальных имён (скачанных файлов), а значит пройденных итераций по строкам файла с сылками
