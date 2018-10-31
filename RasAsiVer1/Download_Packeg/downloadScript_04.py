@@ -21,7 +21,7 @@ def download():
         print(f'{variable1} - {i}')
         variable1 = variable1 + 1
     variable2 = int(input('\nУкажите порядковый номер файла\t'))
-    print(listdir0[variable2-1])
+    print(listdir0[variable2])
     with open(os.path.join(keypath1, 'purl_list', listdir0[variable2]), 'r') as file1:
         links_number = len(file1.readlines())                                                                           #пробегает по всем строчкам, возвращает количество
         file1.seek(0)                                                                                                   #Возвращает курсор в начало файла
