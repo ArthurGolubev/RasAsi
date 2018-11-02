@@ -98,7 +98,7 @@ def download():
 
 
 def downloadFuc(list1, string1, i, links_number, createlogName, keypath1):
-    with open(os.path.join(keypath1, f'logFile{createlogName}.txt'), 'a') as logFile:
+    with open(os.path.join(keypath1, 'logFiles', f'logFile{createlogName}.txt'), 'a') as logFile:
         print(f'Итерация №{i+1} из {links_number}\n')                                                                  #Позволяет перекачать последний файл в последовательности
         logFile.write(f'Итерация №{i+1} из {links_number}\n')                                                          #Нужно в случае, если последний запуск программы был прерван на середине загрузки файла
         startTime = time.time()
