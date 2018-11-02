@@ -21,9 +21,9 @@ def electricity_monitoringFunction():
             print(line1)
             print('try3')
             print(time.time())
-            time.sleep(60)
+            time.sleep(180)
             print(time.time())
-            stopTime = datetime.timedelta(seconds=(time.time() - line1 - 60) // 1)
+            stopTime = datetime.timedelta(seconds=(time.time() - line1 - 180) // 1)
             print('try4')
             print(stopTime)
             with open('/home/pi/Documents/StopTime', 'a') as LF:
