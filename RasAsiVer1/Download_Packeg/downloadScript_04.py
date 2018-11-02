@@ -63,7 +63,7 @@ def download():
 
                 downloadFuc(list1, string1, i, links_number, createlogName, keypath1)
 
-        with open(os.path.join(keypath1, f'logFile{createlogName}.txt'), 'a') as logFile:                                #Общий лог за скачивание
+        with open(os.path.join(keypath1, 'logFiles', f'logFile{createlogName}.txt'), 'a') as logFile:                                #Общий лог за скачивание
             logFile.write('\n\n')
             os.chdir(os.path.join(keypath1, 'DigitalGlobe', list1[3]))
             overallTime = time.time() - overallTime
