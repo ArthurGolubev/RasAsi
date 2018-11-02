@@ -7,7 +7,7 @@ def prost():
 
 def download():
     if platform == 'win32':
-        keypath1 = fr'D:\REMOTE SENSING IMG\Download'
+        keypath1 = r'D:\REMOTE SENSING IMG\Download'
     elif platform == 'linux':
         keypath1 = r'/media/pi/PORTABLE HDD/REMOTE SENSING IMG/Download'
     print(f'keypath1 - {keypath1}')
@@ -27,7 +27,7 @@ def download():
         overallTime = time.time()                                                                                       #Присваевает начальное время запуска программы в секундах с начала эпохи переменной overallTime
         TimeNow = datetime.datetime.now()
         createlogName = f'{TimeNow.day}-{TimeNow.month}-{TimeNow.year}_time-{TimeNow.hour}-{TimeNow.minute}'
-        logFile = open(os.path.join(keypath1, f'logFile{createlogName}.txt'), 'a')
+        logFile = open(os.path.join(keypath1, 'logFiles', f'logFile{createlogName}.txt'), 'a')
         logFile.write(f'Запуск программы\n{time.ctime()}\n\n')                                                            #записывает в файл текущую датувремя в понятной отформатированой форме
         logFile.close()
         for i in range(links_number - 1):                                                                               #считает i с 0, следовательно цифру количества ссылок (которая считается с 1, а не с 0) нужно убавить на 1
