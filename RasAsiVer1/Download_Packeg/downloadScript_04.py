@@ -75,7 +75,7 @@ def download():
                 os.chdir(os.path.join(fr'{keypath1}', 'DigitalGlobe', list1[3], i2))
                 listdir2 = os.listdir()
                 for i3 in listdir2:
-                    os.chdir(os.path.join(keypath1, list1[3], 'DigitalGlobe', i2, i3))
+                    os.chdir(os.path.join(keypath1, 'DigitalGlobe', list1[3], i2, i3))
                     for i4 in os.listdir():
                         sizeDir = sizeDir + os.path.getsize(i4)
                 logFile.write(f'Директория {os.getcwd()}\nфайлов - {len(os.listdir())}\n')
@@ -92,7 +92,7 @@ def download():
         if platform == 'win32':
             os.startfile(os.path.join(keypath1, f'logFile{createlogName}.txt'))
         else:
-            subprocess.call(['xdg-open', os.path.join(keypath1, f'logFile{createlogName}.txt')])
+            subprocess.call(['xdg-open', os.path.join(keypath1, 'logFiles', f'logFile{createlogName}.txt')])
     else:
         return 0
 
