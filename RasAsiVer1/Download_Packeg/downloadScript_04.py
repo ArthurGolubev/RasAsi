@@ -65,17 +65,17 @@ def download():
 
         with open(os.path.join(keypath1, f'logFile{createlogName}.txt'), 'a') as logFile:                                #Общий лог за скачивание
             logFile.write('\n\n')
-            os.chdir(os.path.join(keypath1, list1[3]))
+            os.chdir(os.path.join(keypath1, 'DigitalGlobe', list1[3]))
             overallTime = time.time() - overallTime
             listdir1 = os.listdir()
             v2 = 0
             allSize = 0
             for i2 in listdir1:                                                                                         #Если скачивалось в 2 и более директории
                 sizeDir = 0
-                os.chdir(os.path.join(fr'{keypath1}', list1[3], i2))
+                os.chdir(os.path.join(fr'{keypath1}', 'DigitalGlobe', list1[3], i2))
                 listdir2 = os.listdir()
                 for i3 in listdir2:
-                    os.chdir(os.path.join(keypath1, list1[3], i2, i3))
+                    os.chdir(os.path.join(keypath1, list1[3], 'DigitalGlobe', i2, i3))
                     for i4 in os.listdir():
                         sizeDir = sizeDir + os.path.getsize(i4)
                 logFile.write(f'Директория {os.getcwd()}\nфайлов - {len(os.listdir())}\n')
