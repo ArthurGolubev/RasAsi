@@ -1,4 +1,4 @@
-import urllib.request, time, os, datetime
+import urllib.request, time, os, datetime, subprocess
 from sys import platform
 
 
@@ -89,7 +89,10 @@ def download():
     print('Done!')
     option1 = input('Задача завершина\nОткрыть файл-лог? (1/0)\t')
     if int(option1):
-        os.startfile(os.path.join(keypath1, f'logFile{createlogName}.txt'))
+        if platform == 'win32':
+            os.startfile(os.path.join(keypath1, f'logFile{createlogName}.txt'))
+        else:
+            subprocess.call(['xdg-open', os.path.join(keypath1, f'logFile{createlogName}.txt')])
     else:
         return 0
 
