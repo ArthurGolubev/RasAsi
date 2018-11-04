@@ -14,13 +14,16 @@ def prost5():
 
 def send():
     SCOPES = 'https://www.googleapis.com/auth/gmail.send'
-    CLIENT_SECRET_FILE = 'client_secret.json'
+    CLIENT_SECRET_FILE = 'C:\PythonProject\mygmail\client_secret.json'
     APPLICATION_NAME = 'Gmail API Python Send Email'
 
     def SendMessageInternal(service, user_id, message):
         try:
+            print('mark #3')
             message = (service.users().messages().send(userId=user_id, body=message).execute())
+            print('mark #4')
             print('Message Id: %s' % message['id'])
+            print('mark #5')
             return message
         except errors.HttpError as error:
             print('An error occurred: %s' % error)
@@ -37,7 +40,7 @@ def send():
         body = {'raw': raw}
         return body
 
-    def get_credentials():
+    def get_credentials():                                                                                              #Удостоверение личности
         home_dir = os.path.expanduser('~')
         credential_dir = os.path.join(home_dir, '.credentials')
         if not os.path.exists(credential_dir):
@@ -50,21 +53,24 @@ def send():
             flow.user_agent = APPLICATION_NAME
             credentials = tools.run_flow(flow, store)
             print('Storing credentials to ' + credential_path)
+            input('...[press Enter]...')
         return credentials
 
     def SendMessage(sender, to, subject, msgHtml, msgPlain):
         credentials = get_credentials()
         http = credentials.authorize(httplib2.Http())
         service = discovery.build('gmail', 'v1', http=http)
+        print('mark #1')
         message1 = CreateMessage(sender, to, subject, msgHtml, msgPlain)
+        print('mark #2')
         SendMessageInternal(service, "me", message1)
 
     def main():
-        to = "zabavniy7gmail.com"
+        to = "zabavniy7@gmail.com"
         sender = "raspberry.assistant.py@gmail.com"
         subject = "Ei Ei"
         msgHtml = "VAZHNO!"
-        msgPlain = "Hi man"
+        msgPlain = "Hi\nPlain Email"
         SendMessage(sender, to, subject, msgHtml, msgPlain)
 
     main()
