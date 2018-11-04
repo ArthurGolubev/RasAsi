@@ -1,6 +1,7 @@
 from .Download_Packeg import listOfOrder as listOfOrder_Download_Packeg
 # from .External_Packeg import listOfOrder as listOfOrder_External_Packeg
 from .External_Packeg.electricity_monitoring import electricity_monitoringFunction
+from .Gmail_Packeg import commandList as commandList_Gmail_Packeg
 from sys import platform
 import datetime
 
@@ -15,7 +16,7 @@ def mainMenu():
         electricity_monitoringFunction()
     while variable1 == 0:
         print('FROM cycle')
-        print('\nСписок доступных команд:\n1 - Download_Packeg\n2 - External_Packeg\n3 - program runtime\n0 - stop')
+        print('\nСписок доступных команд:\n1 - Download_Packeg\n2 - External_Packeg\n3 - program runtime\n4 - Gmail_Packeg\n0 - stop')
         comand1 = input('Выберете пакет\t')
         if comand1 == '1':
             listOfOrder_Download_Packeg()
@@ -25,6 +26,8 @@ def mainMenu():
         #     listOfOrder_External_Packeg()
         elif comand1 == '3':
             print(datetime.datetime.now() - startTimeRasAsi)
+        elif comand1 == '4':
+            commandList_Gmail_Packeg()
         else:
             print('\nВы ввели не верную команду\nпопробуйте сново')
             input('...[press Enter]...')
