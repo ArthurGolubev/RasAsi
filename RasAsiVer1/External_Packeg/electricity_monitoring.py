@@ -31,6 +31,7 @@ def electricity_monitoringFunction():
             with open('/home/pi/Documents/StopTime', 'a') as LF:
                 LF.write(f'Дата - {dateNow} Время простоя - {str(stopTime)}\n')
                 send(topic='Электричество', message = f'Дата - {datetime.datetime.now()} Время простоя - {str(stopTime)}\n')
+            print('try5')
             with open('/home/pi/Documents/StopTime', 'r') as LF:
                 time.sleep(10)
                 # str1 =''
@@ -41,7 +42,7 @@ def electricity_monitoringFunction():
                     print(str1)
                     return str1
                 str2 = sf(LF)
-                print('try5')
+                print('try6')
                 send(topic=f'Электричество - {dateNow}', message=str2)
 
 
