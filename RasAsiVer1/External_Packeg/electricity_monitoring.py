@@ -27,7 +27,7 @@ def electricity_monitoringFunction():
             stopTime = datetime.timedelta(seconds=(time.time() - line1 - 180) // 1)
             print('try4')
             print(stopTime)
-            dateNow = f'{datetime.datetime.year}-{datetime.datetime.month}-{datetime.datetime.day}' \
+            dateNow = f'{datetime.datetime.now().year}-{datetime.datetime.month}-{datetime.datetime.day}' \
                       f' {datetime.datetime.hour}:{datetime.datetime.minute}:{datetime.datetime.second}'
             print(f'mark #1\n\n\n\n{dateNow}')
             with open('/home/pi/Documents/StopTime', 'a') as LF:
