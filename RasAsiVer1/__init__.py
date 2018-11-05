@@ -11,8 +11,8 @@ startTimeRasAsi = datetime.datetime.now()
 def mainMenu():
     variable1 = 0
     print('FROM mainMenu')
-    # if platform == 'linux':
-    #     electricity_monitoringFunction()
+    if platform == 'linux':
+        electricity_monitoringFunction()
     while variable1 == 0:
         print('FROM cycle')
         print('\nСписок доступных команд:\n1 - Download_Packeg\n2 - External_Packeg\n3 - program runtime\n4 - Gmail_Packeg\n0 - stop')
