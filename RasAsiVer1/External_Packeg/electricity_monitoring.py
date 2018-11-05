@@ -6,11 +6,11 @@ def func1():
     variable1 = 1
     print(time.ctime())
     while variable1:
-        print(r'*\|/ ______Записано______ \|/*')
-        print(f'\nСейчас - {datetime.datetime.now()}\n')
+        print(r'*\|/ _______Записано_______\|/*')
+        print(f'Сейчас - {datetime.datetime.now()}')
         with open('/home/pi/Documents/logFileTime', 'w') as LF:
             LF.write(str(time.time()))
-        print(r'./|\ ______Записано______ /|\.')
+        print(r'./|\ _______Записано_______ /|\.', '\n')
         time.sleep(60)
 
 
@@ -23,7 +23,7 @@ def electricity_monitoringFunction():
             print(line1)
             print('try3')
             print(time.time())
-            time.sleep(180)
+            time.sleep(8)
             print(time.time())
             stopTime = datetime.timedelta(seconds=(time.time() - line1 - 180) // 1)
             print('try4')
