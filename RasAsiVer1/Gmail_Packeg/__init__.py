@@ -13,7 +13,9 @@ def commandList():
             prost5()
             input('...[press Enter]...')
         elif command1 == '2':
-            send()
+            topic = input('Укажите тему сообщения:\t')
+            message = input('Введите текст сообщения:\t')
+            send(topic, message)
             input('...[press Enter]...')
         else:
             print('\nВы ввели неверную команду\nпопробуйте сново')

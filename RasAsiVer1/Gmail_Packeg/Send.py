@@ -13,7 +13,7 @@ def prost5():
     print('Hello World!')
 
 
-def send():
+def send(topic, message):
     SCOPES = 'https://www.googleapis.com/auth/gmail.send'
     if platform == 'win32':
         CLIENT_SECRET_FILE = 'C:\PythonProject\mygmail\client_secret.json'
@@ -69,15 +69,15 @@ def send():
         print('mark #2')
         SendMessageInternal(service, "me", message1)
 
-    def main():
+    def main(topic, message):
         to = "zabavniy7@gmail.com"
         sender = "raspberry.assistant.py@gmail.com"
-        subject = "Ei Ei"
-        msgHtml = "VAZHNO!"
-        msgPlain = "Hi\nPlain Email"
+        subject = topic
+        msgHtml = message
+        msgPlain = message
         SendMessage(sender, to, subject, msgHtml, msgPlain)
 
-    main()
+    main(topic, message)
 
 if __name__ != '__main__':
     print(f'ЗАПУСК МОДУЛЯ {__name__}')
