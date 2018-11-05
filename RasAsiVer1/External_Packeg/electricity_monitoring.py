@@ -32,7 +32,7 @@ def electricity_monitoringFunction():
                 send(topic='Электричество', message = f'Дата - {datetime.datetime.now()} Время простоя - {str(stopTime)}\n')
             with open('/home/pi/Documents/StopTime', 'r') as LF:
                 time.sleep(10)
-                send(topic='Электричество (из открытого файла)', message=LF.readlines())
+                send(topic='Электричество (из открытого файла)', message=LF.read())
 
     except:
         print('except1')
