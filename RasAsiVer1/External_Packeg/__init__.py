@@ -8,16 +8,16 @@ def commandList():
     while variable1 == 0:
         print('\n-|External_Packeg|-'
               '\nДоступные команды:\n1 - prost3\n2 - getpid ERDAS\n3 - PrintHelp\n0 - back to main')
-        comand1 = input('\nВведите команжу:\t')
+        command1 = input('\nВведите команжу:\t')
 
-        # if comand1 == '1':
+        # if command1 == '1':
         #     prost3()
         #     input('...[press Enter]...')
-        # elif comand1 == '2':
+        # elif command1 == '2':
         #     getpid()
-        # elif comand1 == '3':
+        # elif command1 == '3':
         #     help1()
-        # elif comand1 == '0':
+        # elif command1 == '0':
         #     return 0
         # else:
         #     print('\nВы ввели неверную команду\nпопробуйте сново')

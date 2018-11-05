@@ -16,16 +16,16 @@ def mainMenu():
     while variable1 == 0:
         print('FROM cycle')
         print('\nСписок доступных команд:\n1 - Download_Packeg\n2 - External_Packeg\n3 - program runtime\n4 - Gmail_Packeg\n0 - stop')
-        comand1 = input('Выберете пакет\t')
-        if comand1 == '1':
+        command1 = input('Выберете пакет\t')
+        if command1 == '1':
             commandList_Download_Packeg()
-        elif comand1 == '0':
+        elif command1 == '0':
             raise SystemExit
         # elif comand1 == '2':
         #     commandList_External_Packeg()
-        elif comand1 == '3':
+        elif command1 == '3':
             print(datetime.datetime.now() - startTimeRasAsi)
-        elif comand1 == '4':
+        elif command1 == '4':
             commandList_Gmail_Packeg()
         else:
             print('\nВы ввели неверную команду\nпопробуйте сново')

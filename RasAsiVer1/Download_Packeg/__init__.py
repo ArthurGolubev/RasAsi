@@ -7,20 +7,20 @@ def commandList():
     while variable1 == 0:
         print('\n-|Download_Packeg|-'
               '\nДоступные команды:\n1 - prost\n2 - prost 2\n3 - download\n4 - copyfun\n0 - back to main')
-        comand1 = input('\nВведите команду:\t')
-        if comand1 == '1':
+        command1 = input('\nВведите команду:\t')
+        if command1 == '1':
             prost()
             input('...[press Enter]...')
-        # elif comand1 == '2':
+        # elif command1 == '2':
         #     prost2()
             input('...[press Enter]...')
-        elif comand1 == '3':
+        elif command1 == '3':
             download()
             input('...[press Enter]...')
-        # elif comand1 == '4':
+        # elif command1 == '4':
         #     copyfun()
             input('...[press Enter]...')
-        elif comand1 == '0':
+        elif command1 == '0':
             return 0
         else:
             print('\nВы ввели неверную команду\nпопробуйте сново')
