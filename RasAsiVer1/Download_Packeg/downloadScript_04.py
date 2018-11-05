@@ -1,6 +1,6 @@
 import urllib.request, time, os, datetime, subprocess
 from sys import platform
-
+from RasAsiVer1.Gmail_Packeg.Send import send, log
 
 def prost():
     print('privet from download!!')
@@ -85,7 +85,7 @@ def download():
             logFile.write(f'Общее время выполнение программы - {datetime.timedelta(seconds = overallTime//1)}\n')
             logFile.write(f'Скачано файлов {v2+1} из {links_number}\n')
             logFile.write(f'Скачано {allSize//1024//1024//1024} GB')
-
+    send(topic='Загрузка завершена!', message=log(os.path.join(keypath1, 'logFiles', f'logFile{createlogName}.txt')))
     print('Done!')
     option1 = input('Задача завершина\nОткрыть файл-лог? (1/0)\t')
     if int(option1):
