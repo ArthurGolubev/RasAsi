@@ -22,7 +22,7 @@ def electricity_monitoringFunction():
             print(line1)
             print('try3')
             print(time.time())
-            time.sleep(180)
+            time.sleep(8)
             print(time.time())
             stopTime = datetime.timedelta(seconds=(time.time() - line1 - 180) // 1)
             print('try4')
@@ -33,13 +33,13 @@ def electricity_monitoringFunction():
             with open('/home/pi/Documents/StopTime', 'r') as LF:
                 time.sleep(10)
                 str1 =''
-                def sf(LF):
+                def sf(LF, str1):
                     list1= LF.readlines()
                     for i in list1:
                         str1 = str1 + i
                     print(str1)
                     return str1
-                send(topic='Электричество', message = sf())
+                send(topic='Электричество', message = sf(LF, str1))
 
 
 
