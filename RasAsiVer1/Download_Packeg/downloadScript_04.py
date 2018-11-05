@@ -74,12 +74,13 @@ def download():
                 listdir2 = os.listdir()
                 for i3 in listdir2:
                     os.chdir(os.path.join(keypath1, 'DigitalGlobe', list1[3], i2, i3))
+                    v2 += len(os.listdir())
                     for i4 in os.listdir():
                         sizeDir = sizeDir + os.path.getsize(i4)
                 logFile.write(f'Директория {os.getcwd()}\nфайлов - {len(os.listdir())}\n')
                 logFile.write(f'Размер директории - {sizeDir//1024//1024/1024} GB\n\n')
                 allSize = allSize + sizeDir
-                v2 += len(os.listdir())
+                # v2 += len(os.listdir())
             logFile.write(f'Общее время выполнение программы - {datetime.timedelta(seconds = overallTime//1)}\n')
             logFile.write(f'Скачано файлов {v2} из {links_number-1}\n')
             logFile.write(f'Скачано {allSize//1024//1024//1024} GB')
