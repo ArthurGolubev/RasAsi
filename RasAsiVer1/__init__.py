@@ -1,5 +1,5 @@
-from .Download_Packeg import listOfOrder as listOfOrder_Download_Packeg
-# from .External_Packeg import listOfOrder as listOfOrder_External_Packeg
+from .Download_Packeg import commandList as commandList_Download_Packeg
+# from .External_Packeg import commandList as commandList_External_Packeg
 from .External_Packeg.electricity_monitoring import electricity_monitoringFunction
 from .Gmail_Packeg import commandList as commandList_Gmail_Packeg
 from sys import platform
@@ -18,17 +18,17 @@ def mainMenu():
         print('\nСписок доступных команд:\n1 - Download_Packeg\n2 - External_Packeg\n3 - program runtime\n4 - Gmail_Packeg\n0 - stop')
         comand1 = input('Выберете пакет\t')
         if comand1 == '1':
-            listOfOrder_Download_Packeg()
+            commandList_Download_Packeg()
         elif comand1 == '0':
             raise SystemExit
         # elif comand1 == '2':
-        #     listOfOrder_External_Packeg()
+        #     commandList_External_Packeg()
         elif comand1 == '3':
             print(datetime.datetime.now() - startTimeRasAsi)
         elif comand1 == '4':
             commandList_Gmail_Packeg()
         else:
-            print('\nВы ввели не верную команду\nпопробуйте сново')
+            print('\nВы ввели неверную команду\nпопробуйте сново')
             input('...[press Enter]...')
 
 """

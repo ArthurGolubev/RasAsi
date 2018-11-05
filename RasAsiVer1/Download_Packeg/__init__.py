@@ -2,7 +2,7 @@ from .downloadScript_04 import download, prost
 # from .file_transfer import copyfun, prost2
 
 
-def listOfOrder():
+def commandList():
     variable1 = 0
     while variable1 == 0:
         print('\n-|Download_Packeg|-'
@@ -23,7 +23,7 @@ def listOfOrder():
         elif comand1 == '0':
             return 0
         else:
-            print('\nВы ввели не верную команду\nпопробуйте сново')
+            print('\nВы ввели неверную команду\nпопробуйте сново')
             input('...[press Enter]...')
 
 

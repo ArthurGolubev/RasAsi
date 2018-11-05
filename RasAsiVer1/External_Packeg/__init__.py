@@ -3,7 +3,7 @@
 # from .electricity_monitoring import electricity_monitoringFunction
 
 
-def listOfOrder():
+def commandList():
     variable1 = 0
     while variable1 == 0:
         print('\n-|External_Packeg|-'
@@ -20,5 +20,5 @@ def listOfOrder():
         # elif comand1 == '0':
         #     return 0
         # else:
-        #     print('\nВы ввели не верную команду\nпопробуйте сново')
+        #     print('\nВы ввели неверную команду\nпопробуйте сново')
         #     input('...[press Enter]...')
