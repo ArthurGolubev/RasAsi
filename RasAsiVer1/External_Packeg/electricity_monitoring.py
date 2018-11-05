@@ -35,7 +35,7 @@ def electricity_monitoringFunction():
                 def sf(LF):
                     while LF.readline():
                         str1 = str1 + LF.readline + '\n'
-                    return sf
+                    return str1
                 send(topic='Электричество', message = sf(LF))
 
 
