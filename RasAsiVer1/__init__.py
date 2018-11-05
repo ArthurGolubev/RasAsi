@@ -1,6 +1,6 @@
 from .Download_Packeg import listOfOrder as listOfOrder_Download_Packeg
 # from .External_Packeg import listOfOrder as listOfOrder_External_Packeg
-from .External_Packeg.electricity_monitoring import electricity_monitoringFunction
+# from .External_Packeg.electricity_monitoring import electricity_monitoringFunction
 from .Gmail_Packeg import commandList as commandList_Gmail_Packeg
 from sys import platform
 import datetime
@@ -12,8 +12,8 @@ startTimeRasAsi = datetime.datetime.now()
 def mainMenu():
     variable1 = 0
     print('FROM mainMenu')
-    if platform == 'linux':
-        electricity_monitoringFunction()
+    # if platform == 'linux':
+    #     electricity_monitoringFunction()
     while variable1 == 0:
         print('FROM cycle')
         print('\nСписок доступных команд:\n1 - Download_Packeg\n2 - External_Packeg\n3 - program runtime\n4 - Gmail_Packeg\n0 - stop')
