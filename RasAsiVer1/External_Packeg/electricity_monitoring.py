@@ -28,8 +28,8 @@ def electricity_monitoringFunction():
             print('try4')
             print(stopTime)
             with open('/home/pi/Documents/StopTime', 'a') as LF:
-                LF.write(f'Дата - {time.ctime()} Время простоя - {str(stopTime)}\n')
-                send(topic='Электричество', message = f'Дата - {time.ctime()} Время простоя - {str(stopTime)}\n')
+                LF.write(f'Дата - {datetime.datetime.now()} Время простоя - {str(stopTime)}\n')
+                send(topic='Электричество', message = f'Дата - {datetime.datetime.now()} Время простоя - {str(stopTime)}\n')
             print('try5')
             with open('/home/pi/Documents/StopTime', 'r') as LF:
                 time.sleep(10)
