@@ -6,11 +6,11 @@ def func1():
     variable1 = 1
     print(time.ctime())
     while variable1:
-        print(r'*\|/________Записано________\|/*')
-        print(f'   {datetime.datetime.now()}')
+        print(r'*\|/_________Записано_________\|/*')
+        print(f'    {datetime.datetime.now()}')
         with open('/home/pi/Documents/logFileTime', 'w') as LF:
             LF.write(str(time.time()))
-        print(r'./|\________Записано________/|\.', '\n')
+        print(r'./|\_________Записано_________/|\.', '\n')
         time.sleep(6)
 
 
