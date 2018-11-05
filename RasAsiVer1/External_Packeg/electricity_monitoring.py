@@ -29,10 +29,8 @@ def electricity_monitoringFunction():
             print(stopTime)
             with open('/home/pi/Documents/StopTime', 'a') as LF:
                 LF.write(f'Дата - {datetime.datetime.now()} Время простоя - {str(stopTime)}\n')
-                send(topic='Электричество', message = f'Дата - {datetime.datetime.now()} Время простоя - {str(stopTime)}\n')
-            print('try5')
             with open('/home/pi/Documents/StopTime', 'r') as LF:
-                time.sleep(10)
+
                 def sf(LF):
                     list1= LF.readlines()
                     str1 = ''
@@ -40,9 +38,8 @@ def electricity_monitoringFunction():
                         str1 = str1 + i + '<br/>'
                     print(str1)
                     return str1
-                str2 = sf(LF)
-                print('try6')
-                send(topic=f'Электричество - {time.ctime()}', message=str2)
+                time.sleep(10)
+                send(topic=f'Электричество - {time.ctime()}', message=sf(LF))
 
 
     except:
