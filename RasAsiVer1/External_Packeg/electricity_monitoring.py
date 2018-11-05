@@ -30,7 +30,6 @@ def electricity_monitoringFunction():
             print(f'Время простоя - {stopTime}')
             with open('/home/pi/Documents/StopTime', 'a') as LF:
                 LF.write(f'Дата - {datetime.datetime.now()} Время простоя - {str(stopTime)}\n')
-            time.sleep(10)
             send(topic=f'Электричество - {time.ctime()}', message=log('/home/pi/Documents/StopTime'))
 
 
