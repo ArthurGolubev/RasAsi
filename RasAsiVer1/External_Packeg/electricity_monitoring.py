@@ -40,13 +40,7 @@ def electricity_monitoringFunction():
                     print(str1)
                     return str1
                 str2 = sf(LF, str1)
-                print(str2)
-                print(type(str2))
-                send(topic='Электричество', message=str2)
-
-
-
-
+                send(topic=f'Электричество - {datetime.datetime.now()}', message=str2)
 
 
     except:
