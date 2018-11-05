@@ -6,6 +6,7 @@ import base64
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from apiclient import errors, discovery
+from sys import platform
 
 
 def prost5():
@@ -14,7 +15,10 @@ def prost5():
 
 def send():
     SCOPES = 'https://www.googleapis.com/auth/gmail.send'
-    CLIENT_SECRET_FILE = 'C:\PythonProject\mygmail\client_secret.json'
+    if platform == 'win32':
+        CLIENT_SECRET_FILE = 'C:\PythonProject\mygmail\client_secret.json'
+    else:
+        CLIENT_SECRET_FILE = '/home/pi/Downloads/client_secret.json'
     APPLICATION_NAME = 'Gmail API Python Send Email'
 
     def SendMessageInternal(service, user_id, message):
