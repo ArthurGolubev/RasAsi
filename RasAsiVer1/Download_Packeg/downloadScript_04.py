@@ -31,13 +31,11 @@ def download():
         logFile.write(f'Запуск программы\n{time.ctime()}\n\n')                                                            #записывает в файл текущую датувремя в понятной отформатированой форме
         logFile.close()
         for i in range(links_number - 1):                                                                               #считает i с 0, следовательно цифру количества ссылок (которая считается с 1, а не с 0) нужно убавить на 1
-
             string1 = file1.readline().strip()                                                                          # .strip() удаляет лишние элементы в строке, такие как не явно присутствующий символ переноса на следующую строку /n
             list1 = string1.split('/')                                                                                  #Делит строку URL-пути на список из названий
             try:                                                                                                        #Если такой папки нет - создаёт (нужно для первой ииерации при каждом новом названии директории)
                 os.makedirs(os.path.join(keypath1, 'DigitalGlobe', list1[3], list1[4], list1[5]))
                 os.chdir(os.path.join(keypath1, 'DigitalGlobe', list1[3], list1[4], list1[5]))
-
                 downloadFuc(list1, string1, i, links_number, createlogName, keypath1)
 
             except FileExistsError:                                                                                     #Если папка уже существует (создалоась при первой итерации для уникального названия директории)
@@ -83,7 +81,7 @@ def download():
                 allSize = allSize + sizeDir
                 v2 += len(os.listdir())
             logFile.write(f'Общее время выполнение программы - {datetime.timedelta(seconds = overallTime//1)}\n')
-            logFile.write(f'Скачано файлов {v2+1} из {links_number}\n')
+            logFile.write(f'Скачано файлов {v2} из {links_number-1}\n')
             logFile.write(f'Скачано {allSize//1024//1024//1024} GB')
     send(topic='Загрузка завершена!', message=log(os.path.join(keypath1, 'logFiles', f'logFile{createlogName}.txt')))
     print('Done!')
@@ -99,8 +97,8 @@ def download():
 
 def downloadFuc(list1, string1, i, links_number, createlogName, keypath1):
     with open(os.path.join(keypath1, 'logFiles', f'logFile{createlogName}.txt'), 'a') as logFile:
-        print(f'Итерация №{i+1} из {links_number}\n')                                                                  #Позволяет перекачать последний файл в последовательности
-        logFile.write(f'Итерация №{i+1} из {links_number}\n')                                                          #Нужно в случае, если последний запуск программы был прерван на середине загрузки файла
+        print(f'Итерация №{i+1} из {links_number-1}\n')                                                                #Позволяет перекачать последний файл в последовательности
+        logFile.write(f'Итерация №{i+1} из {links_number-1}\n')                                                        #Нужно в случае, если последний запуск программы был прерван на середине загрузки файла
         startTime = time.time()
         urllib.request.urlretrieve(f'{string1}', f'{i}_{list1[7]}')
         elapsedTime = time.time() - startTime
