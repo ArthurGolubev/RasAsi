@@ -32,11 +32,14 @@ def electricity_monitoringFunction():
                 send(topic='Электричество', message = f'Дата - {datetime.datetime.now()} Время простоя - {str(stopTime)}\n')
             with open('/home/pi/Documents/StopTime', 'r') as LF:
                 time.sleep(10)
+                str1 =''
                 def sf(LF):
-                    while LF.readline():
-                        str1 = str1 + LF.readline + '\n'
+                    list1= LF.readlines()
+                    for i in list1:
+                        str1 = str1 + i
+                    print(str1)
                     return str1
-                send(topic='Электричество', message = sf(LF))
+                send(topic='Электричество', message = sf())
 
 
 
