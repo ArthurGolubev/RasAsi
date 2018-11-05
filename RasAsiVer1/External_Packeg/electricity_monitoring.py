@@ -34,9 +34,9 @@ def electricity_monitoringFunction():
             print('try5')
             with open('/home/pi/Documents/StopTime', 'r') as LF:
                 time.sleep(10)
-                # str1 =''
                 def sf(LF):
                     list1= LF.readlines()
+                    str1 = ''
                     for i in list1:
                         str1 = str1 + i + '<br/>'
                     print(str1)
