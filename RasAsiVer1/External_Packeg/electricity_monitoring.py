@@ -29,20 +29,19 @@ def electricity_monitoringFunction():
             print(stopTime)
             dateNow = f'{datetime.datetime.now().year}-{datetime.datetime.now().month}-{datetime.datetime.now().day}' \
                       f' {datetime.datetime.now().hour}:{datetime.datetime.now().minute}:{datetime.datetime.now().second}'
-            print(f'mark #1\n\n\n\n{dateNow}')
             with open('/home/pi/Documents/StopTime', 'a') as LF:
                 LF.write(f'Дата - {dateNow} Время простоя - {str(stopTime)}\n')
                 send(topic='Электричество', message = f'Дата - {datetime.datetime.now()} Время простоя - {str(stopTime)}\n')
             with open('/home/pi/Documents/StopTime', 'r') as LF:
                 time.sleep(10)
-                str1 =''
+                # str1 =''
                 def sf(LF, str1):
                     list1= LF.readlines()
                     for i in list1:
                         str1 = str1 + i + '<br/>'
                     print(str1)
                     return str1
-                str2 = sf(LF, str1)
+                str2 = sf(LF)
                 send(topic=f'Электричество - {dateNow}', message=str2)
 
 
