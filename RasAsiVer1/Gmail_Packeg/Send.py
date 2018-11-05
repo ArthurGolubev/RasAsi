@@ -12,6 +12,14 @@ from sys import platform
 def prost5():
     print('Hello World!')
 
+def log(path):
+    with open(path, 'r') as LF:
+        list1 = LF.readlines()
+        str1 = ''
+        for i in list1:
+            str1 = str1 + i + '<br/>'
+            print(str1)
+    return str1
 
 def send(topic, message):
     SCOPES = 'https://www.googleapis.com/auth/gmail.send'

@@ -1,5 +1,5 @@
 import time, datetime
-from RasAsiVer1.Gmail_Packeg.Send import send
+from RasAsiVer1.Gmail_Packeg.Send import send, log
 
 
 def func1():
@@ -29,17 +29,17 @@ def electricity_monitoringFunction():
             print(stopTime)
             with open('/home/pi/Documents/StopTime', 'a') as LF:
                 LF.write(f'Дата - {datetime.datetime.now()} Время простоя - {str(stopTime)}\n')
-            with open('/home/pi/Documents/StopTime', 'r') as LF:
-
-                def sf(LF):
-                    list1= LF.readlines()
-                    str1 = ''
-                    for i in list1:
-                        str1 = str1 + i + '<br/>'
-                    print(str1)
-                    return str1
+            # with open('/home/pi/Documents/StopTime', 'r') as LF:
+            #
+            #     def sf(LF):
+            #         list1= LF.readlines()
+            #         str1 = ''
+            #         for i in list1:
+            #             str1 = str1 + i + '<br/>'
+            #         print(str1)
+            #         return str1
                 time.sleep(10)
-                send(topic=f'Электричество - {time.ctime()}', message=sf(LF))
+                send(topic=f'Электричество - {time.ctime()}', message=log('/home/pi/Documents/StopTime'))
 
 
     except:
