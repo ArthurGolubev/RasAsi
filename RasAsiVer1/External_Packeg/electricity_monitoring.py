@@ -36,7 +36,7 @@ def electricity_monitoringFunction():
                 def sf(LF, str1):
                     list1= LF.readlines()
                     for i in list1:
-                        str1 = str1 + i
+                        str1 = str1 + i + '<br/>'
                     print(str1)
                     return str1
                 str2 = sf(LF, str1)
