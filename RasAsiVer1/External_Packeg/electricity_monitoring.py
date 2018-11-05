@@ -27,10 +27,9 @@ def electricity_monitoringFunction():
             stopTime = datetime.timedelta(seconds=(time.time() - line1 - 180) // 1)
             print('try4')
             print(stopTime)
-            dateNow = f'{datetime.datetime.now() - datetime.timedelta(microseconds=datetime.datetime.now().microsecond)}'
             with open('/home/pi/Documents/StopTime', 'a') as LF:
-                LF.write(f'Дата - {dateNow} Время простоя - {str(stopTime)}\n')
-                send(topic='Электричество', message = f'Дата - {datetime.datetime.now()} Время простоя - {str(stopTime)}\n')
+                LF.write(f'Дата - {time.ctime()} Время простоя - {str(stopTime)}\n')
+                send(topic='Электричество', message = f'Дата - {time.ctime()} Время простоя - {str(stopTime)}\n')
             print('try5')
             with open('/home/pi/Documents/StopTime', 'r') as LF:
                 time.sleep(10)
@@ -43,7 +42,7 @@ def electricity_monitoringFunction():
                     return str1
                 str2 = sf(LF)
                 print('try6')
-                send(topic=f'Электричество - {dateNow}', message=str2)
+                send(topic=f'Электричество - {time.ctime()}', message=str2)
 
 
     except:
