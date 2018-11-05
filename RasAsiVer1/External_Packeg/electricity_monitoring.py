@@ -7,7 +7,7 @@ def func1():
     print(time.ctime())
     while variable1:
         print(r'*\|/ ________Записано________\|/*')
-        print(f'\t{datetime.datetime.now()}')
+        print(f'  {datetime.datetime.now()}')
         with open('/home/pi/Documents/logFileTime', 'w') as LF:
             LF.write(str(time.time()))
         print(r'./|\ ________Записано________/|\.', '\n')
