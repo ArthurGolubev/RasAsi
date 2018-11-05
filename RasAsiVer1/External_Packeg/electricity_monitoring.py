@@ -42,6 +42,7 @@ def electricity_monitoringFunction():
                     print(str1)
                     return str1
                 str2 = sf(LF)
+                print('try5')
                 send(topic=f'Электричество - {dateNow}', message=str2)
 
 
