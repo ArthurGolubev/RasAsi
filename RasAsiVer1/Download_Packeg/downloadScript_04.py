@@ -87,7 +87,7 @@ def download():
     send(topic='Загрузка завершена!', message=log(os.path.join(keypath1, 'logFiles', f'logFile{createlogName}.txt')))
     print('Done!')
     option1 = input('Задача завершина\nОткрыть файл-лог? (1/0)\t')
-    if int(option1):
+    if option1 == '1':
         if platform == 'win32':
             os.startfile(os.path.join(keypath1, 'logFiles', f'logFile{createlogName}.txt'))
         else:
