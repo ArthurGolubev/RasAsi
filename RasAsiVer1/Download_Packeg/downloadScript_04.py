@@ -78,12 +78,11 @@ def download():
                     for i4 in os.listdir():
                         sizeDir = sizeDir + os.path.getsize(i4)
                 logFile.write(f'Директория {os.getcwd()}\nфайлов - {len(os.listdir())}\n')
-                logFile.write(f'Размер директории - {sizeDir//1024//1024/1024} GB\n\n')
+                logFile.write(f'Размер директории - {int(sizeDir/1024/1024/1024)} GB\n\n')
                 allSize = allSize + sizeDir
-                # v2 += len(os.listdir())
             logFile.write(f'Общее время выполнение программы - {datetime.timedelta(seconds = overallTime//1)}\n')
             logFile.write(f'Скачано файлов {v2} из {links_number-1}\n')
-            logFile.write(f'Скачано {allSize//1024//1024//1024} GB')
+            logFile.write(f'Скачано {int(allSize/1024//1024/1024)} GB')
     send(topic='Загрузка завершена!', message=log(os.path.join(keypath1, 'logFiles', f'logFile{createlogName}.txt')))
     print('Done!')
     option1 = input('Задача завершина\nОткрыть файл-лог? (1/0)\t')
@@ -104,8 +103,8 @@ def downloadFuc(list1, string1, i, links_number, createlogName, keypath1):
         urllib.request.urlretrieve(f'{string1}', f'{i}_{list1[7]}')
         elapsedTime = time.time() - startTime
         print(f'скачался файл номер {i} - {list1[7]}\n')
-        print(f'...Processing {1+(i*(100/links_number)//1)}%...')
-        file1Size = (os.path.getsize(f'{i}_{list1[7]}')) // 1024 // 1024
+        print(f'...Processing {1+int(i*(100/links_number))}%...')
+        file1Size = int((os.path.getsize(f'{i}_{list1[7]}'))/1024/1024)
         logFile.write(f'скачался файл номер {i} - {list1[7]}\n')
         logFile.write(f'Время скачивания {datetime.timedelta(seconds=elapsedTime//1)}\n')
         logFile.write(f'Размер файла - {file1Size} MB\n\n')
