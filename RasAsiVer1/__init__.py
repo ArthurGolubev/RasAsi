@@ -4,6 +4,7 @@ from .External_Packeg.electricity_monitoring import electricity_monitoringFuncti
 from .Gmail_Packeg import commandList as commandList_Gmail_Packeg
 from sys import platform
 import datetime
+import threading
 
 startTimeRasAsi = datetime.datetime.now()
 
@@ -12,7 +13,8 @@ def mainMenu():
     variable1 = 0
     print('FROM mainMenu')
     if platform == 'linux':
-        electricity_monitoringFunction()
+        t = threading.Thread(target=electricity_monitoringFunction, name='Thread_electricity_monitoringFunction')
+        t.start()
     while variable1 == 0:
         print('FROM cycle')
         print('\nСписок доступных команд:\n1 - Download_Packeg\n2 - External_Packeg\n3 - program runtime\n4 - Gmail_Packeg\n0 - stop')
