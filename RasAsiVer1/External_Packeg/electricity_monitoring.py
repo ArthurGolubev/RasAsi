@@ -1,18 +1,18 @@
 import time, datetime
 from RasAsiVer1.Gmail_Packeg.Send import send, log
 from PyQt5 import QtWidgets, QtGui
-from ..GUI.RasAsi_GUI import Ui_MainWindow
+# from ..GUI.RasAsi_GUI import Ui_MainWindow
 import sys
 
-class mywindow(QtWidgets.QMainWindow):
-    def __init__(self):
-        super(mywindow, self).__init__()
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
-
-    def f1(self, n):
-        self.ui.label.setFont(QtGui.QFont('SansSerif', 30))
-        self.ui.label.setText(f'{n}')
+# class mywindow(QtWidgets.QMainWindow):
+#     def __init__(self):
+#         super(mywindow, self).__init__()
+#         self.ui = Ui_MainWindow()
+#         self.ui.setupUi(self)
+#
+#     def f1(self, n):
+#         self.ui.label.setFont(QtGui.QFont('SansSerif', 30))
+#         self.ui.label.setText(f'{n}')
 
 
 def func1():
