@@ -52,8 +52,8 @@ def electricity_monitoringFunction():
         func1()
 
     func1()
-app = QtWidgets.QApplication([])
-application = mywindow()
-application.show()
-
-sys.exit(app.exec())
+# app = QtWidgets.QApplication([])
+# application = mywindow()
+# application.show()
+#
+# sys.exit(app.exec())
