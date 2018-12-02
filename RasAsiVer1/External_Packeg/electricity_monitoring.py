@@ -21,7 +21,7 @@ def func1():
     while variable1:
         print(r'*\|/_________Записано_________\|/*')
         print(f'    {datetime.datetime.now()}')
-        application.f1(datetime.datetime.now())
+        # application.f1(datetime.datetime.now())
         with open('/home/pi/Documents/logFileTime', 'w') as LF:
             LF.write(str(time.time()))
         print(r'./|\_________Записано_________/|\.', '\n')
