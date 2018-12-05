@@ -1,13 +1,14 @@
 from .Download_Packeg import commandList as commandList_Download_Packeg
 # from .External_Packeg import commandList as commandList_External_Packeg
 from .Gmail_Packeg import commandList as commandList_Gmail_Packeg
+from .External_Packeg.electricity_monitoring import electricity_monitoringFunction
 from sys import platform
 import datetime
 import threading
 
 if platform == 'linux':
     t_stop = threading.Event()
-    from .External_Packeg.electricity_monitoring import electricity_monitoringFunction
+    # from .External_Packeg.electricity_monitoring import electricity_monitoringFunction
     t = threading.Thread(target=electricity_monitoringFunction, name='Treading_emf', args=(t_stop,))
     t.start()
 
