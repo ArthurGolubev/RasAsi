@@ -1,17 +1,19 @@
 from .Download_Packeg import commandList as commandList_Download_Packeg
 # from .External_Packeg import commandList as commandList_External_Packeg
-from .External_Packeg.electricity_monitoring import electricity_monitoringFunction
 from .Gmail_Packeg import commandList as commandList_Gmail_Packeg
 from sys import platform
 import datetime
 import threading
 
-startTimeRasAsi = datetime.datetime.now()
-
 if platform == 'linux':
+    from .External_Packeg.electricity_monitoring import electricity_monitoringFunction
     t_stop = threading.Event()
     t = threading.Thread(target=electricity_monitoringFunction, name='Treading_emf', args=(t_stop,))
     t.start()
+
+startTimeRasAsi = datetime.datetime.now()
+
+
 
 def mainMenu():
     variable1 = 0
