@@ -4,11 +4,11 @@ from RasAsiVer1.Gmail_Packeg.Send import send, log
 def func1(t_stop):
     print(time.ctime())
     while not t_stop.is_set():
-        print('\n', r'*\|/_________Записано_________\|/*')
+        print(r'*\|/_________Записано_________\|/*')
         print(f'    {datetime.datetime.now()}')
         with open('/home/pi/Documents/logFileTime', 'w') as LF:
             LF.write(str(time.time()))
-        print(r'./|\_________Записано_________/|\.')
+        print(r'./|\_________Записано_________/|\.', '\n')
         time.sleep(60)
 
 
