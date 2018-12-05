@@ -26,6 +26,7 @@ def mainMenu():
             commandList_Download_Packeg()
         elif command1 == '0':
             if platform == 'linux':
+                print('Linux!')
                 t_stop.set()
             raise SystemExit
         # elif comand1 == '2':
