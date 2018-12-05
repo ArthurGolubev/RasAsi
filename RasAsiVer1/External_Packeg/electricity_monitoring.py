@@ -4,11 +4,11 @@ from RasAsiVer1.Gmail_Packeg.Send import send, log
 def func1(t_stop):
     print(time.ctime())
     while not t_stop.is_set():
-        print(r'*\|/_________Записано_________\|/*')
+        print('\n', r'*\|/_________Записано_________\|/*')
         print(f'    {datetime.datetime.now()}')
         with open('/home/pi/Documents/logFileTime', 'w') as LF:
             LF.write(str(time.time()))
-        print(r'./|\_________Записано_________/|\.', '\n')
+        print(r'./|\_________Записано_________/|\.')
         time.sleep(60)
 
 
@@ -21,7 +21,7 @@ def electricity_monitoringFunction(t_stop):
             print(line1)
             print('try3')
             print(time.time())
-            time.sleep(3)
+            time.sleep(180)
             print(time.time())
             stopTime = datetime.timedelta(seconds=(time.time() - line1 - 180) // 1)
             print('try4')
