@@ -12,9 +12,9 @@ startTimeRasAsi = datetime.datetime.now()
 def mainMenu():
     variable1 = 0
     print('FROM mainMenu')
-    if platform == 'linux':
-        t = threading.Thread(target=electricity_monitoringFunction, name='Thread_electricity_monitoringFunction')
-        t.start()
+    # if platform == 'linux':
+    #     t = threading.Thread(target=electricity_monitoringFunction, name='Thread_electricity_monitoringFunction')
+    #     t.start()
     while variable1 == 0:
         print('FROM cycle')
         print('\nСписок доступных команд:\n1 - Download_Packeg\n2 - External_Packeg\n3 - program runtime\n4 - Gmail_Packeg\n0 - stop')
