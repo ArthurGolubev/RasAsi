@@ -21,7 +21,7 @@ def electricity_monitoringFunction(t_stop):
             print(line1)
             print('try3')
             print(time.time())
-            time.sleep(180)
+            time.sleep(3)
             print(time.time())
             stopTime = datetime.timedelta(seconds=(time.time() - line1 - 180) // 1)
             print('try4')
