@@ -10,7 +10,7 @@ import sys
 #         self.ui = Ui_MainWindow()
 #         self.ui.setupUi(self)
 #
-#     def f1(self, n):
+#     def f1(self, n):1
 #         self.ui.label.setFont(QtGui.QFont('SansSerif', 30))
 #         self.ui.label.setText(f'{n}')
 
