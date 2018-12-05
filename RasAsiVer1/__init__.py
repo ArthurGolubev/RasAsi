@@ -6,8 +6,8 @@ import datetime
 import threading
 
 if platform == 'linux':
-    from .External_Packeg.electricity_monitoring import electricity_monitoringFunction
     t_stop = threading.Event()
+    from .External_Packeg.electricity_monitoring import electricity_monitoringFunction
     t = threading.Thread(target=electricity_monitoringFunction, name='Treading_emf', args=(t_stop,))
     t.start()
 
