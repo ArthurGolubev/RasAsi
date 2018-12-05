@@ -25,7 +25,8 @@ def mainMenu():
         if command1 == '1':
             commandList_Download_Packeg()
         elif command1 == '0':
-            t_stop.set()
+            if platform == 'linux':
+                t_stop.set()
             raise SystemExit
         # elif comand1 == '2':
         #     commandList_External_Packeg()
