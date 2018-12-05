@@ -36,4 +36,4 @@ def electricity_monitoringFunction(t_stop):
         print('except1')
         func1(t_stop)
 
-    func1()
+    func1(t_stop)
