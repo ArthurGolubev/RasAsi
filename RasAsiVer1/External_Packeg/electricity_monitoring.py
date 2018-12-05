@@ -13,7 +13,7 @@ def func1(t_stop):
         time.sleep(60)
 
 
-def electricity_monitoringFunction():
+def electricity_monitoringFunction(t_stop):
     try:
         print('try1')
         with open('/home/pi/Documents/logFileTime', 'r') as LF:
