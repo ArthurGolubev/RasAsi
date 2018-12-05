@@ -9,8 +9,8 @@ import threading
 startTimeRasAsi = datetime.datetime.now()
 
 if platform == 'linux':
-    t_stop =threading.Event()
-    t = threading.Thread(target=electricity_monitoringFunction, name='Thread_electricity_monitoringFunction')
+    t_stop = threading.Event()
+    t = threading.Thread(target=electricity_monitoringFunction, name='Treading_emf', args=(t_stop,))
     t.start()
 
 def mainMenu():

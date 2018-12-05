@@ -1,11 +1,10 @@
 import time, datetime
 from RasAsiVer1.Gmail_Packeg.Send import send, log
+from RasAsiVer1 import t_stop
 
-
-def func1():
-    variable1 = 1
+def func1(t_stop):
     print(time.ctime())
-    while variable1:
+    while (not t_stop.set()):
         print(r'*\|/_________Записано_________\|/*')
         print(f'    {datetime.datetime.now()}')
         with open('/home/pi/Documents/logFileTime', 'w') as LF:
@@ -35,6 +34,6 @@ def electricity_monitoringFunction():
 
     except:
         print('except1')
-        func1()
+        func1(t_stop)
 
     func1()
