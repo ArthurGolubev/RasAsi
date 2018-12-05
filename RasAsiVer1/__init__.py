@@ -9,6 +9,7 @@ import threading
 startTimeRasAsi = datetime.datetime.now()
 
 if platform == 'linux':
+    t_stop =threading.Event()
     t = threading.Thread(target=electricity_monitoringFunction, name='Thread_electricity_monitoringFunction')
     t.start()
 
@@ -22,6 +23,7 @@ def mainMenu():
         if command1 == '1':
             commandList_Download_Packeg()
         elif command1 == '0':
+            t_stop.set()
             raise SystemExit
         # elif comand1 == '2':
         #     commandList_External_Packeg()
