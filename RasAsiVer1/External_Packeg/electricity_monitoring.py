@@ -3,7 +3,7 @@ from RasAsiVer1.Gmail_Packeg.Send import send, log
 
 def func1(a):
     print(time.ctime())
-    while not a.is_set():
+    while (not a.is_set()):
         print(r'*\|/_________Записано_________\|/*')
         print(f'    {datetime.datetime.now()}')
         with open('/home/pi/Documents/logFileTime', 'w') as LF:
