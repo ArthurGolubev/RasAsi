@@ -27,8 +27,9 @@ def currentTime(t_stop):
             print(datetime.now())
         elif cHour == 8 and cMinutes == 0:
             pass
-        elif cHour == 1 and cMinutes == 45:
-            send(topic='из time_managment', message='сейчас 1:45')
+        elif cHour == 1 and cMinutes == 55:
+            send(topic='из time_managment', message='сейчас 1:55')
+            sleep(60)
         else:
             print('mark #2')
             sleep(30)
