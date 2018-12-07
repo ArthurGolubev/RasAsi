@@ -15,11 +15,15 @@ def checkTime():
 
 def currentTime(t_stop):
     """при запуске Rasberry Asistent"""
-    # sleep(checkTime()[1])
+    print(f'\nВремя включения - {datetime.now()}')
+    sleep(checkTime()[1])
     print('mark #1')
+    print(f'\n{datetime.now()}')
+    cHour = datetime.now().hour
+    cMinutes = 0
     while not t_stop.is_set():
         """дабы не вызывать класс datetime при каждой проверки условий"""
-        cHour, cMinutes = datetime.now().hour, datetime.now().minute
+        # cHour, cMinutes = datetime.now().hour, datetime.now().minute
         if cHour == 12 or cHour == 0:
             """Коррекция времени"""
             print('сейчас 0 или 12 часов')
@@ -33,6 +37,11 @@ def currentTime(t_stop):
         else:
             print('mark #2')
             sleep(60)
+        cMinutes += 1
+        print(f'Time: {cHour}:{cMinutes}')
+        if cMinutes == 60:
+            cHour += 1
+            cMinutes = 0
 
 
 if __name__ != '__main__':
