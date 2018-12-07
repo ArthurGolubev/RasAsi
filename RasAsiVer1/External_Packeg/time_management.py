@@ -23,11 +23,15 @@ def currentTime(t_stop):
     cMinutes = 0
     while not t_stop.is_set():
         """дабы не вызывать класс datetime при каждой проверки условий"""
-        if cHour == 12 or cHour == 0:
+        if cMinutes == 0 and (cHour == 0 or cHour == 6 or cHour == 12 or cHour == 18):
             """Коррекция времени"""
-            print('сейчас 0 или 12 часов')
+            print('коррекция времени')
             sleep(checkTime()[0])
-            print(datetime.now())
+            cHour = datetime.now().hour
+            cMinutes = 0
+            print(f'коррекция времени - {datetime.now()}')
+            send(topic='Коррекция времени',
+                 message=f'время {datetime.now()}, по внутренним часам {cHour}:00')
         elif cHour == 8 and cMinutes == 0:
             pass
         elif cHour == 2 and cMinutes == 15:
@@ -41,7 +45,8 @@ def currentTime(t_stop):
         if cMinutes == 60:
             cHour += 1
             cMinutes = 0
-            send(topic='Час прошёл', message=f'письмо отправленно в {datetime.now()}\nВремя по внутренним часам {cHour}:{cMinutes}0')
+            send(topic='Час прошёл',
+                 message=f'письмо отправленно в {datetime.now()}Время по внутренним часам {cHour}:00')
 
 
 if __name__ != '__main__':
