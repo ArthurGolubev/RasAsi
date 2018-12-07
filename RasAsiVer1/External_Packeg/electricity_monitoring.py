@@ -19,7 +19,7 @@ def electricity_monitoringFunction(t_stop):
             print('try2')
             line1 = float(LF.readline())
             print(line1)
-            line2 = LF.readline()
+            # line2 = LF.readline()
             print(f'MARK #10000 {line2}')
             print('try3')
             print(time.time())
