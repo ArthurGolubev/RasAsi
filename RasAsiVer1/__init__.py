@@ -9,9 +9,9 @@ import threading
 
 
 t_stop = threading.Event()
-if platform == 'linux':
-    t = threading.Thread(target=electricity_monitoringFunction, name='Treading_emf', args=(t_stop,))
-    t.start()
+# if platform == 'linux':
+#     t = threading.Thread(target=electricity_monitoringFunction, name='Treading_emf', args=(t_stop,))
+#     t.start()
 
 t2 = threading.Thread(target=currentTime, name='T_time_manegement', args=(t_stop,))
 t2.start()
