@@ -19,6 +19,8 @@ def electricity_monitoringFunction(t_stop):
             print('try2')
             line1 = float(LF.readline())
             print(line1)
+            line2 = LF.readline()
+            print(line2)
             print('try3')
             print(time.time())
             time.sleep(180)
@@ -38,8 +40,8 @@ def electricity_monitoringFunction(t_stop):
 
 
 def userDirectiv():
-    with open('/home/pi/Documents/StopTime', 'a') as LF:
-        LF.write(f'Дата - {datetime.datetime.now()} Время простоя - {str(stopTime)} *user stop*\n')
+    with open('/home/pi/Documents/logFileTime', 'w') as LF:
+        LF.write(str(time.time())+'\nuser stop')
 
 
 if __name__ != '__main__':
