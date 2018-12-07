@@ -38,7 +38,7 @@ def currentTime(t_stop):
             print('mark #2')
             sleep(60)
         cMinutes += 1
-        print(f'Time: {cHour}:{cMinutes}')
+        print(f'Time: {cHour}:{cMinutes} {datetime.now()}')
         if cMinutes == 60:
             cHour += 1
             cMinutes = 0
