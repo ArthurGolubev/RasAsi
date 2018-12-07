@@ -1,7 +1,7 @@
 from .Download_Packeg import commandList as commandList_Download_Packeg
 # from .External_Packeg import commandList as commandList_External_Packeg
 from .Gmail_Packeg import commandList as commandList_Gmail_Packeg
-from .External_Packeg.electricity_monitoring import electricity_monitoringFunction
+from .External_Packeg.electricity_monitoring import electricity_monitoringFunction, userDirectiv
 from .External_Packeg.time_management import currentTime
 from sys import platform
 import datetime
@@ -32,6 +32,7 @@ def mainMenu():
         elif command1 == '0':
             if platform == 'linux':
                 print(f'...завершение программы...')
+                userDirectiv()
                 t_stop.set()
             raise SystemExit
         # elif comand1 == '2':

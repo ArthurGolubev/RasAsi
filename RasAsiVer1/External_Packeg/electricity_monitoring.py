@@ -30,12 +30,17 @@ def electricity_monitoringFunction(t_stop):
                 LF.write(f'Дата - {datetime.datetime.now()} Время простоя - {str(stopTime)}\n')
             send(topic=f'Электричество - {time.ctime()}', message=log('/home/pi/Documents/StopTime'))
 
-
     except:
         print('except1')
         func1(t_stop)
 
     func1(t_stop)
+
+
+def userDirectiv():
+    with open('/home/pi/Documents/logFileTime', 'w') as LF:
+        LF.write(str(time.time())+'*user stop*')
+
 
 if __name__ != '__main__':
     print(f'ЗАПУСК МОДУЛЯ - {__name__}')
