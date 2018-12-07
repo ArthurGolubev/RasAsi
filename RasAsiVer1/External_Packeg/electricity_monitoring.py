@@ -36,3 +36,9 @@ def electricity_monitoringFunction(t_stop):
         func1(t_stop)
 
     func1(t_stop)
+
+if __name__ != '__main__':
+    print(f'ЗАПУСК МОДУЛЯ - {__name__}')
+else:
+    print('ВЫ ТЕСТИРУЕТЕ МОДУЛЬ')
+    """необходима передача аргумента Event из модуля threading"""
