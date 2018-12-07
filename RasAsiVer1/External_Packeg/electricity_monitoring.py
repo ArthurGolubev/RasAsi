@@ -28,12 +28,12 @@ def electricity_monitoringFunction(t_stop):
             stopTime = datetime.timedelta(seconds=int(time.time() - line1 - 180))
             print('try4')
             print(f'Время простоя - {stopTime}')
-            with open('/home/pi/Documents/StopTime', 'a') as LF:
-                if LF.readline():
-                    LF.write(f'Дата - {datetime.datetime.now()} Время простоя - {str(stopTime)} *user stop*\n')
-                else:
-                    LF.write(f'Дата - {datetime.datetime.now()} Время простоя - {str(stopTime)}\n')
-            send(topic=f'Электричество - {time.ctime()}', message=log('/home/pi/Documents/StopTime'))
+        with open('/home/pi/Documents/StopTime', 'a') as LF:
+            if LF.readline():
+                LF.write(f'Дата - {datetime.datetime.now()} Время простоя - {str(stopTime)} *user stop*\n')
+            else:
+                LF.write(f'Дата - {datetime.datetime.now()} Время простоя - {str(stopTime)}\n')
+        send(topic=f'Электричество - {time.ctime()}', message=log('/home/pi/Documents/StopTime'))
 
     except:
         print('except1')
