@@ -23,7 +23,6 @@ def currentTime(t_stop):
     cMinutes = 0
     while not t_stop.is_set():
         """дабы не вызывать класс datetime при каждой проверки условий"""
-        # cHour, cMinutes = datetime.now().hour, datetime.now().minute
         if cHour == 12 or cHour == 0:
             """Коррекция времени"""
             print('сейчас 0 или 12 часов')
@@ -42,6 +41,7 @@ def currentTime(t_stop):
         if cMinutes == 60:
             cHour += 1
             cMinutes = 0
+            send(topic='Час прошёл', message=f'письмо отправленно в {datetime.now()}\nВремя по внутренним часам {cHour}:{cMinutes}0')
 
 
 if __name__ != '__main__':
