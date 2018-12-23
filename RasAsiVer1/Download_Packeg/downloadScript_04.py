@@ -28,7 +28,7 @@ def download():
         TimeNow = datetime.datetime.now()
         createlogName = f'{TimeNow.day}-{TimeNow.month}-{TimeNow.year}_time-{TimeNow.hour}-{TimeNow.minute}'
         logFile = open(os.path.join(keypath1, 'logFiles', f'logFile{createlogName}.txt'), 'a')
-        logFile.write(f'Запуск программы\n{time.ctime()}\n\n')                                                            #записывает в файл текущую датувремя в понятной отформатированой форме
+        logFile.write(f'Запуск программы\n{time.ctime()}\n\n')                                                          #записывает в файл текущую датувремя в понятной отформатированой форме
         logFile.close()
         for i in range(links_number - 1):                                                                               #считает i с 0, следовательно цифру количества ссылок (которая считается с 1, а не с 0) нужно убавить на 1
             string1 = file1.readline().strip()                                                                          # .strip() удаляет лишние элементы в строке, такие как не явно присутствующий символ переноса на следующую строку /n
