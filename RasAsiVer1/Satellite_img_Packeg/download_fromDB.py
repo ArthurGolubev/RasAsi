@@ -28,7 +28,7 @@ def download():
         print(f'{available_metadata[i][0]} - {available_metadata[i][1]}')
     ucommand = input('\nУкажите id эвента\t')
     listlink = query_select(DBq2, ucommand)
-    print('MOI LISTLINK: ', listlink)
+    print('Количество скачеваемых элементов: ', len(listlink))
     overallTime = time.time()
     TimeNow = datetime.datetime.now()
     createlogName = f'{TimeNow.day}-{TimeNow.month}-{TimeNow.year}_time-{TimeNow.hour}-{TimeNow.minute}'
