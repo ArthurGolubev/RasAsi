@@ -1,3 +1,2 @@
-password1 = input('Пароль:\t')
-
-config = {'host': 'localhost', 'database': 'mydb', 'user': 'root', 'password': password1}
+config = {'host': 'localhost', 'database': 'mydb', 'user': 'root', 'password': input('Пароль:\t')
+}
