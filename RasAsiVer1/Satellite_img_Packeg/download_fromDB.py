@@ -108,7 +108,7 @@ def downloadFuc(list1, string1, i, links_number, createlogName, keypath1):
         elapsedTime = time.time() - startTime
         print(f'скачался файл номер {i} - {list1[7]}')
         file1Size = int((os.path.getsize(f'{i}_{list1[7]}'))/1024/1024)
-        print(f'Средняя скорость {elapsedTime/(file1Size)} MB/sec')
+        print(f'Средняя скорость {round(elapsedTime/(file1Size), 3)} MB/sec')
         print(f'...Processing {1 + int(i * (100 / links_number))}%...')
         logFile.write(f'скачался файл номер {i} - {list1[7]}\n')
         logFile.write(f'Время скачивания {datetime.timedelta(seconds=elapsedTime//1)}\n')
