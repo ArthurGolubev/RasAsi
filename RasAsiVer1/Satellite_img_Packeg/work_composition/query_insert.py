@@ -1,6 +1,5 @@
-# print('print from __q1__')
-from . import *
-from work_composition.config import *
+import mysql.connector
+from .config import config
 # TODO посмотреть и, возможно, переписать инициализацию в пакетах, как тут!
 
 

@@ -1,5 +1,5 @@
-from . import *
-from work_composition.config import config
+from .config import config
+import mysql.connector
 print('print from __q2__')
 
 

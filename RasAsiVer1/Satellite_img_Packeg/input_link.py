@@ -1,10 +1,10 @@
-from work_composition.my_query import *
-from work_composition.queri_select import *
-from work_composition.initial_request import initial_request
-from work_composition.input_metadata import input_metadata
-from work_composition.query_insert import query_insert1
 import datetime
-#from work_composition.config import *
+from sys import platform
+from work_composition.my_query import *
+from work_composition.query_insert import query_insert1
+from work_composition.input_metadata import input_metadata
+from work_composition.initial_request import initial_request
+
 # TODO: написать документацию к модулю
 
 
@@ -19,7 +19,7 @@ def add_settelite_link():
         keypath1 = fr'{HDD.upper()}:\REMOTE SENSING IMG\Download\purl_list\1.txt'
     elif platform == 'linux':
         # TODO: добавить путь для скачки на HDD_DB
-        keypath1 = r'/media/pi/PHDD/REMOTE SENSING IMG/Download'
+        keypath1 = r'/media/pi/PORTABLE HDD/REMOTE SENSING IMG/Download/purl_list/1.txt'
 
     with open(keypath1) as F:
         '''Считываение всех строк из файла со ссылками в спсиок "a" '''

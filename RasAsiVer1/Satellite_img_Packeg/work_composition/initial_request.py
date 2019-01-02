@@ -1,5 +1,6 @@
-from work_composition.my_query import *
-from work_composition.queri_select import *
+from .my_query import *
+from .queri_select import query_select
+from .query_insert import query_insert1
 print('from Initial_r')
 
 

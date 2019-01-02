@@ -1,12 +1,12 @@
 # TODO: разобраться с импортами
-# from work_composition import query_select
-from work_composition.query_insert import query_insert1
-from work_composition.my_query import *
-from work_composition.config import config
-# from RasAsiVer1.Gmail_Packeg.Send import send, log
+import os
+import time
+import subprocess
+import urllib.request
 from sys import platform
+from work_composition.my_query import *
 from work_composition.queri_select import query_select
-import datetime
+from work_composition.query_insert import query_insert1
 # TODO: добавление сайза в GB для метаданных, добавление примерного времени скачивания в метаданные события
 
 
@@ -15,7 +15,7 @@ def download():
         HDD = input('укажите букву жёсткого диска:\t')
         keypath1 = fr'{HDD.upper()}:\REMOTE SENSING IMG\Download'
     elif platform == 'linux':
-        keypath1 = r'/media/pi/PHDD/REMOTE SENSING IMG/Download'
+        keypath1 = r'/media/pi/PORTABLE HDD/REMOTE SENSING IMG/Download'
     print(f'keypath1 - {keypath1}')
     file1_number = []
     available_metadata = query_select(DBq1)

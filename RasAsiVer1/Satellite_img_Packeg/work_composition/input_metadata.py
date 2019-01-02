@@ -1,12 +1,6 @@
-# from .queri_select import query_select
-# from .query_insert import query_insert1
-# from .my_query import *
-# from . import config
-
-from work_composition.queri_select import query_select
-from work_composition.query_insert import query_insert1
-from work_composition.config import *
-from work_composition.my_query import *
+from .query_insert import query_insert1
+from .queri_select import query_select
+from .my_query import *
 
 def input_metadata(plist, titledict):
     # TODO: написать документацию к модулю

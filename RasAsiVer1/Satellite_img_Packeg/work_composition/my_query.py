@@ -1,4 +1,4 @@
-from . import *
+import datetime
 zapros1 = 'INSERT INTO calendar(EventDate) VALUE (%s)'
 # zapros2 = 'SELECT MAX(EventDate) FROM calendar'
 zapros3 = "SELECT EventDate FROM calendar WHERE idCalendar = %s or %s"
