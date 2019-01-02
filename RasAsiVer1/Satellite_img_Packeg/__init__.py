@@ -12,8 +12,8 @@ from .download_fromDB import download
 def commandList():
     variable1 = 0
     if platform == 'linux':
-        if not os.path.exists('/media/pi/PORTABLE HDD/REMOTE SENSING IMG/Download/purl_list/1.txt'):
-            os.makedirs('/media/pi/PORTABLE HDD/REMOTE SENSING IMG/Download/purl_list/1.txt')
+        if not os.path.exists('/media/pi/PORTABLE HDD/REMOTE SENSING IMG/Download/purl_list/linkToDB.txt'):
+            os.makedirs('/media/pi/PORTABLE HDD/REMOTE SENSING IMG/Download/purl_list/linkToDB.txt')
 
     while variable1 == 0:
         print('\n-|Satellite_img_Packeg|-'
