@@ -13,7 +13,9 @@ def commandList():
     variable1 = 0
     if platform == 'linux':
         if not os.path.exists('/media/pi/PORTABLE HDD/REMOTE SENSING IMG/Download/purl_list/linkToDB.txt'):
-            os.makedirs('/media/pi/PORTABLE HDD/REMOTE SENSING IMG/Download/purl_list/linkToDB.txt')
+            os.makedirs('/media/pi/PORTABLE HDD/REMOTE SENSING IMG/Download/purl_list/')
+            with open('/media/pi/PORTABLE HDD/REMOTE SENSING IMG/Download/purl_list/linkToDB.txt', 'w'):
+                pass
 
     while variable1 == 0:
         print('\n-|Satellite_img_Packeg|-'
