@@ -39,6 +39,7 @@ def download():
     links_number = len(listlink)
     for i in range(links_number):
         print('\n{:,^47}'.format(' mark #1 from: ') + '\n{: ^47}'.format(__name__) + '\n{:,^47}'.format('') + '\n')  #<<<<_MARK_<<<<
+        print('ДЛИННА РЕНДЖА', links_number)
         print(listlink[i][0])
         plist = listlink[i][0].split('/')
         print('\n{:,^47}'.format(' mark #5 from: ') + '\n{: ^47}'.format(__name__) + '\n{:,^47}'.format('') + '\n')  #<<<<_MARK_<<<<
