@@ -15,5 +15,4 @@ if __name__ != '__main__':
     print(f'ЗАПУСК МОДУЛЯ - {__name__}')
 else:
     print('ВЫ ТЕСТИРУЕТЕ МОДУЛЬ')
-    # currentTime()
     k2()

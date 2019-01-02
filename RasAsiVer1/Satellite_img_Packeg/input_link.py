@@ -1,9 +1,9 @@
 import datetime
 from sys import platform
-from work_composition.my_query import *
-from work_composition.query_insert import query_insert1
-from work_composition.input_metadata import input_metadata
-from work_composition.initial_request import initial_request
+from .work_composition.my_query import *
+from .work_composition.query_insert import query_insert1
+from .work_composition.input_metadata import input_metadata
+from .work_composition.initial_request import initial_request
 
 # TODO: написать документацию к модулю
 

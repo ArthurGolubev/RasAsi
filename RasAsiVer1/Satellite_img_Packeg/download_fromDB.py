@@ -1,12 +1,12 @@
-# TODO: разобраться с импортами
 import os
 import time
 import subprocess
 import urllib.request
 from sys import platform
-from work_composition.my_query import *
-from work_composition.queri_select import query_select
-from work_composition.query_insert import query_insert1
+from ..Gmail_Packeg.Send import send, log
+from .work_composition.my_query import *
+from .work_composition.queri_select import query_select
+from .work_composition.query_insert import query_insert1
 # TODO: добавление сайза в GB для метаданных, добавление примерного времени скачивания в метаданные события
 
 
@@ -85,8 +85,7 @@ def download():
             timekitchen = datetime.time(hour=int(dtime / 3600), minute=int((dtime % 3600) / 60), second=int(dtime % 60))
             print(timekitchen)
             query_insert1(DBq3, (timekitchen, tsize, plist[3]))
-        # TODO: Разкоментить при интеграции в RasAsi
-        # send(topic='Загрузка завершена!', message=log(os.path.join(keypath1, 'logFiles', f'logFile{createlogName}.txt')))
+        send(topic='Загрузка завершена!', message=log(os.path.join(keypath1, 'logFiles', f'logFile{createlogName}.txt')))
         print('Done!')
         ucommand = input('Задача завершина\nОткрыть файл-лог? (1/0)\t')
         if ucommand == '1':
