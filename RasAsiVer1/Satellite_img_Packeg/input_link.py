@@ -20,7 +20,6 @@ def add_settelite_link():
     elif platform == 'linux':
         # TODO: добавить путь для скачки на HDD_DB
         keypath1 = r'/media/pi/PORTABLE HDD/REMOTE SENSING IMG/Download/purl_list/1.txt'
-
     with open(keypath1) as F:
         '''Считываение всех строк из файла со ссылками в спсиок "a" '''
         a = F.readlines()

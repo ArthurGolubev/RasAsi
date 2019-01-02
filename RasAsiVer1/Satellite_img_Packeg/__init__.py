@@ -11,7 +11,6 @@ from .download_fromDB import download
 
 def commandList():
     variable1 = 0
-    # password1 = input('Пароль:\t')
     while variable1 == 0:
         print('\n-|Satellite_img_Packeg|-'
               '\nДоступные команды:\n1 - add_settelite_link\n2 - download\n0 - back to main')
