@@ -28,6 +28,8 @@ def add_settelite_link():
             return 0
         else:
             for i in range(len(a)):
+                print('\n{:,^47}'.format(' mark #1 from: ') + '\n{: ^47}'.format(__name__) + '\n{:,^47}'.format('') + '\n')  #<<<<_MARK_<<<<
+                print(a[i])
                 # TODO: Добавить бьютифул месадж?
                 print('Чтение строк из файла с ссылками')
                 print(f'итерация {i+1}')
@@ -39,7 +41,6 @@ def add_settelite_link():
                     '''Если есть лишние пробелы до или после ссылки - убрать. Распарсить ссылку на элементы списка'''
                     plist = a[i].strip().split('/')
                     if plist[2] == 'opendata.digitalglobe.com':
-                        print('\n{:,^47}'.format(' mark #ЭТО DIGITALGLOBE from: ') + '\n{: ^47}'.format(__name__) + '\n{:,^47}'.format('') + '\n')  #<<<<_MARK_<<<<
                         SOURSE = 'DigitalGlobe'
                         if not existmetadata:
                             '''Первая, обязательная итерация для проверки методынных к ссылке'''
