@@ -1,11 +1,13 @@
+# TODO: навести красоту в импортах
 from .Download_Packeg import commandList as commandList_Download_Packeg
 # from .External_Packeg import commandList as commandList_External_Packeg
 from .Gmail_Packeg import commandList as commandList_Gmail_Packeg
 from .External_Packeg.electricity_monitoring import electricity_monitoringFunction, userDirectiv
-from .External_Packeg.legacy_time_management import currentTime
+from .External_Packeg.time_management import k2
 from sys import platform
 import datetime
 import threading
+from .Satellite_img_Packeg import commandList as commandList_Setellite_img_Packeg
 
 
 t_stop = threading.Event()
@@ -13,7 +15,7 @@ if platform == 'linux':
     t = threading.Thread(target=electricity_monitoringFunction, name='Treading_emf', args=(t_stop,))
     t.start()
 
-t2 = threading.Thread(target=currentTime, name='T_time_manegement', args=(t_stop,))
+t2 = threading.Thread(target=k2, name='T_time_manegement', args=(t_stop,))
 t2.start()
 
 startTimeRasAsi = datetime.datetime.now()
@@ -25,7 +27,7 @@ def mainMenu():
     print('FROM mainMenu')
     while variable1 == 0:
         print('FROM cycle')
-        print('\nСписок доступных команд:\n1 - Download_Packeg\n2 - External_Packeg\n3 - program runtime\n4 - Gmail_Packeg\n0 - stop')
+        print('\nСписок доступных команд:\n1 - Download_Packeg\n2 - External_Packeg\n3 - program runtime\n4 - Gmail_Packeg\n5 - Setallite_img_Packeg\n0 - stop')
         command1 = input('Выберете пакет\t')
         if command1 == '1':
             commandList_Download_Packeg()
@@ -41,6 +43,8 @@ def mainMenu():
             print(datetime.datetime.now() - startTimeRasAsi)
         elif command1 == '4':
             commandList_Gmail_Packeg()
+        elif command1 == '5':
+            commandList_Setellite_img_Packeg()
         else:
             print('\nВы ввели неверную команду\nпопробуйте сново')
             input('...[press Enter]...')
