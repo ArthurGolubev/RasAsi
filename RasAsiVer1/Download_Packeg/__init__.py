@@ -1,5 +1,4 @@
 from .downloadScript_04 import download, prost
-# from .file_transfer import copyfun, prost2
 
 
 def commandList():
