@@ -41,6 +41,8 @@ def download():
         print('\n{:,^47}'.format(' mark #1 from: ') + '\n{: ^47}'.format(__name__) + '\n{:,^47}'.format('') + '\n')  #<<<<_MARK_<<<<
         print(listlink[i][0])
         plist = listlink[i][0].split('/')
+        print('\n{:,^47}'.format(' mark #5 from: ') + '\n{: ^47}'.format(__name__) + '\n{:,^47}'.format('') + '\n')  #<<<<_MARK_<<<<
+        print(plist[2])
         if plist[2] == 'opendata.digitalglobe.com':
             print('\n{:,^47}'.format(' mark #2 from: ') + '\n{: ^47}'.format(__name__) + '\n{:,^47}'.format('') + '\n')  #<<<<_MARK_<<<<
             print(listlink[i][0])
