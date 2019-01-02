@@ -32,13 +32,10 @@ def download():
     overallTime = time.time()
     TimeNow = datetime.datetime.now()
     createlogName = f'{TimeNow.day}-{TimeNow.month}-{TimeNow.year}_time-{TimeNow.hour}-{TimeNow.minute}'
-    try:
+    if not os.path.exists(os.path.join(keypath1, 'logFiles')):
         os.makedirs(os.path.join(keypath1, 'logFiles'))
-    except:
-        pass
-    finally:
-        with open(os.path.join(keypath1, 'logFiles', f'logFile{createlogName}.txt'), 'a') as logFile:
-            logFile.write(f'Запуск программы\n{time.ctime()}\n\n')
+    with open(os.path.join(keypath1, 'logFiles', f'logFile{createlogName}.txt'), 'a') as logFile:
+        logFile.write(f'Запуск программы\n{time.ctime()}\n\n')
     links_number = len(listlink)
     for i in range(links_number):
         plist = listlink[i][0].split('/')

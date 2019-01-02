@@ -28,8 +28,6 @@ def add_settelite_link():
             return 0
         else:
             for i in range(len(a)):
-                print('\n{:,^47}'.format(' mark #1 from: ') + '\n{: ^47}'.format(__name__) + '\n{:,^47}'.format('') + '\n')  #<<<<_MARK_<<<<
-                print(a[i])
                 # TODO: Добавить бьютифул месадж?
                 print('Чтение строк из файла с ссылками')
                 print(f'итерация {i+1}')
