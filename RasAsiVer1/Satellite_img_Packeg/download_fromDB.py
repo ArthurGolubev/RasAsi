@@ -20,10 +20,10 @@ def download():
     file1_number = []
     available_metadata = query_select(DBq1)
     if not available_metadata:
-        print('Доступны следующие эвенты:')
-    else:
         print('В базе данных пока нет эвентов')
         return 0
+    else:
+        print('Доступны следующие эвенты:')
     for i in range(len(available_metadata)):
         print(f'{available_metadata[i][0]} - {available_metadata[i][1]}')
     ucommand = input('\nУкажите id эвента\t')
