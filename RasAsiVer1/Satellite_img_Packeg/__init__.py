@@ -12,11 +12,10 @@ from .download_fromDB import download
 def commandList():
     variable1 = 0
     if platform == 'linux':
-        print('\n{:,^47}'.format(' mark #TTTTT from: ') + '\n{: ^47}'.format(__name__) + '\n{:,^47}'.format('') + '\n')  #<<<<_MARK_<<<<
         if not os.path.exists('/media/pi/PORTABLE HDD/REMOTE SENSING IMG'):
-            print('\n{:,^47}'.format(' mark #MMM from: ') + '\n{: ^47}'.format(__name__) + '\n{:,^47}'.format('') + '\n')  #<<<<_MARK_<<<<
-            os.mkdir('/media/pi/PORTABLE HDD/REMOTE SENSING IMG/Download/purl_list')
-
+            print('TRUE')
+        else:
+            print('FALSE')
     while variable1 == 0:
         print('\n-|Satellite_img_Packeg|-'
               '\nДоступные команды:\n1 - add_settelite_link\n2 - download\n0 - back to main')
