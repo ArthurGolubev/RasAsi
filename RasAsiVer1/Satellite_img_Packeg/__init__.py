@@ -12,7 +12,9 @@ from .download_fromDB import download
 def commandList():
     variable1 = 0
     if platform == 'linux':
+        print('\n{:,^47}'.format(' mark #TTTTT from: ') + '\n{: ^47}'.format(__name__) + '\n{:,^47}'.format('') + '\n')  #<<<<_MARK_<<<<
         if not os.path.exists('/media/pi/PORTABLE HDD/REMOTE SENSING IMG/Download/purl_list'):
+            print('\n{:,^47}'.format(' mark #MMM from: ') + '\n{: ^47}'.format(__name__) + '\n{:,^47}'.format('') + '\n')  #<<<<_MARK_<<<<
             os.mkdir('/media/pi/PORTABLE HDD/REMOTE SENSING IMG/Download/purl_list')
 
     while variable1 == 0:
