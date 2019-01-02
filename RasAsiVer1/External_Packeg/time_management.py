@@ -15,6 +15,7 @@ def checkTime():
 def k2(t_stop):
     while not t_stop.is_set():
         cTime = datetime.now().time()
+        print(cTime)
         if cTime.minute == 3:
             print('\n{:,^47}'.format(' mark #1 from: ') + '\n{: ^47}'.format(__name__) + '\n{:,^47}'.format('') + '\n')  #<<<<_MARK_<<<<
             send(topic='Час прошёл', message=f'письмо отправленно в {datetime.now()}')
