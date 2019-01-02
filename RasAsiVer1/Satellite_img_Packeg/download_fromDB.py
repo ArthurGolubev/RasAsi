@@ -99,8 +99,6 @@ def download():
         return 0
 
 
-
-
 def downloadFuc(list1, string1, i, links_number, createlogName, keypath1):
     with open(os.path.join(keypath1, 'logFiles', f'logFile{createlogName}.txt'), 'a') as logFile:
         print(f'\nИтерация №{i+1} из {links_number}')
