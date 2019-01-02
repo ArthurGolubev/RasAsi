@@ -13,6 +13,7 @@ def checkTime():
     return waitHour, waitMinute
 
 def k2(t_stop):
+    print('\n{:,^47}'.format(' mark #1 from: ') + '\n{: ^47}'.format(__name__) + '\n{:,^47}'.format('') + '\n')  #<<<<_MARK_<<<<
     while not t_stop.is_set():
         cTime = datetime.now().time()
         print('из моего времени - 60 секунд спустя\t', cTime)
