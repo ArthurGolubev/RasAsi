@@ -38,25 +38,14 @@ def download():
         logFile.write(f'Запуск программы\n{time.ctime()}\n\n')
     links_number = len(listlink)
     for i in range(links_number):
-        print('\n{:,^47}'.format(' mark #1 from: ') + '\n{: ^47}'.format(__name__) + '\n{:,^47}'.format('') + '\n')  #<<<<_MARK_<<<<
-        print('ДЛИННА РЕНДЖА', links_number)
-        print(listlink[i][0])
         plist = listlink[i][0].split('/')
-        print('\n{:,^47}'.format(' mark #5 from: ') + '\n{: ^47}'.format(__name__) + '\n{:,^47}'.format('') + '\n')  #<<<<_MARK_<<<<
-        print(plist[2])
         if plist[2] == 'opendata.digitalglobe.com':
-            print('\n{:,^47}'.format(' mark #2 from: ') + '\n{: ^47}'.format(__name__) + '\n{:,^47}'.format('') + '\n')  #<<<<_MARK_<<<<
-            print(listlink[i][0])
             SOURCE = 'DigitalGlobe'
             try:
-                print('\n{:,^47}'.format(' mark #3 from: ') + '\n{: ^47}'.format(__name__) + '\n{:,^47}'.format('') + '\n')  #<<<<_MARK_<<<<
-                print(listlink[i][0])
                 os.makedirs(os.path.join(keypath1, 'DigitalGlobe', plist[3], plist[4], plist[5]))
                 os.chdir(os.path.join(keypath1, 'DigitalGlobe', plist[3], plist[4], plist[5]))
                 downloadFuc(plist, listlink[i][0], i, links_number, createlogName, keypath1)
             except FileExistsError:
-                print('\n{:,^47}'.format(' mark #4 from: ') + '\n{: ^47}'.format(__name__) + '\n{:,^47}'.format('') + '\n')  #<<<<_MARK_<<<<
-                print(listlink[i][0])
                 os.chdir(os.path.join(keypath1, 'DigitalGlobe', plist[3], plist[4], plist[5]))
                 file1_number.extend(os.listdir())
                 '''количество уникальных файлов, а значит пройденных итераций'''
