@@ -65,7 +65,6 @@ def download():
         totalfiles = 0
         totalsize = 0
         for i1 in listdir1:
-            sizeDir = 0
             os.chdir((os.path.join(keypath1, SOURCE, plist[3], i1)))
             listdir2 = os.listdir()
             for i2 in listdir2:
@@ -73,6 +72,7 @@ def download():
                 totalfiles += len(os.listdir())
                 for i3 in os.listdir():
                     '''проход по файлам'''
+                    sizeDir = 0
                     sizeDir += os.path.getsize(i3)
                 logFile.write(f'Директория {os.getcwd()}\nфайлов - {len(os.listdir())}\n')
                 logFile.write(f'Размер директории - {int(sizeDir / 1024 / 1024 / 1024)} GB\n\n')
