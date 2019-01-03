@@ -6,8 +6,8 @@ from ..Gmail_Packeg import send
 def k2(t_stop):
     while not t_stop.is_set():
         cTime = datetime.now().time()
-        if cTime.minute == 3:
-            send(topic='Час прошёл', message=f'письмо отправленно в {datetime.now()}')
+        # if cTime.minute == 3:
+        #     send(topic='Час прошёл', message=f'письмо отправленно в {datetime.now()}')
         sleep(60)
 
 
