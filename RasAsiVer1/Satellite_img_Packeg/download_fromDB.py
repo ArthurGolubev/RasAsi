@@ -80,7 +80,7 @@ def download():
         dtime = datetime.timedelta(seconds=int(overallTime))
         tsize = int(totalsize / 1024 / 1024 / 1024)
         logFile.write(f'Общее время выполнение программы - {dtime}\n')
-        logFile.write(f'Скачано файлов {totalfiles} из {links_number - 1}\n')
+        logFile.write(f'Скачано файлов {totalfiles} из {links_number}\n')
         logFile.write(f'Скачано {tsize} GB')
         dtime = dtime.total_seconds()
         timekitchen = datetime.time(hour=int(dtime / 3600), minute=int((dtime % 3600) / 60), second=int(dtime % 60))
