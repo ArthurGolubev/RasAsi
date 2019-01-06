@@ -1,6 +1,8 @@
 from datetime import datetime
 from time import sleep
-from ..Gmail_Packeg import send
+from RasAsiVer1 import startTimeRasAsi
+from ..Gmail_Packeg import send, read_msg
+from datetime import datetime
 
 
 def k2(t_stop):
@@ -8,6 +10,11 @@ def k2(t_stop):
         cTime = datetime.now().time()
         # if cTime.minute == 3:
         #     send(topic='Час прошёл', message=f'письмо отправленно в {datetime.now()}')
+        if cTime.hour == 19:
+            list1 = read_msg()
+            for i in list1:
+                if i.get('k') == 'время':
+                    send(topic='ВРЕМЯ ПРИШЛО', message=f'{datetime.now()-startTimeRasAsi}')
         sleep(60)
 
 
