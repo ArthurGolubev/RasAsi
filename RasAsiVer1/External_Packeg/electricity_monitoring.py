@@ -18,12 +18,11 @@ def electricity_monitoringFunction(t_stop):
     try:
         with open('/home/pi/Documents/logFileTime', 'r') as LF:
             line1 = float(LF.readline())
-            print('\n{:,^47}'.format(' mark #1 from: ') + '\n{: ^47}'.format(__name__) + '\n{:,^47}'.format(
-                '') + '\n')  # <<<<_MARK_<<<<
             time.sleep(180)
             stopTime = datetime.timedelta(seconds=int(time.time() - line1 - 180))
             print(f'\nВремя простоя - {stopTime}')
             with open('/home/pi/Documents/StopTime', 'a') as LF1:
+                '''Если есть вторая строка в лог файле (*user stop*), то:'''
                 if LF.readline():
                     LF1.write(f'Дата - {datetime.datetime.now()} Время простоя - {str(stopTime)} *user stop*\n')
                 else:
