@@ -2,17 +2,22 @@ from apiclient import discovery
 from httplib2 import Http
 from oauth2client import file, client, tools
 import datetime
-import base64
+from sys import platform
 
 
 def get_message():
     SCOPES = ['https://www.googleapis.com/auth/gmail.readonly', 'https://www.googleapis.com/auth/gmail.modify']
-    CLIENT_SECRET = 'C:\PythonProject\mygmail\client_secret.json'
+    if platform == 'win32':
+        CLIENT_SECRET_FILE = 'C:\PythonProject\mygmail\client_secret.json'
+    elif platform == 'linux':
+        CLIENT_SECRET_FILE = '/home/pi/Downloads/client_secret.json'
+    else:
+        print(f'Платформа {platform} не поддерживается')
 
     store = file.Storage('storage.json')
     creds = store.get()
     if not creds or creds.invalid:
-        flow = client.flow_from_clientsecrets(CLIENT_SECRET, SCOPES)
+        flow = client.flow_from_clientsecrets(CLIENT_SECRET_FILE, SCOPES)
         creds = tools.run_flow(flow, store)
 
     GMAIL = discovery.build('gmail', 'v1', http=creds.authorize(Http()))

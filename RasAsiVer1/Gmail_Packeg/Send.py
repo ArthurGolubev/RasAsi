@@ -26,6 +26,8 @@ def send(topic, message):
         CLIENT_SECRET_FILE = 'C:\PythonProject\mygmail\client_secret.json'
     elif platform == 'linux':
         CLIENT_SECRET_FILE = '/home/pi/Downloads/client_secret.json'
+    else:
+        print(f'Платформа {platform} не поддерживается')
     APPLICATION_NAME = 'Gmail API Python Send Email'
 
     def SendMessageInternal(service, user_id, message):

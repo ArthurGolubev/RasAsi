@@ -5,7 +5,6 @@ from .Gmail_Packeg import commandList as commandList_Gmail_Packeg
 from .External_Packeg.electricity_monitoring import electricity_monitoringFunction, userDirectiv
 from .External_Packeg.time_management import k2
 from sys import platform
-import datetime
 import threading
 from .Satellite_img_Packeg import commandList as commandList_Setellite_img_Packeg
 from .External_Packeg.startTimeRasAsi import *
