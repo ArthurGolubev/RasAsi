@@ -17,8 +17,8 @@ def read_message():
             k1 = base64.urlsafe_b64decode(data1)
             k2 = k1.decode()
             msglist_text.append(k2)
-            print(k2)
-            print(msglist_text)
+            # print(k2)
+            # print(msglist_text)
         return msglist_text
     return ()
 

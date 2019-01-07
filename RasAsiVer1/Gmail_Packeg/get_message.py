@@ -34,7 +34,7 @@ def get_message():
                                                                                'addLabelIds': [
                                                                                    'Label_5076690750399729789']}).execute()
                 specificMsglist.append(specificMsg)
-            elif mdate.date() <= datetime.date.today() - datetime.timedelta(hours=1):
+            elif mdate.date() <= datetime.date.today() - datetime.timedelta(days=7):
                 print(f'Устаревшее сообщение "...{specificMsg["snippet"]}..."')
                 GMAIL.users().messages().trash(userId='me', id=i['id']).execute()
                 print('удалено')

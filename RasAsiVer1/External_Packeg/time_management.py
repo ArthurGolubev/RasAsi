@@ -12,11 +12,10 @@ def k2(t_stop):
     while not t_stop.is_set():
         cTime = datetime.now().time()
         if cTime.hour == 21:
-            print('1')
+            pass
         if 'Время\r\n' in read_message():
             send(topic='Server time', message=f'Время работы сервера:\t {str(timeHasPassed(startTimeRasAsi))}')
             print('Время работы сервера было отправлено по внешнему запросу')
-        print(cTime.hour)
         sleep(60)
 
 
