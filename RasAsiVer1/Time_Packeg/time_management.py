@@ -16,10 +16,9 @@ def k2(t_stop):
         if cTime.hour == 21:
             pass
         if 'Время\r\n' in read_message():
-            msg = emojize(f'{ej["слон"]} '
-                          f'Время работы сервера:\t {str(timeHasPassed(startTimeRasAsi))} {ej["хлопушка"]}')
+            msg = emojize(f'{ej["слон"]} Время работы сервера:\t {str(timeHasPassed(startTimeRasAsi))}')
             send(topic='Server time', message=msg)
-            print(emojize(f"Время работы сервера было отправлено по внешнему запросу {ej['слон']}"))
+            print(emojize(f"Время работы сервера было отправлено по внешнему запросу {ej['хлопушка']}"))
         sleep(60)
 
 
