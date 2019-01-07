@@ -24,7 +24,7 @@ def send(topic, message):
     SCOPES = 'https://www.googleapis.com/auth/gmail.send'
     if platform == 'win32':
         CLIENT_SECRET_FILE = 'C:\PythonProject\mygmail\client_secret.json'
-    else:
+    elif platform == 'linux':
         CLIENT_SECRET_FILE = '/home/pi/Downloads/client_secret.json'
     APPLICATION_NAME = 'Gmail API Python Send Email'
 
