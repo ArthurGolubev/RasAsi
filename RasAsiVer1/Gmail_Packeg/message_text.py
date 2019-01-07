@@ -4,7 +4,6 @@ from RasAsiVer1.Gmail_Packeg.get_message import get_message
 
 def read_message():
     msglist = get_message()
-    print('Получено', len(msglist))
     if msglist:
         print('Обработка')
         msglist_text = []

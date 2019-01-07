@@ -21,8 +21,31 @@ def get_message():
         creds = tools.run_flow(flow, store)
 
     GMAIL = discovery.build('gmail', 'v1', http=creds.authorize(Http()))
-    messages = GMAIL.users().messages().list(userId='me', q='from:zabavniy7@gmail.com').execute()['messages']
-    specificMsglist = []
+
+    try:
+        messages = GMAIL.users().messages().list(userId='me', q='from:zabavniy7@gmail.com').execute()['messages']
+        specificMsglist = []
+        for i in messages:
+            specificMsg = GMAIL.users().messages().get(userId='me', id=i['id']).execute()
+            mdate = datetime.datetime.fromtimestamp(int(specificMsg['internalDate']) / 1000)
+
+            if mdate.date() == datetime.date.today() and 'UNREAD' in specificMsg['labelIds']:
+                GMAIL.users().messages().modify(userId='me', id=i['id'], body={'removeLabelIds': ['UNREAD'],
+                                                                               'addLabelIds': [
+                                                                                   'Label_5076690750399729789']}).execute()
+                specificMsglist.append(specificMsg)
+            elif mdate.date() <= datetime.date.today() - datetime.timedelta(hours=1):
+                print(f'Устаревшее сообщение "...{specificMsg["snippet"]}..."')
+                GMAIL.users().messages().trash(userId='me', id=i['id']).execute()
+                print('удалено')
+
+        return specificMsglist
+
+    except KeyError:
+        print('По данному запросу сообщений нет:',
+              GMAIL.users().messages().list(userId='me', q='from:zabavniy7@gmail.com').execute())
+        return None
+
     '''получить список ID label'''
     # results = GMAIL.users().labels().list(userId='me').execute()
     # labels = results.get('labels', [])
@@ -33,30 +56,6 @@ def get_message():
     #     print('Labels:')
     #     for label in labels:
     #         print(label['name'] + " " + label['id'])
-
-
-
-
-
-
-    for i in messages:
-        specificMsg = GMAIL.users().messages().get(userId='me', id=i['id']).execute()
-        mdate = datetime.datetime.fromtimestamp(int(specificMsg['internalDate'])/1000)
-
-        if mdate.date() == datetime.date.today() and 'UNREAD' in specificMsg['labelIds']:
-            GMAIL.users().messages().modify(userId='me', id=i['id'], body={'removeLabelIds': ['UNREAD'],
-                                                                           'addLabelIds': [
-                                                                               'Label_5076690750399729789']}).execute()
-
-            specificMsglist.append(specificMsg)
-        elif mdate.date() >= datetime.date.today() - datetime.timedelta(hours=1):
-            print(i)
-            print(specificMsg['snippet'])
-            # print(f'Устаревшее сообщение "...{i["snippet"]}..."')
-            GMAIL.users().massage().trash(userId='me', id=i['id']).execute()
-            print('удалено')
-
-    return specificMsglist
 
 
 if __name__ != '__main__':
