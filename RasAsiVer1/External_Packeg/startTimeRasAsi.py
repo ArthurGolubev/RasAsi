@@ -8,8 +8,8 @@ def initTime():
 
 def timeHasPassed(inittime):
     # TODO: сделать время без наносекунд в отправке "время простоя"
-    # cTime = datetime.now() - inittime
-    formTime = (datetime.now() - inittime) - timedelta(microseconds=datetime.now().microsecond)
+    cTime = datetime.now()
+    formTime = (cTime - inittime) - timedelta(microseconds=cTime.microsecond)
 
     return formTime
 
