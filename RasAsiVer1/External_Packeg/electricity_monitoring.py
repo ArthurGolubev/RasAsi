@@ -2,6 +2,7 @@ import time, datetime
 from RasAsiVer1.Gmail_Packeg.Send import send, log
 
 
+
 def func1(t_stop):
     print(time.ctime())
     while not t_stop.is_set():

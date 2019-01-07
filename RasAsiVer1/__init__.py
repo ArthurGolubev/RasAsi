@@ -7,6 +7,7 @@ from .External_Packeg.time_management import k2
 from sys import platform
 import datetime
 import threading
+# from RasAsi_main import startTimeRasAsi
 from .Satellite_img_Packeg import commandList as commandList_Setellite_img_Packeg
 
 
@@ -17,9 +18,6 @@ if platform == 'linux':
 
 t2 = threading.Thread(target=k2, name='T_time_manegement', args=(t_stop,))
 t2.start()
-
-startTimeRasAsi = datetime.datetime.now()
-
 
 
 def mainMenu():
@@ -32,15 +30,15 @@ def mainMenu():
         if command1 == '1':
             commandList_Download_Packeg()
         elif command1 == '0':
+            print(f'...завершение программы...')
             if platform == 'linux':
-                print(f'...завершение программы...')
                 userDirectiv()
-                t_stop.set()
+            t_stop.set()
             raise SystemExit
         # elif comand1 == '2':
         #     commandList_External_Packeg()
-        elif command1 == '3':
-            print(datetime.datetime.now() - startTimeRasAsi)
+        # elif command1 == '3':
+        #     print(datetime.datetime.now() - startTimeRasAsi)
         elif command1 == '4':
             commandList_Gmail_Packeg()
         elif command1 == '5':

@@ -1,14 +1,9 @@
 print('Hello!\nMy name is Raspberry Pi Asistent')
-import RasAsiVer1
+import RasAsiVer1, datetime
 
-
+startTimeRasAsi = datetime.datetime.now()
 RasAsiVer1.mainMenu()
 
-
-"""
-просмотреть путь для счёта количества скачаных файлов
-Директория {os.getcwd()} файлов - {len(os.listdir())}
-"""
 
 """
 добавить хорошее названия для мультилогинга
@@ -18,9 +13,4 @@ RasAsiVer1.mainMenu()
 
 """
 Доделать getpid в PM_P
-"""
-
-
-"""
-Добавить функционал в лог файл размера скачаной папки через os.patch.getsize
 """
