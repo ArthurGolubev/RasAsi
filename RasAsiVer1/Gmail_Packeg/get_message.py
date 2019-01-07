@@ -50,7 +50,7 @@ def get_message():
 
             specificMsglist.append(specificMsg)
         elif mdate.date() >= datetime.date.today() - datetime.timedelta(hours=1):
-            print(f'Устаревшее сообщение "...{messages["snippet"]}..."')
+            print(f'Устаревшее сообщение "...{messages[i]["snippet"]}..."')
             GMAIL.users().massage().trash(userId='me', id=i['id']).execute()
             print('удалено')
 
