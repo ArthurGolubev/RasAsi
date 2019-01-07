@@ -23,10 +23,12 @@ def electricity_monitoringFunction(t_stop):
             print(f'\nВремя простоя - {stopTime}')
             with open('/home/pi/Documents/StopTime', 'a') as LF1:
                 '''Если есть вторая строка в лог файле (*user stop*), то:'''
+                cTime = datetime.datetime.now()
+                formTime = cTime - datetime.timedelta(microseconds=cTime.microsecond)
                 if LF.readline():
-                    LF1.write(f'Дата - {datetime.datetime.now()} Время простоя - {str(stopTime)} *user stop*\n')
+                    LF1.write(f'Дата - {formTime} Время простоя - {str(stopTime)} *user stop*\n')
                 else:
-                    LF1.write(f'Дата - {datetime.datetime.now()} Время простоя - {str(stopTime)}\n')
+                    LF1.write(f'Дата - {formTime} Время простоя - {str(stopTime)}\n')
 
         send(topic=f'Электричество - {time.ctime()}', message=log('/home/pi/Documents/StopTime'))
 
