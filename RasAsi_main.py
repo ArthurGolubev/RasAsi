@@ -1,7 +1,7 @@
 print('Hello!\nMy name is Raspberry Pi Asistent')
-import RasAsiVer1, datetime
+import RasAsiVer1
 
-startTimeRasAsi = datetime.datetime.now()
+
 RasAsiVer1.mainMenu()
 
 

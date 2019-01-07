@@ -7,8 +7,8 @@ from .External_Packeg.time_management import k2
 from sys import platform
 import datetime
 import threading
-# from RasAsi_main import startTimeRasAsi
 from .Satellite_img_Packeg import commandList as commandList_Setellite_img_Packeg
+from .External_Packeg.startTimeRasAsi import *
 
 
 t_stop = threading.Event()
@@ -25,7 +25,13 @@ def mainMenu():
     print('FROM mainMenu')
     while variable1 == 0:
         print('FROM cycle')
-        print('\nСписок доступных команд:\n1 - Download_Packeg\n2 - External_Packeg\n3 - program runtime\n4 - Gmail_Packeg\n5 - Setallite_img_Packeg\n0 - stop')
+        print('\nСписок доступных команд:\n'
+              '1 - Download_Packeg\n'
+              '2 - External_Packeg\n'
+              '3 - program runtime\n'
+              '4 - Gmail_Packeg\n'
+              '5 - Setallite_img_Packeg\n'
+              '0 - stop')
         command1 = input('Выберете пакет\t')
         if command1 == '1':
             commandList_Download_Packeg()
@@ -37,8 +43,8 @@ def mainMenu():
             raise SystemExit
         # elif comand1 == '2':
         #     commandList_External_Packeg()
-        # elif command1 == '3':
-        #     print(datetime.datetime.now() - startTimeRasAsi)
+        elif command1 == '3':
+            print(timeHasPassed(startTimeRasAsi))
         elif command1 == '4':
             commandList_Gmail_Packeg()
         elif command1 == '5':
