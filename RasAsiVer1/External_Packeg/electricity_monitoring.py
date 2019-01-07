@@ -18,6 +18,8 @@ def electricity_monitoringFunction(t_stop):
     try:
         with open('/home/pi/Documents/logFileTime', 'r') as LF:
             line1 = float(LF.readline())
+            print('\n{:,^47}'.format(' mark #1 from: ') + '\n{: ^47}'.format(__name__) + '\n{:,^47}'.format(
+                '') + '\n')  # <<<<_MARK_<<<<
             time.sleep(180)
             stopTime = datetime.timedelta(seconds=int(time.time() - line1 - 180))
             print(f'\nВремя простоя - {stopTime}')
