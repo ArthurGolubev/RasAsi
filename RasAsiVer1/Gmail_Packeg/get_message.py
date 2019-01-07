@@ -23,7 +23,7 @@ def get_message():
     GMAIL = discovery.build('gmail', 'v1', http=creds.authorize(Http()))
     messages = GMAIL.users().messages().list(userId='me', q='from:zabavniy7@gmail.com').execute()['messages']
     specificMsglist = []
-
+    '''получить список ID label'''
     # results = GMAIL.users().labels().list(userId='me').execute()
     # labels = results.get('labels', [])
     #
@@ -49,15 +49,7 @@ def get_message():
                                                                                'Label_5076690750399729789']}).execute()
 
             specificMsglist.append(specificMsg)
-            # print(specificMsg)
-            #
-            # print('Тема сообщения:\t', specificMsg['payload']['headers'][19]['value'])
-            # data1 = specificMsg['payload']['parts'][0]['body']['data']
-            # k1 = base64.urlsafe_b64decode(data1)
-            # k2 = k1.decode()
-            # print(k2)
-
-        elif mdate.date() == datetime.date.today() - datetime.timedelta(days=7):
+        elif mdate.date() >= datetime.date.today() - datetime.timedelta(hours=1):
             print(f'Устаревшее сообщение "...{messages["snippet"]}..."')
             GMAIL.users().massage().trash(userId='me', id=i['id']).execute()
             print('удалено')
