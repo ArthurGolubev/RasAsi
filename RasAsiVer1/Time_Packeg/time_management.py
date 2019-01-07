@@ -5,7 +5,9 @@ from time import sleep
 from RasAsiVer1.Gmail_Packeg.message_text import read_message
 from RasAsiVer1.Gmail_Packeg.Send import send
 from datetime import datetime
-from RasAsiVer1.External_Packeg.startTimeRasAsi import timeHasPassed, startTimeRasAsi
+from RasAsiVer1.Time_Packeg.startTimeRasAsi import timeHasPassed, startTimeRasAsi
+from emoji import emojize
+from RasAsiVer1.External_Packeg.emojilist import ej
 
 
 def k2(t_stop):
@@ -14,8 +16,10 @@ def k2(t_stop):
         if cTime.hour == 21:
             pass
         if 'Время\r\n' in read_message():
-            send(topic='Server time', message=f'Время работы сервера:\t {str(timeHasPassed(startTimeRasAsi))}')
-            print('Время работы сервера было отправлено по внешнему запросу')
+            msg = emojize(f'{ej["слон"]} '
+                          f'Время работы сервера:\t {str(timeHasPassed(startTimeRasAsi))} {ej["хлопушка"]}')
+            send(topic='Server time', message=msg)
+            print(emojize(f"{ej['gраф']} Время работы сервера было отправлено по внешнему запросу {ej['слон']}"))
         sleep(60)
 
 

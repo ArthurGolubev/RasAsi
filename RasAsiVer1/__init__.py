@@ -1,13 +1,14 @@
 # TODO: навести красоту в импортах
 from .Download_Packeg import commandList as commandList_Download_Packeg
-# from .External_Packeg import commandList as commandList_External_Packeg
+# from .Time_Packeg import commandList as commandList_External_Packeg
 from .Gmail_Packeg import commandList as commandList_Gmail_Packeg
-from .External_Packeg.electricity_monitoring import electricity_monitoringFunction, userDirectiv
-from .External_Packeg.time_management import k2
+from .Time_Packeg.electricity_monitoring import electricity_monitoringFunction, userDirectiv
+from .Time_Packeg.time_management import k2
 from sys import platform
 import threading
 from .Satellite_img_Packeg import commandList as commandList_Setellite_img_Packeg
-from .External_Packeg.startTimeRasAsi import *
+from .Time_Packeg.startTimeRasAsi import *
+from .External_Packeg.emojilist import ej
 
 
 t_stop = threading.Event()
@@ -26,7 +27,7 @@ def mainMenu():
         print('FROM cycle')
         print('\nСписок доступных команд:\n'
               '1 - Download_Packeg\n'
-              '2 - External_Packeg\n'
+              '2 - Time_Packeg\n'
               '3 - program runtime\n'
               '4 - Gmail_Packeg\n'
               '5 - Setallite_img_Packeg\n'
@@ -43,7 +44,7 @@ def mainMenu():
         # elif comand1 == '2':
         #     commandList_External_Packeg()
         elif command1 == '3':
-            print(timeHasPassed(startTimeRasAsi))
+            print(f'{ej["молния"]} {timeHasPassed(startTimeRasAsi)} {ej["молния"]}')
         elif command1 == '4':
             commandList_Gmail_Packeg()
         elif command1 == '5':
