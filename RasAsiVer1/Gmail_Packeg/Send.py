@@ -8,7 +8,6 @@ from email.mime.text import MIMEText
 from apiclient import errors, discovery
 from sys import platform
 
-
 def prost5():
     print('Hello World!')
 
@@ -25,8 +24,10 @@ def send(topic, message):
     SCOPES = 'https://www.googleapis.com/auth/gmail.send'
     if platform == 'win32':
         CLIENT_SECRET_FILE = 'C:\PythonProject\mygmail\client_secret.json'
-    else:
+    elif platform == 'linux':
         CLIENT_SECRET_FILE = '/home/pi/Downloads/client_secret.json'
+    else:
+        print(f'Платформа {platform} не поддерживается')
     APPLICATION_NAME = 'Gmail API Python Send Email'
 
     def SendMessageInternal(service, user_id, message):

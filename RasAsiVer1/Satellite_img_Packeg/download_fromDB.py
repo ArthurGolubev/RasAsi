@@ -65,7 +65,6 @@ def download():
         totalfiles = 0
         totalsize = 0
         for i1 in listdir1:
-            sizeDir = 0
             os.chdir((os.path.join(keypath1, SOURCE, plist[3], i1)))
             listdir2 = os.listdir()
             for i2 in listdir2:
@@ -73,6 +72,7 @@ def download():
                 totalfiles += len(os.listdir())
                 for i3 in os.listdir():
                     '''проход по файлам'''
+                    sizeDir = 0
                     sizeDir += os.path.getsize(i3)
                 logFile.write(f'Директория {os.getcwd()}\nфайлов - {len(os.listdir())}\n')
                 logFile.write(f'Размер директории - {int(sizeDir / 1024 / 1024 / 1024)} GB\n\n')
@@ -80,7 +80,7 @@ def download():
         dtime = datetime.timedelta(seconds=int(overallTime))
         tsize = int(totalsize / 1024 / 1024 / 1024)
         logFile.write(f'Общее время выполнение программы - {dtime}\n')
-        logFile.write(f'Скачано файлов {totalfiles} из {links_number - 1}\n')
+        logFile.write(f'Скачано файлов {totalfiles} из {links_number+1}\n')
         logFile.write(f'Скачано {tsize} GB')
         dtime = dtime.total_seconds()
         timekitchen = datetime.time(hour=int(dtime / 3600), minute=int((dtime % 3600) / 60), second=int(dtime % 60))
@@ -99,8 +99,6 @@ def download():
         return 0
 
 
-
-
 def downloadFuc(list1, string1, i, links_number, createlogName, keypath1):
     with open(os.path.join(keypath1, 'logFiles', f'logFile{createlogName}.txt'), 'a') as logFile:
         print(f'\nИтерация №{i+1} из {links_number}')
@@ -110,7 +108,7 @@ def downloadFuc(list1, string1, i, links_number, createlogName, keypath1):
         elapsedTime = time.time() - startTime
         print(f'скачался файл номер {i} - {list1[7]}')
         file1Size = int((os.path.getsize(f'{i}_{list1[7]}'))/1024/1024)
-        print(f'Средняя скорость {elapsedTime/(file1Size)} MB/sec')
+        print(f'Средняя скорость {round(elapsedTime/(file1Size), 3)} MB/sec')
         print(f'...Processing {1 + int(i * (100 / links_number))}%...')
         logFile.write(f'скачался файл номер {i} - {list1[7]}\n')
         logFile.write(f'Время скачивания {datetime.timedelta(seconds=elapsedTime//1)}\n')
