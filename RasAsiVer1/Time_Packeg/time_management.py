@@ -13,8 +13,6 @@ from RasAsiVer1.External_Packeg.emojilist import ej
 def k2(t_stop):
     while not t_stop.is_set():
         cTime = datetime.now().time()
-        if cTime.hour == 21:
-            pass
         if 'Время\r\n' in read_message():
             msg = emojize(f'{ej["слон"]} Время работы сервера:\t {str(timeHasPassed(startTimeRasAsi))}')
             send(topic='Server time', message=msg)
