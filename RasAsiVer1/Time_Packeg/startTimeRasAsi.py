@@ -7,7 +7,6 @@ def initTime():
 
 
 def timeHasPassed(inittime):
-    # TODO: сделать время без наносекунд в отправке "время простоя"
     cTime = datetime.now() - inittime
     formTime = cTime - timedelta(microseconds=cTime.microseconds)
 

@@ -2,6 +2,9 @@ import base64
 from RasAsiVer1.Gmail_Packeg.get_message import get_message
 
 
+# TODO: переименовать модуль в read_message
+
+
 def read_message():
     msglist = get_message()
     if msglist:
@@ -20,7 +23,7 @@ def read_message():
             # print(k2)
             # print(msglist_text)
         return msglist_text
-    return ()
+
 
 if __name__ != '__main__':
     print(f'ЗАПУСК МОДУЛЯ {__name__}')

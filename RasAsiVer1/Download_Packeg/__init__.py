@@ -2,10 +2,12 @@ from .downloadScript_04 import download, prost
 
 
 def commandList():
-    variable1 = 0
-    while variable1 == 0:
+    while True:
         print('\n-|Download_Packeg|-'
-              '\nДоступные команды:\n1 - prost\n2 - prost 2\n3 - download\n4 - copyfun\n0 - back to main')
+              '\nДоступные команды:\n'
+              '1 - prost\n2 - prost 2\n'
+              '3 - download\n4 - copyfun\n'
+              '0 - back to main')
         command1 = input('\nВведите команду:\t')
         if command1 == '1':
             prost()

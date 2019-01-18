@@ -1,14 +1,15 @@
 # TODO: навести красоту в импортах
-from .Download_Packeg import commandList as commandList_Download_Packeg
+from .Download_Packeg import commandList as cL_Download_Packeg
 # from .Time_Packeg import commandList as commandList_External_Packeg
-from .Gmail_Packeg import commandList as commandList_Gmail_Packeg
+from .Gmail_Packeg import commandList as cL_Gmail_Packeg
 from .Time_Packeg.electricity_monitoring import electricity_monitoringFunction, userDirectiv
 from .Time_Packeg.time_management import k2
 from sys import platform
 import threading
-from .Satellite_img_Packeg import commandList as commandList_Setellite_img_Packeg
+from .Satellite_img_Packeg import commandList as cL_Setellite_img_Packeg
 from .Time_Packeg.startTimeRasAsi import *
 from .External_Packeg.emojilist import ej
+from .resService_Packeg import commandList as cL_resService_Packeg
 
 
 t_stop = threading.Event()
@@ -21,9 +22,8 @@ t2.start()
 
 
 def mainMenu():
-    variable1 = 0
     print('FROM mainMenu')
-    while variable1 == 0:
+    while True:
         print('FROM cycle')
         print('\nСписок доступных команд:\n'
               '1 - Download_Packeg\n'
@@ -31,10 +31,11 @@ def mainMenu():
               '3 - program runtime\n'
               '4 - Gmail_Packeg\n'
               '5 - Setallite_img_Packeg\n'
+              '6 - resService_Packeg\n'
               '0 - stop')
         command1 = input('Выберете пакет\t')
         if command1 == '1':
-            commandList_Download_Packeg()
+            cL_Download_Packeg()
         elif command1 == '0':
             print(f'...завершение программы...')
             if platform == 'linux':
@@ -46,9 +47,11 @@ def mainMenu():
         elif command1 == '3':
             print(f'{ej["молния"]} {timeHasPassed(startTimeRasAsi)} {ej["молния"]}')
         elif command1 == '4':
-            commandList_Gmail_Packeg()
+            cL_Gmail_Packeg()
         elif command1 == '5':
-            commandList_Setellite_img_Packeg()
+            cL_Setellite_img_Packeg()
+        elif command1 == '6':
+            cL_resService_Packeg(t_stop)
         else:
             print('\nВы ввели неверную команду\nпопробуйте сново')
             input('...[press Enter]...')

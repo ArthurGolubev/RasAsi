@@ -8,17 +8,20 @@ from sys import platform
 from .input_link import add_settelite_link
 from .download_fromDB import download
 
+
 def commandList():
-    variable1 = 0
     if platform == 'linux':
         if not os.path.exists('/media/pi/PORTABLE HDD/REMOTE SENSING IMG/Download/purl_list/linkToDB.txt'):
             os.makedirs('/media/pi/PORTABLE HDD/REMOTE SENSING IMG/Download/purl_list/')
             with open('/media/pi/PORTABLE HDD/REMOTE SENSING IMG/Download/purl_list/linkToDB.txt', 'w'):
                 pass
 
-    while variable1 == 0:
+    while True:
         print('\n-|Satellite_img_Packeg|-'
-              '\nДоступные команды:\n1 - add_settelite_link\n2 - download\n0 - back to main')
+              '\nДоступные команды:\n'
+              '1 - add_settelite_link\n'
+              '2 - download\n'
+              '0 - back to main')
         command1 = input('\nВведите команду:\t')
         if command1 == '1':
             add_settelite_link()

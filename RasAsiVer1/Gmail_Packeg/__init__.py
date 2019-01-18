@@ -2,10 +2,12 @@ from .Send import prost5, send
 
 
 def commandList():
-    variable1 = 0
-    while variable1 == 0:
+    while True:
         print('\n-|Gmail_Packeg|-'
-              '\nДоступные команды:\n1 - prost5\n2 - send\n0 - back to main')
+              '\nДоступные команды:\n'
+              '1 - prost5\n'
+              '2 - send\n'
+              '0 - back to main')
         command1 = input('\nВведите команду:\t')
         if command1 == '0':
             return 0

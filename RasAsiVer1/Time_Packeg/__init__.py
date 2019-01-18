@@ -4,10 +4,13 @@
 
 
 def commandList():
-    variable1 = 0
-    while variable1 == 0:
+    while True:
         print('\n-|Time_Packeg|-'
-              '\nДоступные команды:\n1 - prost3\n2 - getpid ERDAS\n3 - PrintHelp\n0 - back to main')
+              '\nДоступные команды:\n'
+              '1 - prost3\n'
+              '2 - getpid ERDAS\n'
+              '3 - PrintHelp\n'
+              '0 - back to main')
         command1 = input('\nВведите команжу:\t')
 
         # if command1 == '1':

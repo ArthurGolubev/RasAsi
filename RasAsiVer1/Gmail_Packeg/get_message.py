@@ -24,7 +24,7 @@ def get_message():
 
     try:
         messages = GMAIL.users().messages().list(userId='me', q='from:zabavniy7@gmail.com').execute()['messages']
-        print('Получилось. Сообщение:\t', messages)
+        # print('Получилось. Сообщение:\t', messages)
         specificMsglist = []
         for i in messages:
             specificMsg = GMAIL.users().messages().get(userId='me', id=i['id']).execute()
@@ -43,8 +43,7 @@ def get_message():
         return specificMsglist
 
     except KeyError:
-        print('По данному запросу сообщений нет:',
-              GMAIL.users().messages().list(userId='me', q='from:zabavniy7@gmail.com').execute())
+        print('По данному запросу сообщений нет')
         return None
 
     '''получить список ID label'''
