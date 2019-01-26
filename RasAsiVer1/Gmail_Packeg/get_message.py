@@ -24,7 +24,6 @@ def get_message():
 
     try:
         messages = GMAIL.users().messages().list(userId='me', q='from:zabavniy7@gmail.com').execute()['messages']
-        # print('Получилось. Сообщение:\t', messages)
         specificMsglist = []
         for i in messages:
             specificMsg = GMAIL.users().messages().get(userId='me', id=i['id']).execute()
@@ -39,6 +38,7 @@ def get_message():
                 print(f'Устаревшее сообщение "...{specificMsg["snippet"]}..."')
                 GMAIL.users().messages().trash(userId='me', id=i['id']).execute()
                 print('удалено')
+                specificMsglist.append(specificMsg)
 
         return specificMsglist
 
