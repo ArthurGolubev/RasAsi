@@ -1,5 +1,5 @@
 from selenium import webdriver
 
-browser = webdriver.Fierfox()
+browser = webdriver.Firefox()
 
 browser.get('https://24-ok.ru/')
