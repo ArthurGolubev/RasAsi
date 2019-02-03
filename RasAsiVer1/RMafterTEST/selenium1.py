@@ -1,5 +1,5 @@
 from selenium import webdriver
 
-driver = webdriver.Firefox(firefox_profile=profile, log_path='./Log/geckodriver.log')
+browserdriver = webdriver.Firefox()
 
-driver.get('https://24-ok.ru/')
+browser.get('https://24-ok.ru/')
