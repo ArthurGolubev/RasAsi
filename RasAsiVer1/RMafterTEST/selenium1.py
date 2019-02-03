@@ -1,5 +1,5 @@
 from selenium import webdriver
 
-browserdriver = webdriver.Firefox()
+browserdriver = webdriver.Firefox(executable_path='usr/local/bin/geckodriver')
 
-browser.get('https://24-ok.ru/')
+browser.get('https://www.youtube.com/')
