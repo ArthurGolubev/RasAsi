@@ -5,4 +5,4 @@ web = webdriver.Firefox(
     firefox_binary='/usr/lib/firefox-esr/firefox-esr'
 )
 
-browser.get('https://www.youtube.com/')
+web.get('https://www.youtube.com/')
