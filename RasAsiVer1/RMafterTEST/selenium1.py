@@ -1,5 +1,8 @@
 from selenium import webdriver
 
-browser = webdriver.Firefox()
+web = webdriver.Firefox(
+    executable_path='/path/to/geckodriver',
+    firefox_binary='/path/to/firefox/binary'
+)
 
 browser.get('https://www.youtube.com/')
