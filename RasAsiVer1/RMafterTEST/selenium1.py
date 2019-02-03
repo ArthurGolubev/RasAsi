@@ -1,8 +1,4 @@
 from selenium import webdriver
 
-web = webdriver.Firefox(
-    executable_path='/usr/local/bin/geckodriver',
-    firefox_binary='/usr/lib/firefox-esr/firefox-esr'
-)
-
-web.get('https://www.youtube.com/')
+browser = webdriver.Chrome(executable_path="/usr/lib/chromium-browser/chromedriver")
+browser.get('https://www.google.com/')
