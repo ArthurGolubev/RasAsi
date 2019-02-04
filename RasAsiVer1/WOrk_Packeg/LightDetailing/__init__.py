@@ -10,10 +10,11 @@ def commandList():
               '2 - viewAU\n'
               '0 - back to main')
         command1 = input('\nВведите команжу:\t')
-
         if command1 == '1':
-            user = input('Введите имя пользователя')
-            getAU24(user)
+            user = input('Введите имя пользователя:\t')
+            classification_usr = input('Укажите - магазин/пользователь:\t')
+
+            getAU24(classification_usr, user)
             input('...[press Enter]...')
         elif command1 == '2':
             vievAUrequests()

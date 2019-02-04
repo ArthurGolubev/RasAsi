@@ -32,7 +32,7 @@ def mainMenu():
               '4 - Gmail_Packeg\n'
               '5 - Setallite_img_Packeg\n'
               '6 - resService_Packeg\n'
-              '7 - WOrk_Packeg'
+              '7 - WOrk_Packeg\n'
               '0 - stop')
         command1 = input('Выберете пакет\t')
         if command1 == '1':

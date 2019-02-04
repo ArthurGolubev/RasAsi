@@ -5,7 +5,7 @@ import os, datetime
 from RasAsiVer1.WOrk_Packeg.LightDetailing.GetAU24.create_table import reportTable
 
 
-def getAU24(userSearch):
+def getAU24(classification_usr, userSearch):
     # TODO: добавить функционал выбора пользователя для анализа
     if platform == 'win32':
         path1 = 'F:\WOrk'
@@ -13,22 +13,22 @@ def getAU24(userSearch):
         path1 = '/media/pi/PORTABLE HDD'
     else:
         print('Платформа не поддерживается')
-
-    # userSearch = 'lightdetailing'
-    # link1 = f'https://au.ru/user/{userSearch}/lots/'
-    # link2 = f'https://au.ru/user/{userSearch}/lots/?page='
-    #
+    if classification_usr == 'пользователь':
+        link1 = f'https://au.ru/user/{userSearch}/lots/'
+        link2 = f'https://au.ru/user/{userSearch}/lots/?page='
+    elif classification_usr == 'магазин':
+        link1 = f'https://au.ru/user/{userSearch}/shop/'
+        link2 = f'https://au.ru/user/{userSearch}/shop/?group=active&page='
 
     # userSearch = 'ice23'
     # userSearch = 'ProFara'
-
+    # userSearch = 'lightdetailing'
     # userSearch = 'sho21'
-    link1 = f'https://au.ru/user/{userSearch}/shop/'
-    link2 = f'https://au.ru/user/{userSearch}/shop/?group=active&page='
+
 
     startTime = datetime.datetime.now()
     # TODO: переименовать someDict
-    someDict = runPages(GetSOMETHING_SHEET(getHTML(link1)), link1, link2, userSearch)
+    someDict = runPages(GetSOMETHING_SHEET(getHTML(link1)), link2, userSearch, path1)
     cTime = datetime.datetime.now()
     formTime = cTime - datetime.timedelta(microseconds=cTime.microsecond)
     reportTable(f'{userSearch} - {formTime}', someDict)
@@ -54,7 +54,7 @@ def GetSOMETHING_SHEET(HTML_1):
     return totalPages
 
 
-def runPages(totalP, link1, link2, userSearch):
+def runPages(totalP, link2, userSearch, path1):
     someDict = {}
     justVar = 0
     for i in range(1, totalP + 1):
@@ -66,11 +66,11 @@ def runPages(totalP, link1, link2, userSearch):
             print(f'Лот {justVar}')
             lotID = i2.get('data-lamber-object').split(':')[1]
             lotLink = f'https://krsk.au.ru/{lotID}/'
-            someDict = lotParer(getHTML(lotLink), lotLink, someDict)
+            someDict = lotParer(getHTML(lotLink), lotLink, someDict, userSearch, path1)
     return someDict
 
 
-def lotParer(HTML, lotLink, someDict):
+def lotParer(HTML, lotLink, someDict, userSearch, path1):
     soup = BeautifulSoup(HTML, 'html.parser')
     allPageContent = soup.find('div', class_='au-item-page-content au-item-page-content-vertical')
 
@@ -188,4 +188,4 @@ if __name__ != '__main__':
     print(f'ЗАПУСК МОДУЛЯ - {__name__}')
 else:
     print('ВЫ ТЕСТИРУЕТЕ МОДУЛЬ')
-    getAU24(userSearch=None)
+    getAU24(classification_usr='магазин', userSearch=None)
