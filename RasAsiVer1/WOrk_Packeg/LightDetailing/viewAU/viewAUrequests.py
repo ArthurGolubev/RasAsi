@@ -21,6 +21,7 @@ def vievAUrequests():
     else:
         print('Платформа не поддерживается')
         raise SystemExit
+    print(f'viewAU: Task completed {datetime.today().time()}')
 
     def getlinklist():
         totalP = GetSOMETHING_SHEET(getHTML(link1))

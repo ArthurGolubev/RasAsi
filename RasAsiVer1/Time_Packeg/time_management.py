@@ -16,8 +16,7 @@ def k2(t_stop):
         if cTime.hour in [8, 11, 13, 14, 18, 21]:
             if cTime.minute in [15, 28, 43, 55]:
                 print(f'Task viewAU {datetime.now().time()}')
-                t3 = threading.Thread(target=vievAUrequests(), name='viewAUrequests').start()
-                print(f'viewAU: Task completed {datetime.today().time()}')
+                t3 = threading.Thread(target=vievAUrequests, name='viewAUrequests').start()
         try:
             msgpipeline = read_message()
             if msgpipeline:
