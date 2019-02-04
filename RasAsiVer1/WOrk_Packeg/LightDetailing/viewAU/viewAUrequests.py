@@ -21,7 +21,6 @@ def vievAUrequests():
     else:
         print('Платформа не поддерживается')
         raise SystemExit
-    print(f'viewAU: Task completed {datetime.today().time()}')
 
     def getlinklist():
         totalP = GetSOMETHING_SHEET(getHTML(link1))
@@ -61,6 +60,7 @@ def vievAUrequests():
         rlink = random.choice(listlink).replace('\n', '')
         getHTML(rlink)
         time.sleep(random.randint(1, 11))
+    print(f'viewAU: Task completed {datetime.today().time()}')
 
 
 if __name__ != '__main__':
