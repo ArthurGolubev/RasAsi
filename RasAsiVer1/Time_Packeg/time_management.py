@@ -18,6 +18,7 @@ def k2(t_stop):
                 print(f'Task viewAU {datetime.now().time()}')
                 t3 = threading.Thread(target=vievAUrequests, name='viewAUrequests').start()
         try:
+            print(datetime.now().time())
             msgpipeline = read_message()
             if msgpipeline:
                 if 'Время\r\n' in msgpipeline:
