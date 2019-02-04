@@ -1,20 +1,19 @@
-# TODO: навести красоту в импортах
-from .Download_Packeg import commandList as cL_Download_Packeg
-# from .Time_Packeg import commandList as commandList_External_Packeg
-from .Gmail_Packeg import commandList as cL_Gmail_Packeg
-from .Time_Packeg.electricity_monitoring import electricity_monitoringFunction, userDirectiv
-from .Time_Packeg.time_management import k2
-from sys import platform
 import threading
-from .Satellite_img_Packeg import commandList as cL_Setellite_img_Packeg
-from .Time_Packeg.startTimeRasAsi import *
+from sys import platform
 from .External_Packeg.emojilist import ej
+from .Time_Packeg.startTimeRasAsi import *
+from .Time_Packeg.time_management import k2
+from .Gmail_Packeg import commandList as cL_Gmail_Packeg
+from .Download_Packeg import commandList as cL_Download_Packeg
 from .resService_Packeg import commandList as cL_resService_Packeg
+# from .Time_Packeg import commandList as commandList_External_Packeg
+from .Satellite_img_Packeg import commandList as cL_Setellite_img_Packeg
+from .Time_Packeg.electricity_monitoring import electricity_monitoringFunction, userDirectiv
 
 
 t_stop = threading.Event()
 if platform == 'linux':
-    t = threading.Thread(target=electricity_monitoringFunction, name='Treading_emf', args=(t_stop,))
+    t = threading.Thread(target=electricity_monitoringFunction, name='Treading_emF', args=(t_stop,))
     t.start()
 
 t2 = threading.Thread(target=k2, name='T_time_manegement', args=(t_stop,))
