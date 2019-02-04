@@ -16,7 +16,7 @@ def vievAUrequests():
         path0 = r'C:\PythonProject\RasAsi\RasAsiVer1\WOrk_Packeg\LightDetailing\viewAU\{}.txt'
         path1 = path0.format(datetime.today().date())
     elif platform == 'linux':
-        path0 = r'/home/pi/RasAsi/RasAsiVer1/WOrk_Packeg/viewAU/{}.txt'
+        path0 = r'/home/pi/RasAsi/RasAsiVer1/WOrk_Packeg/LightDetailing/viewAU/{}.txt'
         path1 = path0.format(datetime.today().date())
     else:
         print('Платформа не поддерживается')
