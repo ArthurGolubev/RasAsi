@@ -24,7 +24,7 @@ def vievAUrequests():
 
     def getlinklist():
         totalP = GetSOMETHING_SHEET(getHTML(link1))
-        print(totalP)
+        print(f'Станиц - {totalP}')
         lotLink = []
         for i in range(1, totalP + 1):
             externalPageHTML = getHTML(f'{link2}{i}')
@@ -58,7 +58,6 @@ def vievAUrequests():
 
     for i in range(int(len(listlink) / 3)):
         rlink = random.choice(listlink).replace('\n', '')
-        print(rlink)
         getHTML(rlink)
         time.sleep(random.randint(1, 11))
 
