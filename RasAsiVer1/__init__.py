@@ -9,6 +9,7 @@ from .resService_Packeg import commandList as cL_resService_Packeg
 # from .Time_Packeg import commandList as commandList_External_Packeg
 from .Satellite_img_Packeg import commandList as cL_Setellite_img_Packeg
 from .Time_Packeg.electricity_monitoring import electricity_monitoringFunction, userDirectiv
+from .WOrk_Packeg import commandList as cL_WOrk_Packeg
 
 
 t_stop = threading.Event()
@@ -31,6 +32,7 @@ def mainMenu():
               '4 - Gmail_Packeg\n'
               '5 - Setallite_img_Packeg\n'
               '6 - resService_Packeg\n'
+              '7 - WOrk_Packeg'
               '0 - stop')
         command1 = input('Выберете пакет\t')
         if command1 == '1':
@@ -51,6 +53,8 @@ def mainMenu():
             cL_Setellite_img_Packeg()
         elif command1 == '6':
             cL_resService_Packeg(t_stop)
+        elif command1 == '7':
+            cL_WOrk_Packeg()
         else:
             print('\nВы ввели неверную команду\nпопробуйте сново')
             input('...[press Enter]...')

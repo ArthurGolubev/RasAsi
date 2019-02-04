@@ -4,25 +4,37 @@ import requests
 import os, datetime
 from RasAsiVer1.WOrk_Packeg.LightDetailing.GetAU24.create_table import reportTable
 
-# TODO: добавить функционал выбора пользователя для анализа
-if platform == 'win32':
-    path1 = 'F:\WOrk'
-elif platform == 'linux':
-    path1 = '/media/pi/PORTABLE HDD'
-else:
-    print('Платформа не поддерживается')
 
-# userSearch = 'lightdetailing'
-# link1 = f'https://au.ru/user/{userSearch}/lots/'
-# link2 = f'https://au.ru/user/{userSearch}/lots/?page='
-#
+def getAU24(userSearch):
+    # TODO: добавить функционал выбора пользователя для анализа
+    if platform == 'win32':
+        path1 = 'F:\WOrk'
+    elif platform == 'linux':
+        path1 = '/media/pi/PORTABLE HDD'
+    else:
+        print('Платформа не поддерживается')
 
-userSearch = 'ice23'
-# userSearch = 'ProFara'
+    # userSearch = 'lightdetailing'
+    # link1 = f'https://au.ru/user/{userSearch}/lots/'
+    # link2 = f'https://au.ru/user/{userSearch}/lots/?page='
+    #
 
-# userSearch = 'sho21'
-link1 = f'https://au.ru/user/{userSearch}/shop/'
-link2 = f'https://au.ru/user/{userSearch}/shop/?group=active&page='
+    # userSearch = 'ice23'
+    # userSearch = 'ProFara'
+
+    # userSearch = 'sho21'
+    link1 = f'https://au.ru/user/{userSearch}/shop/'
+    link2 = f'https://au.ru/user/{userSearch}/shop/?group=active&page='
+
+    startTime = datetime.datetime.now()
+    # TODO: переименовать someDict
+    someDict = runPages(GetSOMETHING_SHEET(getHTML(link1)), link1, link2, userSearch)
+    cTime = datetime.datetime.now()
+    formTime = cTime - datetime.timedelta(microseconds=cTime.microsecond)
+    reportTable(f'{userSearch} - {formTime}', someDict)
+    elapsedTime = datetime.datetime.now() - startTime
+    elapsedTime = elapsedTime - datetime.timedelta(microseconds=elapsedTime.microseconds)
+    print(f'Время выполнение программы {elapsedTime}')
 
 
 def getHTML(url_1):
@@ -42,7 +54,7 @@ def GetSOMETHING_SHEET(HTML_1):
     return totalPages
 
 
-def runPages(totalP):
+def runPages(totalP, link1, link2, userSearch):
     someDict = {}
     justVar = 0
     for i in range(1, totalP + 1):
@@ -173,14 +185,7 @@ def lotParam(lotParametrs, tagPath, someDict, lotName, lotPrice, lotLink):
 
 
 if __name__ != '__main__':
-    pass
-if __name__ == '__main__':
-    startTime = datetime.datetime.now()
-    # TODO: переименовать someDict
-    someDict = runPages(GetSOMETHING_SHEET(getHTML(link1)))
-    cTime = datetime.datetime.now()
-    formTime = cTime - datetime.timedelta(microseconds=cTime.microsecond)
-    reportTable(f'{userSearch} - {formTime}', someDict)
-    elapsedTime = datetime.datetime.now() - startTime
-    elapsedTime = elapsedTime - datetime.timedelta(microseconds=elapsedTime.microseconds)
-    print(f'Время выполнение программы {elapsedTime}')
+    print(f'ЗАПУСК МОДУЛЯ - {__name__}')
+else:
+    print('ВЫ ТЕСТИРУЕТЕ МОДУЛЬ')
+    getAU24(userSearch=None)
