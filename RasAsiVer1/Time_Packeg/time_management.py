@@ -13,10 +13,10 @@ from RasAsiVer1.WOrk_Packeg.LightDetailing.viewAU.viewAUrequests import vievAUre
 def k2(t_stop):
     while not t_stop.is_set():
         cTime = datetime.now()
-        if cTime.hour in [8, 11, 13, 14, 18, 21]:
-            if cTime.minute in [15, 28, 43, 55]:
-                print(f'Task viewAU {datetime.now().time()}')
-                t3 = threading.Thread(target=vievAUrequests, name='viewAUrequests').start()
+        # if cTime.hour in [8, 11, 13, 14, 18, 21]:
+        #     if cTime.minute in [15, 28, 43, 55]:
+        #         print(f'Task viewAU {datetime.now().time()}')
+        #         t3 = threading.Thread(target=vievAUrequests, name='viewAUrequests').start()
         try:
             msgpipeline = read_message()
             if msgpipeline:
