@@ -1,3 +1,3 @@
 from selenium import webdriver
 
-browser = webdriver.Firefox('/home/pi/RasAsi/RasAsiVer2')
+browser = webdriver.Firefox('/home/pi/RasAsi/RasAsiVer2/geckodriver')
