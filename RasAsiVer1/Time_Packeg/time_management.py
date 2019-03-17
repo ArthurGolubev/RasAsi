@@ -1,5 +1,4 @@
- # TODO Разкоментить?
-# d_elapsed_time.pyfrom time import sleep
+from time import sleep
 # from RasAsi_main import startTimeRasAsi
 # from ..Gmail_Packeg import send, get_message
 import threading
