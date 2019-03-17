@@ -1,11 +1,6 @@
+import sys
+sys.path.append('/home/pi/.local/lib/python3.5/site-packages/')
 from selenium import webdriver
 
-options = webdriver.ChromeOptions()
-options.add_argument("-headless")
-options.add_argument("-disable-gpu")
-
-chrome = webdriver.Chrome(executable_path="/usr/lib/chromium-browser/chromedriver")
-chrome.get("http://google.fr")
-
-print("Titre de la page: {}".format(chrome.title))
-chrome.save_screenshot('screenshot.png')
+browser = webdriver.Chrome(executable_path="/usr/lib/chromium-browser/chromedriver")
+browser.get('https://www.google.com/')
