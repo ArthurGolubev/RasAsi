@@ -5,5 +5,5 @@ from selenium import webdriver
 from pyvirtualdisplay import Display
 display = Display(visible=0, size=(800, 800))
 display.start()
-browser = webdriver.Chrome(executable_path="/usr/lib/chromium-browser/chromedriver")
+browser = webdriver.Firefox()
 browser.get('https://www.google.com/')
