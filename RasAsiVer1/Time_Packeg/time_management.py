@@ -17,6 +17,9 @@ def k2(t_stop):
         #     if cTime.minute in [15, 28, 43, 55]:
         #         print(f'Task viewAU {datetime.now().time()}')
         #         t3 = threading.Thread(target=vievAUrequests, name='viewAUrequests').start()
+        if cTime.hour == '00':
+            msg = emojize(f'{ej["слон"]} Время работы сервера:\t {str(timeHasPassed(startTimeRasAsi))}')
+            send(topic='Server time ☁', message=msg)
         try:
             msgpipeline = read_message()
             if msgpipeline:
