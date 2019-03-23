@@ -9,6 +9,8 @@ class WeatherChart:
     Krasnoyarsk_spreadsheetId = '103fPu9jlTmFcWKhRChdzP2Xva2SJa17wlK2YRWrhrSM'
     Novosibirsk_spreadsheetId = '1Dfh88Of9a1ekZWALq25XH4DD5mh1wQUal0kHqSgGWDQ'
     data = []
+    today = datetime.today()
+    chart_name = f'ChartWeather 18.03.2019 - {today.day}.{today.month}.{today.year}.html'
 
     def __init__(self):
         _Novosibirsk = Weather(place='novosibirsk')
@@ -117,7 +119,8 @@ class WeatherChart:
 
         layout = dict(title="Температура в °C", showlegend=True, updatemenus=updatemenus)
         fig = dict(data=self.data, layout=layout)
-        plotly.offline.plot(fig, auto_open=True, filename=f'ChartWeather 18-{datetime.today().day}.html')
+        # plotly.offline.plot(fig, auto_open=True, filename=self.chart_name)
+        plotly.offline.plot(fig, auto_open=True, filename='ChartWeather.html')
 
 
 if __name__ == '__main__':
