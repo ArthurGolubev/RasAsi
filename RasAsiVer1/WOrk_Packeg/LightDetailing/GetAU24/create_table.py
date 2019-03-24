@@ -10,8 +10,8 @@ def reportTable(nameTable, dictValues=None):
     SCOPES = 'https://www.googleapis.com/auth/spreadsheets'
 
     if platform == 'win32':
-        store = file.Storage(r'C:\PythonProject\storage_LightDetailing.json')
-        # store = file.Storage(r'C:\PythonProject\storage_RaspberryAssistant.json')
+        # store = file.Storage(r'C:\PythonProject\storage_LightDetailing.json')
+        store = file.Storage(r'C:\PythonProject\storage_RaspberryAssistant.json')
     elif platform == 'linux':
         print('УКАЖИ ПУТЬ')
     creds = store.get()

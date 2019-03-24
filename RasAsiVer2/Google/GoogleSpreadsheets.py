@@ -12,7 +12,8 @@ class GoogleSpreadsheet:
     def __init__(self):
 
         if platform == 'win32':
-            store = file.Storage(r'C:\PycharmProjects\RasAsi_credential.json')
+            # store = file.Storage(r'C:\PycharmProjects\RasAsi_credential.json')  # Laptop
+            store = file.Storage(r'C:\PythonProject\RasAsi_credential.json')  # PC
         elif platform == 'linux':
             pass
         else:
@@ -22,11 +23,12 @@ class GoogleSpreadsheet:
 
         if not creds or creds.invalid:
             if platform == 'win32':
-                path1 = r'C:\Users\ArthurGo\Downloads\client_secret.json'
+                # path1 = r'C:\Users\ArthurGo\Downloads\client_secret.json'  # Laptop
+                path1 = r'C:\PythonProject\mygmail\client_secret.json'  # PC
             elif platform == 'linux':
                 print('Необходимо указать путь для linux')
                 input('pause\t')
-            flow = client.flow_from_clientsecrets(path1, self.SCOPES)
+            flow = client.flow_from_clientsecrets(path1, self._SCOPES)
             creds = tools.run_flow(flow, store)
 
         HTTP = creds.authorize(Http())
