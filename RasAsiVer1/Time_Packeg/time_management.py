@@ -28,7 +28,7 @@ def k2(t_stop):
                     send(topic='Server time', message=msg)
                     print(emojize(f'Время работы сервера было отправлено по внешнему запросу {datetime.now()}'))
                 elif 'Хранилище' in msgpipeline:
-                    print('Хранилище')
+                    print('Хранилище\r\n')
                 else:
                     send(topic='Неподдерживаемая команда', message=f'Неподдерживаемая '
                     f'команда "{msgpipeline[0]}"<br/>Список поддерживаемых команд:<br/>1. Время')
