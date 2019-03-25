@@ -8,9 +8,9 @@ from google.auth.transport.requests import Request
 
 class GoogleTasks:
     _SCOPE = 'https://www.googleapis.com/auth/tasks'
-    _mainID = None
 
-    def __init__(self):
+    def __init__(self, mainID):
+        self.mainID = mainID
         creds = None
         if os.path.exists('token.pickle'):
             with open('token.pickle', 'rb') as token:
@@ -19,8 +19,8 @@ class GoogleTasks:
             if creds and creds.expired and creds.refresh_token:
                 creds.refresh(Request())
             else:
-                flow = InstalledAppFlow.from_client_secrets_file(r'C:\PythonProject\mygmail\client_secret.json',
-                                                                 self._SCOPE)
+                # flow = InstalledAppFlow.from_client_secrets_file(r'C:\PythonProject\mygmail\client_secret.json', self._SCOPE)  # PC
+                flow = InstalledAppFlow.from_client_secrets_file(r'C:\PycharmProjects\client_secret.json', self._SCOPE)  #Laptop
                 creds = flow.run_local_server()
             with open('token.pickle', 'wb') as token:
                 pickle.dump(creds, token)
@@ -37,25 +37,25 @@ class GoogleTasks:
             print('Task lists:')
             for item in items:
                 print(u'{0} {1}'.format(item['title'], item['id']))
-                self._mainID = item['id']
+                self.mainID = item['id']
 
     def get_tasks(self):
-        tasks = self._TASKS.tasks().list(tasklist=self._mainID).execute()
+        tasks = self._TASKS.tasks().list(tasklist=self.mainID).execute()
         for task in tasks['items']:
             print(task.get('title'), task)
 
     def get1(self):
-        task = self._TASKS.tasks().get(tasklist=self._mainID,
+        task = self._TASKS.tasks().get(tasklist=self.mainID,
                                        task='MTc5Mjk4NTgzNTcwNzA0ODEzNjM6MDoyNDE2NDMxMTk1NDQxMTk4').execute()
         print(task)
 
-    def insert(self):
-        task = {
-            'title': 'New Task',
-            'notes': 'Please complete me',
-            'due': '2019-10-15T12:00:00.000Z'
-        }
-        result = self._TASKS.tasks().insert(tasklist=self._mainID, body=task).execute()
+    def insert(self, task):
+        # task = {
+        #     'title': 'New Task',
+        #     'notes': 'Please complete me',
+        #     'due': '2019-10-15T12:00:00.000Z'
+        # }
+        result = self._TASKS.tasks().insert(tasklist=self.mainID, body=task).execute()
 
         print(result.get('id'))
 

@@ -17,7 +17,7 @@ def k2(t_stop):
         #     if cTime.minute in [15, 28, 43, 55]:
         #         print(f'Task viewAU {datetime.now().time()}')
         #         t3 = threading.Thread(target=vievAUrequests, name='viewAUrequests').start()
-        if cTime.hour == '00':
+        if cTime.hour == '00' and cTime.minute == '00':
             msg = emojize(f'{ej["слон"]} Время работы сервера:\t {str(timeHasPassed(startTimeRasAsi))}')
             send(topic='Server time ☁', message=msg)
         try:
@@ -27,6 +27,8 @@ def k2(t_stop):
                     msg = emojize(f'{ej["слон"]} Время работы сервера:\t {str(timeHasPassed(startTimeRasAsi))}')
                     send(topic='Server time', message=msg)
                     print(emojize(f'Время работы сервера было отправлено по внешнему запросу {datetime.now()}'))
+                elif 'Хранилище' in msgpipeline:
+                    print('Хранилище')
                 else:
                     send(topic='Неподдерживаемая команда', message=f'Неподдерживаемая '
                     f'команда "{msgpipeline[0]}"<br/>Список поддерживаемых команд:<br/>1. Время')

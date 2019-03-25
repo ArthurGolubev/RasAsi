@@ -12,8 +12,8 @@ class GoogleSpreadsheet:
     def __init__(self):
 
         if platform == 'win32':
-            # store = file.Storage(r'C:\PycharmProjects\RasAsi_credential.json')  # Laptop
-            store = file.Storage(r'C:\PythonProject\RasAsi_credential.json')  # PC
+            store = file.Storage(r'C:\PycharmProjects\RasAsi_credential.json')  # Laptop
+            # store = file.Storage(r'C:\PythonProject\RasAsi_credential.json')  # PC
         elif platform == 'linux':
             pass
         else:
