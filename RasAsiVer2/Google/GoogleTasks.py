@@ -1,3 +1,4 @@
+# TODO рефакторинг: добавить свежий метод добавления пачки задач
 import pickle
 import os.path
 import pickle
@@ -39,25 +40,34 @@ class GoogleTasks:
                 print(u'{0} {1}'.format(item['title'], item['id']))
                 self.mainID = item['id']
 
-    def get_tasks(self):
-        tasks = self._TASKS.tasks().list(tasklist=self.mainID).execute()
+    def get_tasks(self):  # TODO Ничего не возвращает.
+        tasks = self._TASKS.tasks().list(tasklist=self.mainID, showHidden=True).execute()
         for task in tasks['items']:
             print(task.get('title'), task)
+        print(tasks)
 
-    def get1(self):
-        task = self._TASKS.tasks().get(tasklist=self.mainID,
-                                       task='MTc5Mjk4NTgzNTcwNzA0ODEzNjM6MDoyNDE2NDMxMTk1NDQxMTk4').execute()
-        print(task)
+    def get_task(self, task_id):
+        task = self._TASKS.tasks().get(tasklist=self.mainID, task=task_id).execute()
+        return task
+
+    def delete_task(self, task_id):
+        self._TASKS.tasks().delete(tasklist=self.mainID, task=task_id).execute()
 
     def insert(self, task):
-        # task = {
-        #     'title': 'New Task',
-        #     'notes': 'Please complete me',
-        #     'due': '2019-10-15T12:00:00.000Z'
-        # }
-        result = self._TASKS.tasks().insert(tasklist=self.mainID, body=task).execute()
+        """
 
-        print(result.get('id'))
+        :param task:
+        task = {
+            'title': 'New Task',
+            'notes': 'Please complete me',
+            'due': '2019-10-15T12:00:00.000Z'
+        }
+
+        :return:
+        return Task id
+        """
+        result = self._TASKS.tasks().insert(tasklist=self.mainID, body=task).execute()
+        return result.get('id')
 
     def update(self):
         pass

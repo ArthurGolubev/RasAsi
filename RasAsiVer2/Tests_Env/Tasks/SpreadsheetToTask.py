@@ -1,6 +1,6 @@
 from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
 from random import choice
-from RasAsiVer2.Tests_Env.Tasks.TestTasks import GoogleTasks
+from RasAsiVer2.Google.GoogleTasks import GoogleTasks
 
 class TakeTasks:
     spreadsheet_id = '1DvY6qzp32qP_BNTFU2opXlfQ0lpnjs1MnGZ7LWRJIbw'

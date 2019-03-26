@@ -52,17 +52,32 @@ class GoogleSpreadsheet:
         result = self.SHEETS.spreadsheets().values().batchGet(spredsheetId=spreadshhet_id, range=range_names).execute()
 
     def update_spreadsheets_values(self, body, spreadsheet_id, range_name):
+        """
+        body = [[x, y], [x1, y1]]
+        """
         result = self.SHEETS.spreadsheets().values().update(spreadsheetId=spreadsheet_id, range=range_name, body=body,
                                                             valueInputOption="USER_ENTERED").execute()
         # r1 = result.get('updateCells')
 
-    def batchUpdate_spreadshets_values(self, values, spreadsheet_id, range_name):
-        data = [
-            {
-                'range': range_name,
-                'values': values
-            },
-        ]
+    def batchUpdate_spreadshets_values(self, spreadsheet_id, range_name, values):
+        """
+        # range_name = []
+        # data = [{}, {}, {}]
+        # vales = [[[x, y, z], [x, y, z]], [[]], [[]]] - верхний - под range'и,
+        # средний - список строк заполняющий каждый диапозон
+        # нижний - значения в каждую ячейку
+        """
+        data = []
+        for i in range(len(range_name)):
+            print(values[i])
+            data.append({'range': range_name[i],
+                         'values': values[i]})
+        # data = [
+        #     {
+        #         'range': range_name,
+        #         'values': values
+        #     },
+        # ]
         body = {
             'valueInputOption': 'USER_ENTERED',
             'data': data
@@ -71,6 +86,7 @@ class GoogleSpreadsheet:
         # r1 = result.get('updateCells')
 
     def append_spreadsheets_values(self, values, spreadsheet_id, range_name, valueInputOption='USER_ENTERED'):
+
         body = {
             'values': values
         }
@@ -79,6 +95,13 @@ class GoogleSpreadsheet:
         # r1 = result.get('updates').get('updatedCells')
 
     def body_formation(self, values, majorDimension = "ROWS"):
+        """
+
+        :param values: ?
+        :param majorDimension:
+        :return:
+        """
+
         body = {
             "majorDimension": majorDimension,
             "values": values

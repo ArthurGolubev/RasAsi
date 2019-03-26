@@ -38,7 +38,7 @@ class Weather:
                                                spreadsheet_id=self.spreadsheetId, range_name="Лист1!A1")
 
         '''почему не нужно указывать self.day_wether'''
-    def update_spreadsheet(self, spreadsheet_id, values, range_='Лист1'):
+    def append_spreadsheet(self, spreadsheet_id, values, range_='Лист1'):
         self._table.append_spreadsheets_values(spreadsheet_id=spreadsheet_id, values=values, range_name=range_,)
 
     def get_weather_data_set(self, spreadsheetId):

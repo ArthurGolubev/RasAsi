@@ -7,7 +7,7 @@ class TimeManagement:
         self.today = datetime.today()
         # self.t_stop = t_stop
         while not t_stop.is_set():
-            cTime = datetime.
+            cTime = datetime
 
     def time_management(self):
         pass
