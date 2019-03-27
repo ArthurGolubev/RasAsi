@@ -1,22 +1,8 @@
-from datetime import datetime, timedelta
-from time import sleep
+d = ['арбуз', 'ананас', 'а']
 
-
-print(datetime.strftime(datetime.now(), '%B'))
-
-
-def initTime():
-    startTimeRasAsi = datetime.now()
-    return startTimeRasAsi
-
-
-def timeHasPassed(inittime):
-    sleep(2)
-    t1 = datetime.now() - inittime
-    print(t1)
-    t2 = t1 - timedelta(microseconds=t1.microseconds)
-    print(t2)
-    return t2
-
-if __name__ == '__main__':
-    print(timeHasPassed(initTime()))
+if 'арбуз' in d:
+    print(1)
+elif 'ананас' in d:
+    print(2)
+elif 'а' in d:
+    print(3)

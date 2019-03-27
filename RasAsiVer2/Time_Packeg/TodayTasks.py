@@ -83,7 +83,6 @@ class TodayTasks:
         material = material.split(' ')
         material.insert(1, datetime.datetime.today().strftime('%d.%m.%Y'))
         material.append(0)
-        # material.append(datetime.datetime.today().strftime('%d.%m.%Y'))
         GoogleSpreadsheet().append_spreadsheets_values(values=[material[1:]],
                                                        spreadsheet_id=self._spreadsheet_id,
                                                        range_name='Лист1')

@@ -8,7 +8,7 @@ from datetime import datetime
 from RasAsiVer1.Time_Packeg.startTimeRasAsi import timeHasPassed, startTimeRasAsi
 from emoji import emojize
 from RasAsiVer1.External_Packeg.emojilist import ej
-from RasAsiVer1.WOrk_Packeg.LightDetailing.viewAU.viewAUrequests import vievAUrequests
+# from RasAsiVer1.WOrk_Packeg.LightDetailing.viewAU.viewAUrequests import vievAUrequests
 from RasAsiVer2.Time_Packeg.TodayTasks import TodayTasks
 
 
@@ -16,7 +16,7 @@ def k2(t_stop):
     Tasks = TodayTasks()
     while not t_stop.is_set():
         cTime = datetime.now()
-        print(cTime.hour, cTime.minute)
+        # print(cTime.hour, cTime.minute)
         if cTime.hour == 00 and cTime.minute == 00:
             msg = emojize(f'{ej["слон"]} Время работы сервера:\t {str(timeHasPassed(startTimeRasAsi))}')
             send(topic='Server time ☁', message=msg)

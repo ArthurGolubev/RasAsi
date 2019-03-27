@@ -1,4 +1,5 @@
 from RasAsiVer2.Weather_Packeg.Weather import Weather
+from RasAsiVer2.Weather_Packeg.WeatherChart import WeatherChart
 
 
 class TodayWeather:
@@ -20,6 +21,7 @@ class TodayWeather:
         # Krasnoyarsk.make_spreadsheet()
         # Krasnoyarsk.update_spreadsheet(spreadsheet_id=Krasnoyarsk.spreadsheetId, values=Krasnoyarsk.day_weather[1:])
 
+        WeatherChart().chart()
 
 if __name__ == '__main__':
     TodayWeather()
