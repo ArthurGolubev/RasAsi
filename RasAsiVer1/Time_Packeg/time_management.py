@@ -23,7 +23,8 @@ def k2(t_stop):
         if cTime.hour == '00' and cTime.minute == '00':
             msg = emojize(f'{ej["слон"]} Время работы сервера:\t {str(timeHasPassed(startTimeRasAsi))}')
             send(topic='Server time ☁', message=msg)
-        elif cTime.hour == '16' and cTime.minute == '00':
+        elif cTime.hour == '16' and cTime.minute == '10':
+            print('\n\n\n\nok\n')
             Tasks.take_tasks()
         try:
             msgpipeline = read_message()
