@@ -11,9 +11,10 @@ from RasAsiVer1.External_Packeg.emojilist import ej
 from RasAsiVer1.WOrk_Packeg.LightDetailing.viewAU.viewAUrequests import vievAUrequests
 from RasAsiVer2.Time_Packeg.TodayTasks import TodayTasks
 
+
 def k2(t_stop):
+    Tasks = TodayTasks()
     while not t_stop.is_set():
-        Tasks = TodayTasks()
         cTime = datetime.now()
         # if cTime.hour in [8, 11, 13, 14, 18, 21]:
         #     if cTime.minute in [15, 28, 43, 55]:
