@@ -20,6 +20,7 @@ class TodayTasks:
         print(self.tasks)
 
     def take_tasks(self, n=3):
+        print('go')
         row_id = []
         task_id = []
         xn = 0
