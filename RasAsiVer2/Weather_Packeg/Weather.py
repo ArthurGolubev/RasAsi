@@ -34,7 +34,7 @@ class Weather:
     def make_spreadsheet(self):
         self._table.create_table(table_name=f'{self.place.capitalize()} {self.date}')
         self.spreadsheetId = self._table.spreadsheet_id
-        self._table.update_spreadsheets_values(body=self._table.body_formation(values=self.day_weather),
+        self._table.update_spreadsheets_values(values=self._table.body_formation(values=self.day_weather),
                                                spreadsheet_id=self.spreadsheetId, range_name="Лист1!A1")
 
         '''почему не нужно указывать self.day_wether'''

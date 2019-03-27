@@ -51,10 +51,15 @@ class GoogleSpreadsheet:
         #range_names = []
         result = self.SHEETS.spreadsheets().values().batchGet(spredsheetId=spreadshhet_id, range=range_names).execute()
 
-    def update_spreadsheets_values(self, body, spreadsheet_id, range_name):
+    def update_spreadsheets_values(self, values, spreadsheet_id, range_name):
         """
-        body = [[x, y], [x1, y1]]
+
+        :param values: [[x, y, z], [x1, y1, z1]]
+        :param spreadsheet_id: '2131lsdDqq2'
+        :param range_name: 'Лист1' or 'Лист1!G2' or 'Лист1!C2:D5'
+        :return: Nothing
         """
+        body = self.body_formation(values=values)
         result = self.SHEETS.spreadsheets().values().update(spreadsheetId=spreadsheet_id, range=range_name, body=body,
                                                             valueInputOption="USER_ENTERED").execute()
         # r1 = result.get('updateCells')
@@ -62,7 +67,7 @@ class GoogleSpreadsheet:
     def batchUpdate_spreadshets_values(self, spreadsheet_id, range_name, values):
         """
         # range_name = []
-        # data = [{}, {}, {}]
+        # data = [{}, {}, {}] - используй body formation
         # vales = [[[x, y, z], [x, y, z]], [[]], [[]]] - верхний - под range'и,
         # средний - список строк заполняющий каждый диапозон
         # нижний - значения в каждую ячейку
@@ -86,7 +91,14 @@ class GoogleSpreadsheet:
         # r1 = result.get('updateCells')
 
     def append_spreadsheets_values(self, values, spreadsheet_id, range_name, valueInputOption='USER_ENTERED'):
+        """
 
+        :param values: [[x, y, z], [x1, y1, z1]]
+        :param spreadsheet_id: 'asdas2dl12knjd;S412'
+        :param range_name: 'Лист1' or 'Лист1!C2'
+        :param valueInputOption: Default
+        :return:
+        """
         body = {
             'values': values
         }
@@ -94,12 +106,13 @@ class GoogleSpreadsheet:
                                                             valueInputOption=valueInputOption).execute()
         # r1 = result.get('updates').get('updatedCells')
 
-    def body_formation(self, values, majorDimension = "ROWS"):
+    def body_formation(self, values, majorDimension = "ROWS"):  # TODO возможно нужен для формирования списка из тел
+                                                                # для заполнения нескольких диапозонов
         """
 
-        :param values: ?
-        :param majorDimension:
-        :return:
+        :param values: [[x, y, z], [x1, y1, z1]]
+        :param majorDimension: Default
+        :return: dict
         """
 
         body = {

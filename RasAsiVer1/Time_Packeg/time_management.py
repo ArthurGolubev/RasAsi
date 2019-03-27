@@ -9,6 +9,7 @@ from RasAsiVer1.Time_Packeg.startTimeRasAsi import timeHasPassed, startTimeRasAs
 from emoji import emojize
 from RasAsiVer1.External_Packeg.emojilist import ej
 from RasAsiVer1.WOrk_Packeg.LightDetailing.viewAU.viewAUrequests import vievAUrequests
+from RasAsiVer2.Time_Packeg.TodayTasks import TodayTasks
 
 def k2(t_stop):
     while not t_stop.is_set():
@@ -23,6 +24,7 @@ def k2(t_stop):
         try:
             msgpipeline = read_message()
             if msgpipeline:
+                print(msgpipeline)
                 if 'Время\r\n' in msgpipeline:
                     msg = emojize(f'{ej["слон"]} Время работы сервера:\t {str(timeHasPassed(startTimeRasAsi))}')
                     send(topic='Server time', message=msg)
