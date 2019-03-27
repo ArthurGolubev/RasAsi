@@ -31,7 +31,7 @@ class TodayTasks:
             print(f'Осталось невыполненных заданий - {xn}')
             n = xn
 
-        if n <= 3:
+        if n < 3:
             print('mark 0')
             count = 0
             for task in self.tasks:
