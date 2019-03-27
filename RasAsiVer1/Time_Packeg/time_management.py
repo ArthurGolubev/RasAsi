@@ -13,6 +13,7 @@ from RasAsiVer2.Time_Packeg.TodayTasks import TodayTasks
 
 def k2(t_stop):
     while not t_stop.is_set():
+        Tasks = TodayTasks()
         cTime = datetime.now()
         # if cTime.hour in [8, 11, 13, 14, 18, 21]:
         #     if cTime.minute in [15, 28, 43, 55]:
@@ -21,6 +22,8 @@ def k2(t_stop):
         if cTime.hour == '00' and cTime.minute == '00':
             msg = emojize(f'{ej["слон"]} Время работы сервера:\t {str(timeHasPassed(startTimeRasAsi))}')
             send(topic='Server time ☁', message=msg)
+        elif cTime.hour == '13' and cTime.minute == '35':
+            Tasks.take_tasks()
         try:
             msgpipeline = read_message()
             if msgpipeline:
