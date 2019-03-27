@@ -16,6 +16,7 @@ def k2(t_stop):
     Tasks = TodayTasks()
     while not t_stop.is_set():
         cTime = datetime.now()
+        print(cTime.hour, cTime.minute)
         # if cTime.hour in [8, 11, 13, 14, 18, 21]:
         #     if cTime.minute in [15, 28, 43, 55]:
         #         print(f'Task viewAU {datetime.now().time()}')
@@ -23,7 +24,7 @@ def k2(t_stop):
         if cTime.hour == '00' and cTime.minute == '00':
             msg = emojize(f'{ej["слон"]} Время работы сервера:\t {str(timeHasPassed(startTimeRasAsi))}')
             send(topic='Server time ☁', message=msg)
-        elif cTime.hour == '16' and cTime.minute == '10':
+        elif cTime.hour == '16' and cTime.minute == '18':
             print('\n\n\n\nok\n')
             Tasks.take_tasks()
         try:
