@@ -20,7 +20,6 @@ class TodayTasks:
         print(self.tasks)
 
     def take_tasks(self, n=3):
-        print('\n\n\ngo\n\n\n')
         row_id = []
         task_id = []
         xn = 0
@@ -48,6 +47,7 @@ class TodayTasks:
                     self.today_tasks[task_id[i]] = row_id[i]
         else:
             while n:
+                print(1)
                 task = choice(self.tasks)
                 if not int(task[2]) and task not in self.daily:
                     n -= 1
