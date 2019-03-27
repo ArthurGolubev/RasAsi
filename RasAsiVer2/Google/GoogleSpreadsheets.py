@@ -15,7 +15,7 @@ class GoogleSpreadsheet:
             store = file.Storage(r'C:\PycharmProjects\RasAsi_credential.json')  # Laptop
             # store = file.Storage(r'C:\PythonProject\RasAsi_credential.json')  # PC
         elif platform == 'linux':
-            store = file.Storage(r'/home/pi/Downloads/client_secret.json')
+            store = file.Storage(r'/home/pi/Downloads/RasAsi_secret.json')
         else:
             print(f'Платформа {platform} не поддерживается')
 
