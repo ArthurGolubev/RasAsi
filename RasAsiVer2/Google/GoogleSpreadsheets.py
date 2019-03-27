@@ -15,7 +15,6 @@ class GoogleSpreadsheet:
             store = file.Storage(r'C:\PycharmProjects\RasAsi_credential.json')  # Laptop
             # store = file.Storage(r'C:\PythonProject\RasAsi_credential.json')  # PC
         elif platform == 'linux':
-            input('pause\t')
             store = file.Storage(r'/home/pi/Downloads/client_secret.json')
         else:
             print(f'Платформа {platform} не поддерживается')
@@ -27,8 +26,7 @@ class GoogleSpreadsheet:
                 # path1 = r'C:\Users\ArthurGo\Downloads\client_secret.json'  # Laptop
                 path1 = r'C:\PythonProject\mygmail\client_secret.json'  # PC
             elif platform == 'linux':
-                print('Необходимо указать путь для linux')
-                input('pause\t')
+                path1 = r'/home/pi/Downloads/client_secret.json'
             flow = client.flow_from_clientsecrets(path1, self._SCOPES)
             creds = tools.run_flow(flow, store)
 
