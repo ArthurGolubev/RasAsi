@@ -14,7 +14,7 @@ class GoogleTasks:
         # path1 = r'C:\PythonProject\mygmail\client_secret.json'  # PC
         path1 = r'C:\PycharmProjects\client_secret.json'
     elif platform == 'linux':
-        path1 = '/home/pi/Downloads/client_secret.json'
+        path1 = '/home/pi/Downloads/Zabavniy7_client.json'
     else:
         print(f'Платформа {platform} не поддерживается')
 
