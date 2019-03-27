@@ -2,6 +2,7 @@
 import pickle
 import os.path
 import pickle
+from sys import platform
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -9,6 +10,13 @@ from google.auth.transport.requests import Request
 
 class GoogleTasks:
     _SCOPE = 'https://www.googleapis.com/auth/tasks'
+    if platform == 'win32':
+        # path1 = r'C:\PythonProject\mygmail\client_secret.json'  # PC
+        path1 = r'C:\PycharmProjects\client_secret.json'
+    elif platform == 'linux':
+        path1 = '/home/pi/Downloads/client_secret.json'
+    else:
+        print(f'Платформа {platform} не поддерживается')
 
     def __init__(self, mainID):
         self.mainID = mainID
@@ -20,8 +28,7 @@ class GoogleTasks:
             if creds and creds.expired and creds.refresh_token:
                 creds.refresh(Request())
             else:
-                # flow = InstalledAppFlow.from_client_secrets_file(r'C:\PythonProject\mygmail\client_secret.json', self._SCOPE)  # PC
-                flow = InstalledAppFlow.from_client_secrets_file(r'C:\PycharmProjects\client_secret.json', self._SCOPE)  #Laptop
+                flow = InstalledAppFlow.from_client_secrets_file(self.path1, self._SCOPE)
                 creds = flow.run_local_server()
             with open('token.pickle', 'wb') as token:
                 pickle.dump(creds, token)
