@@ -7,12 +7,11 @@ class GetWeather:
                         '12:00', '13:00', '14:00', '15:00', '16:00', '17:00',
                         '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']
 
-    _next12hours = []
-    _cha_dict = {}
-    _name_dict = ''
-    weather_log = {}
-
     def __init__(self, browser, get_date):
+        self._name_dict = ''
+        self._next12hours = []
+        self._cha_dict = {}
+        self.weather_log = {}
         self.browser = browser
         self.get_date = get_date
         sleep(20)
@@ -25,6 +24,7 @@ class GetWeather:
         print(f'Сбор набора данных\t-|{attribute}|-')
         if attribute == 'Влажность':
             for i in self._next12hours[1::3]:
+                print('mark #1', i)
                 self.browser.find_element_by_xpath(f"//span[@class='e']//a[@title='{i}']").click()
                 sleep(15)
                 c = self._get_characteristic()
@@ -33,12 +33,14 @@ class GetWeather:
         elif attribute == 'Осадки':
             self.browser.find_element_by_xpath("//div[@class='qj ua hv']//select//option[@value='rain-1h']").click()
             for i in self._next12hours:
+                print('mark #1', i)
                 self.browser.find_element_by_xpath(f"//span[@class='e']//a[@title='{i}']").click()
                 sleep(15)
                 c = self._get_characteristic()
                 characteristic_dict.update({i: c})
         elif attribute == 'Атмосферное давление':
             for i in self._next12hours:
+                print('mark #1', i)
                 self.browser.find_element_by_xpath(f"//span[@class='e']//a[@title='{i}']").click()
                 sleep(15)
                 c = self._get_characteristic()
@@ -51,12 +53,14 @@ class GetWeather:
         elif attribute == 'Скорость ветра':
             self.browser.find_element_by_xpath("//div[@id='l'][@class='yy']").click()
             for i in self._next12hours:
+                print('mark #1', i)
                 self.browser.find_element_by_xpath(f"//span[@class='e']//a[@title='{i}']").click()
                 sleep(15)
                 c = self._get_characteristic()
                 characteristic_dict.update({i: c})
         else:
             for i in self._next12hours:
+                print('mark #1', i)
                 self.browser.find_element_by_xpath(f"//span[@class='e']//a[@title='{i}']").click()
                 sleep(15)
                 c = self._get_characteristic()

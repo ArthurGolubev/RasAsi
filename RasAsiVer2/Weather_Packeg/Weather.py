@@ -5,10 +5,10 @@ from datetime import datetime
 
 
 class Weather:
-    day_weather = None
-    _table = GoogleSpreadsheet()
 
-    def __init__(self, place='krasnoyarsk', date=datetime.today().strftime('%d.%m.%Y'), feature=None, spreadsheetId = None):
+    def __init__(self, place, date=datetime.now().strftime('%d.%m.%Y'), feature=None, spreadsheetId=None):
+        self.day_weather = None
+        self._table = GoogleSpreadsheet()
         self.spreadsheetId = spreadsheetId
         self.place = place
         self.date = date
@@ -44,5 +44,4 @@ class Weather:
     def get_weather_data_set(self, spreadsheetId):
         weather_data_set = self._table.get_spreadsheets_values(spreadsheet_id=spreadsheetId, range_name='Лист1!A:G').get('values')
         return weather_data_set
-
 

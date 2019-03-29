@@ -6,11 +6,11 @@ from oauth2client import tools, file, client
 
 class GoogleSpreadsheet:
     _SCOPES = 'https://www.googleapis.com/auth/spreadsheets'
-    _spreadsheet = None
-    spreadsheet_id = None
+
 
     def __init__(self):
-
+        self._spreadsheet = None
+        self.spreadsheet_id = None
         if platform == 'win32':
             store = file.Storage(r'C:\PycharmProjects\RasAsi_credential.json')  # Laptop
             # store = file.Storage(r'C:\PythonProject\RasAsi_credential.json')  # PC

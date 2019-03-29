@@ -1,8 +1,17 @@
-d = ['арбуз', 'ананас', 'а']
+class kl:
+    @staticmethod
+    def decorator_errors( func):
+        def try_():
+            print(1)
+            func()
 
-if 'арбуз' in d:
-    print(1)
-elif 'ананас' in d:
-    print(2)
-elif 'а' in d:
-    print(3)
+        return try_
+
+    def sp(self):
+        print('hello')
+
+
+if __name__ == '__main__':
+    a = kl
+    @kl.decorator_errors
+    a.sp()

@@ -8,21 +8,22 @@ from RasAsiVer2.Tests_Env.Plotly.payload.annotations import Annotations
 class WeatherChart:
     Krasnoyarsk_spreadsheetId = '103fPu9jlTmFcWKhRChdzP2Xva2SJa17wlK2YRWrhrSM'
     Novosibirsk_spreadsheetId = '1Dfh88Of9a1ekZWALq25XH4DD5mh1wQUal0kHqSgGWDQ'
-    data = []
-    today = datetime.today()
-    chart_name = f'ChartWeather 18.03.2019 - {today.day}.{today.month}.{today.year}.html'
 
     def __init__(self):
+        self.today = datetime.today()
+
+        self.data = []
+        self.chart_name = f'ChartWeather 18.03.2019 - {self.today.day}.{self.today.month}.{self.today.year}.html'
+
         _Novosibirsk = Weather(place='novosibirsk')
         Novosibirsk_data_set = _Novosibirsk.get_weather_data_set(spreadsheetId=self.Novosibirsk_spreadsheetId)
         print(Novosibirsk_data_set)
 
-        _Krasnoyarsk = Weather()
+        _Krasnoyarsk = Weather(place='krasnoyarsk')
         Krasnoyarsk_data_set = _Krasnoyarsk.get_weather_data_set(self.Krasnoyarsk_spreadsheetId)
         print(Krasnoyarsk_data_set)
 
         self.Novosibirsk = self._data_processing(Novosibirsk_data_set)
-        # print(self.Novosibirsk[3])
         self.Krasnoyarsk = self._data_processing(Krasnoyarsk_data_set)
 
     def _data_processing(self, data_set):
