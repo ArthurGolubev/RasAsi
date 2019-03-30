@@ -1,16 +1,17 @@
-import time
+# TODO написать метод send
 import base64
+import datetime
 from sys import platform
 from httplib2 import Http
 from apiclient import discovery
 from oauth2client import file, client, tools
-from RasAsiVer2.Decorators.Decorators import errors_decorator
+from RasAsiVer2.Decorators.Decorators import errors_decorator, time_decorator
 
 
 class GoogleGmail:
     _SCOPE = ['https://www.googleapis.com/auth/gmail.readonly',
               'https://www.googleapis.com/auth/gmail.send',
-              'https://www.googleapis.com/auth/gmail.labels']
+              'https://www.googleapis.com/auth/gmail.modify']
 
     store = file.Storage('RasAsi_storage.json')
 
@@ -32,7 +33,7 @@ class GoogleGmail:
         self.GMAIL = discovery.build('gmail', 'v1', http=creds.authorize(Http()))
 
     @errors_decorator
-    def unread_messages(self, userId='me', q='', labelIds='UNREAD'):
+    def list_unread_messages(self, userId='me', q='', labelIds='UNREAD'):
         _response = self.GMAIL.users().messages().list(userId=userId, q=q, labelIds=labelIds).execute()
         msg_id =[]
         if 'messages' in _response:
@@ -51,23 +52,76 @@ class GoogleGmail:
                 print(messages)
             return messages
 
-    def read_message(self, message):
-        topic = message['payload']['headers'][19]['value']
-        date = time.ctime(int(message['internalDate'])/1000)
-        p = 0
-        for i in message['payload']['headers']:
-            print(p, i['value'])
-            p += 1
-        from_person = message['payload']['headers'][6]['value'].replace('>', '').replace('<', '')
-        content = message['payload'] #['parts'][0]['body']['data']
-        # c1 = base64.urlsafe_b64decode(content).decode()
-        print(message)
+    @errors_decorator
+    def decoded_messages(self, messages):
+        """
+
+        :param messages: list of messages
+        :return: list of dictionaries consisting of decoded massages [{decoded_message1}, {decoded_message2}]
+        """
+        decoded_messages = []
+        for message in messages:
+            print(message)
+            topic = message['payload']['headers'][19]['value']
+            date = datetime.datetime.fromtimestamp(int(message['internalDate'])/1000)
+            from_person = message['payload']['headers'][6]['value'].replace('>', '').replace('<', '')
+            content = message['payload']['parts'][0]['body']['data']
+            content = base64.urlsafe_b64decode(content).decode()
+            print(topic)
+            decoded_messages.append({
+                'topic': topic,
+                'from_person': from_person,
+                'date': date,
+                'content': content,
+                'labelIds': message['labelIds'],
+                'id': message['id']
+            })
+        return decoded_messages
+
+    def send_message(self):
+        pass
+
+    @errors_decorator
+    def change_labels(self, msg_id, userId='me', removeLabels=None, addLabelIds=None):
+
+        if removeLabels and addLabelIds:
+            body = {
+                'removeLabelIds': removeLabels,
+                'addLabelIds': addLabelIds
+            }
+        elif removeLabels:
+            body = {
+                'removeLabelIds': removeLabels
+            }
+        elif addLabelIds:
+            body = {
+                'addLabelIds': addLabelIds
+            }
+        else:
+            print('Параметры для запроса не указаны')
+            return None
+
+        """
+
+        :param msg_id:
+        :param userId:
+        :param removeLabels: ['UNREAD', 'my_LABEL']
+        :param addLabelIds: ['UNREAD', 'my_LABEL']
+        :return: None
+        """
+        self.GMAIL.users().messages().modify(id=msg_id, userId=userId, body=body).execute()
+
+    @time_decorator
+    def logic_get_message(self):
+        msgs_id = self.list_unread_messages()
+        messages = self.get_messages(msgs_id)
+        decoded_messages = self.decoded_messages(messages)
+        return decoded_messages
+
 
 if __name__ == '__main__':
     a = GoogleGmail()
-    msg_id = a.unread_messages()
-    messages = a.get_messages(msg_id)
-    for i in messages:
-        a.read_message(i)
-    print(messages[0]['payload']['headers'][19]['value'])
+    msg = a.logic_get_message()[0]
+
+    a.change_labels(msg_id=msg['id'], removeLabels=['UNREAD'])
 

@@ -19,6 +19,6 @@ def time_decorator(func):
         start_time = time()
         ret = func(*args, **kwargs)
         elapsed_time = time() - start_time
-        print(f'{func.__name__} выполнено за {elapsed_time} секунд')
+        print(f'{func.__name__} выполнено за {elapsed_time} сек')
         return ret
     return wrapper
