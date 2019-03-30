@@ -1,17 +1,10 @@
-class kl:
-    @staticmethod
-    def decorator_errors( func):
-        def try_():
-            print(1)
-            func()
+import base64
+from email.mime.text import MIMEText
+message_text = 'text'
+message = MIMEText(message_text)
+message['to'] = 'zabavniy7@gmail.com'
+message['from'] = 'me'
+message['subject'] = 'Тема письма____1'
 
-        return try_
-
-    def sp(self):
-        print('hello')
-
-
-if __name__ == '__main__':
-    a = kl
-    @kl.decorator_errors
-    a.sp()
+dict_1 = {'raw': base64.urlsafe_b64encode(message.as_bytes())}
+print(dict_1)

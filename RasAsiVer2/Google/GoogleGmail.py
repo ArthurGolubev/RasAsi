@@ -1,10 +1,15 @@
-# TODO написать метод send
+import os
 import base64
 import datetime
+import mimetypes
 from sys import platform
 from httplib2 import Http
 from apiclient import discovery
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email.mime.image import MIMEImage
 from oauth2client import file, client, tools
+from email.mime.multipart import MIMEMultipart
 from RasAsiVer2.Decorators.Decorators import errors_decorator, time_decorator
 
 
@@ -78,8 +83,56 @@ class GoogleGmail:
             })
         return decoded_messages
 
-    def send_message(self):
-        pass
+    @errors_decorator
+    def send_message(self, message_text, userId='me', from_='Асистент Малинка', to='zabavniy7@gmail.com', topic=''):
+
+        message = MIMEText(message_text)
+        message['To'] = to
+        message['From'] = from_
+        message['Subject'] = topic
+        message = {'raw': base64.urlsafe_b64encode(message.as_bytes()).decode()}
+
+        message = self.GMAIL.users().messages().send(userId=userId, body=message).execute()
+        return message
+
+    @errors_decorator  # TODO доделать метод
+    def send_message_with_attachment(self,
+                                     message_text,
+                                     file_dir,
+                                     file_name,
+                                     userId='me',
+                                     from_='Асистент малинка',
+                                     to='zabavniy7@gmail.com',
+                                     topic=''):
+        message = MIMEMultipart
+
+        msg = MIMEText(message_text)
+        msg['to'] = to
+        msg['From'] = from_
+        msg['Subject'] = topic
+
+        path = os.path.join(file_dir, file_name)
+        content_type, encoding = mimetypes.guess_type(path)
+
+        if content_type is None or encoding is not None:
+            content_type = 'application/octet-stream'
+        main_type, sub_type = content_type.split('/', 1)
+        if main_type == 'text':
+            with open(path, 'rb') as f:
+                payload = MIMEText(f.read(), _subtype=sub_type)
+        elif main_type == 'image':
+            with open(path, 'rb') as f:
+                payload = MIMEImage(f.read(), _subtype=sub_type)
+        else:
+            with open(path, 'rb') as f:
+                payload = MIMEBase(main_type, sub_type)
+                payload.set_payload(f.read())
+        payload.add_header('Контенто-содержащий', 'attachment', filename=file_name)
+        message.attach(msg, payload)
+        message = {'raw': base64.urlsafe_b64encode(message.as_bytes()).decode()}
+
+        message = self.GMAIL.users().messages().send(userId=userId, body=message)
+        return message
 
     @errors_decorator
     def change_labels(self, msg_id, userId='me', removeLabels=None, addLabelIds=None):
@@ -121,7 +174,12 @@ class GoogleGmail:
 
 if __name__ == '__main__':
     a = GoogleGmail()
-    msg = a.logic_get_message()[0]
+    a.send_message_with_attachment(message_text='Держи 😊',
+                                   file_dir='C:\PycharmProjects\RasAsi\RasAsiVer2\Weather_Packeg',
+                                   file_name='ChartWeather.html',
+                                   topic='Прикреплён график погоды 👍☁')
+    # a.send_message(message_text='Привет 👌☁', topic='ТОПИК_ТЕМА 👍😁')
+    # msg = a.logic_get_message()[0]
 
-    a.change_labels(msg_id=msg['id'], removeLabels=['UNREAD'])
+    # a.change_labels(msg_id=msg['id'], removeLabels=['UNREAD'])
 
