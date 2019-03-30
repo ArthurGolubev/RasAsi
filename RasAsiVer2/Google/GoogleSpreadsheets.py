@@ -105,7 +105,7 @@ class GoogleSpreadsheet:
                                                             valueInputOption=valueInputOption).execute()
         # r1 = result.get('updates').get('updatedCells')
 
-    def body_formation(self, values, majorDimension = "ROWS"):  # TODO возможно нужен для формирования списка из тел
+    def body_formation(self, values, majorDimension = "ROWS"):  # возможно нужен для формирования списка из тел
                                                                 # для заполнения нескольких диапозонов
         """
 

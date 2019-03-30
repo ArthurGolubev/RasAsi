@@ -47,7 +47,7 @@ class GoogleTasks:
                 print(u'{0} {1}'.format(item['title'], item['id']))
                 self.mainID = item['id']
 
-    def get_tasks(self):  # TODO Ничего не возвращает.
+    def get_tasks(self):
         tasks = self._TASKS.tasks().list(tasklist=self.mainID, showHidden=True).execute()
         for task in tasks['items']:
             print(task.get('title'), task)

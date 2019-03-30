@@ -45,7 +45,7 @@ class WeatherChart:
             humidity.append(int(i[5].split(' ')[0]))
         return time, wind_speed, precipitation, temperature, overcast, humidity, atmosphere_pressure
 
-    def _trace(self, place, name):  # TODO возможность сменить цвет
+    def _trace(self, place, name):
         trace = []
         for i in range(1, 7):
             trace.append(

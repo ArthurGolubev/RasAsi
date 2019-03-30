@@ -3,7 +3,7 @@ from RasAsiVer2.Tests_Env.Plotly.payload.annotations import Annotations
 import plotly
 from plotly import graph_objs
 
-# TODO 2 блок кода - формирование имеющихся данных
+
 Krasnoyarsk_spreadsheetId = '103fPu9jlTmFcWKhRChdzP2Xva2SJa17wlK2YRWrhrSM'
 Novosibirsk_spreadsheetId = '1Dfh88Of9a1ekZWALq25XH4DD5mh1wQUal0kHqSgGWDQ'
 # Novosibirsk_spreadsheetId = '1GVAdbAt8eaGVE5qK-lLtILRzGvr4omVl3r3y-Qxd2vQ' # copy
@@ -66,7 +66,7 @@ trace1 = graph_objs.Scatter(
 )
 
 
-data = [trace0, trace1]  # TODO 1 блок - формирование анотации
+data = [trace0, trace1]
 HH_annotations=[
                                             dict(x=Krasnoyarsk[1].index(max(Krasnoyarsk[1])), y=max(Krasnoyarsk[1]),
                                                  xref='x',

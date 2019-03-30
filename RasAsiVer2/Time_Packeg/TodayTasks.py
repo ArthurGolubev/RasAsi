@@ -17,7 +17,7 @@ class TodayTasks:
         self.tasks = GoogleSpreadsheet().get_spreadsheets_values(
             spreadsheet_id=self._spreadsheet_id,
             range_name='Лист1').get('values')
-        print(self.tasks)
+        print('\nХранилище\n', self.tasks)
 
     def take_tasks(self, n=3):
         row_id = []
