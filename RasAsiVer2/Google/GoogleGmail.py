@@ -44,8 +44,8 @@ class GoogleGmail:
         if 'messages' in _response:
             for i in _response['messages']:
                 msg_id.append(i['id'])
-        else:
-            print('Сообщений нет')
+        # else:
+        #     print('Сообщений нет')
         return msg_id
 
     @errors_decorator
@@ -164,7 +164,7 @@ class GoogleGmail:
         """
         self.GMAIL.users().messages().modify(id=msg_id, userId=userId, body=body).execute()
 
-    @time_decorator
+    # @time_decorator
     def logic_get_message(self):
         msgs_id = self.list_unread_messages()
         messages = self.get_messages(msgs_id)
