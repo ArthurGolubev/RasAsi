@@ -1,11 +1,11 @@
 from time import sleep
 # from RasAsi_main import startTimeRasAsi
-# from ..Gmail_Packeg import send, get_message
+# from ..legacy_Gmail_Packeg import send, get_message
 import threading
-from RasAsiVer1.Gmail_Packeg.read_message import read_message
-from RasAsiVer1.Gmail_Packeg.Send import send
+from RasAsiVer1.legacy_Gmail_Packeg.read_message import read_message
+from RasAsiVer1.legacy_Gmail_Packeg.Send import send
 from datetime import datetime
-from RasAsiVer1.Time_Packeg.startTimeRasAsi import timeHasPassed, startTimeRasAsi
+from RasAsiVer1.Time_Packeg.legacy_startTimeRasAsi import timeHasPassed, startTimeRasAsi
 from emoji import emojize
 from RasAsiVer1.External_Packeg.emojilist import ej
 # from RasAsiVer1.WOrk_Packeg.LightDetailing.viewAU.viewAUrequests import vievAUrequests

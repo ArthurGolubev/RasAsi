@@ -1,5 +1,5 @@
 import base64
-from RasAsiVer1.Gmail_Packeg.get_message import get_message
+from RasAsiVer1.legacy_Gmail_Packeg.get_message import get_message
 
 
 def read_message():

@@ -1,6 +1,6 @@
 import urllib.request, time, os, datetime, subprocess
 from sys import platform
-from RasAsiVer1.Gmail_Packeg.Send import send, log
+from RasAsiVer1.legacy_Gmail_Packeg.Send import send, log
 
 def prost():
     print('privet from download!!')

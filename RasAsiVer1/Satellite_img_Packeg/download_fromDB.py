@@ -3,7 +3,7 @@ import time
 import subprocess
 import urllib.request
 from sys import platform
-from ..Gmail_Packeg.Send import send, log
+from ..legacy_Gmail_Packeg.Send import send, log
 from .work_composition.my_query import *
 from .work_composition.queri_select import query_select
 from .work_composition.query_insert import query_insert1

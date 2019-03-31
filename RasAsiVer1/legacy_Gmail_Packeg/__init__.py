@@ -3,7 +3,7 @@ from .Send import prost5, send
 
 def commandList():
     while True:
-        print('\n-|Gmail_Packeg|-'
+        print('\n-|legacy_Gmail_Packeg|-'
               '\nДоступные команды:\n'
               '1 - prost5\n'
               '2 - send\n'

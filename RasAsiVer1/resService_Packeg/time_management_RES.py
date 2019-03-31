@@ -1,5 +1,5 @@
 import threading
-from RasAsiVer1.Time_Packeg.time_management import k2
+from RasAsiVer1.Time_Packeg.legacy_time_management import k2
 
 
 def time_managment_RES(t_stop):

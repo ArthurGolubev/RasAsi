@@ -1,26 +1,14 @@
 import threading
 from sys import platform
 from .External_Packeg.emojilist import ej
-from .Time_Packeg.startTimeRasAsi import *
-# from .Time_Packeg.time_management import k2
-from RasAsiVer2.Time_Packeg.TimeManagement import TimeManagement
-
-from .Gmail_Packeg import commandList as cL_Gmail_Packeg
+from .Time_Packeg.legacy_startTimeRasAsi import *
+from .WOrk_Packeg import commandList as cL_WOrk_Packeg
 from .Download_Packeg import commandList as cL_Download_Packeg
+from .legacy_Gmail_Packeg import commandList as cL_Gmail_Packeg
+from RasAsiVer2.Time_Packeg.TimeManagement import TimeManagement
 from .resService_Packeg import commandList as cL_resService_Packeg
-# from .Time_Packeg import commandList as commandList_External_Packeg
 from .Satellite_img_Packeg import commandList as cL_Setellite_img_Packeg
 from .Time_Packeg.electricity_monitoring import electricity_monitoringFunction, userDirectiv
-from .WOrk_Packeg import commandList as cL_WOrk_Packeg
-
-
-# t_stop = threading.Event()
-# if platform == 'linux':
-#     t = threading.Thread(target=electricity_monitoringFunction, name='Treading_emF', args=(t_stop,))
-#     t.start()
-#
-# t2 = threading.Thread(target=k2, name='T_time_manegement', args=(t_stop,))
-# t2.start()
 
 t = threading.Thread(target=TimeManagement().time_line, name='T_TimeManagement')
 t.start()
@@ -33,7 +21,7 @@ def mainMenu():
               '1 - Download_Packeg\n'
               '2 - Time_Packeg\n'
               '3 - program runtime\n'
-              '4 - Gmail_Packeg\n'
+              '4 - legacy_Gmail_Packeg\n'
               '5 - Setallite_img_Packeg\n'
               '6 - resService_Packeg\n'
               '7 - WOrk_Packeg\n'

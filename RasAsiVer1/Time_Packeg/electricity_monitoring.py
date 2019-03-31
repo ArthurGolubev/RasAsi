@@ -1,5 +1,5 @@
 import time, datetime
-from RasAsiVer1.Gmail_Packeg.Send import send, log
+from RasAsiVer1.legacy_Gmail_Packeg.Send import send, log
 
 
 
