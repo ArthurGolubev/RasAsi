@@ -17,47 +17,32 @@ class TodayTasks:
         self.tasks = GoogleSpreadsheet().get_spreadsheets_values(
             spreadsheet_id=self._spreadsheet_id,
             range_name='Лист1').get('values')
-        print('\nХранилище\n', self.tasks)
+        # print('\nХранилище\n', self.tasks)
 
     def take_tasks(self, n=3):
         row_id = []
         task_id = []
         xn = 0
         for task in self.tasks:
-            # print(i)
             if not int(task[2]):
                 xn += 1
         if n > xn:
             print(f'Осталось невыполненных заданий - {xn}')
             n = xn
 
-        if n < 3:
-            print('mark 0')
-            count = 0
-            for task in self.tasks:
-                if not int(task[2]) and task not in self.daily:
-                    self.daily.append(task)
-                    row_id.append((self.tasks.index(task)+1))
-                    count += 1
-            if count:
-                for i in self.daily:
-                    id = GoogleTasks(mainID=self._tasklist_id).insert(task={'title': i[1]})
-                    task_id.append(id)
-                for i in range(len(row_id)):
-                    self.today_tasks[task_id[i]] = row_id[i]
-        else:
-            while n:
-                print(1)
-                task = choice(self.tasks)
-                if not int(task[2]) and task not in self.daily:
-                    n -= 1
-                    self.daily.append(task)
-                    row_id.append(self.tasks.index(task)+1)
-            for i in self.daily:
-                id = GoogleTasks(mainID=self._tasklist_id).insert(task={'title': i[1]})
-                task_id.append(id)
-            for i in range(len(row_id)):
-                self.today_tasks[task_id[i]] = row_id[i]
+        count_n = n
+        while count_n:
+            task = choice(self.tasks)
+            if not int(task[2]) and task not in self.daily:
+                count_n -= 1
+                self.daily.append(task)
+                row_id.append(self.tasks.index(task)+1)
+
+        for i in range(n):
+            id = GoogleTasks(mainID=self._tasklist_id).insert(task={'title': self.daily[-1-i][1]})
+            task_id.append(id)
+        for i in range(len(row_id)):
+            self.today_tasks[task_id[i]] = row_id[i]
 
     def check(self):
         for id in self.today_tasks:
@@ -81,9 +66,9 @@ class TodayTasks:
         :return: Nothing
         """
         material = material.split(' ')
-        material.insert(1, datetime.datetime.today().strftime('%d.%m.%Y'))
+        material.insert(0, datetime.datetime.today().strftime('%d.%m.%Y'))
         material.append(0)
-        GoogleSpreadsheet().append_spreadsheets_values(values=[material[1:]],
+        GoogleSpreadsheet().append_spreadsheets_values(values=[material[0:]],
                                                        spreadsheet_id=self._spreadsheet_id,
                                                        range_name='Лист1')
 

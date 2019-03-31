@@ -1,58 +1,65 @@
 import threading
 from time import sleep
-from datetime import datetime
-from RasAsiVer1.Gmail_Packeg.Send import send
+from datetime import datetime, timedelta
+from RasAsiVer2.Google.GoogleGmail import GoogleGmail
 from RasAsiVer2.Time_Packeg.TodayTasks import TodayTasks
-from RasAsiVer1.Time_Packeg.startTimeRasAsi import timeHasPassed, startTimeRasAsi
+from RasAsiVer2.Decorators.Decorators import time_decorator
 
 
 class TimeManagement:
     Task = TodayTasks()
 
-    def __init__(self, t_stop):
-        self.stop = t_stop
-        self.T_view_messages = threading.Thread(target=self._view_messages, name='T_viev_messages')
-        self.T_server_time = threading.Thread(target=self._server_time, name='T_server_time')
-        self.T_Task_put = threading.Thread(target=self._Task_put, name='T_Task_put')
-        self.T_Task_give_me_one = threading.Thread(target=self._Task_give_me_one, name='T_Task_give_me_one')
-        self.T_Task_check_clean = threading.Thread(target=self._Task_check_clean, name='T_Task_check')
+    def __init__(self):
+        self.messages = {}
+        self.startTimeRasAsi = datetime.now()
 
     def time_line(self):
-        while not self.stop.is_set():
-            cTime = datetime.time()
+        while True:
+            cTime = datetime.now()
             self.messages = self._view_messages()
-            if 'Время' in self.messages:
-                self.T_server_time.start()
-            if 'Хранилище' in self.messages:
-                self.T_Task_put.start()
-            if 'Дай мне один' in self.messages:
-                self.T_Task_give_me_one.start()
+            if self.messages:
+                for message in self.messages:
+                    if message['from_person'] == 'zabavniy7@gmail.com':
 
-            if cTime.hour == 0 and cTime.minute == 0:
-                self.T_server_time.start()
-                self.T_Task_check_clean.start()
-            # elif cTime.hour == 2 and:
+                        if message['topic'] == 'Время':
+                            self._server_time()
+                        elif message['topic'] == 'Хранилище':
+                            self._Task_put(material=message['content'])
+                        elif message['topic'] == 'Дай мне один':
+                            self.Task.give_me_one()
 
-            elif cTime.hour == 8 and cTime.minute == 0:
-                self.Task.take_tasks()
+            if cTime.hour == 0:
+                if cTime.minute == 0:
+                    self._server_time()
+                    self._Task_check_clean()
+
+            elif cTime.hour == 15:
+                if cTime.minute == 35:
+                    self.Task.take_tasks()
 
             sleep(60)
 
     def _view_messages(self):
-        input('pause\t')
-        return  {} # TODO возращать словарь, где ключ - тема сообщения
-        # просмотр сообщений
+        messages = GoogleGmail().logic_get_message()
+        return messages
 
+    @time_decorator
     def _server_time(self):
-        msg = f'🎉👌 Время работы сервера:\t {str(timeHasPassed(startTimeRasAsi))}'
-        send(topic='Server time ☁', message=msg)
+        cTime = datetime.now() - self.startTimeRasAsi
+        cTime = cTime - timedelta(microseconds=cTime.microseconds)
+        GoogleGmail().send_message(
+            topic='Server time ☁', message_text=f'🎉👌 Время работы сервера:\t {cTime}')
 
-    def _Task_put(self):
-        self.Task.put(material=self.messages.get('Хранилище'))
-
-    def _Task_give_me_one(self):
-        self.Task.give_me_one()
+    def _Task_put(self, material):
+        self.Task.put(material=material.strip())
 
     def _Task_check_clean(self):
         self.Task.check()
         self.Task.clean()
+
+
+if __name__ == '__main__':
+    t = threading.Thread(target=TimeManagement().time_line, name='T_TimeManagement')
+    t.start()
+else:
+    print(f'Подключен модуль {__name__}')

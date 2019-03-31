@@ -168,8 +168,11 @@ class GoogleGmail:
     def logic_get_message(self):
         msgs_id = self.list_unread_messages()
         messages = self.get_messages(msgs_id)
-        decoded_messages = self.decoded_messages(messages)
-        return decoded_messages
+        if messages:
+            decoded_messages = self.decoded_messages(messages)
+            for message in decoded_messages:
+                self.change_labels(msg_id=message['id'], removeLabels=('UNREAD', ))
+            return decoded_messages
 
 
 if __name__ == '__main__':

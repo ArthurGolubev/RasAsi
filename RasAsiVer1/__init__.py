@@ -2,7 +2,9 @@ import threading
 from sys import platform
 from .External_Packeg.emojilist import ej
 from .Time_Packeg.startTimeRasAsi import *
-from .Time_Packeg.time_management import k2
+# from .Time_Packeg.time_management import k2
+from RasAsiVer2.Time_Packeg.TimeManagement import TimeManagement
+
 from .Gmail_Packeg import commandList as cL_Gmail_Packeg
 from .Download_Packeg import commandList as cL_Download_Packeg
 from .resService_Packeg import commandList as cL_resService_Packeg
@@ -12,14 +14,16 @@ from .Time_Packeg.electricity_monitoring import electricity_monitoringFunction, 
 from .WOrk_Packeg import commandList as cL_WOrk_Packeg
 
 
-t_stop = threading.Event()
-if platform == 'linux':
-    t = threading.Thread(target=electricity_monitoringFunction, name='Treading_emF', args=(t_stop,))
-    t.start()
+# t_stop = threading.Event()
+# if platform == 'linux':
+#     t = threading.Thread(target=electricity_monitoringFunction, name='Treading_emF', args=(t_stop,))
+#     t.start()
+#
+# t2 = threading.Thread(target=k2, name='T_time_manegement', args=(t_stop,))
+# t2.start()
 
-t2 = threading.Thread(target=k2, name='T_time_manegement', args=(t_stop,))
-t2.start()
-
+t = threading.Thread(target=TimeManagement().time_line, name='T_TimeManagement')
+t.start()
 
 def mainMenu():
     print('FROM mainMenu')
