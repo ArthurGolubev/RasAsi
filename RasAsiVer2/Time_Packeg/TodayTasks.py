@@ -65,10 +65,11 @@ class TodayTasks:
         :param material: string from msg
         :return: Nothing
         """
-        material = material.split(' ')
-        material.insert(0, datetime.datetime.today().strftime('%d.%m.%Y'))
-        material.append(0)
-        GoogleSpreadsheet().append_spreadsheets_values(values=[material[0:]],
+        values = []
+        values.append(datetime.datetime.today().strftime('%d.%m.%Y'))
+        values.append(material)
+        values.append(0)
+        GoogleSpreadsheet().append_spreadsheets_values(values=[values],
                                                        spreadsheet_id=self._spreadsheet_id,
                                                        range_name='Лист1')
 
