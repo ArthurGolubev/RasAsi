@@ -54,7 +54,6 @@ class GoogleGmail:
             messages = []
             for i in msg_id:
                 messages.append(self.GMAIL.users().messages().get(userId='me', id=i).execute())
-                print(messages)
             return messages
 
     @errors_decorator
@@ -66,7 +65,6 @@ class GoogleGmail:
         """
         decoded_messages = []
         for message in messages:
-            print(message)
             topic = message['payload']['headers'][19]['value']
             date = datetime.datetime.fromtimestamp(int(message['internalDate'])/1000)
             from_person = message['payload']['headers'][6]['value'].replace('>', '').replace('<', '')
@@ -181,8 +179,5 @@ if __name__ == '__main__':
                                    file_dir='C:\PycharmProjects\RasAsi\RasAsiVer2\Weather_Packeg',
                                    file_name='ChartWeather.html',
                                    topic='Прикреплён график погоды 👍☁')
-    # a.send_message(message_text='Привет 👌☁', topic='ТОПИК_ТЕМА 👍😁')
-    # msg = a.logic_get_message()[0]
 
-    # a.change_labels(msg_id=msg['id'], removeLabels=['UNREAD'])
 
