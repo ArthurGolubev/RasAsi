@@ -35,7 +35,7 @@ class GoogleTasks:
 
         self._TASKS = build('tasks', 'v1', credentials=creds)
 
-    def callAPI(self):
+    def callAPI(self):  # TODO ???
         result = self._TASKS.tasklists().list().execute()
         items = result.get('items', [])
 
@@ -47,8 +47,8 @@ class GoogleTasks:
                 print(u'{0} {1}'.format(item['title'], item['id']))
                 self.mainID = item['id']
 
-    def get_tasks(self):
-        tasks = self._TASKS.tasks().list(tasklist=self.mainID, showHidden=True).execute()
+    def list_tasks(self):
+        tasks = self._TASKS.tasks().list(tasklist=self.mainID).execute()
         for task in tasks['items']:
             print(task.get('title'), task)
         print(tasks)
