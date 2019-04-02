@@ -39,10 +39,10 @@ class TimeManagement:
                     self._Task_check_clean()
 
             elif cTime.hour == 8:
-                if cTime.minute == 00:
+                if cTime.minute == 20:
                     self.Task.take_tasks()
 
-            sleep(10)
+            sleep(60)
 
     def _view_messages(self):
         messages = GoogleGmail().logic_get_message()
