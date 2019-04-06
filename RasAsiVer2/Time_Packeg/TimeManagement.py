@@ -33,13 +33,13 @@ class TimeManagement:
                         else:
                             self._unsupported_command(message['topic'])
 
-            if cTime.hour == 0:
-                if cTime.minute == 0:
+            if cTime.hour == 16:
+                if cTime.minute == 25:
                     self._server_time()
                     self._Task_check_clean()
 
-            elif cTime.hour == 8:
-                if cTime.minute == 00:
+            elif cTime.hour == 16:
+                if cTime.minute == 15:
                     self.Task.take_tasks()
 
             sleep(60)
