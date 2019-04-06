@@ -1,6 +1,8 @@
 import threading
 from time import sleep
+from selenium import webdriver
 from datetime import datetime, timedelta
+from selenium.webdriver.common.keys import Keys
 from RasAsiVer2.Google.GoogleGmail import GoogleGmail
 from RasAsiVer2.Time_Packeg.TodayTasks import TodayTasks
 from RasAsiVer2.Decorators.Decorators import time_decorator
@@ -33,12 +35,12 @@ class TimeManagement:
                         else:
                             self._unsupported_command(message['topic'])
 
-            if cTime.hour == 18:
-                if cTime.minute == 35:
+            if cTime.hour == 00:
+                if cTime.minute == 00:
                     self._server_time()
-                    self._Task_check_clean()
-                elif cTime.minute in [33, 40]:
-                    print('okokoko')
+                    self._Task_check_clean_refresh()
+            elif cTime.hour == 8:
+                if cTime.minute == 00:
                     self.Task.take_tasks()
 
             sleep(60)
@@ -57,9 +59,10 @@ class TimeManagement:
     def _Task_put(self, material):
         self.Task.put(material=material.strip())
 
-    def _Task_check_clean(self):
+    def _Task_check_clean_refresh(self):
         self.Task.check()
         self.Task.clean()
+        self.Task.refresh_tasks()
 
     def _lenta_discount(self, number):
         date = datetime.now().strftime('%d.%m.%Y')
@@ -91,7 +94,6 @@ class TimeManagement:
             GoogleGmail().send_message(topic='Проездной 🧐🚌💰',
                                        message_text=f'Оставшийся баланс на транспортной карте: {transport_unit} руб.')
 
-        print(number)
 
 if __name__ == '__main__':
     t = threading.Thread(target=TimeManagement().time_line, name='T_TimeManagement')
