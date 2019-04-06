@@ -39,7 +39,7 @@ class TimeManagement:
                     self._Task_check_clean()
 
             elif cTime.hour == 16:
-                if cTime.minute == 15:
+                if cTime.minute == 20:
                     self.Task.take_tasks()
 
             sleep(60)
