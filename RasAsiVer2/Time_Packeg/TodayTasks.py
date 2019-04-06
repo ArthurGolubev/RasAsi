@@ -75,6 +75,7 @@ class TodayTasks:
             if status == 'needsAction' and not due:
                 GoogleTasks(mainID=self._tasklist_id).delete_task(task_id=id)
         self.daily.clear()
+        self.today_tasks.clear()
 
     def put(self, material):
         """
