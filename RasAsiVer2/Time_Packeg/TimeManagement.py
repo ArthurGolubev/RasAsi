@@ -37,7 +37,7 @@ class TimeManagement:
                 if cTime.minute == 20:
                     self._server_time()
                     self._Task_check_clean()
-                elif cTime.minute == 17:
+                elif cTime.minute in [17, 25]:
                     print('okokoko')
                     self.Task.take_tasks()
 
