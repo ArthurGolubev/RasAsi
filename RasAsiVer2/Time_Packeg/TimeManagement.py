@@ -34,10 +34,10 @@ class TimeManagement:
                             self._unsupported_command(message['topic'])
 
             if cTime.hour == 18:
-                if cTime.minute == 20:
+                if cTime.minute == 35:
                     self._server_time()
                     self._Task_check_clean()
-                elif cTime.minute in [17, 25]:
+                elif cTime.minute in [33, 40]:
                     print('okokoko')
                     self.Task.take_tasks()
 
