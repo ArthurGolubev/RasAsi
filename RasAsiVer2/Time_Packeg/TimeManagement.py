@@ -74,6 +74,25 @@ class TimeManagement:
                                  f'список поддерживаемых команд:\n'
                                  f'1. Время\n2. Хранилище\n3. Дай мне один\n4. Лента')
 
+    def _transport_card(self):
+        number = GoogleSpreadsheet().get_spreadsheets_values(
+            spreadsheet_id='1vqDWkRh8ERwxkRtyum-0bffbmjp7KMJn-SpAgNnYtyM',
+            range_name='Лист1').get('values')[0][0]
+        browser = webdriver.Firefox(
+            executable_path=r'C:\PycharmProjects\RasAsi\RasAsiVer2\Weather_Packeg\geckodriver.exe')
+        browser.implicitly_wait(20)
+
+        browser.get('https://www.krasinform.ru/')
+        browser.find_element_by_xpath("//input[@type='text'][@name='card_num']").send_keys(f'{number}')
+        sleep(5)
+        browser.find_element_by_xpath("//input[@type='text'][@name='card_num']").send_keys(Keys.ENTER)
+        transport_unit = browser.find_elements_by_xpath("//table[@class='table']//td")
+        transport_unit = int(transport_unit[1].text.split(' ')[0])
+        if transport_unit < 225:
+            GoogleGmail().send_message(topic='Проездной 🧐🚌💰',
+                                       message_text=f'Оставшийся баланс на транспортной карте: {transport_unit} руб.')
+
+        print(number)
 
 if __name__ == '__main__':
     t = threading.Thread(target=TimeManagement().time_line, name='T_TimeManagement')

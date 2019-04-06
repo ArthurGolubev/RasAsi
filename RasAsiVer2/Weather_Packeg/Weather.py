@@ -1,7 +1,7 @@
 from selenium import webdriver
 from RasAsiVer2.Weather_Packeg.GetWeather import GetWeather
 from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
-from datetime import datetime, timedelta
+from datetime import datetime
 
 
 class Weather:

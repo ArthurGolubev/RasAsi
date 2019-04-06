@@ -51,8 +51,6 @@ class TodayTasks:
             status = task.get('status')
             notes = task.get('notes')
             due = task.get('due')
-            print(due)
-            print(type(due))
             if status == 'completed':
                 values = [[1, datetime.datetime.today().strftime('%d.%m.%Y'), notes]]
                 GoogleSpreadsheet().update_spreadsheets_values(spreadsheet_id=self._spreadsheet_id,
