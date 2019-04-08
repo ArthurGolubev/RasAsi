@@ -93,10 +93,9 @@ class TodayTasks:
                                                        range_name='Лист1')
 
     def give_me_one(self):
-        completed = self.check()
+        self.check()
         self.refresh_tasks()
         self.take_tasks(n=1)
-        return completed
 
 
 if __name__ == '__main__':

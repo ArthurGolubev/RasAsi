@@ -30,7 +30,7 @@ class TimeManagement:
                         elif message['topic'] == 'Хранилище':
                             self._Task_put(material=message['content'])
                         elif message['topic'] == 'Дай мне один':
-                            self._completed_today += self.Task.give_me_one()
+                            self.Task.give_me_one()
                         elif message['topic'] == 'Лента':
                             self._lenta_discount(number=message['content'])
                         else:
