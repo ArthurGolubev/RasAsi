@@ -15,6 +15,7 @@ class TimeManagement:
     def __init__(self):
         self.messages = {}
         self.startTimeRasAsi = datetime.now()
+        self._completed_today = 0
 
     def time_line(self):
         while True:
@@ -29,18 +30,18 @@ class TimeManagement:
                         elif message['topic'] == 'Хранилище':
                             self._Task_put(material=message['content'])
                         elif message['topic'] == 'Дай мне один':
-                            self.Task.give_me_one()
+                            self._completed_today += self.Task.give_me_one()
                         elif message['topic'] == 'Лента':
                             self._lenta_discount(number=message['content'])
                         else:
                             self._unsupported_command(message['topic'])
 
-            if cTime.hour == 00:
-                if cTime.minute == 00:
+            if cTime.hour == 23:
+                if cTime.minute == 50:
                     self._server_time()
                     self._Task_check_clean_refresh()
             elif cTime.hour == 8:
-                if cTime.minute == 11:
+                if cTime.minute == 5:
                     self.Task.take_tasks()
 
             sleep(60)
@@ -60,7 +61,14 @@ class TimeManagement:
         self.Task.put(material=material.strip())
 
     def _Task_check_clean_refresh(self):
-        self.Task.check()
+        self._completed_today += self.Task.check()
+
+        GoogleSpreadsheet().append_spreadsheets_values(
+            values=[[datetime.today().strftime('%d.%.m.%Y'), self._completed_today]],
+            spreadsheet_id='158Z7-2JEL9-j5jD7TCp_u-XahllRudDp7NIOoSiya_k',
+            range_name='Лист1')
+
+        self._completed_today = 0
         self.Task.clean()
         self.Task.refresh_tasks()
 
