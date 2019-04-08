@@ -40,7 +40,7 @@ class TimeManagement:
                     self._server_time()
                     self._Task_check_clean_refresh()
             elif cTime.hour == 8:
-                if cTime.minute == 9:
+                if cTime.minute == 11:
                     self.Task.take_tasks()
 
             sleep(60)
