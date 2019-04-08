@@ -1,17 +1,19 @@
 from selenium import webdriver
+from datetime import datetime, timedelta
 from RasAsiVer2.Weather_Packeg.GetWeather import GetWeather
 from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
-from datetime import datetime
 
 
 class Weather:
 
-    def __init__(self, place, date=datetime.now().strftime('%d.%m.%Y'), feature=None, spreadsheetId=None):
+    def __init__(self, place, feature=None, spreadsheetId=None):
         self.day_weather = None
         self._table = GoogleSpreadsheet()
         self.spreadsheetId = spreadsheetId
         self.place = place
-        self.date = date
+        self.date = (datetime.now()+timedelta(1)).strftime('%d.%m.%Y')
+        self.tomorrow = (datetime.now()+timedelta(1)).date().day
+
         if not feature:
             self.feature = ["Скорость ветра", "Осадки", "Температура",
                             "Облачность", "Влажность", "Атмосферное давление"]
@@ -25,6 +27,8 @@ class Weather:
         _browser.implicitly_wait(20)
         _browser.get(f'https://www.ventusky.com/{self.place}')
         _browser.find_element_by_xpath("//span[@id='aside_close_btn']").click()
+        _browser.find_element_by_xpath(f"//div[@id='m']/a[@class='s t']").click()
+        _browser.find_element_by_xpath(f"//table//tr//td//a[contains(text(), '{self.tomorrow}')]").click()
         _weather = GetWeather(browser=_browser, get_date=self.date)
         for i in self.feature:
             _weather.get_values(i)
