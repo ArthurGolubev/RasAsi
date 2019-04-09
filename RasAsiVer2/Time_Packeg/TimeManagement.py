@@ -64,7 +64,7 @@ class TimeManagement:
         self._completed_today += self.Task.check()
 
         GoogleSpreadsheet().append_spreadsheets_values(
-            values=[[datetime.today().strftime('%d.%.m.%Y'), self._completed_today]],
+            values=[[datetime.today().strftime('%d.%m.%Y'), self._completed_today]],
             spreadsheet_id='158Z7-2JEL9-j5jD7TCp_u-XahllRudDp7NIOoSiya_k',
             range_name='Лист1')
 
