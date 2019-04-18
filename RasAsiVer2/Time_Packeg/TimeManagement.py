@@ -15,7 +15,10 @@ class TimeManagement:
     def __init__(self):
         self.messages = {}
         self.startTimeRasAsi = datetime.now()
-        self._completed_today = 0
+        self.cache_variables = {
+            'tasks_taken': None,    # switch
+            '23:50': None,          # switch
+        }
 
     def time_line(self):
         while True:
@@ -36,13 +39,19 @@ class TimeManagement:
                         else:
                             self._unsupported_command(message['topic'])
 
-            if cTime.hour == 23:
-                if cTime.minute == 50:
+            if cTime.hour == 0 and cTime.minute in [0, 1, 2, 3]:
+                self.cache_variables['23:50'] = 0   # nullification (new day)
+
+            elif cTime.hour == 8:
+                if cTime.minute in [5, 6, 7] and not self.cache_variables['tasks_taken']:
+                    self.Task.take_tasks()
+                    self.cache_variables['tasks_taken'] = 1
+            elif cTime.hour == 23:
+                if cTime.minute in [50, 51, 52] and not self.cache_variables['23:50']:
                     self._server_time()
                     self._Task_check_clean_refresh()
-            elif cTime.hour == 8:
-                if cTime.minute == 5:
-                    self.Task.take_tasks()
+                    self.cache_variables['tasks_taken'] = 0
+                    self.cache_variables['23:50'] = 1
 
             sleep(60)
 
@@ -61,14 +70,8 @@ class TimeManagement:
         self.Task.put(material=material.strip())
 
     def _Task_check_clean_refresh(self):
-        self._completed_today += self.Task.check()
-
-        GoogleSpreadsheet().append_spreadsheets_values(
-            values=[[datetime.today().strftime('%d.%m.%Y'), self._completed_today]],
-            spreadsheet_id='158Z7-2JEL9-j5jD7TCp_u-XahllRudDp7NIOoSiya_k',
-            range_name='Лист1')
-
-        self._completed_today = 0
+        self.Task.check()
+        self.Task.day_completed()
         self.Task.clean()
         self.Task.refresh_tasks()
 

@@ -47,11 +47,18 @@ class GoogleTasks:
                 print(u'{0} {1}'.format(item['title'], item['id']))
                 self.mainID = item['id']
 
-    def list_tasks(self):
-        tasks = self._TASKS.tasks().list(tasklist=self.mainID).execute()
+    def list_tasks(self, completedMin=None):
+        """
+
+        :param completedMin: lower bound of time from which to look for completed tasks -> date[1:3]
+        string, format - RFC 3339 -> '2019-10-15T12:00:00.000Z'
+        :return: list of tasks
+        """
+        tasks = self._TASKS.tasks().list(tasklist=self.mainID, showHidden=True, completedMin=completedMin).execute()
         for task in tasks['items']:
             print(task.get('title'), task)
         print(tasks)
+        return tasks['items']
 
     def get_task(self, task_id):
         task = self._TASKS.tasks().get(tasklist=self.mainID, task=task_id).execute()

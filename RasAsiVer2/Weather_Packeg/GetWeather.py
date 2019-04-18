@@ -18,7 +18,7 @@ class GetWeather:
         for i in self._twentyFourHours:
             self._next12hours.append(get_date + ' ' + i)
 
-    def get_values(self, attribute): # TODO тут нужно переключить календарь на день вперёд
+    def get_values(self, attribute):
         characteristic_dict = {}
         self.browser.find_element_by_link_text(attribute).click()
         print(f'Сбор набора данных\t-|{attribute}|-')
