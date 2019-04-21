@@ -26,14 +26,19 @@ class TimeManagement:
             self.messages = self._view_messages()
             if self.messages:
                 for message in self.messages:
-                    if message['from_person'] == 'zabavniy7@gmail.com':
+                    if message['from_person'] == 'zabavniy7@gmail.com': # TODO проверка должна проводится в 26 строке. Если отправил RasAsi для RasAsi - out of range
 
                         if message['topic'] == 'Время':
                             self._server_time()
                         elif message['topic'] == 'Хранилище':
                             self._Task_put(material=message['content'])
                         elif message['topic'] == 'Дай мне один':
-                            self.Task.give_me_one()
+                            if len(message['content'].strip()):
+                                print(message['content'])
+                                self.Task.give_me_specific_one(message['content'])
+                            else:
+                                self.Task.give_me_one()
+
                         elif message['topic'] == 'Лента':
                             self._lenta_discount(number=message['content'])
                         else:

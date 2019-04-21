@@ -11,10 +11,10 @@ class Weather:
         self._table = GoogleSpreadsheet()
         self.spreadsheetId = spreadsheetId
         self.place = place
-        self.date = (datetime.now()+timedelta(1)).strftime('%d.%m.%Y')
-        # self.date = datetime.now().strftime('%d.%m.%Y')
-        self.tomorrow = (datetime.now()+timedelta(1)).date().day
-        # self.tomorrow = datetime.now().date().day
+        self.date = (datetime.now()+timedelta(1)).strftime('%d.%m.%Y')      # next day weather
+        # self.date = datetime.now().strftime('%d.%m.%Y')                     # today weather
+        self.tomorrow = (datetime.now()+timedelta(1)).date().day            # next day weather
+        # self.tomorrow = datetime.now().date().day                           # today  weather
 
         if not feature:
             self.feature = ["Скорость ветра", "Осадки", "Температура",

@@ -7,9 +7,9 @@ class TodayWeather:
     Novosibirsk_spreadsheetId = '1Dfh88Of9a1ekZWALq25XH4DD5mh1wQUal0kHqSgGWDQ'
 
     def today_weather(self):
-        # Krasnoyarsk = Weather(place='krasnoyarsk')
-        # Krasnoyarsk.get_weather()
-        # Krasnoyarsk.append_spreadsheet(spreadsheet_id=self.Krasnoyarsk_spreadsheetId, values=Krasnoyarsk.day_weather[1:])
+        Krasnoyarsk = Weather(place='krasnoyarsk')
+        Krasnoyarsk.get_weather()
+        Krasnoyarsk.append_spreadsheet(spreadsheet_id=self.Krasnoyarsk_spreadsheetId, values=Krasnoyarsk.day_weather[1:])
 
         Novosibirsk = Weather(place='novosibirsk')
         Novosibirsk.get_weather()

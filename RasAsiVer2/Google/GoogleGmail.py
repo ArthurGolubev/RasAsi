@@ -163,6 +163,7 @@ class GoogleGmail:
         self.GMAIL.users().messages().modify(id=msg_id, userId=userId, body=body).execute()
 
     # @time_decorator
+    @errors_decorator
     def logic_get_message(self):
         msgs_id = self.list_unread_messages()
         messages = self.get_messages(msgs_id)
