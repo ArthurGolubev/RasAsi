@@ -62,7 +62,7 @@ class TodayTasks:
                 date = due.split('T')
                 date = date[0].split('-')
                 date = f'{date[2]}.{date[1]}.{date[0]}'
-                values = [[0, date, notes]]
+                values = [[1, date, notes]]
                 GoogleSpreadsheet().update_spreadsheets_values(spreadsheet_id=self._spreadsheet_id,
                                                                range_name=f'Лист1!C{self.today_tasks.get(id)}',
                                                                values=values)
