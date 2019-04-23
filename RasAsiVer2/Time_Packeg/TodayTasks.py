@@ -25,7 +25,7 @@ class TodayTasks:
         xn = 0
         for task in self.tasks:
             print(task)
-            if not int(task[2]):
+            if not task[2]:
                 xn += 1
         if n > xn:
             print(f'Осталось невыполненных заданий - {xn}')
