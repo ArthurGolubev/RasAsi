@@ -24,6 +24,7 @@ class TodayTasks:
         task_id = []
         xn = 0
         for task in self.tasks:
+            print(task)
             if not int(task[2]):
                 xn += 1
         if n > xn:
@@ -60,7 +61,7 @@ class TodayTasks:
                 date = due.split('T')
                 date = date[0].split('-')
                 date = f'{date[2]}.{date[1]}.{date[0]}'
-                values = [['❌deadline', date, notes]]
+                values = [['❌deadline🤯⭕', date, notes]]
                 GoogleSpreadsheet().update_spreadsheets_values(spreadsheet_id=self._spreadsheet_id,
                                                                range_name=f'Лист1!C{self.today_tasks.get(id)}',
                                                                values=values)
