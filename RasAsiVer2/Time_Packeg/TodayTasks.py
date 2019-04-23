@@ -25,7 +25,7 @@ class TodayTasks:
         xn = 0
         for task in self.tasks:
             print(task)
-            if not task[2]:
+            if not int(task[2]):
                 xn += 1
         if n > xn:
             print(f'Осталось невыполненных заданий - {xn}')
@@ -58,10 +58,11 @@ class TodayTasks:
                                                                range_name=f'Лист1!C{self.today_tasks.get(id)}',
                                                                values=values)
             elif status == 'needsAction' and due:
+                notes = '❌deadline🤯⭕'
                 date = due.split('T')
                 date = date[0].split('-')
                 date = f'{date[2]}.{date[1]}.{date[0]}'
-                values = [['❌deadline🤯⭕', date, notes]]
+                values = [[0, date, notes]]
                 GoogleSpreadsheet().update_spreadsheets_values(spreadsheet_id=self._spreadsheet_id,
                                                                range_name=f'Лист1!C{self.today_tasks.get(id)}',
                                                                values=values)
