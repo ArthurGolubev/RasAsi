@@ -55,10 +55,11 @@ class GoogleTasks:
         :return: list of tasks
         """
         tasks = self._TASKS.tasks().list(tasklist=self.mainID, showHidden=True, completedMin=completedMin).execute()
-        for task in tasks['items']:
-            print(task.get('title'), task)
-        print(tasks)
-        return tasks['items']
+        if tasks:
+            for task in tasks['items']:
+                print(task.get('title'), task)
+            print(tasks)
+            return tasks['items']
 
     def get_task(self, task_id):
         task = self._TASKS.tasks().get(tasklist=self.mainID, task=task_id).execute()
