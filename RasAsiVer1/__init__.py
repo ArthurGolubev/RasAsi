@@ -9,7 +9,7 @@ from .resService_Packeg import commandList as cL_resService_Packeg
 from .Satellite_img_Packeg import commandList as cL_Setellite_img_Packeg
 from .Time_Packeg.electricity_monitoring import electricity_monitoringFunction, userDirectiv
 
-t = threading.Thread(target=TimeManagement().time_line, name='T_TimeManagement',)
+t = threading.Thread(target=TimeManagement().time_line, name='T_TimeManagement')
 t.start()
 
 def mainMenu():
