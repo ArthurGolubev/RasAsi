@@ -1,4 +1,3 @@
-
 def errors_decorator(func):
     from apiclient import errors
 
@@ -6,7 +5,7 @@ def errors_decorator(func):
         try:
             ret = func(*args, **kwargs)
         except errors.HttpError as error:
-            print('ERRRRRRR\n\n' ,error)
+            print('ERRRRRRR\n\n', error)
             ret = None
         return ret
     return wrapper
@@ -22,3 +21,18 @@ def time_decorator(func):
         print(f'{func.__name__} выполнено за {elapsed_time} сек')
         return ret
     return wrapper
+
+
+def logging_decorator(func):
+    import logging
+
+    def wrapper(*args, **kwargs):
+        logging.basicConfig(filename='logfile.txt', level=logging.ERROR, filemode='w')
+        try:
+            ret = func(*args, **kwargs)
+        except:
+            logging.getLogger().exception(f'name:\t\t{func.__name__}')
+            ret = None
+        return ret
+    return wrapper
+

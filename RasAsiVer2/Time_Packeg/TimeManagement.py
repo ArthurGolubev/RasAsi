@@ -6,6 +6,7 @@ from selenium.webdriver.common.keys import Keys
 from RasAsiVer2.Google.GoogleGmail import GoogleGmail
 from RasAsiVer2.Time_Packeg.TodayTasks import TodayTasks
 from RasAsiVer2.Decorators.Decorators import time_decorator
+from RasAsiVer2.Decorators.Decorators import logging_decorator
 from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
 
 
@@ -20,6 +21,7 @@ class TimeManagement:
             '23:50': None,          # switch
         }
 
+    @logging_decorator
     def time_line(self):
         while True:
             cTime = datetime.now()

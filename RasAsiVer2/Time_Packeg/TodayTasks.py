@@ -71,7 +71,7 @@ class TodayTasks:
 
         :return:
         """
-        today = (datetime.datetime.utcnow()-datetime.timedelta(hours=20)).isoformat('T') + 'Z'
+        today = (datetime.datetime.utcnow()-datetime.timedelta(hours=24)).isoformat('T') + 'Z'
         completed_tasks = GoogleTasks(mainID=self._tasklist_id).list_tasks(completedMin=today)
 
         GoogleSpreadsheet().append_spreadsheets_values(

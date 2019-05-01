@@ -10,14 +10,14 @@ from .resService_Packeg import commandList as cL_resService_Packeg
 from .Satellite_img_Packeg import commandList as cL_Setellite_img_Packeg
 from .Time_Packeg.electricity_monitoring import electricity_monitoringFunction, userDirectiv
 
-t = threading.Thread(target=TimeManagement().time_line, name='T_TimeManagement')
+t = threading.Thread(target=TimeManagement().time_line, name='T_TimeManagement',)
 t.start()
 
 def mainMenu():
     print('FROM mainMenu')
     while True:
         print('FROM cycle')
-        print('\nСписок доступных команд:\n'
+        print('\nСписок доступных команд:\n' # TODO правки. Переделать
               '1 - Download_Packeg\n'
               '2 - Time_Packeg\n'
               '3 - program runtime\n'
@@ -33,18 +33,18 @@ def mainMenu():
             print(f'...завершение программы...')
             if platform == 'linux':
                 userDirectiv()
-            t_stop.set()
             raise SystemExit
         # elif comand1 == '2':
         #     commandList_External_Packeg()
         elif command1 == '3':
-            print(f'{ej["молния"]} {timeHasPassed(startTimeRasAsi)} {ej["молния"]}')
+            print('🤷‍♂️')
         elif command1 == '4':
             cL_Gmail_Packeg()
         elif command1 == '5':
             cL_Setellite_img_Packeg()
         elif command1 == '6':
-            cL_resService_Packeg(t_stop)
+            # cL_resService_Packeg(t_stop)
+            pass
         elif command1 == '7':
             cL_WOrk_Packeg()
         else:

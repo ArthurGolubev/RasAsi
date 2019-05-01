@@ -55,7 +55,7 @@ class GoogleTasks:
         :return: list of tasks
         """
         tasks = self._TASKS.tasks().list(tasklist=self.mainID, showHidden=True, completedMin=completedMin).execute()
-        if tasks:
+        if tasks['items']:
             for task in tasks['items']:
                 print(task.get('title'), task)
             print(tasks)
