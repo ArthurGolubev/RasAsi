@@ -1,6 +1,5 @@
 import threading
 from sys import platform
-from .External_Packeg.emojilist import ej
 # from .Time_Packeg.legacy_startTimeRasAsi import *
 from .WOrk_Packeg import commandList as cL_WOrk_Packeg
 from .Download_Packeg import commandList as cL_Download_Packeg
@@ -37,14 +36,13 @@ def mainMenu():
         # elif comand1 == '2':
         #     commandList_External_Packeg()
         elif command1 == '3':
-            print('🤷‍♂️')
+            print(3)
         elif command1 == '4':
             cL_Gmail_Packeg()
         elif command1 == '5':
             cL_Setellite_img_Packeg()
         elif command1 == '6':
-            # cL_resService_Packeg(t_stop)
-            pass
+            print(6)
         elif command1 == '7':
             cL_WOrk_Packeg()
         else:
