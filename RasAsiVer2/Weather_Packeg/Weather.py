@@ -11,8 +11,7 @@ class Weather:
         executable_path = r'C:\PycharmProjects\RasAsi\credentials\geckodriver.exe'  # Laptop
         # executable_path = r'C:\PythonProject\RasAsi\credentials\geckodriver.exe'  # PC
     elif platform == 'linux':
-        """Ubuntu Mate"""
-        executable_path = r'/home/rasasi/RasAsi/credentials/geckodriver'
+        executable_path = r'/home/rasasi/RasAsi/credentials/geckodriver'  # Ubuntu Mate
     else:
         print(f'Платформа {platform} не поддерживается')
 
@@ -37,7 +36,7 @@ class Weather:
         print(f'\n{self.place.capitalize()}')
 
         _options_webdriver = webdriver.FirefoxOptions()
-        _options_webdriver.set_preference("intl.accept_languages", "es")
+        _options_webdriver.set_preference("intl.accept_languages", "ru")
 
         _browser = webdriver.Firefox(executable_path=self.executable_path, firefox_options=_options_webdriver)
         _browser.implicitly_wait(220)
