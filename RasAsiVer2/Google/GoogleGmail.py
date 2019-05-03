@@ -24,7 +24,8 @@ class GoogleGmail:
         _client_secret = r'C:\Users\ArthurGo\Downloads\client_secret.json'  # Laptop
         # client_secret = r'C:\PythonProject\mygmail\client_secret.json'  # PC
     elif platform == 'linux':
-        _client_secret = r'/home/pi/Downloads/client_secret.json'
+        # _client_secret = r'/home/pi/Downloads/client_secret.json'  # raspbian
+        _client_secret = r'/home/pi/Downloads/client_secret.json'  # ubuntu mate
     else:
         print(f'Платформа {platform} не поддерживается')
 
