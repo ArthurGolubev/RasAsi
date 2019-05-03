@@ -1,40 +1,43 @@
-# TODO рефакторинг: добавить свежий метод добавления пачки задач
 import pickle
 import os.path
 import pickle
 from sys import platform
+from apiclient import discovery
 from googleapiclient.discovery import build
-from google_auth_oauthlib.flow import InstalledAppFlow
+from oauth2client import tools, file, client
 from google.auth.transport.requests import Request
+from google_auth_oauthlib.flow import InstalledAppFlow
+from RasAsiVer2.Decorators.Decorators import errors_decorator, time_decorator
 
 
 class GoogleTasks:
     _SCOPE = 'https://www.googleapis.com/auth/tasks'
+
     if platform == 'win32':
-        # path1 = r'C:\PythonProject\mygmail\client_secret.json'  # PC
-        path1 = r'C:\PycharmProjects\client_secret.json'
+        path_credential = r'C:\PycharmProjects\RasAsi\credentials'  # Laptop
+        # path_credential = r'C:\PythonProject\RasAsi\credentials'  # PC
+        _client_secret = path_credential + r'\client_secret.json'
     elif platform == 'linux':
-        path1 = '/home/pi/Downloads/client_secret.json'
+        # path_credential = r'/home/pi/Downloads'  # raspbian
+        path_credential = r'/home/rasasi/RasAsi/credentials'  # Ubuntu Mate
+        _client_secret = path_credential + r'/client_secret.json'
     else:
         print(f'Платформа {platform} не поддерживается')
 
+    store = file.Storage(os.path.join(path_credential, 'RasAsi_storage.json'))
+
     def __init__(self, mainID):
         self.mainID = mainID
-        creds = None
-        if os.path.exists('token.pickle'):
-            with open('token.pickle', 'rb') as token:
-                creds = pickle.load(token)
-        if not creds or not creds.valid:
-            if creds and creds.expired and creds.refresh_token:
-                creds.refresh(Request())
-            else:
-                flow = InstalledAppFlow.from_client_secrets_file(self.path1, self._SCOPE)
-                creds = flow.run_local_server()
-            with open('token.pickle', 'wb') as token:
-                pickle.dump(creds, token)
+        creds = self.store.get()
 
-        self._TASKS = build('tasks', 'v1', credentials=creds)
+        if not creds or creds.invalid:
+            print('creds_Tasks_invalid')
+            flow = client.flow_from_clientsecrets(self._client_secret, self._SCOPE)
+            creds = tools.run_flow(flow, self.store)
 
+        self._TASKS = discovery.build('tasks', 'v1', credentials=creds)
+
+    @errors_decorator
     def callAPI(self):  # TODO ???
         result = self._TASKS.tasklists().list().execute()
         items = result.get('items', [])
@@ -47,6 +50,7 @@ class GoogleTasks:
                 print(u'{0} {1}'.format(item['title'], item['id']))
                 self.mainID = item['id']
 
+    @errors_decorator
     def list_tasks(self, completedMin=None):
         """
 
@@ -61,13 +65,16 @@ class GoogleTasks:
             print(tasks)
             return tasks['items']
 
+    @errors_decorator
     def get_task(self, task_id):
         task = self._TASKS.tasks().get(tasklist=self.mainID, task=task_id).execute()
         return task
 
+    @errors_decorator
     def delete_task(self, task_id):
         self._TASKS.tasks().delete(tasklist=self.mainID, task=task_id).execute()
 
+    @errors_decorator
     def insert(self, task):
         """
 
@@ -84,7 +91,7 @@ class GoogleTasks:
         result = self._TASKS.tasks().insert(tasklist=self.mainID, body=task).execute()
         return result.get('id')
 
-    def update(self):
+    def update(self):  # TODO ???
         pass
 
 

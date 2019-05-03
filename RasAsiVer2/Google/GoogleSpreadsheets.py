@@ -1,38 +1,42 @@
+import os
 from sys import platform
 from httplib2 import Http
 from apiclient import discovery
 from oauth2client import tools, file, client
+from RasAsiVer2.Decorators.Decorators import errors_decorator, time_decorator
+
 
 
 class GoogleSpreadsheet:
     _SCOPES = 'https://www.googleapis.com/auth/spreadsheets'
 
+    if platform == 'win32':
+        path_credential = r'C:\PycharmProjects\RasAsi\credentials'  # Laptop
+        # path_credential = r'C:\PythonProject\RasAsi\credentials'  # PC
+        _client_secret = path_credential + r'\client_secret.json'
+    elif platform == 'linux':
+        # path_credential = r'/home/pi/Downloads'  # raspbian
+        path_credential = r'/home/rasasi/RasAsi/credentials'  # Ubuntu Mate
+        _client_secret = path_credential + r'/client_secret.json'
+    else:
+        print(f'Платформа {platform} не поддерживается')
 
+    store = file.Storage(os.path.join(path_credential, 'RasAsi_storage.json'))
+
+    @errors_decorator
     def __init__(self):
         self._spreadsheet = None
         self.spreadsheet_id = None
-        if platform == 'win32':
-            store = file.Storage(r'C:\PycharmProjects\RasAsi_credential.json')  # Laptop
-            # store = file.Storage(r'C:\PythonProject\RasAsi_credential.json')  # PC
-        elif platform == 'linux':
-            store = file.Storage(r'/home/pi/Downloads/RasAsi_secret.json')
-        else:
-            print(f'Платформа {platform} не поддерживается')
-
-        creds = store.get()
+        creds = self.store.get()
 
         if not creds or creds.invalid:
-            if platform == 'win32':
-                # path1 = r'C:\Users\ArthurGo\Downloads\client_secret.json'  # Laptop
-                path1 = r'C:\PythonProject\mygmail\client_secret.json'  # PC
-            elif platform == 'linux':
-                path1 = r'/home/pi/Downloads/client_secret.json'
-            flow = client.flow_from_clientsecrets(path1, self._SCOPES)
-            creds = tools.run_flow(flow, store)
+            flow = client.flow_from_clientsecrets(self._client_secret, self._SCOPES)
+            creds = tools.run_flow(flow, self.store)
 
         HTTP = creds.authorize(Http())
         self.SHEETS = discovery.build('sheets', 'v4', http=HTTP)
 
+    @errors_decorator
     def create_table(self, table_name):
         spreadsheet = {
             'properties': {
@@ -42,14 +46,17 @@ class GoogleSpreadsheet:
         self._spreadsheet = self.SHEETS.spreadsheets().create(body=spreadsheet).execute()
         self.spreadsheet_id = self._spreadsheet.get('spreadsheetId')
 
+    @errors_decorator
     def get_spreadsheets_values(self, spreadsheet_id, range_name):
         result = self.SHEETS.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range=range_name).execute()
         return result
 
+    @errors_decorator
     def batchGet_spreadsheets_values(self, spreadshhet_id, range_names):
         #range_names = []
         result = self.SHEETS.spreadsheets().values().batchGet(spredsheetId=spreadshhet_id, range=range_names).execute()
 
+    @errors_decorator
     def update_spreadsheets_values(self, values, spreadsheet_id, range_name):
         """
 
@@ -63,6 +70,7 @@ class GoogleSpreadsheet:
                                                             valueInputOption="USER_ENTERED").execute()
         # r1 = result.get('updateCells')
 
+    @errors_decorator
     def batchUpdate_spreadshets_values(self, spreadsheet_id, range_name, values):
         """
         # range_name = []
@@ -89,6 +97,7 @@ class GoogleSpreadsheet:
         result = self.SHEETS.spreadsheets().values().batchUpdate(spreadsheetId=spreadsheet_id, body=body).execute()
         # r1 = result.get('updateCells')
 
+    @errors_decorator
     def append_spreadsheets_values(self, values, spreadsheet_id, range_name, valueInputOption='USER_ENTERED'):
         """
 

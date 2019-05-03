@@ -18,16 +18,18 @@ class GoogleGmail:
               'https://www.googleapis.com/auth/gmail.send',
               'https://www.googleapis.com/auth/gmail.modify']
 
-    store = file.Storage('RasAsi_storage.json')
-
     if platform == 'win32':
-        _client_secret = r'C:\Users\ArthurGo\Downloads\client_secret.json'  # Laptop
-        # client_secret = r'C:\PythonProject\mygmail\client_secret.json'  # PC
+        path_credential = r'C:\PycharmProjects\RasAsi\credentials'  # Laptop
+        # path_credential = r'C:\PythonProject\RasAsi\credentials'  # PC
+        _client_secret = path_credential + r'\client_secret.json'
     elif platform == 'linux':
-        # _client_secret = r'/home/pi/Downloads/client_secret.json'  # raspbian
-        _client_secret = r'/home/rasasi/RasAsi/credentials/client_secret.json'  # ubuntu mate
+        # path_credential = r'/home/pi/Downloads'  # raspbian
+        path_credential = r'/home/rasasi/RasAsi/credentials'  # Ubuntu Mate
+        _client_secret = path_credential + r'/client_secret.json'
     else:
         print(f'Платформа {platform} не поддерживается')
+
+    store = file.Storage(os.path.join(path_credential, 'RasAsi_storage.json'))
 
     @errors_decorator
     def __init__(self):
@@ -181,5 +183,6 @@ if __name__ == '__main__':
                                    file_dir='C:\PycharmProjects\RasAsi\RasAsiVer2\Weather_Packeg',
                                    file_name='ChartWeather.html',
                                    topic='Прикреплён график погоды 👍☁')
-
+else:
+    print(f'Подключен модкль {__name__}')
 

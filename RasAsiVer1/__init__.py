@@ -16,7 +16,7 @@ def mainMenu():
     print('FROM mainMenu')
     while True:
         print('FROM cycle')
-        print('\nСписок доступных команд:\n' # TODO правки. Переделать
+        print('\nСписок доступных команд:\n'  # TODO правки. Переделать
               '1 - Download_Packeg\n'
               '2 - Time_Packeg\n'
               '3 - program runtime\n'
