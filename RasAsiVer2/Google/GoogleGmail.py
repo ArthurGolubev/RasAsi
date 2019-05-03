@@ -29,7 +29,7 @@ class GoogleGmail:
     else:
         print(f'Платформа {platform} не поддерживается')
 
-    store = file.Storage(os.path.join(path_credential, 'RasAsi_storage.json'))
+    store = file.Storage(os.path.join(path_credential, 'RasAsi_mail.json'))
 
     @errors_decorator
     def __init__(self):

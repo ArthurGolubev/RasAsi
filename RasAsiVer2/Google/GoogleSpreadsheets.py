@@ -21,7 +21,7 @@ class GoogleSpreadsheet:
     else:
         print(f'Платформа {platform} не поддерживается')
 
-    store = file.Storage(os.path.join(path_credential, 'RasAsi_storage.json'))
+    store = file.Storage(os.path.join(path_credential, 'RasAsi_Spreadsheets.json'))
 
     @errors_decorator
     def __init__(self):

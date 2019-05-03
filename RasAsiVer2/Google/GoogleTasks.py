@@ -1,12 +1,7 @@
-import pickle
 import os.path
-import pickle
 from sys import platform
 from apiclient import discovery
-from googleapiclient.discovery import build
 from oauth2client import tools, file, client
-from google.auth.transport.requests import Request
-from google_auth_oauthlib.flow import InstalledAppFlow
 from RasAsiVer2.Decorators.Decorators import errors_decorator, time_decorator
 
 
@@ -24,7 +19,7 @@ class GoogleTasks:
     else:
         print(f'Платформа {platform} не поддерживается')
 
-    store = file.Storage(os.path.join(path_credential, 'RasAsi_storage.json'))
+    store = file.Storage(os.path.join(path_credential, 'RasAsi_Tasks.json'))
 
     def __init__(self, mainID):
         self.mainID = mainID
