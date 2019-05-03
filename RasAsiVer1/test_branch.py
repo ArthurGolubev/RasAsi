@@ -1,3 +1,3 @@
-from RasAsiVer2.Google.GoogleTasks import GoogleTasks
+from selenium import webdriver
 
-a = GoogleTasks(mainID='MDE2MzQwNDIxMTc3NjI1NjYwMTY6NjU5MTE0NDY0NzQyODU1Njow')
+browser = webdriver.Firefox(executable_path='C:\PycharmProjects\RasAsi\credentials\geckodriver.exe')
