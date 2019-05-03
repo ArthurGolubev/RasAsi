@@ -38,7 +38,7 @@ class Weather:
         _options_webdriver = webdriver.FirefoxOptions()
         _options_webdriver.set_preference("intl.accept_languages", "ru")
 
-        _browser = webdriver.Firefox(executable_path=self.executable_path, firefox_options=_options_webdriver)
+        _browser = webdriver.Firefox(executable_path=self.executable_path, options=_options_webdriver)
         _browser.implicitly_wait(220)
         _browser.get(f'https://www.ventusky.com/{self.place}')
         _browser.find_element_by_xpath("//span[@id='aside_close_btn']").click()

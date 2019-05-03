@@ -1,11 +1,10 @@
 import threading
 from time import sleep
-from selenium import webdriver
 from datetime import datetime, timedelta
-from selenium.webdriver.common.keys import Keys
 from RasAsiVer2.Google.GoogleGmail import GoogleGmail
 from RasAsiVer2.Time_Packeg.TodayTasks import TodayTasks
 from RasAsiVer2.Decorators.Decorators import time_decorator
+from RasAsiVer2.Time_Packeg.TransportCard import TransportCard
 from RasAsiVer2.Decorators.Decorators import logging_decorator
 from RasAsiVer2.Weather_Packeg.TodayWeather import TodayWeather
 from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
@@ -13,16 +12,18 @@ from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
 
 class TimeManagement:
     Task = TodayTasks()
-    TodayWeather().today_weather()
 
     def __init__(self):
         self.messages = {}
         self.startTimeRasAsi = datetime.now()
         self.cache_variables = {
             'tasks_taken': None,    # switch
+            '01:00': None,          # switch
+            '03:00': None,          # switch
+            '07:00': None,          # switch
             '23:50': None,          # switch
-            '15:50': None,          # switch
         }
+
 
     @logging_decorator
     def time_line(self):
@@ -49,23 +50,37 @@ class TimeManagement:
                         else:
                             self._unsupported_command(message['topic'])
 
-            if cTime.hour == 0 and cTime.minute in [0, 1, 2, 3]:
+            if cTime.hour == 0 and cTime.minute in [0, 1, 2]:
+                self.cache_variables['01:00'] = 0   # nullification (new day)
+                self.cache_variables['03:00'] = 0   # nullification (new day)
+                self.cache_variables['07:00'] = 0   # nullification (new day)
+                self.cache_variables['08:10'] = 0   # nullification (new day)
                 self.cache_variables['23:50'] = 0   # nullification (new day)
 
+            elif cTime.hour == 1:
+                if cTime.minute in [0, 1, 2] and not self.cache_variables['01:00']:
+                    self.my_TK = TransportCard(who='me')
+            elif cTime.hour == 3:
+                if cTime.minute in [0, 1, 2] and not self.cache_variables['03:00']:
+                    self.cache_variables['03:00'] = 1
+                    TodayWeather().today_weather()  # TODO Попробывать запустить в потоке
+            elif cTime.hour == 7:
+                if cTime.minute in [0, 1, 2] and not self.cache_variables['07:00']:
+                    self.cache_variables['07:00'] = 1
             elif cTime.hour == 8:
-                if cTime.minute in [5, 6, 7] and not self.cache_variables['tasks_taken']:
-                    self.Task.take_tasks()
+                if cTime.minute in [0, 1, 2] and not self.cache_variables['tasks_taken']:
                     self.cache_variables['tasks_taken'] = 1
-            # elif cTime.hour == 20:
-            #     if cTime.minute in [53, 54, 55] and not self.cache_variables['15:50']:
-            #         self.cache_variables['15:50'] = 1
-            #         TodayWeather().today_weather()
+                    self.Task.take_tasks()
+                elif cTime.minute in [10, 11, 12] and not self.cache_variables['08:10']:
+                    self.cache_variables['08:10'] = 1
+                    GoogleGmail().send_message(topic='Проездной 🧐🚌💰',
+                                               message_text=f'Оставшийся баланс на транспортной карте: {self.my_TK} руб.')
             elif cTime.hour == 23:
                 if cTime.minute in [50, 51, 52] and not self.cache_variables['23:50']:
+                    self.cache_variables['23:50'] = 1
                     self._server_time()
                     self._Task_check_clean_refresh()
                     self.cache_variables['tasks_taken'] = 0
-                    self.cache_variables['23:50'] = 1
 
             sleep(60)
 
@@ -100,24 +115,6 @@ class TimeManagement:
                                  message_text=f'Команда "{command}" не поддерживается,'
                                  f'список поддерживаемых команд:\n'
                                  f'1. Время\n2. Хранилище\n3. Дай мне один\n4. Лента')
-
-    def _transport_card(self):
-        number = GoogleSpreadsheet().get_spreadsheets_values(
-            spreadsheet_id='1vqDWkRh8ERwxkRtyum-0bffbmjp7KMJn-SpAgNnYtyM',
-            range_name='Лист1').get('values')[0][0]
-        browser = webdriver.Firefox(
-            executable_path=r'C:\PycharmProjects\RasAsi\RasAsiVer2\Weather_Packeg\geckodriver.exe')
-        browser.implicitly_wait(20)
-
-        browser.get('https://www.krasinform.ru/')
-        browser.find_element_by_xpath("//input[@type='text'][@name='card_num']").send_keys(f'{number}')
-        sleep(5)
-        browser.find_element_by_xpath("//input[@type='text'][@name='card_num']").send_keys(Keys.ENTER)
-        transport_unit = browser.find_elements_by_xpath("//table[@class='table']//td")
-        transport_unit = int(transport_unit[1].text.split(' ')[0])
-        if transport_unit < 225:
-            GoogleGmail().send_message(topic='Проездной 🧐🚌💰',
-                                       message_text=f'Оставшийся баланс на транспортной карте: {transport_unit} руб.')
 
 
 if __name__ == '__main__':
