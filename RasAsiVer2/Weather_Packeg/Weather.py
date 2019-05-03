@@ -37,7 +37,7 @@ class Weather:
         print(f'\n{self.place.capitalize()}')
 
         _options_webdriver = webdriver.FirefoxOptions()
-        _options_webdriver.add_argument('--lang=ru')
+        _options_webdriver.set_preference("intl.accept_languages", "es")
 
         _browser = webdriver.Firefox(executable_path=self.executable_path, firefox_options=_options_webdriver)
         _browser.implicitly_wait(220)
