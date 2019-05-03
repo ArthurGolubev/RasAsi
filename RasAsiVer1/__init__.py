@@ -31,7 +31,8 @@ def mainMenu():
         elif command1 == '0':
             print(f'...завершение программы...')
             if platform == 'linux':
-                userDirectiv()
+                # userDirectiv()
+                input('pause\t')
             raise SystemExit
         # elif comand1 == '2':
         #     commandList_External_Packeg()
