@@ -35,8 +35,11 @@ class Weather:
 
     def get_weather(self):
         print(f'\n{self.place.capitalize()}')
-        print(self.executable_path)
-        _browser = webdriver.Firefox(executable_path=self.executable_path)
+
+        _options_webdriver = webdriver.FirefoxOptions()
+        _options_webdriver.add_argument('--lang=ru')
+
+        _browser = webdriver.Firefox(executable_path=self.executable_path, firefox_options=_options_webdriver)
         _browser.implicitly_wait(220)
         _browser.get(f'https://www.ventusky.com/{self.place}')
         _browser.find_element_by_xpath("//span[@id='aside_close_btn']").click()
