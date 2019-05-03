@@ -13,6 +13,7 @@ from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
 
 class TimeManagement:
     Task = TodayTasks()
+    TodayWeather().today_weather()
 
     def __init__(self):
         self.messages = {}
@@ -55,10 +56,10 @@ class TimeManagement:
                 if cTime.minute in [5, 6, 7] and not self.cache_variables['tasks_taken']:
                     self.Task.take_tasks()
                     self.cache_variables['tasks_taken'] = 1
-            elif cTime.hour == 20:
-                if cTime.minute in [18, 19, 20] and not self.cache_variables['15:50']:
-                    self.cache_variables['15:50'] = 1
-                    TodayWeather().today_weather()
+            # elif cTime.hour == 20:
+            #     if cTime.minute in [53, 54, 55] and not self.cache_variables['15:50']:
+            #         self.cache_variables['15:50'] = 1
+            #         TodayWeather().today_weather()
             elif cTime.hour == 23:
                 if cTime.minute in [50, 51, 52] and not self.cache_variables['23:50']:
                     self._server_time()
