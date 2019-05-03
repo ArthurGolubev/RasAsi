@@ -6,6 +6,7 @@ from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
 
 
 class Weather:
+
     if platform == 'win32':
         executable_path = r'C:\PycharmProjects\RasAsi\credentials\geckodriver.exe'  # Laptop
         # executable_path = r'C:\PythonProject\RasAsi\credentials\geckodriver.exe'  # PC
@@ -33,6 +34,7 @@ class Weather:
 
     def get_weather(self):
         print(f'\n{self.place.capitalize()}')
+        print(self.executable_path)
         _browser = webdriver.Firefox(executable_path=self.executable_path)
         _browser.implicitly_wait(20)
         _browser.get(f'https://www.ventusky.com/{self.place}')
