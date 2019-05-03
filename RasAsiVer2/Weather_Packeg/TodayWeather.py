@@ -17,7 +17,7 @@ class TodayWeather:
 
         WeatherChart().chart()
 
-    def today_place(self, place):
+    def today_place(self, place):  # TODO Доделать
         spec_place = Weather(place=place)
         spec_place.get_weather()
         spec_place.make_spreadsheet()

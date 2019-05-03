@@ -7,6 +7,7 @@ from RasAsiVer2.Google.GoogleGmail import GoogleGmail
 from RasAsiVer2.Time_Packeg.TodayTasks import TodayTasks
 from RasAsiVer2.Decorators.Decorators import time_decorator
 from RasAsiVer2.Decorators.Decorators import logging_decorator
+from RasAsiVer2.Weather_Packeg.TodayWeather import TodayWeather
 from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
 
 
@@ -19,6 +20,7 @@ class TimeManagement:
         self.cache_variables = {
             'tasks_taken': None,    # switch
             '23:50': None,          # switch
+            '15:50': None,          # switch
         }
 
     @logging_decorator
@@ -53,6 +55,9 @@ class TimeManagement:
                 if cTime.minute in [5, 6, 7] and not self.cache_variables['tasks_taken']:
                     self.Task.take_tasks()
                     self.cache_variables['tasks_taken'] = 1
+            elif cTime.hour == 15:
+                if cTime.minute in [50, 51, 52] and not self.cache_variables['15:50']:
+                    TodayWeather().today_weather()
             elif cTime.hour == 23:
                 if cTime.minute in [50, 51, 52] and not self.cache_variables['23:50']:
                     self._server_time()
