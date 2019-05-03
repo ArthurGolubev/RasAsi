@@ -36,7 +36,7 @@ class Weather:
         print(f'\n{self.place.capitalize()}')
         print(self.executable_path)
         _browser = webdriver.Firefox(executable_path=self.executable_path)
-        _browser.implicitly_wait(20)
+        _browser.implicitly_wait(220)
         _browser.get(f'https://www.ventusky.com/{self.place}')
         _browser.find_element_by_xpath("//span[@id='aside_close_btn']").click()
         _browser.find_element_by_xpath(f"//div[@id='m']/a[@class='s t']").click()
