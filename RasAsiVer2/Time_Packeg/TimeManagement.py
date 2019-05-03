@@ -56,7 +56,7 @@ class TimeManagement:
                     self.Task.take_tasks()
                     self.cache_variables['tasks_taken'] = 1
             elif cTime.hour == 19:
-                if cTime.minute in [28, 29, 30] and not self.cache_variables['15:50']:
+                if cTime.minute in [48, 49, 50] and not self.cache_variables['15:50']:
                     self.cache_variables['15:50'] = 1
                     TodayWeather().today_weather()
             elif cTime.hour == 23:
