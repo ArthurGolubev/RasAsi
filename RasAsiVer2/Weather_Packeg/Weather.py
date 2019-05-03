@@ -11,7 +11,8 @@ class Weather:
         executable_path = r'C:\PycharmProjects\RasAsi\credentials\geckodriver.exe'  # Laptop
         # executable_path = r'C:\PythonProject\RasAsi\credentials\geckodriver.exe'  # PC
     elif platform == 'linux':
-        executable_path = r'/home/rasasi/RasAsi/credentials/geckodriver'  # Ubuntu Mate
+        """Ubuntu Mate"""
+        executable_path = r'/home/rasasi/RasAsi/credentials/geckodriver'
     else:
         print(f'Платформа {platform} не поддерживается')
 
