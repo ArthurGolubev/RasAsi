@@ -21,6 +21,7 @@ class TimeManagement:
             '01:00': None,          # switch
             '03:00': None,          # switch
             '07:00': None,          # switch
+            '08:10': None,          # switch
             '23:50': None,          # switch
         }
 
