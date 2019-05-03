@@ -6,7 +6,7 @@ from RasAsiVer2.Time_Packeg.TodayTasks import TodayTasks
 from RasAsiVer2.Decorators.Decorators import time_decorator
 from RasAsiVer2.Time_Packeg.TransportCard import TransportCard
 from RasAsiVer2.Decorators.Decorators import logging_decorator
-from RasAsiVer2.Weather_Packeg.TodayWeather import TodayWeather
+from RasAsiVer2.Weather_Packeg.WeatherTomorrow import WeatherTomorrow
 from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
 
 
@@ -64,7 +64,7 @@ class TimeManagement:
             elif cTime.hour == 3:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['03:00']:
                     self.cache_variables['03:00'] = 1
-                    TodayWeather().today_weather()  # TODO Попробывать запустить в потоке
+                    WeatherTomorrow().weather_tomorrow()  # TODO Попробывать запустить в потоке
             elif cTime.hour == 7:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['07:00']:
                     self.cache_variables['07:00'] = 1
