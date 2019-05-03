@@ -1,3 +1,4 @@
+from sys import platform
 from selenium import webdriver
 from datetime import datetime, timedelta
 from RasAsiVer2.Weather_Packeg.GetWeather import GetWeather
@@ -5,6 +6,13 @@ from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
 
 
 class Weather:
+    if platform == 'win32':
+        executable_path = r'C:\PycharmProjects\RasAsi\credentials\geckodriver.exe'  # Laptop
+        # executable_path = r'C:\PythonProject\RasAsi\credentials\geckodriver.exe'  # PC
+    elif platform == 'linux':
+        executable_path = r'/home/rasasi/RasAsi/credentials/geckodriver'  # Ubuntu Mate
+    else:
+        print(f'Платформа {platform} не поддерживается')
 
     def __init__(self, place, feature=None, spreadsheetId=None):
         self.day_weather = None
@@ -25,7 +33,7 @@ class Weather:
 
     def get_weather(self):
         print(f'\n{self.place.capitalize()}')
-        _browser = webdriver.Firefox()
+        _browser = webdriver.Firefox(executable_path=self.executable_path)
         _browser.implicitly_wait(20)
         _browser.get(f'https://www.ventusky.com/{self.place}')
         _browser.find_element_by_xpath("//span[@id='aside_close_btn']").click()
