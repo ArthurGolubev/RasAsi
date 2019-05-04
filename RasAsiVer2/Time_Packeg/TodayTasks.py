@@ -46,25 +46,26 @@ class TodayTasks:
             self.today_tasks[task_id[i]] = row_id[i]
 
     def check(self):
-        for id in self.today_tasks:
-            task = GoogleTasks(mainID=self._tasklist_id).get_task(task_id=id)
-            status = task.get('status')
-            notes = task.get('notes')
-            due = task.get('due')
-            if status == 'completed':
-                values = [[1, datetime.datetime.today().strftime('%d.%m.%Y'), notes]]
-                GoogleSpreadsheet().update_spreadsheets_values(spreadsheet_id=self._spreadsheet_id,
-                                                               range_name=f'Лист1!C{self.today_tasks.get(id)}',
-                                                               values=values)
-            elif status == 'needsAction' and due:
-                notes = '❌deadline🤯⭕'
-                date = due.split('T')
-                date = date[0].split('-')
-                date = f'{date[2]}.{date[1]}.{date[0]}'
-                values = [[1, date, notes]]
-                GoogleSpreadsheet().update_spreadsheets_values(spreadsheet_id=self._spreadsheet_id,
-                                                               range_name=f'Лист1!C{self.today_tasks.get(id)}',
-                                                               values=values)
+        if self.today_tasks:
+            for id in self.today_tasks:
+                task = GoogleTasks(mainID=self._tasklist_id).get_task(task_id=id)
+                status = task.get('status')
+                notes = task.get('notes')
+                due = task.get('due')
+                if status == 'completed':
+                    values = [[1, datetime.datetime.today().strftime('%d.%m.%Y'), notes]]
+                    GoogleSpreadsheet().update_spreadsheets_values(spreadsheet_id=self._spreadsheet_id,
+                                                                   range_name=f'Лист1!C{self.today_tasks.get(id)}',
+                                                                   values=values)
+                elif status == 'needsAction' and due:
+                    notes = '❌deadline🤯⭕'
+                    date = due.split('T')
+                    date = date[0].split('-')
+                    date = f'{date[2]}.{date[1]}.{date[0]}'
+                    values = [[1, date, notes]]
+                    GoogleSpreadsheet().update_spreadsheets_values(spreadsheet_id=self._spreadsheet_id,
+                                                                   range_name=f'Лист1!C{self.today_tasks.get(id)}',
+                                                                   values=values)
 
     def day_completed(self):
         """
