@@ -61,7 +61,7 @@ class TimeManagement:
                 self.cache_variables['23:50'] = 0   # nullification (new day)
 
             elif cTime.hour == 9:  # TODO change
-                if cTime.minute in [0, 1, 10] and not self.cache_variables['01:00']:
+                if cTime.minute in [0, 1, 14] and not self.cache_variables['01:00']:
                     print(1)
                     self.cache_variables['01:00'] = 1
                     self.my_TK.start()
