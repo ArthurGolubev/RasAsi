@@ -61,12 +61,12 @@ class TimeManagement:
                 self.cache_variables['23:50'] = 0   # nullification (new day)
 
             elif cTime.hour == 9:  # TODO change
-                if cTime.minute in [0, 1, 14] and not self.cache_variables['01:00']:
+                if cTime.minute in [0, 1, 20] and not self.cache_variables['01:00']:
                     print(1)
                     self.cache_variables['01:00'] = 1
                     self.my_TK.start()
             elif cTime.hour == 9:  # TODO change
-                if cTime.minute in [0, 1, 15] and not self.cache_variables['03:00']:
+                if cTime.minute in [0, 1, 25] and not self.cache_variables['03:00']:
                     self.cache_variables['03:00'] = 1
                     # WeatherTomorrow().weather_tomorrow()  # TODO Попробывать запустить в потоке
                     self.weather.start()
