@@ -60,7 +60,7 @@ class TimeManagement:
                 self.cache_variables['07:10'] = 0   # nullification (new day)
                 self.cache_variables['23:50'] = 0   # nullification (new day)
 
-            elif cTime.hour == 13:  # TODO change
+            elif cTime.hour == 14:  # TODO change
                 if cTime.minute in [0, 1, 55] and not self.cache_variables['01:00']:
                     print(1)
                     self.cache_variables['01:00'] = 1
