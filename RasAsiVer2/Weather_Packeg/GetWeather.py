@@ -22,6 +22,7 @@ class GetWeather:
         characteristic_dict = {}
         self.browser.find_element_by_link_text(attribute).click()
         print(f'Сбор набора данных\t-|{attribute}|-')
+        sleep(30)
         if attribute == 'Влажность':
             for i in self._next12hours[1::3]:
                 print('mark #1', i)

@@ -44,7 +44,7 @@ class Weather:
         _browser.find_element_by_xpath("//span[@id='aside_close_btn']").click()                                         #close right panel
         _browser.find_element_by_xpath('//div[@class="qj l hv"]/div[@class="xx"]/select/option[@value="off"]').click()  #off wind animation
         _browser.find_element_by_xpath(f"//div[@id='m']/a[@class='s t']").click()                                       #calendar
-        _browser.find_element_by_xpath(f"//table//tr//td//a[contains(text(), '{self.tomorrow}')]").click()
+        _browser.find_element_by_xpath(f"//table//tr//td//a[contains(text(), '{self.tomorrow}')]").click()              #calendar
         _weather = GetWeather(browser=_browser, get_date=self.date)
         for i in self.feature:
             _weather.get_values(i)

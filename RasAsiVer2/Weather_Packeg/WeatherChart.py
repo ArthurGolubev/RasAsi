@@ -121,7 +121,7 @@ class WeatherChart:
         layout = dict(title="Температура в °C", showlegend=True, updatemenus=updatemenus)
         fig = dict(data=self.data, layout=layout)
         # plotly.offline.plot(fig, auto_open=True, filename=self.chart_name)
-        plotly.offline.plot(fig, auto_open=True, filename='ChartWeather.html')
+        plotly.offline.plot(fig, auto_open=False, filename='ChartWeather.html')
 
 
 if __name__ == '__main__':

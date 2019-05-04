@@ -22,8 +22,6 @@ class TimeManagement:
             'tasks_taken': None,    # switch
             '01:00': None,          # switch
             '03:00': None,          # switch
-            '07:00': None,          # switch
-            '07:10': None,          # switch
             '23:50': None,          # switch
         }
 
@@ -31,7 +29,6 @@ class TimeManagement:
     def time_line(self):
         while True:
             cTime = datetime.now()
-            print(cTime)
             self.messages = self._view_messages()
             if self.messages:
                 for message in self.messages:
@@ -56,33 +53,16 @@ class TimeManagement:
             if cTime.hour == 0 and cTime.minute in [0, 1, 2]:
                 self.cache_variables['01:00'] = 0   # nullification (new day)
                 self.cache_variables['03:00'] = 0   # nullification (new day)
-                self.cache_variables['07:00'] = 0   # nullification (new day)
-                self.cache_variables['07:10'] = 0   # nullification (new day)
                 self.cache_variables['23:50'] = 0   # nullification (new day)
 
-            elif cTime.hour == 21:  # TODO change
-                if cTime.minute in [20, 1, 55] and not self.cache_variables['01:00']:
-                    print(1)
+            elif cTime.hour == 1:
+                if cTime.minute in [0, 1, 2] and not self.cache_variables['01:00']:
                     self.cache_variables['01:00'] = 1
                     self.my_TK.start()
-                elif cTime.minute in [25, 5, 57] and not self.cache_variables['03:00']:
+            elif cTime.hour == 3:
+                if cTime.minute in [0, 1, 2] and not self.cache_variables['03:00']:
                     self.cache_variables['03:00'] = 1
                     self.weather.start()
-            # elif cTime.hour == 9:  # TODO change
-            #     if cTime.minute in [0, 1, 20] and not self.cache_variables['01:00']:
-            #         print(1)
-            #         self.cache_variables['01:00'] = 1
-            #         self.my_TK.start()
-            # elif cTime.hour == 9:  # TODO change
-            #     if cTime.minute in [0, 1, 30] and not self.cache_variables['03:00']:
-            #         self.cache_variables['03:00'] = 1
-            #         # WeatherTomorrow().weather_tomorrow()  # TODO Попробывать запустить в потоке
-            #         self.weather.start()
-            elif cTime.hour == 7:
-                if cTime.minute in [0, 1, 2] and not self.cache_variables['07:00']:
-                    self.cache_variables['07:00'] = 1
-                elif cTime.minute in [10, 11, 12] and not self.cache_variables['08:10']:
-                    self.cache_variables['07:10'] = 1
             elif cTime.hour == 8:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['tasks_taken']:
                     self.cache_variables['tasks_taken'] = 1
