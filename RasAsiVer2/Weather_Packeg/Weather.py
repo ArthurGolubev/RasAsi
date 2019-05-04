@@ -41,8 +41,9 @@ class Weather:
         _browser = webdriver.Firefox(executable_path=self.executable_path, options=_options_webdriver)
         _browser.implicitly_wait(220)
         _browser.get(f'https://www.ventusky.com/{self.place}')
-        _browser.find_element_by_xpath("//span[@id='aside_close_btn']").click()
-        _browser.find_element_by_xpath(f"//div[@id='m']/a[@class='s t']").click()
+        _browser.find_element_by_xpath("//span[@id='aside_close_btn']").click()                                         #close right panel
+        _browser.find_element_by_xpath('//div[@class="qj l hv"]/div[@class="xx"]/select/option[@value="off"]').click()  #off wind animation
+        _browser.find_element_by_xpath(f"//div[@id='m']/a[@class='s t']").click()                                       #calendar
         _browser.find_element_by_xpath(f"//table//tr//td//a[contains(text(), '{self.tomorrow}')]").click()
         _weather = GetWeather(browser=_browser, get_date=self.date)
         for i in self.feature:
