@@ -55,12 +55,12 @@ class TimeManagement:
                 self.cache_variables['03:00'] = 0   # nullification (new day)
                 self.cache_variables['23:50'] = 0   # nullification (new day)
 
-            elif cTime.hour == 8:
-                if cTime.minute in [35, 1, 2] and not self.cache_variables['01:00']:
+            elif cTime.hour == 1:
+                if cTime.minute in [0, 1, 2] and not self.cache_variables['01:00']:
                     self.cache_variables['01:00'] = 1
                     self.my_TK.start()
-            elif cTime.hour == 3:
-                if cTime.minute in [0, 1, 2] and not self.cache_variables['03:00']:
+            elif cTime.hour == 8:
+                if cTime.minute in [40, 1, 2] and not self.cache_variables['03:00']:
                     self.cache_variables['03:00'] = 1
                     self.weather.start()
             elif cTime.hour == 8:
