@@ -25,7 +25,7 @@ class TimeManagement:
             '23:50': None,          # switch
         }
 
-    # @logging_decorator
+    @logging_decorator
     def time_line(self):
         while True:
             cTime = datetime.now()

@@ -3,6 +3,9 @@ from RasAsiVer2.Weather_Packeg.WeatherChart import WeatherChart
 
 
 class WeatherTomorrow:
+    Krasnoyarsk_spreadsheetId = '1fgjOxFNxjnUIRRIA60xnWCpYyLRg0txuazimsbg1Km4'
+    Novosibirsk_spreadsheetId = '1LZF9yopCmDpUUkjSPSu4krwwJ0IFOHV7Qioz_4SuFm0'
+
 
     def weather_tomorrow(self):
         Krasnoyarsk = Weather(place='krasnoyarsk')
