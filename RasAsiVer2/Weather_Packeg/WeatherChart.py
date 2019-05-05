@@ -17,11 +17,11 @@ class WeatherChart:
 
         _Novosibirsk = Weather(place='novosibirsk')
         Novosibirsk_data_set = _Novosibirsk.get_weather_data_set(spreadsheetId=self.Novosibirsk_spreadsheetId)
-        print(Novosibirsk_data_set)
+        # print(Novosibirsk_data_set)
 
         _Krasnoyarsk = Weather(place='krasnoyarsk')
         Krasnoyarsk_data_set = _Krasnoyarsk.get_weather_data_set(self.Krasnoyarsk_spreadsheetId)
-        print(Krasnoyarsk_data_set)
+        # print(Krasnoyarsk_data_set)
 
         self.Novosibirsk = self._data_processing(Novosibirsk_data_set)
         self.Krasnoyarsk = self._data_processing(Krasnoyarsk_data_set)
