@@ -5,16 +5,12 @@ from sys import platform
 from .Download_Packeg import commandList as cL_Download_Packeg
 # from .legacy_Gmail_Packeg import commandList as cL_Gmail_Packeg
 from RasAsiVer2.Time_Packeg.TimeManagement import TimeManagement
-from RasAsiVer2.Time_Packeg.thread_checker import thread_checker
 # from .resService_Packeg import commandList as cL_resService_Packeg
 # from .Satellite_img_Packeg import commandList as cL_Setellite_img_Packeg
 # from .Time_Packeg.electricity_monitoring import electricity_monitoringFunction, userDirectiv
 
 t1 = threading.Thread(target=TimeManagement().time_line, name='T_TimeManagement')
-t2 = threading.Thread(target=thread_checker, name='thread_checker')
-
 t1.start()
-t2.start()
 
 def mainMenu():
     print('FROM mainMenu')

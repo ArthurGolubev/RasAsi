@@ -6,14 +6,14 @@ from RasAsiVer2.Time_Packeg.TodayTasks import TodayTasks
 from RasAsiVer2.Decorators.Decorators import time_decorator
 from RasAsiVer2.Time_Packeg.TransportCard import TransportCard
 from RasAsiVer2.Decorators.Decorators import logging_decorator
-from RasAsiVer2.Weather_Packeg.WeatherTomorrow import WeatherTomorrow
+from RasAsiVer2.Weather_Packeg.WeatherToday import WeatherToday
 from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
 
 
 class TimeManagement:
     Task = TodayTasks()
     my_TK = threading.Thread(target=TransportCard(who='me').transport_card, name='threading_TransportCard')
-    weather = threading.Thread(target=WeatherTomorrow().weather_tomorrow, name='threading_weather')
+    weather = threading.Thread(target=WeatherToday().weather_today, name='threading_weather')
 
     def __init__(self):
         self.messages = {}

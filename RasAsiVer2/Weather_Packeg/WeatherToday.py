@@ -2,12 +2,12 @@ from RasAsiVer2.Weather_Packeg.Weather import Weather
 from RasAsiVer2.Weather_Packeg.WeatherChart import WeatherChart
 
 
-class WeatherTomorrow:
+class WeatherToday:
     Krasnoyarsk_spreadsheetId = '1fgjOxFNxjnUIRRIA60xnWCpYyLRg0txuazimsbg1Km4'
     Novosibirsk_spreadsheetId = '1LZF9yopCmDpUUkjSPSu4krwwJ0IFOHV7Qioz_4SuFm0'
 
 
-    def weather_tomorrow(self):
+    def weather_today(self):
         Krasnoyarsk = Weather(place='krasnoyarsk')
         Krasnoyarsk.get_weather()
         Krasnoyarsk.append_spreadsheet(spreadsheet_id=self.Krasnoyarsk_spreadsheetId, values=Krasnoyarsk.day_weather[1:])
@@ -28,6 +28,6 @@ class WeatherTomorrow:
 
 
 if __name__ == '__main__':
-    WeatherTomorrow().weather_tomorrow()
+    WeatherToday().weather_today()
 else:
     print(f'Подключен модуль {__name__}')
