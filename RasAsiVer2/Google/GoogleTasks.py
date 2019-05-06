@@ -55,9 +55,6 @@ class GoogleTasks:
         """
         tasks = self._TASKS.tasks().list(tasklist=self.mainID, showHidden=True, completedMin=completedMin).execute()
         if tasks.get('items'):
-            for task in tasks['items']:
-                print(task.get('title'), task)
-            print(tasks)
             return tasks['items']
 
     @errors_decorator

@@ -44,9 +44,10 @@ class TimeManagement:
                                 self.Task.give_me_specific_one(message['content'])
                             else:
                                 self.Task.give_me_one()
-
                         elif message['topic'] == 'Лента':
                             self._lenta_discount(number=message['content'])
+                        elif message['topic'] == 'Проездной':
+                            self.my_TK.start()
                         else:
                             self._unsupported_command(message['topic'])
 
@@ -106,7 +107,8 @@ class TimeManagement:
         GoogleGmail().send_message(topic='🤢 Неподдерживаемая команда 🤯',
                                  message_text=f'Команда "{command}" не поддерживается,'
                                  f'список поддерживаемых команд:\n'
-                                 f'1. Время\n2. Хранилище\n3. Дай мне один\n4. Лента')
+                                 f'1. Время\n2. Хранилище\n3. Дай мне один\n4. Лента\n'
+                                 f'5. Проездной')
 
 
 if __name__ == '__main__':

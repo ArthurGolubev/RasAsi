@@ -47,8 +47,6 @@ class GoogleGmail:
         if 'messages' in _response:
             for i in _response['messages']:
                 msg_id.append(i['id'])
-        # else:
-        #     print('Сообщений нет')
         return msg_id
 
     @errors_decorator

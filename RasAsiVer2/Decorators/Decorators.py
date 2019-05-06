@@ -26,13 +26,14 @@ def time_decorator(func):
 def logging_decorator(func):
     import logging
     from RasAsiVer2.Google.GoogleGmail import GoogleGmail
+    from datetime import datetime
 
     def wrapper(*args, **kwargs):
         logging.basicConfig(filename='logfile.txt', level=logging.ERROR, filemode='w')
         try:
             ret = func(*args, **kwargs)
         except:
-            logging.getLogger().exception(f'name:\t\t{func.__name__}')
+            logging.getLogger().exception(f'name:\t\t{func.__name__}\t\t {datetime.now().strftime("%d.%m.%Y %HH:%MM:%SS")}')
             ret = None
             with open('logfile.txt', 'r') as file:
                 GoogleGmail().send_message(topic=f'😒 Error from {func.__name__}',

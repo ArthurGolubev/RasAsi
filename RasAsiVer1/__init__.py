@@ -5,12 +5,16 @@ from sys import platform
 from .Download_Packeg import commandList as cL_Download_Packeg
 # from .legacy_Gmail_Packeg import commandList as cL_Gmail_Packeg
 from RasAsiVer2.Time_Packeg.TimeManagement import TimeManagement
+from RasAsiVer2.Time_Packeg.thread_checker import thread_checker
 # from .resService_Packeg import commandList as cL_resService_Packeg
 # from .Satellite_img_Packeg import commandList as cL_Setellite_img_Packeg
 # from .Time_Packeg.electricity_monitoring import electricity_monitoringFunction, userDirectiv
 
-t = threading.Thread(target=TimeManagement().time_line, name='T_TimeManagement')
-t.start()
+t1 = threading.Thread(target=TimeManagement().time_line, name='T_TimeManagement')
+t2 = threading.Thread(target=thread_checker, name='thread_checker')
+
+t1.start()
+t2.start()
 
 def mainMenu():
     print('FROM mainMenu')
@@ -50,21 +54,3 @@ def mainMenu():
         else:
             print('\nВы ввели неверную команду\nпопробуйте сново')
             input('...[press Enter]...')
-
-"""
-Импортируется пакет (библиотека) RasAsiVer1
-Это инициализирует в ней файл __init__.py (RasAsiVer1/__init__.py)
-1_В котором импортируется пакет (библиотека) Download_Packeg -> Download_Packeg/__init__.py
-2_Это инициализирует в нём файл __init__.py (Download_Packeg/__init__.py)
-3_Файл __init__.py (Download_Packeg/__init__.py) импортирует из файла downloadScript.py переменную a2
-4_таким образом в Download_Packeg, а именно в его __init__.py содержится переменная a2
-5_БЛАГОДАРЯ ЭТОМУ текущий файл __init__.py (RasAsiVer1->__init__.py) имеет возможность
-импортировать переменную a2 из пакета Download_Packeg, которую он, в свою очередь, импортировал
-в себя (в свой файл __init__.py) из файла downloadScript_04.py
-6_Таким образом вместо обращения к переменной a2 через
-
-RasAsiVer1.Download_Packeg.downloadScript.a2
-
-мы можем обращатся к переменной просто
-RasAsiVer1.a2
-"""
