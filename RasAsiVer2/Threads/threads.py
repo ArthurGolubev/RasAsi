@@ -26,3 +26,8 @@ def checker():
 
 t1 = threading.Thread(target=TimeManagement().time_line, name='T_TimeManagement')
 t2 = threading.Thread(target=checker, name='check thread TimeManagement')
+
+if __name__ == '__main__':
+    start_threads()
+else:
+    print(f'Подключен модуль {__name__}')

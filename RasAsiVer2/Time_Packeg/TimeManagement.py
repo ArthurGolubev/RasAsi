@@ -110,7 +110,6 @@ class TimeManagement:
 
 
 if __name__ == '__main__':
-    t = threading.Thread(target=TimeManagement().time_line, name='T_TimeManagement')
-    t.start()
+    TimeManagement().time_line()
 else:
     print(f'Подключен модуль {__name__}')
