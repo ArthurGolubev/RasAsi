@@ -1,4 +1,3 @@
-import threading
 from time import sleep
 from datetime import datetime, timedelta
 from RasAsiVer2.Google.GoogleGmail import GoogleGmail
@@ -12,8 +11,6 @@ from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
 
 class TimeManagement:
     Task = TodayTasks()
-    my_TK = threading.Thread(target=TransportCard(who='me').transport_card, name='threading_TransportCard')
-    weather = threading.Thread(target=WeatherToday().weather_today, name='threading_weather')
 
     def __init__(self):
         self.messages = {}
@@ -47,7 +44,7 @@ class TimeManagement:
                         elif message['topic'] == 'Лента':
                             self._lenta_discount(number=message['content'])
                         elif message['topic'] == 'Проездной':
-                            self.my_TK.start()
+                            TransportCard(who='me')
                         else:
                             self._unsupported_command(message['topic'])
 
@@ -59,11 +56,11 @@ class TimeManagement:
             elif cTime.hour == 1:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['01:00']:
                     self.cache_variables['01:00'] = 1
-                    self.my_TK.start()
+                    TransportCard(who='me')
             elif cTime.hour == 3:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['03:00']:
                     self.cache_variables['03:00'] = 1
-                    self.weather.start()
+                    WeatherToday()
             elif cTime.hour == 8:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['tasks_taken']:
                     self.cache_variables['tasks_taken'] = 1
