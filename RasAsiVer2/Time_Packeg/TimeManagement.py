@@ -74,6 +74,7 @@ class TimeManagement:
 
             sleep(60)
 
+
     def _view_messages(self):
         messages = GoogleGmail().logic_get_message()
         return messages
