@@ -17,6 +17,7 @@ class TimeManagement:
         self.startTimeRasAsi = datetime.now()
         self.cache_variables = {
             'tasks_taken': None,    # switch
+            'weather': None,        # switch
             '01:00': None,          # switch
             '03:00': None,          # switch
             '23:50': None,          # switch
@@ -51,9 +52,10 @@ class TimeManagement:
                             self._unsupported_command(message['topic'])
 
             if cTime.hour == 0 and cTime.minute in [0, 1, 2]:
-                self.cache_variables['01:00'] = 0   # nullification (new day)
-                self.cache_variables['03:00'] = 0   # nullification (new day)
-                self.cache_variables['23:50'] = 0   # nullification (new day)
+                self.cache_variables['weather'] = 0     # nullification (new day)
+                self.cache_variables['01:00'] = 0       # nullification (new day)
+                self.cache_variables['03:00'] = 0       # nullification (new day)
+                self.cache_variables['23:50'] = 0       # nullification (new day)
 
             elif cTime.hour == 1:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['01:00']:
@@ -63,10 +65,13 @@ class TimeManagement:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['03:00']:
                     self.cache_variables['03:00'] = 1
                     WeatherToday().weather_today()
+                    self.cache_variables['weather'] = 1
             elif cTime.hour == 8:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['tasks_taken']:
                     self.cache_variables['tasks_taken'] = 1
                     self.Task.take_tasks()
+                elif cTime.minute in [5, 6, 7] and not self.cache_variables['weather']:
+                    GoogleGmail().send_message(topic='☁🌫 Погода не получена', message_text='Не удолось получить погоду')
             elif cTime.hour == 23:
                 if cTime.minute in [50, 51, 52] and not self.cache_variables['23:50']:
                     self.cache_variables['23:50'] = 1
