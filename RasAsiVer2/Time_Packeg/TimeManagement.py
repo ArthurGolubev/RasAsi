@@ -44,7 +44,9 @@ class TimeManagement:
                         elif message['topic'] == 'Лента':
                             self._lenta_discount(number=message['content'])
                         elif message['topic'] == 'Проездной':
-                            TransportCard(who='me')
+                            TransportCard(who='me').transport_card()
+                        elif message['topic'] == 'Погода':
+                            WeatherToday().weather_today()
                         else:
                             self._unsupported_command(message['topic'])
 
@@ -56,11 +58,11 @@ class TimeManagement:
             elif cTime.hour == 1:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['01:00']:
                     self.cache_variables['01:00'] = 1
-                    TransportCard(who='me')
+                    TransportCard(who='me').transport_card()
             elif cTime.hour == 3:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['03:00']:
                     self.cache_variables['03:00'] = 1
-                    WeatherToday()
+                    WeatherToday().weather_today()
             elif cTime.hour == 8:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['tasks_taken']:
                     self.cache_variables['tasks_taken'] = 1
@@ -73,7 +75,6 @@ class TimeManagement:
                     self.cache_variables['tasks_taken'] = 0
 
             sleep(60)
-
 
     def _view_messages(self):
         messages = GoogleGmail().logic_get_message()
