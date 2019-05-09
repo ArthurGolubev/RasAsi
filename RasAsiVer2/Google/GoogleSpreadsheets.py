@@ -6,7 +6,6 @@ from oauth2client import tools, file, client
 from RasAsiVer2.Decorators.Decorators import errors_decorator, time_decorator
 
 
-
 class GoogleSpreadsheet:
     _SCOPES = 'https://www.googleapis.com/auth/spreadsheets'
 
@@ -128,3 +127,8 @@ class GoogleSpreadsheet:
             "values": values
         }
         return body
+
+if __name__ == '__main__':
+    GoogleSpreadsheet()
+else:
+    print(f'Подключен модуль {__name__}')

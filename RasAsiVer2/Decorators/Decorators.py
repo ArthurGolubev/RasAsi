@@ -45,3 +45,7 @@ def logging_decorator(func):
         return ret
     return wrapper
 
+if __name__ == '__main__':
+    print(f'Запущен модуль {__name__}')
+else:
+    print(f'Подключен модуль {__name__}')
