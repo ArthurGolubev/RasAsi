@@ -3,6 +3,7 @@ from sys import platform
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from RasAsiVer2.Google.GoogleGmail import GoogleGmail
+from RasAsiVer2.Decorators.Decorators import logging_decorator
 from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
 
 
@@ -19,6 +20,7 @@ class TransportCard:
                 spreadsheet_id='1vqDWkRh8ERwxkRtyum-0bffbmjp7KMJn-SpAgNnYtyM',
                 range_name='Лист1').get('values')[0][1]
 
+    @logging_decorator
     def transport_card(self):
         if platform == 'win32':
             executable_path = r'C:\PycharmProjects\RasAsi\credentials\geckodriver.exe'  # Laptop
@@ -47,3 +49,8 @@ class TransportCard:
         GoogleGmail().send_message(to=self.to,
                                    topic='Проездной 🧐🚌💰',
                                    message_text=f'Оставшийся баланс на транспортной карте: {transport_unit} руб.')
+
+if __name__ == '__main__':
+    TransportCard(who='me').transport_card()
+else:
+    print(f'Подключен модуль {__name__}')

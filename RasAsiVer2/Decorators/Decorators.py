@@ -35,6 +35,12 @@ def logging_decorator(func):
         except:
             logging.getLogger().exception(f'name:\t\t{func.__name__}\t\t {datetime.now().strftime("%d.%m.%Y %HH:%MM:%SS")}')
             ret = None
+            try:
+                with open('logfile.txt', 'r') as file:
+                    GoogleGmail().send_message(topic=f'😒 Error in {func.__name__} 🌫',
+                                               message_text=file.read())
+            except:
+                print(f'Error in {func.__name__} (Не отправлено по Gmail)')
 
         return ret
     return wrapper

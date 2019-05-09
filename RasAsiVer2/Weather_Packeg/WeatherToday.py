@@ -1,4 +1,5 @@
 from RasAsiVer2.Weather_Packeg.Weather import Weather
+from RasAsiVer2.Decorators.Decorators import logging_decorator
 from RasAsiVer2.Weather_Packeg.WeatherChart import WeatherChart
 
 
@@ -6,7 +7,7 @@ class WeatherToday:
     Krasnoyarsk_spreadsheetId = '1fgjOxFNxjnUIRRIA60xnWCpYyLRg0txuazimsbg1Km4'
     Novosibirsk_spreadsheetId = '1LZF9yopCmDpUUkjSPSu4krwwJ0IFOHV7Qioz_4SuFm0'
 
-
+    @logging_decorator
     def weather_today(self):
         Krasnoyarsk = Weather(place='krasnoyarsk')
         Krasnoyarsk.get_weather()
@@ -18,6 +19,7 @@ class WeatherToday:
 
         WeatherChart().chart()
 
+    @logging_decorator
     def today_place(self, place):  # TODO Доделать
         spec_place = Weather(place=place)
         spec_place.get_weather()
