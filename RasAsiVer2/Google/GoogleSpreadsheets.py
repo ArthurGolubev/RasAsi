@@ -21,18 +21,19 @@ class GoogleSpreadsheet:
         print(f'Платформа {platform} не поддерживается')
 
     store = file.Storage(os.path.join(path_credential, 'RasAsi_Spreadsheets.json'))
+    creds = store.get()
+
+    if not creds or creds.invalid:
+        flow = client.flow_from_clientsecrets(_client_secret, _SCOPES)
+        creds = tools.run_flow(flow, store)
+
+    SHEETS = discovery.build('sheets', 'v4', http=creds.authorize(Http()))
 
     @errors_decorator
     def __init__(self):
         self._spreadsheet = None
         self.spreadsheet_id = None
-        creds = self.store.get()
 
-        if not creds or creds.invalid:
-            flow = client.flow_from_clientsecrets(self._client_secret, self._SCOPES)
-            creds = tools.run_flow(flow, self.store)
-
-        self.SHEETS = discovery.build('sheets', 'v4', http=creds.authorize(Http()))
 
     @errors_decorator
     def create_table(self, table_name):

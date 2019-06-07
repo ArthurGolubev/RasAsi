@@ -20,17 +20,16 @@ class GoogleTasks:
         print(f'Платформа {platform} не поддерживается')
 
     store = file.Storage(os.path.join(path_credential, 'RasAsi_Tasks.json'))
+    creds = store.get()
+
+    if not creds or creds.invalid:
+        flow = client.flow_from_clientsecrets(_client_secret, _SCOPE)
+        creds = tools.run_flow(flow, store)
+
+    _TASKS = discovery.build('tasks', 'v1', credentials=creds)
 
     def __init__(self, mainID):
         self.mainID = mainID
-        creds = self.store.get()
-
-        if not creds or creds.invalid:
-            print('creds_Tasks_invalid')
-            flow = client.flow_from_clientsecrets(self._client_secret, self._SCOPE)
-            creds = tools.run_flow(flow, self.store)
-
-        self._TASKS = discovery.build('tasks', 'v1', credentials=creds)
 
     @errors_decorator
     def callAPI(self):  # TODO ???

@@ -30,15 +30,21 @@ class GoogleGmail:
         print(f'Платформа {platform} не поддерживается')
 
     store = file.Storage(os.path.join(path_credential, 'RasAsi_mail.json'))
+    creds = store.get()
 
-    @errors_decorator
-    def __init__(self):
-        creds = self.store.get()
-        if not creds or creds.invalid:
-            flow = client.flow_from_clientsecrets(self._client_secret, self._SCOPE)
-            creds = tools.run_flow(flow, self.store)
+    if not creds or creds.invalid:
+        flow = client.flow_from_clientsecrets(_client_secret, _SCOPE)
+        creds = tools.run_flow(flow, store)
 
-        self.GMAIL = discovery.build('gmail', 'v1', http=creds.authorize(Http()))
+    GMAIL = discovery.build('gmail', 'v1', http=creds.authorize(Http()))
+    # @errors_decorator
+    # def __init__(self):
+    #     creds = self.store.get()
+    #     if not creds or creds.invalid:
+    #         flow = client.flow_from_clientsecrets(self._client_secret, self._SCOPE)
+    #         creds = tools.run_flow(flow, self.store)
+    #
+    #     self.GMAIL = discovery.build('gmail', 'v1', http=creds.authorize(Http()))
 
     @errors_decorator
     def list_unread_messages(self, userId='me', q='', labelIds='UNREAD'):

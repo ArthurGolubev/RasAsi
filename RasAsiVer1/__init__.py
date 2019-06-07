@@ -4,12 +4,13 @@ from sys import platform
 from .Download_Packeg import commandList as cL_Download_Packeg
 # from .legacy_Gmail_Packeg import commandList as cL_Gmail_Packeg
 from RasAsiVer2.Threads import threads
-from RasAsiVer2.Google.credential_init import google_init
+# from RasAsiVer2.Google.credential_init import google_init
+
 # from .resService_Packeg import commandList as cL_resService_Packeg
 # from .Satellite_img_Packeg import commandList as cL_Setellite_img_Packeg
 # from .Time_Packeg.electricity_monitoring import electricity_monitoringFunction, userDirectiv
 
-google_init()
+# google_init()
 threads.start_threads()
 
 def mainMenu():
