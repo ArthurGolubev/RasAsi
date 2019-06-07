@@ -24,7 +24,7 @@ class GoogleGmail:
         _client_secret = path_credential + r'\client_secret.json'
     elif platform == 'linux':
         # path_credential = r'/home/pi/Downloads'  # raspbian
-        path_credential = r'./credentials'  # Ubuntu
+        path_credential = r'/credentials'  # Ubuntu
         _client_secret = path_credential + r'/client_secret.json'
     else:
         print(f'Платформа {platform} не поддерживается')
