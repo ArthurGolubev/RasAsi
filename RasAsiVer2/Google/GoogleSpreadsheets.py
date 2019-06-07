@@ -15,7 +15,7 @@ class GoogleSpreadsheet:
         _client_secret = path_credential + r'\client_secret.json'
     elif platform == 'linux':
         # path_credential = r'/home/pi/Downloads'  # raspbian
-        path_credential = r'/home/rasasi/PycharmProjects/RasAsi/credentials'  # Ubuntu
+        path_credential = r'/home/rasasi/RasAsi/credentials'  # Ubuntu
         _client_secret = path_credential + r'/client_secret.json'
     else:
         print(f'Платформа {platform} не поддерживается')
