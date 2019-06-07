@@ -15,7 +15,7 @@ class GoogleSpreadsheet:
         _client_secret = path_credential + r'\client_secret.json'
     elif platform == 'linux':
         # path_credential = r'/home/pi/Downloads'  # raspbian
-        path_credential = r'/home/rasasi/RasAsi/credentials'  # Ubuntu Mate
+        path_credential = r'~/PycharmProjects/RasAsi/credential'  # Ubuntu
         _client_secret = path_credential + r'/client_secret.json'
     else:
         print(f'Платформа {platform} не поддерживается')
@@ -32,8 +32,7 @@ class GoogleSpreadsheet:
             flow = client.flow_from_clientsecrets(self._client_secret, self._SCOPES)
             creds = tools.run_flow(flow, self.store)
 
-        HTTP = creds.authorize(Http())
-        self.SHEETS = discovery.build('sheets', 'v4', http=HTTP)
+        self.SHEETS = discovery.build('sheets', 'v4', http=creds.authorize(Http()))
 
     @errors_decorator
     def create_table(self, table_name):
