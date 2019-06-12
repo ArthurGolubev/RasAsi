@@ -33,6 +33,11 @@ class GoogleTasks:
 
     @errors_decorator
     def callAPI(self):  # TODO ???
+        """
+
+        :return: возвращает имена списков и их id
+        """
+
         result = self._TASKS.tasklists().list().execute()
         items = result.get('items', [])
 
@@ -52,7 +57,13 @@ class GoogleTasks:
         string, format - RFC 3339 -> '2019-10-15T12:00:00.000Z'
         :return: list of tasks
         """
-        tasks = self._TASKS.tasks().list(tasklist=self.mainID, showHidden=True, completedMin=completedMin).execute()
+        tasks = self._TASKS.tasks().list(
+            tasklist=self.mainID,
+            showHidden=True,
+            completedMin=completedMin,
+            maxResults='100'
+        ).execute()
+
         if tasks.get('items'):
             return tasks['items']
 
