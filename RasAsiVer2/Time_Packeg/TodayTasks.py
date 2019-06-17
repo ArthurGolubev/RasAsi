@@ -2,6 +2,7 @@ from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
 from random import choice
 from RasAsiVer2.Google.GoogleTasks import GoogleTasks
 import datetime
+from RasAsiVer2.Decorators.Decorators import errors_decorator
 
 class TodayTasks:
     today_tasks = {}
@@ -13,6 +14,7 @@ class TodayTasks:
     def __init__(self):
         self.refresh_tasks()
 
+    @errors_decorator
     def refresh_tasks(self):
         self.tasks = GoogleSpreadsheet().get_spreadsheets_values(
             spreadsheet_id=self._spreadsheet_id,

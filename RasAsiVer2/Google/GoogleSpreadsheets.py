@@ -34,7 +34,6 @@ class GoogleSpreadsheet:
         self._spreadsheet = None
         self.spreadsheet_id = None
 
-
     @errors_decorator
     def create_table(self, table_name):
         spreadsheet = {
