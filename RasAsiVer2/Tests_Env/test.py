@@ -31,7 +31,7 @@ class GoogleTasks:
         self.mainID = mainID
 
     def list_tasks(self, completedMin=None):
-        completedMin = (datetime.datetime.utcnow()-datetime.timedelta(hours=24)).isoformat('T') + 'Z'
+        completedMin = (datetime.datetime.utcnow()-datetime.timedelta(hours=32)).isoformat('T') + 'Z'
 
         """
 
