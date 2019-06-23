@@ -77,9 +77,7 @@ class TodayTasks:
         :return:
         """
         today = (datetime.datetime.utcnow()-datetime.timedelta(hours=24)).isoformat('T') + 'Z'
-        completed_tasks = GoogleTasks(mainID=self._tasklist_id).list_tasks(completedMin=today,
-                                                                           showHidden=True,
-                                                                           maxResults=100)
+        completed_tasks = GoogleTasks(mainID=self._tasklist_id).list_tasks(completedMin=today)
 
         if completed_tasks:
             completed_tasks = len(completed_tasks)

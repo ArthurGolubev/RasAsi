@@ -37,14 +37,7 @@ class GoogleGmail:
         creds = tools.run_flow(flow, store)
 
     GMAIL = discovery.build('gmail', 'v1', http=creds.authorize(Http()))
-    # @errors_decorator
-    # def __init__(self):
-    #     creds = self.store.get()
-    #     if not creds or creds.invalid:
-    #         flow = client.flow_from_clientsecrets(self._client_secret, self._SCOPE)
-    #         creds = tools.run_flow(flow, self.store)
-    #
-    #     self.GMAIL = discovery.build('gmail', 'v1', http=creds.authorize(Http()))
+
 
     @errors_decorator
     def list_unread_messages(self, userId='me', q='', labelIds='UNREAD'):
