@@ -83,6 +83,7 @@ class TimeManagement:
 
             self.temp.temperature_sensor()
             sleep(60)
+            print('time')
 
     def _view_messages(self):
         messages = GoogleGmail().logic_get_message()
