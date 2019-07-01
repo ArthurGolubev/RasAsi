@@ -3,40 +3,27 @@ from RasAsiVer2.Google.GoogleGmail import GoogleGmail
 
 
 class TemperatureSensor:
-    test_temperature = 0
     temperature_55 = 0
     temperature_60 = 0
     temperature_65 = 0
 
     def temperature_sensor(self):
         if sys.platform == 'win32':
-            print('return')
             return
         else:
             temp = []
             t = psutil.sensors_temperatures()
             for i in t['coretemp']:
-                print(i[1])
                 temp.append(i[1])
-            # print(t)
             t = max(temp)
-            if 50 <= t < 55:
-                self.test_temperature += 1
-                print('test - ', t)
-            else:
-                self.test_temperature = 0
 
             if 55 <= t < 60:
                 self.temperature_55 += 1
-                print('test - ', t)
-
             else:
                 self.temperature_55 = 0
 
             if 60 <= t < 65:
                 self.temperature_60 += 1
-                print('test - ', t)
-
             else:
                 self.temperature_60 = 0
 
