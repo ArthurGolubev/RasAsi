@@ -15,6 +15,8 @@ class TemperatureSensor:
         else:
             print('in')
             t = psutil.sensors_temperatures()
+            for i in t['coretemp']:
+                print(type(i))
             print(t)
             if 50 <= t < 55:
                 self.test_temperature += 1
