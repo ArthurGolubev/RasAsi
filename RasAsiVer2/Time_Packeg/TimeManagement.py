@@ -7,10 +7,12 @@ from RasAsiVer2.Time_Packeg.TransportCard import TransportCard
 from RasAsiVer2.Decorators.Decorators import logging_decorator
 from RasAsiVer2.Weather_Packeg.WeatherToday import WeatherToday
 from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
+from RasAsiVer2.addiction_support.psutil_temperature import TemperatureSensor
 
 
 class TimeManagement:
     Task = TodayTasks()
+    temp = TemperatureSensor()
 
     def __init__(self):
         self.messages = {}
@@ -79,6 +81,7 @@ class TimeManagement:
                     self._Task_check_clean_refresh()
                     self.cache_variables['tasks_taken'] = 0
 
+            self.temp.temperature_sensor()
             sleep(60)
 
     def _view_messages(self):
