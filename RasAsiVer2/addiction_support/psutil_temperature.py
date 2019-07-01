@@ -10,8 +10,10 @@ class TemperatureSensor:
 
     def temperature_sensor(self):
         if sys.platform == 'win32':
+            print('return')
             return
         else:
+            print('in')
             t = psutil.sensors_temperatures()
             if 50 <= t < 55:
                 self.test_temperature += 1
