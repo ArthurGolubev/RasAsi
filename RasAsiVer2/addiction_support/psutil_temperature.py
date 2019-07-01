@@ -21,11 +21,15 @@ class TemperatureSensor:
 
             if 55 <= t < 60:
                 self.temperature_55 += 1
+                print('test - ', t)
+
             else:
                 self.temperature_55 = 0
 
             if 60 <= t < 65:
                 self.temperature_60 += 1
+                print('test - ', t)
+
             else:
                 self.temperature_60 = 0
 
