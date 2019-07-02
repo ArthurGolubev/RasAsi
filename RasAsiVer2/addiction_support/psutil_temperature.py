@@ -42,9 +42,7 @@ class TemperatureSensor:
                 GoogleGmail.send_message(topic='Температура ♨🌡',
                                          message_text=f'Температура процессора {t}')
                 time.sleep(60)
-            elif self.test_temperature == 11:
-                GoogleGmail.send_message(topic='Температура ♨🌡',
-                                         message_text=f'Температура процессора {t}')
+
 
 if __name__ == '__main__':
     te = TemperatureSensor()
