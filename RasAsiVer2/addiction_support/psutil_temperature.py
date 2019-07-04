@@ -16,7 +16,6 @@ class TemperatureSensor:
             for i in t['coretemp']:
                 temp.append(i[1])
             t = max(temp)
-
             if 55 <= t < 60:
                 self.temperature_55 += 1
             else:
@@ -33,13 +32,13 @@ class TemperatureSensor:
                 self.temperature_65 = 0
 
             if self.temperature_55 == 5:
-                GoogleGmail.send_message(topic='Температура ♨🌡',
+                GoogleGmail().send_message(topic='Температура ♨🌡',
                                          message_text=f'Температура процессора {t}')
             elif self.temperature_60 == 3:
-                GoogleGmail.send_message(topic='Температура ♨🌡',
+                GoogleGmail().send_message(topic='Температура ♨🌡',
                                          message_text=f'Температура процессора {t}')
             elif self.temperature_65 == 1:
-                GoogleGmail.send_message(topic='Температура ♨🌡',
+                GoogleGmail().send_message(topic='Температура ♨🌡',
                                          message_text=f'Температура процессора {t}')
                 time.sleep(60)
 
