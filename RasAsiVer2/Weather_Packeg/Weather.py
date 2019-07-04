@@ -3,6 +3,7 @@ from selenium import webdriver
 from datetime import datetime, timedelta
 from RasAsiVer2.Weather_Packeg.GetWeather import GetWeather
 from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
+from RasAsiVer2.addiction_support.psutil_temperature import TemperatureSensor
 
 
 class Weather:
@@ -12,6 +13,7 @@ class Weather:
         # executable_path = r'C:\PythonProject\RasAsi\credentials\geckodriver.exe'  # PC
     elif platform == 'linux':
         executable_path = r'/home/rasasi/RasAsi/credentials/geckodriver'  # Ubuntu Mate
+        temp = TemperatureSensor()
     else:
         print(f'Платформа {platform} не поддерживается')
 
@@ -45,7 +47,7 @@ class Weather:
         _browser.find_element_by_xpath('//div[@class="qj l hv"]/div[@class="xx"]/select/option[@value="off"]').click()  #off wind animation
         _browser.find_element_by_xpath(f"//div[@id='m']/a[@class='s t']").click()                                       #calendar
         _browser.find_element_by_xpath(f"//table//tr//td//a[contains(text(), '{self.tomorrow}')]").click()              #calendar
-        _weather = GetWeather(browser=_browser, get_date=self.date)
+        _weather = GetWeather(browser=_browser, get_date=self.date, temp=self.temp)
         for i in self.feature:
             _weather.get_values(i)
         self.day_weather = _weather.dict_formation()
