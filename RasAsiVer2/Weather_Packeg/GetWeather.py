@@ -141,4 +141,3 @@ class GetWeather:
             ]
 
         return weather
-

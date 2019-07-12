@@ -72,6 +72,15 @@ class TimeManagement:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['tasks_taken']:
                     self.cache_variables['tasks_taken'] = 1
                     self.Task.take_tasks()
+
+                    today = datetime.today()
+                    day = today.strftime('%j')
+                    if int(today.year)%4 == 0:
+                        nday = 366 - int(day)
+                    else:
+                        nday = 365 - int(day)
+
+                    GoogleGmail().send_message(topic=f'День {day} ☀🔆 осталось {nday}', message_text='😗☺')
                 elif cTime.minute in [5, 6, 7] and not self.cache_variables['weather']:
                     GoogleGmail().send_message(topic='☁🌫 Погода не получена', message_text='Не удолось получить погоду')
             elif cTime.hour == 23:

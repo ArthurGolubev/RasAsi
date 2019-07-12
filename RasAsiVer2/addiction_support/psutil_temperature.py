@@ -1,4 +1,5 @@
 import sys, psutil, time
+from datetime import datetime
 from RasAsiVer2.Google.GoogleGmail import GoogleGmail
 
 
@@ -32,14 +33,14 @@ class TemperatureSensor:
                 self.temperature_65 = 0
 
             if self.temperature_55 == 5:
-                GoogleGmail().send_message(topic='Температура ♨🌡',
-                                         message_text=f'Температура процессора {t}')
+                GoogleGmail().send_message(topic=f'Температура {t}♨🌡',
+                                         message_text=f'Температура процессора {t} {datetime.ctime()}')
             elif self.temperature_60 == 3:
-                GoogleGmail().send_message(topic='Температура ♨🌡',
-                                         message_text=f'Температура процессора {t}')
+                GoogleGmail().send_message(topic=f'Температура {t}♨🌡',
+                                         message_text=f'Температура процессора {t} {datetime.ctime()}')
             elif self.temperature_65 == 1:
-                GoogleGmail().send_message(topic='Температура ♨🌡',
-                                         message_text=f'Температура процессора {t}')
+                GoogleGmail().send_message(topic=f'Температура {t}♨🌡',
+                                         message_text=f'Температура процессора {t} {datetime.ctime()}')
                 time.sleep(60)
 
 
