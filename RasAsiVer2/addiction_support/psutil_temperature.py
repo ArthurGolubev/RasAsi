@@ -34,13 +34,13 @@ class TemperatureSensor:
 
             if self.temperature_55 == 5:
                 GoogleGmail().send_message(topic=f'Температура {t}♨🌡',
-                                         message_text=f'Температура процессора {t} {datetime.ctime()}')
+                                         message_text=f'Температура процессора {t} дата <br>{datetime.today()}')
             elif self.temperature_60 == 3:
                 GoogleGmail().send_message(topic=f'Температура {t}♨🌡',
-                                         message_text=f'Температура процессора {t} {datetime.ctime()}')
+                                         message_text=f'Температура процессора {t} дата {datetime.today()}')
             elif self.temperature_65 == 1:
                 GoogleGmail().send_message(topic=f'Температура {t}♨🌡',
-                                         message_text=f'Температура процессора {t} {datetime.ctime()}')
+                                         message_text=f'Температура процессора {t} дата {datetime.today()}')
                 time.sleep(60)
 
 
