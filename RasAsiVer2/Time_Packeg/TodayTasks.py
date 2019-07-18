@@ -4,6 +4,7 @@ from RasAsiVer2.Google.GoogleTasks import GoogleTasks
 import datetime
 from RasAsiVer2.Decorators.Decorators import errors_decorator
 
+
 class TodayTasks:
     today_tasks = {}
     _spreadsheet_id = '1DvY6qzp32qP_BNTFU2opXlfQ0lpnjs1MnGZ7LWRJIbw'
@@ -112,6 +113,7 @@ class TodayTasks:
         GoogleSpreadsheet().append_spreadsheets_values(values=[values],
                                                        spreadsheet_id=self._spreadsheet_id,
                                                        range_name='Лист1')
+
 
     def give_me_one(self):
         self.check()

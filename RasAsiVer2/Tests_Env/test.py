@@ -1,24 +1,18 @@
-# from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
 import psycopg2
-# k = GoogleSpreadsheet().get_spreadsheets_values(spreadsheet_id='1fgjOxFNxjnUIRRIA60xnWCpYyLRg0txuazimsbg1Km4', range_name='Лист1')
-# print(k)
 
-conn = psycopg2.connect(dbname='postgres', user='postgres', password='HOPPOH77', host='localhost')
-cur = conn.cursor()
+def test(upass):
+    conn = psycopg2.connect(database='postgres', user='postgres', password=upass, host='localhost')
+    cur = conn.cursor()
+    tag_id = 400
+    tag_line = 'sql, python'
+    tag_line2 = ['sql', 'python']
+    # t_l = tag_line.split(',')
+    cur.execute("""INSERT INTO tag_table (rid_storage, {0}, {2}) VALUES (407, {1}, {1})""".format('sql', True, 'python', False))
 
-cur.execute('CREATE TABLE IF NOT EXISTS "my_city" (id_city serial PRIMARY KEY, country varchar(20), city varchar(20))')
-cur.execute('CREATE TABLE IF NOT EXISTS "weather_journal" ('
-            'id_weather_journal serial PRIMARY KEY,'
-            'id_city )')
-# cursor.execute('SELECT * FROM "date_day" WHERE ("date_day" = current_date)')
-# cur.execute("CREATE TABLE IF NOT EXISTS test (id serial PRIMARY KEY, num integer, data varchar);")
-# c = cursor.fetchall()
-# print(c)
-# cur.execute('INSERT INTO "my_city" VALUES (DEFAULT, %s, %s)', ( "Russia", "Krsk"))
-cur.execute('SELECT * FROM "my_city"')
-c2 = cur.fetchall()
-print(c2)
+    conn.commit()
+    cur.close()
+    conn.close()
 
-conn.commit()
-cur.close()
-conn.close()
+
+if __name__ == '__main__':
+    test(upass=input('pass '))

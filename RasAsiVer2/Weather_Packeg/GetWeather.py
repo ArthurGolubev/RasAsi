@@ -1,5 +1,7 @@
 from time import sleep
+from RasAsiVer2.Database_Scripts.id_city import id_city
 from RasAsiVer2.addiction_support import psutil_temperature
+
 
 class GetWeather:
     _twentyFourHours = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00',
@@ -15,7 +17,7 @@ class GetWeather:
         self.weather_log = {}
         self.browser = browser
         self.get_date = get_date
-        sleep(20)
+        sleep(10)
         for i in self._twentyFourHours:
             self._next12hours.append(get_date + ' ' + i)
 
@@ -23,13 +25,15 @@ class GetWeather:
         characteristic_dict = {}
         self.browser.find_element_by_link_text(attribute).click()
         print(f'Сбор набора данных\t-|{attribute}|-')
-        sleep(30)
+        sleep(7)
+
         if attribute == 'Влажность':
             for i in self._next12hours[1::3]:
                 print('mark #1', i)
                 self.temp.temperature_sensor()
+
                 self.browser.find_element_by_xpath(f"//span[@class='e']//a[@title='{i}']").click()
-                sleep(15)
+                sleep(7)
                 c = self._get_characteristic()
                 characteristic_dict.update({i: c})
 
@@ -38,17 +42,19 @@ class GetWeather:
             for i in self._next12hours:
                 print('mark #1', i)
                 self.temp.temperature_sensor()
+
                 self.browser.find_element_by_xpath(f"//span[@class='e']//a[@title='{i}']").click()
-                sleep(15)
+                sleep(7)
                 c = self._get_characteristic()
                 characteristic_dict.update({i: c})
+
         elif attribute == 'Атмосферное давление':
             for i in self._next12hours:
                 print('mark #1', i)
                 self.temp.temperature_sensor()
 
                 self.browser.find_element_by_xpath(f"//span[@class='e']//a[@title='{i}']").click()
-                sleep(15)
+                sleep(7)
                 c = self._get_characteristic()
                 self.browser.find_element_by_xpath("//div[@id='l'][@class='yy']").click()
                 self.browser.find_element_by_xpath("//div[@id='l'][@class='yy']").click()
@@ -56,13 +62,14 @@ class GetWeather:
                 c += ' / ' + self._get_characteristic()
                 self.browser.find_element_by_xpath("//div[@id='l'][@class='yy']").click()
                 characteristic_dict.update({i: c})
+
         elif attribute == 'Скорость ветра':
             self.browser.find_element_by_xpath("//div[@id='l'][@class='yy']").click()
             for i in self._next12hours:
                 print('mark #1', i)
                 self.temp.temperature_sensor()
                 self.browser.find_element_by_xpath(f"//span[@class='e']//a[@title='{i}']").click()
-                sleep(15)
+                sleep(7)
                 c = self._get_characteristic()
                 characteristic_dict.update({i: c})
         else:
@@ -70,7 +77,7 @@ class GetWeather:
                 print('mark #1', i)
                 self.temp.temperature_sensor()
                 self.browser.find_element_by_xpath(f"//span[@class='e']//a[@title='{i}']").click()
-                sleep(15)
+                sleep(7)
                 c = self._get_characteristic()
                 characteristic_dict.update({i: c})
 
@@ -85,13 +92,25 @@ class GetWeather:
         self.weather_log[self._name_dict] = self._cha_dict
 
     def _hours(self, keys, hour):
+
+        """
+            формируется одна запись (строка) в таблицу по всем атрибутам
+        :param keys: Атрибуты (Температура, Скорость ветра...)
+        :param hour: К какому часу принадлежит строка записи
+        :return: список записей (строк)
+        """
         _t = []
         _t.append(f'{self.get_date} {hour}:00')
         for i in keys:
             _t.append(self.weather_log.get(i).get(f'{self.get_date} {hour}:00'))
         return _t
 
-    def dict_formation(self, title=True):
+    def GoogleSpreadsheet_dict_formation(self, title=True): # TODO Отрефакторить?
+        """
+
+        :param title: Оглавление столбцов таблицы (Время, Температура, Влажность..)
+        :return: Возвращает список записей (строк) в таблицу
+        """
         keys = []
 
         for i in self.weather_log.keys():
@@ -141,3 +160,35 @@ class GetWeather:
             ]
 
         return weather
+
+    def database_list_formation(self, place, upass, id_date_day):
+        idcity = id_city(upass=upass, place=place)
+        keys = self.weather_log.keys()
+
+        weather = []
+
+        for i in self._twentyFourHours:
+            entry = []
+            entry.append(idcity)
+            entry.append(id_date_day)
+            entry.append(f'{self.get_date} {i}')
+            for i2 in keys:
+                if i2 == 'Атмосферное давление':
+
+                    hpa = self.weather_log.get(i2).get(f'{self.get_date} {i}').split(' / ')[0]
+                    mmhg = self.weather_log.get(i2).get(f'{self.get_date} {i}').split(' / ')[1]
+                    entry.append(hpa.split(' ')[0])
+                    entry.append(mmhg.split(' ')[0])
+                else:
+                    temp_var = self.weather_log.get(i2).get(f'{self.get_date} {i}')
+
+                    if not temp_var:
+                        entry.append(self.weather_log.get(i2).get(f'{self.get_date} {i}'))
+                    else:
+                        entry.append(self.weather_log.get(i2).get(f'{self.get_date} {i}').split(' ')[0].replace(',', '.'))
+
+            weather.append(tuple(entry))
+
+        return weather
+
+

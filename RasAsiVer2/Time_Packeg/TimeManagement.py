@@ -1,7 +1,9 @@
 from time import sleep
+from getpass import getpass
 from datetime import datetime, timedelta
 from RasAsiVer2.Google.GoogleGmail import GoogleGmail
 from RasAsiVer2.Time_Packeg.TodayTasks import TodayTasks
+from RasAsiVer2.Database_Scripts.today_id import today_id
 from RasAsiVer2.Decorators.Decorators import time_decorator
 from RasAsiVer2.Time_Packeg.TransportCard import TransportCard
 from RasAsiVer2.Decorators.Decorators import logging_decorator
@@ -10,19 +12,25 @@ from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
 from RasAsiVer2.addiction_support.psutil_temperature import TemperatureSensor
 
 
+
 class TimeManagement:
     Task = TodayTasks()
     temp = TemperatureSensor()
+    upass = getpass()
+    today_id = today_id(upass)
+
 
     def __init__(self):
         self.messages = {}
         self.startTimeRasAsi = datetime.now()
         self.cache_variables = {
             'tasks_taken': None,    # switch
+            'today_id': None,       # switch
             'weather': None,        # switch
             '01:00': None,          # switch
             '03:00': None,          # switch
             '23:50': None,          # switch
+
         }
 
     @logging_decorator
@@ -49,15 +57,21 @@ class TimeManagement:
                         elif message['topic'] == 'Проездной':
                             TransportCard(who='me').transport_card()
                         elif message['topic'] == 'Погода':
-                            WeatherToday().weather_today()
+                            WeatherToday(upass=self.upass).weather_today()
                         else:
-                            self._unsupported_command(message['topic'])
+                            self._unsupported_command(message['topic'], message['content'])
 
             if cTime.hour == 0 and cTime.minute in [0, 1, 2]:
-                self.cache_variables['weather'] = 0     # nullification (new day)
                 self.cache_variables['01:00'] = 0       # nullification (new day)
                 self.cache_variables['03:00'] = 0       # nullification (new day)
                 self.cache_variables['23:50'] = 0       # nullification (new day)
+                self.cache_variables['weather'] = 0     # nullification (new day)
+                self.cache_variables['today_id'] = 0    # nullification (new day)
+
+            elif cTime.hour == 0 and cTime.minute in [3, 4, 5]:
+                if self.cache_variables['today_id'] == 0:
+                    self.today_id = today_id(upass=self.upass)
+                    self.cache_variables['today_id'] = 1
 
             elif cTime.hour == 1:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['01:00']:
@@ -66,7 +80,7 @@ class TimeManagement:
             elif cTime.hour == 3:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['03:00']:
                     self.cache_variables['03:00'] = 1
-                    WeatherToday().weather_today()
+                    WeatherToday(upass=self.upass).weather_today()
                     self.cache_variables['weather'] = 1
             elif cTime.hour == 8:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['tasks_taken']:
@@ -119,12 +133,13 @@ class TimeManagement:
                                                        spreadsheet_id='1SEOxlcQcaVQAhvzAalPUlgpiRWrG0-ji3M8RrZbMnTE',
                                                        range_name='Лист1')
 
-    def _unsupported_command(self, command):
+    def _unsupported_command(self, command, content=None):
         GoogleGmail().send_message(topic='🤢 Неподдерживаемая команда 🤯',
                                  message_text=f'Команда "{command}" не поддерживается,'
                                  f'список поддерживаемых команд:\n'
                                  f'1. Время\n2. Хранилище\n3. Дай мне один\n4. Лента\n'
-                                 f'5. Проездной')
+                                 f'5. Проездной\n'
+                                 f'Сообщение: {content}')
 
 
 if __name__ == '__main__':
