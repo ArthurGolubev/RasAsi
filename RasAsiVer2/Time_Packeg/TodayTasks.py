@@ -94,7 +94,7 @@ class TodayTasks:
         for id in self.today_tasks:
             task = GoogleTasks(mainID=self._tasklist_id).get_task(task_id=id)
             status = task.get('status')
-            due = task.get('due')  # due - ожидаемый (set Deadline in GoogleTasks)
+            due = task.get('due')   # due - ожидаемый (set Deadline in GoogleTasks)
             if status == 'needsAction' and not due:
                 GoogleTasks(mainID=self._tasklist_id).delete_task(task_id=id)
         self.daily.clear()

@@ -1,11 +1,10 @@
 import psycopg2
 import datetime
-import getpass # TODO удалить
 
 
 class DailyForecast:
-    def __init__(self, user_password):
-        self.user_password = user_password
+    def __init__(self, upass):
+        self.user_password = upass
 
     def get_today_precipitation(self):
 
@@ -46,6 +45,4 @@ class DailyForecast:
 
 
 if __name__ == '__main__':
-    # p = getpass.getpass()
-    p = '' # TODO удалить
-    DailyForecast(p).get_today_precipitation()
+    DailyForecast(upass=input('pass ')).get_today_precipitation()

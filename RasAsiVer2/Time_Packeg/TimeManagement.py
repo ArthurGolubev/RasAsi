@@ -2,9 +2,10 @@ from time import sleep
 from getpass import getpass
 from datetime import datetime, timedelta
 from RasAsiVer2.Google.GoogleGmail import GoogleGmail
-from RasAsiVer2.Time_Packeg.TodayTasks import TodayTasks
+# from RasAsiVer2.Time_Packeg.TodayTasks import TodayTasks
 from RasAsiVer2.Database_Scripts.today_id import today_id
 from RasAsiVer2.Decorators.Decorators import time_decorator
+from RasAsiVer2.Time_Packeg.TodayTasks_v2 import TodayTasksV2
 from RasAsiVer2.Time_Packeg.TransportCard import TransportCard
 from RasAsiVer2.Decorators.Decorators import logging_decorator
 from RasAsiVer2.Weather_Packeg.WeatherToday import WeatherToday
@@ -12,13 +13,12 @@ from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
 from RasAsiVer2.addiction_support.psutil_temperature import TemperatureSensor
 
 
-
 class TimeManagement:
-    Task = TodayTasks()
     temp = TemperatureSensor()
     upass = getpass()
+    # Task = TodayTasks()
+    Task = TodayTasksV2(upass=upass)
     today_id = today_id(upass)
-
 
     def __init__(self):
         self.messages = {}
@@ -44,14 +44,16 @@ class TimeManagement:
 
                         if message['topic'] == 'Время':
                             self._server_time()
-                        elif message['topic'] == 'Хранилище':
+                        elif message['topic'] == 'Хранилище': # TODO опробовать
                             self._Task_put(material=message['content'])
-                        elif message['topic'] == 'Дай мне один':
+                        elif message['topic'] == 'Дай мне один': # TODO опробовать
                             if len(message['content'].strip()):
                                 print(message['content'])
-                                self.Task.give_me_specific_one(message['content'])
+                                # self.Task.give_me_specific_one(message['content'])
+                                self.Task.get_specific_one_v2()
                             else:
-                                self.Task.give_me_one()
+                                # self.Task.give_me_one()
+                                self.Task.get_3_tasks(n=1)
                         elif message['topic'] == 'Лента':
                             self._lenta_discount(number=message['content'])
                         elif message['topic'] == 'Проездной':
@@ -68,11 +70,6 @@ class TimeManagement:
                 self.cache_variables['weather'] = 0     # nullification (new day)
                 self.cache_variables['today_id'] = 0    # nullification (new day)
 
-            elif cTime.hour == 0 and cTime.minute in [3, 4, 5]:
-                if self.cache_variables['today_id'] == 0:
-                    self.today_id = today_id(upass=self.upass)
-                    self.cache_variables['today_id'] = 1
-
             elif cTime.hour == 1:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['01:00']:
                     self.cache_variables['01:00'] = 1
@@ -85,7 +82,8 @@ class TimeManagement:
             elif cTime.hour == 8:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['tasks_taken']:
                     self.cache_variables['tasks_taken'] = 1
-                    self.Task.take_tasks()
+                    # self.Task.take_tasks()
+                    self.Task.get_3_tasks()
 
                     today = datetime.today()
                     day = today.strftime('%j')
@@ -93,8 +91,8 @@ class TimeManagement:
                         nday = 366 - int(day)
                     else:
                         nday = 365 - int(day)
-
                     GoogleGmail().send_message(topic=f'День {day} ☀🔆 осталось {nday}', message_text='😗☺')
+
                 elif cTime.minute in [5, 6, 7] and not self.cache_variables['weather']:
                     GoogleGmail().send_message(topic='☁🌫 Погода не получена', message_text='Не удолось получить погоду')
             elif cTime.hour == 23:
@@ -119,15 +117,18 @@ class TimeManagement:
             topic='Server time ☁', message_text=f'🎉👌 Время работы сервера:\t {cTime}')
 
     def _Task_put(self, material):
-        self.Task.put(material=material.strip())
+        # self.Task.put(material=material.strip())
+        self.Task.put_v2(content=material.strip())
 
     def _Task_check_clean_refresh(self):
-        self.Task.check()
-        self.Task.day_completed()
-        self.Task.clean()
-        self.Task.refresh_tasks()
+        # self.Task.check()
+        # self.Task.day_completed()
+        # self.Task.clean()
+        # self.Task.refresh_tasks()
+        self.Task.refresh_v2()
+        self.Task.clear_v2()
 
-    def _lenta_discount(self, number):
+    def _lenta_discount(self, number): # TODO Содать вторую версию
         date = datetime.now().strftime('%d.%m.%Y')
         GoogleSpreadsheet().append_spreadsheets_values(values=[[date, int(number)]],
                                                        spreadsheet_id='1SEOxlcQcaVQAhvzAalPUlgpiRWrG0-ji3M8RrZbMnTE',

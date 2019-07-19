@@ -1,18 +1,13 @@
-import psycopg2
+from RasAsiVer2.Google.GoogleTasks import GoogleTasks
+from  datetime import datetime, timedelta
 
-def test(upass):
-    conn = psycopg2.connect(database='postgres', user='postgres', password=upass, host='localhost')
-    cur = conn.cursor()
-    tag_id = 400
-    tag_line = 'sql, python'
-    tag_line2 = ['sql', 'python']
-    # t_l = tag_line.split(',')
-    cur.execute("""INSERT INTO tag_table (rid_storage, {0}, {2}) VALUES (407, {1}, {1})""".format('sql', True, 'python', False))
+cTime = datetime.now().time()
 
-    conn.commit()
-    cur.close()
-    conn.close()
-
-
-if __name__ == '__main__':
-    test(upass=input('pass '))
+today = (datetime.utcnow() - timedelta(hours=cTime.hour, minutes=cTime.minute, seconds=cTime.second)
+                     ).isoformat('T') + 'Z'
+t = GoogleTasks(mainID='MDE2MzQwNDIxMTc3NjI1NjYwMTY6NjU5MTE0NDY0NzQyODU1Njow').list_tasks()
+print(len(t))
+for i in t:
+    if i['status'] == 'needsAction':
+        print(i)
+print(t[0]['status'])
