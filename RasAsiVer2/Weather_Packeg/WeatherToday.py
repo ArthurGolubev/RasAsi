@@ -16,11 +16,12 @@ class WeatherToday:
         Krasnoyarsk = Weather(place='krasnoyarsk', upass=self.upass)
         Krasnoyarsk.get_weather()
         Krasnoyarsk.append_spreadsheet(spreadsheet_id=self.Krasnoyarsk_spreadsheetId)
-        Krasnoyarsk.append_database()
 
         Novosibirsk = Weather(place='novosibirsk', upass=self.upass)
         Novosibirsk.get_weather()
         Novosibirsk.append_spreadsheet(spreadsheet_id=self.Novosibirsk_spreadsheetId)
+
+        Krasnoyarsk.append_database()
         Novosibirsk.append_database()
 
         WeatherChart().chart()

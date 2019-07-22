@@ -161,7 +161,7 @@ class GetWeather:
 
         return weather
 
-    def database_list_formation(self, place, upass, id_date_day):
+    def database_list_formation(self, place, upass):
         idcity = id_city(upass=upass, place=place)
         keys = self.weather_log.keys()
 
@@ -170,7 +170,6 @@ class GetWeather:
         for i in self._twentyFourHours:
             entry = []
             entry.append(idcity)
-            entry.append(id_date_day)
             entry.append(f'{self.get_date} {i}')
             for i2 in keys:
                 if i2 == 'Атмосферное давление':
