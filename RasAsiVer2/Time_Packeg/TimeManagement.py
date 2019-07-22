@@ -2,7 +2,7 @@ from time import sleep
 from getpass import getpass
 from datetime import datetime, timedelta
 from RasAsiVer2.Google.GoogleGmail import GoogleGmail
-# from RasAsiVer2.Time_Packeg.TodayTasks import TodayTasks
+from RasAsiVer2.Time_Packeg.TodayTasks import TodayTasks
 from RasAsiVer2.Database_Scripts.today_id import today_id
 from RasAsiVer2.Decorators.Decorators import time_decorator
 from RasAsiVer2.Time_Packeg.TodayTasks_v2 import TodayTasksV2
@@ -10,14 +10,15 @@ from RasAsiVer2.Time_Packeg.TransportCard import TransportCard
 from RasAsiVer2.Decorators.Decorators import logging_decorator
 from RasAsiVer2.Weather_Packeg.WeatherToday import WeatherToday
 from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
+from RasAsiVer2.Database_Scripts.dump_database import dump_rasasi_database
 from RasAsiVer2.addiction_support.psutil_temperature import TemperatureSensor
 
 
 class TimeManagement:
     temp = TemperatureSensor()
     upass = getpass()
-    # Task = TodayTasks()
-    Task = TodayTasksV2(upass=upass)
+    Task = TodayTasks()
+    Task_v2 = TodayTasksV2(upass=upass)
     today_id = today_id(upass)
 
     def __init__(self):
@@ -27,6 +28,7 @@ class TimeManagement:
             'tasks_taken': None,    # switch
             'today_id': None,       # switch
             'weather': None,        # switch
+            '00:00': None,          # switch
             '01:00': None,          # switch
             '03:00': None,          # switch
             '23:50': None,          # switch
@@ -49,11 +51,11 @@ class TimeManagement:
                         elif message['topic'] == 'Дай мне один': # TODO опробовать
                             if len(message['content'].strip()):
                                 print(message['content'])
-                                # self.Task.give_me_specific_one(message['content'])
-                                self.Task.get_specific_one_v2()
+                                self.Task.give_me_specific_one(message['content'])
+                                self.Task_v2.get_specific_one_v2(int(message['content']))
                             else:
-                                # self.Task.give_me_one()
-                                self.Task.get_3_tasks(n=1)
+                                self.Task.give_me_one()
+                                self.Task_v2.get_3_tasks(n=1)
                         elif message['topic'] == 'Лента':
                             self._lenta_discount(number=message['content'])
                         elif message['topic'] == 'Проездной':
@@ -64,12 +66,16 @@ class TimeManagement:
                             self._unsupported_command(message['topic'], message['content'])
 
             if cTime.hour == 0 and cTime.minute in [0, 1, 2]:
+                self.cache_variables['00:00'] = 0       # nullification (new day)
                 self.cache_variables['01:00'] = 0       # nullification (new day)
                 self.cache_variables['03:00'] = 0       # nullification (new day)
                 self.cache_variables['23:50'] = 0       # nullification (new day)
                 self.cache_variables['weather'] = 0     # nullification (new day)
                 self.cache_variables['today_id'] = 0    # nullification (new day)
 
+            elif cTime.hour == 1:
+                if cTime.minute in [3, 4, 5] and not self.cache_variables['00:00']:
+                    dump_rasasi_database()
             elif cTime.hour == 1:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['01:00']:
                     self.cache_variables['01:00'] = 1
@@ -82,8 +88,8 @@ class TimeManagement:
             elif cTime.hour == 8:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['tasks_taken']:
                     self.cache_variables['tasks_taken'] = 1
-                    # self.Task.take_tasks()
-                    self.Task.get_3_tasks()
+                    self.Task.take_tasks()
+                    self.Task_v2.get_3_tasks()
 
                     today = datetime.today()
                     day = today.strftime('%j')
@@ -101,6 +107,8 @@ class TimeManagement:
                     self._server_time()
                     self._Task_check_clean_refresh()
                     self.cache_variables['tasks_taken'] = 0
+                elif cTime.minute in [57, 58, 59]:
+                    pass
 
             self.temp.temperature_sensor()
             sleep(60)
@@ -117,16 +125,16 @@ class TimeManagement:
             topic='Server time ☁', message_text=f'🎉👌 Время работы сервера:\t {cTime}')
 
     def _Task_put(self, material):
-        # self.Task.put(material=material.strip())
-        self.Task.put_v2(content=material.strip())
+        self.Task.put(material=material.strip())
+        self.Task_v2.put_v2(content=material.strip())
 
     def _Task_check_clean_refresh(self):
-        # self.Task.check()
-        # self.Task.day_completed()
-        # self.Task.clean()
-        # self.Task.refresh_tasks()
-        self.Task.refresh_v2()
-        self.Task.clear_v2()
+        self.Task.check()
+        self.Task.day_completed()
+        self.Task.clean()
+        self.Task.refresh_tasks()
+        self.Task_v2.refresh_v2()
+        self.Task_v2.clear_v2()
 
     def _lenta_discount(self, number): # TODO Содать вторую версию
         date = datetime.now().strftime('%d.%m.%Y')

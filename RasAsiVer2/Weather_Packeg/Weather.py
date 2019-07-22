@@ -19,9 +19,8 @@ class Weather:
 
     temp = TemperatureSensor()
 
-    def __init__(self, place, upass, id_date_day, feature=None, spreadsheetId=None):
+    def __init__(self, place, upass, feature=None, spreadsheetId=None):
         self.upass = upass
-        self.id_date_day = id_date_day
         self._table = GoogleSpreadsheet()
         self.spreadsheetId = spreadsheetId
         self.place = place
