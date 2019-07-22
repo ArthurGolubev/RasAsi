@@ -3,7 +3,6 @@ from getpass import getpass
 from datetime import datetime, timedelta
 from RasAsiVer2.Google.GoogleGmail import GoogleGmail
 from RasAsiVer2.Time_Packeg.TodayTasks import TodayTasks
-from RasAsiVer2.Database_Scripts.today_id import today_id
 from RasAsiVer2.Decorators.Decorators import time_decorator
 from RasAsiVer2.Time_Packeg.TodayTasks_v2 import TodayTasksV2
 from RasAsiVer2.Time_Packeg.TransportCard import TransportCard
@@ -19,7 +18,6 @@ class TimeManagement:
     upass = getpass()
     Task = TodayTasks()
     Task_v2 = TodayTasksV2(upass=upass)
-    today_id = today_id(upass)
 
     def __init__(self):
         self.messages = {}
