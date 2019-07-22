@@ -110,7 +110,7 @@ class TodayTasksV2:
     def clear_v2(self):
         Tasks = GoogleTasks(mainID=self._tasklist_id).list_tasks()
         for i in Tasks:
-            due = Tasks.get('due')
+            due = i.get('due')
             if i['status'] == 'needsAction' and not due:
                 GoogleTasks(mainID=self._tasklist_id).delete_task(task_id=i['id'])
         self.DailyTasks.clear()
