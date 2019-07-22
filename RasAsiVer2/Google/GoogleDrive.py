@@ -16,8 +16,8 @@ class GoogleDrive:
         _path_token = r'..\..\credentials\GoogleDrive_token.pickle'
         _path_client_secret = r'..\..\credentials\client_secret.json'
     elif platform == 'linux':
-        _path_token = r'../../credential/GoogleDrive_token.pickle'
-        _path_client_secret = r'../../credential/client_secret.json'
+        _path_token = r'../../credentials/GoogleDrive_token.pickle'
+        _path_client_secret = r'../../credentials/client_secret.json'
     else:
         print('Платформа не поддерживаетя')
 
