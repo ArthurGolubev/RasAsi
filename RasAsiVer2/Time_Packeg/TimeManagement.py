@@ -71,8 +71,9 @@ class TimeManagement:
                 self.cache_variables['weather'] = 0     # nullification (new day)
                 self.cache_variables['today_id'] = 0    # nullification (new day)
 
-            elif cTime.hour == 1:
+            elif cTime.hour == 0:
                 if cTime.minute in [3, 4, 5] and not self.cache_variables['00:00']:
+                    self.cache_variables['00:00'] = 1
                     dump_rasasi_database()
             elif cTime.hour == 1:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['01:00']:
