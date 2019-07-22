@@ -36,9 +36,10 @@ class GoogleDrive:
 
     _GoogleDrive = build('drive', 'v3', credentials=_creds)
 
-    def upload(self, files):
+    def upload(self, files, folder_id=None):
         """
 
+        :param folder_id: sds
         :param files: files = (('/path/to/file', None), ('/path/to/file', application/vnd.google-apps.document), (...))
         :return: Nothing
         """
@@ -47,6 +48,9 @@ class GoogleDrive:
         files = ((files, None),)
         for filename, mimeType in files:
             metadata = {'name': name}
+            if folder_id:
+                metadata.update({'parents': [folder_id]})
+
             respond = self._GoogleDrive.files().create(body=metadata, media_body=filename).execute()
 
             if respond:
@@ -54,4 +58,4 @@ class GoogleDrive:
 
 
 if __name__ == '__main__':
-    GoogleDrive().upload(r'C:\Users\ArthurGo\Downloads\test.jpg')
+    GoogleDrive().upload(r'C:\Users\ArthurGo\Downloads\test.jpg', folder_id='1CpsaUbjn2_4Zm6Sog05BBQwf3MEqQ2Vk')
