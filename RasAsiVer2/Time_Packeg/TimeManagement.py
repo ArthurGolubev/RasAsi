@@ -26,7 +26,7 @@ class TimeManagement:
             'tasks_taken': None,    # switch
             'today_id': None,       # switch
             'weather': None,        # switch
-            '00:00': None,          # switch
+            '00:10': None,          # switch
             '01:00': None,          # switch
             '03:00': None,          # switch
             '23:50': None,          # switch
@@ -64,7 +64,7 @@ class TimeManagement:
                             self._unsupported_command(message['topic'], message['content'])
 
             if cTime.hour == 0 and cTime.minute in [0, 1, 2]:
-                self.cache_variables['00:00'] = 0       # nullification (new day)
+                self.cache_variables['00:10'] = 0       # nullification (new day)
                 self.cache_variables['01:00'] = 0       # nullification (new day)
                 self.cache_variables['03:00'] = 0       # nullification (new day)
                 self.cache_variables['23:50'] = 0       # nullification (new day)
@@ -72,8 +72,8 @@ class TimeManagement:
                 self.cache_variables['today_id'] = 0    # nullification (new day)
 
             elif cTime.hour == 0:
-                if cTime.minute in [3, 4, 5] and not self.cache_variables['00:00']:
-                    self.cache_variables['00:00'] = 1
+                if cTime.minute in [8, 9, 10] and not self.cache_variables['00:10']:
+                    self.cache_variables['00:10'] = 1
                     dump_rasasi_database()
             elif cTime.hour == 1:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['01:00']:
