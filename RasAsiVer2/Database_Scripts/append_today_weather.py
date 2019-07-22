@@ -11,7 +11,7 @@ def append_today_weather(upass, values):
     :return: Nothing
     """
 
-    conn = psycopg2.connect(database='postgres', user='postgres', password=upass, host='localhost')
+    conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=upass, host='localhost')
     cur = conn.cursor()
 
     execute_values(cur,

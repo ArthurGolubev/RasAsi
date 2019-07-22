@@ -2,7 +2,7 @@ import psycopg2
 
 
 def create_daily_table(upass):
-    conn = psycopg2.connect(database='postgres', user='postgres', password=upass, host='localhost')
+    conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=upass, host='localhost')
     cur = conn.cursor()
 
     cur.execute("""CREATE TABLE IF NOT EXISTS daily_ach (

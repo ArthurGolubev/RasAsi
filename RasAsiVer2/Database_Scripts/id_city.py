@@ -4,7 +4,7 @@ import psycopg2
 def id_city(place, upass):
     place = place.capitalize()
 
-    conn = psycopg2.connect(database='postgres', user='postgres', password=upass)
+    conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=upass, host='localhost')
     cur = conn.cursor()
 
     cur.execute("""SELECT id_city FROM my_city WHERE (city=%s)""", (place,)) # TODO переписать my_city

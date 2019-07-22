@@ -4,7 +4,7 @@ import datetime
 
 class DailyForecast:
     def __init__(self, upass):
-        self.user_password = upass
+        self.upass = upass
 
     def get_today_precipitation(self):
 
@@ -13,7 +13,7 @@ class DailyForecast:
         :return: список с ['датавремя - осадки',]
         """
         precipitation_forecast = []
-        conn = psycopg2.connect(dbname='postgres', user='postgres', password=self.user_password, host='localhost')
+        conn = psycopg2.connect(dbname='rasasi_database', user='rasasi', password=self.upass, host='localhost')
         cur = conn.cursor()
 
         cur.execute(
