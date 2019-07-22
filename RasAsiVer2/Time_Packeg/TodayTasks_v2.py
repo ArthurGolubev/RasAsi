@@ -13,7 +13,7 @@ class TodayTasksV2:
         self.upass = upass
 
     def get_3_tasks(self, n=None):
-        conn = psycopg2.connect(database='postgres', user='postgres', password=self.upass, host='localhost')
+        conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=self.upass, host='localhost')
         cur = conn.cursor()
 
         cur.execute("""SELECT id_storage, content FROM my_storage WHERE (completed = FALSE)""")
