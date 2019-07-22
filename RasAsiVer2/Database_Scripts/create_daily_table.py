@@ -16,5 +16,6 @@ def create_daily_table(upass):
     cur.close()
     conn.close()
 
+
 if __name__ == '__main__':
     create_daily_table(input('pass '))
