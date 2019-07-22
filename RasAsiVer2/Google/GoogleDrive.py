@@ -13,24 +13,25 @@ class GoogleDrive:
     ]
 
     if platform == 'win32':
-        print(1)
-        _path = r'..\..\credentials\GoogleDrive_token.pickle'
+        _path_token = r'..\..\credentials\GoogleDrive_token.pickle'
+        _path_client_secret = r'..\..\credentials\client_secret.json'
     elif platform == 'linux':
-        _path = r''  # TODO Написать путь
+        _path_token = r'../../credential/GoogleDrive_token.pickle'
+        _path_client_secret = r'../../credential/client_secret.json'
     else:
         print('Платформа не поддерживаетя')
 
     _creds = None
-    if os.path.exists(_path):
-        with open(_path, 'rb') as _token:
+    if os.path.exists(_path_token):
+        with open(_path_token, 'rb') as _token:
             _creds = pickle.load(_token)
     if not _creds or not _creds.valid:
         if _creds and _creds.expired and _creds.refresh_token:
             _creds.refresh(Request())
         else:
-            _flow = InstalledAppFlow.from_client_secrets_file(r'..\..\credentials\client_secret.json', _SCOPES)
+            _flow = InstalledAppFlow.from_client_secrets_file(_path_client_secret, _SCOPES)
             _creds = _flow.run_local_server(port=0)
-            with open(r'..\..\credentials\GoogleDrive_token.pickle', 'wb') as _token:
+            with open(_path_token, 'wb') as _token:
                 pickle.dump(_creds, _token)
 
     _GoogleDrive = build('drive', 'v3', credentials=_creds)
