@@ -54,7 +54,7 @@ class TimeManagement:
                             else:
                                 self.Task.give_me_one()
                                 self.Task_v2.get_3_tasks(n=1)
-                        elif message['topic'] == 'Лента':
+                        elif message['topic'] == 'Лента':  # TODO Сделать таблицу для Ленты
                             self._lenta_discount(number=message['content'])
                         elif message['topic'] == 'Проездной':
                             TransportCard(who='me').transport_card()

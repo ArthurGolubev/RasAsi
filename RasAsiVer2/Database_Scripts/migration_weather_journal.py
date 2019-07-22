@@ -1,7 +1,6 @@
-from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
 import psycopg2
-import getpass
 from psycopg2.extras import execute_values
+from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
 
 
 def add_awesome_stuff(city_weather, city_num, upass):
@@ -27,13 +26,6 @@ def add_awesome_stuff(city_weather, city_num, upass):
     conn = psycopg2.connect(dbname='rasasi_database', user='rasasi', password=upass, host='localhost')
     cur = conn.cursor()
 
-    # cur.execute('DROP TABLE IF EXISTS "weather_journal"')
-
-    # cur.execute('CREATE TABLE IF NOT EXISTS "my_city" ('
-    #             'id_city serial PRIMARY KEY, '
-    #             'country varchar(20), '
-    #             'city varchar(20))')
-
     cur.execute("""CREATE TABLE IF NOT EXISTS my_place (
     id_place serial PRIMARY KEY,
     country varchar(20), 
@@ -41,19 +33,6 @@ def add_awesome_stuff(city_weather, city_num, upass):
 
     cur.execute("""INSERT INTO my_place (country, city) VALUES ('Russia', 'Krasnoyarsk') ON CONFLICT (city) DO NOTHING""")
     cur.execute("""INSERT INTO my_place (country, city) VALUES ('Russia', 'Novosibirsk') ON CONFLICT (city) DO NOTHING""")
-
-    # cur.execute('CREATE TABLE IF NOT EXISTS "weather_journal" ('
-    #             'id_weather_journal serial PRIMARY KEY,'
-    #             'id_city integer REFERENCES "my_city",'
-    #             'id_date_day integer REFERENCES "date_day",'
-    #             'time timestamp,'
-    #             'Wind_mps int,'
-    #             'Precipitation_mm real,'
-    #             'Temperature_c integer,'
-    #             'Cloudiness_percent integer,'
-    #             'Humidity_percent integer,'
-    #             'Atmosphere_pressure_hpa integer,'
-    #             'Atmosphere_pressure_mmhg integer)')
 
     cur.execute("""CREATE TABLE IF NOT EXISTS "weather_journal" (
     id_weather_journal serial PRIMARY KEY, 
@@ -67,30 +46,10 @@ def add_awesome_stuff(city_weather, city_num, upass):
     atmosphere_pressure_hpa integer, 
     atmosphere_pressure_mmhg integer)""")
 
-
-
-    # execute_values(cur, 'INSERT INTO "weather_journal" ('
-    #                     'id_city, id_date_day, time, Wind_mps, Precipitation_mm, Temperature_c, Cloudiness_percent,'
-    #                     'Humidity_percent, Atmosphere_pressure_hpa, Atmosphere_pressure_mmhg)'
-    #                     ' VALUES %s', some_some_dict)
-
     execute_values(cur, """INSERT INTO weather_journal (
     id_city, time, wind_mps, precipitation_mm, temperature_c, cloudiness_percent, humidity_percent, 
     atmosphere_pressure_hpa, atmosphere_pressure_mmhg) VALUES %s""", some_some_dict)
 
-    # [(1, 2, 3), (4, 5, 6), (7, 8, 9)])
-    # cur.execute('SELECT * FROM "weather_journal"')
-    # k = cur.fetchall()
-    # print(k)
-    # cursor.execute('SELECT * FROM "date_day" WHERE ("date_day" = current_date)')
-    # cur.execute("CREATE TABLE IF NOT EXISTS test (id serial PRIMARY KEY, num integer, data varchar);")
-    # c = cursor.fetchall()
-    # print(c)
-    # cur.execute('INSERT INTO "my_city" VALUES (DEFAULT, %s, %s)', ( "Russia", "Krasnoyarsk"))
-    # cur.execute('INSERT INTO "my_city" VALUES (DEFAULT, %s, %s)', ( "Russia", "Novosibirsk"))
-    # cur.execute('SELECT * FROM "my_city"')
-    # c2 = cur.fetchall()
-    # print(c2)
 
     conn.commit()
     cur.close()
@@ -103,6 +62,5 @@ if __name__ == '__main__':
     n = GoogleSpreadsheet().get_spreadsheets_values(spreadsheet_id='1LZF9yopCmDpUUkjSPSu4krwwJ0IFOHV7Qioz_4SuFm0',
                                                     range_name='Лист1')
     print(k['values'][1])
-    # user_password = getpass.getpass(prompt='Пароль БД:')
-    add_awesome_stuff(n, 2, upass=input('pass'))
-    add_awesome_stuff(k, 1, upass=input('pass'))
+    add_awesome_stuff(n, 2, upass=input('pass '))
+    add_awesome_stuff(k, 1, upass=input('pass '))

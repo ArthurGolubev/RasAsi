@@ -10,7 +10,7 @@ def migration_weather_journal(upass):
         range_name='Лист1')['values']
 
     print(storage_data)
-    conn = psycopg2.connect(database='postgres', user='postgres', password=upass, host='localhost')
+    conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=upass, host='localhost')
     cur = conn.cursor()
 
     cur.execute("""CREATE TABLE IF NOT EXISTS my_storage (
@@ -44,4 +44,4 @@ def migration_weather_journal(upass):
 
 
 if __name__ == '__main__':
-    migration_weather_journal(upass=input('pass'))
+    migration_weather_journal(upass=input('pass '))
