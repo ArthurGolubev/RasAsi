@@ -66,7 +66,7 @@ class TodayTasksV2:
         for i in completed_tasks:
             print(i['title'])
 
-            conn = psycopg2.connect(database='postgres', user='postgres', password=self.upass, host='localhost')
+            conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=self.upass, host='localhost')
             cur = conn.connect()
 
             id_task = self.DailyTasks.get(i['title'])
@@ -98,7 +98,7 @@ class TodayTasksV2:
         :param content: string from msg
         :return: None
         """
-        conn = psycopg2.connect(database='postgres', user='postgres', password=self.upass, host='localhost')
+        conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=self.upass, host='localhost')
         cur = conn.cursor()
 
         cur.execute("""INSERT INTO my_storage (date_added, content) VALUES (current_date, %s)""", (content,))
