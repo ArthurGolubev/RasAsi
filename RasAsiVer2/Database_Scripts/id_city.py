@@ -7,7 +7,7 @@ def id_city(place, upass):
     conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=upass, host='localhost')
     cur = conn.cursor()
 
-    cur.execute("""SELECT id_city FROM my_city WHERE (city=%s)""", (place,)) # TODO переписать my_city
+    cur.execute("""SELECT id_city FROM my_place WHERE (city=%s)""", (place,))
     id_city = cur.fetchone()
 
     if not id_city:
