@@ -9,13 +9,23 @@ from RasAsiVer2.Time_Packeg.TransportCard import TransportCard
 from RasAsiVer2.Decorators.Decorators import logging_decorator
 from RasAsiVer2.Weather_Packeg.WeatherToday import WeatherToday
 from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
+from RasAsiVer2.Database_Scripts.test_connect import test_connection
 from RasAsiVer2.Database_Scripts.dump_database import dump_rasasi_database
 from RasAsiVer2.addiction_support.psutil_temperature import TemperatureSensor
 
 
 class TimeManagement:
     temp = TemperatureSensor()
+    test_connection_ok = 0
     upass = getpass()
+
+    while not test_connection_ok:
+        try:
+            test_connection_ok = test_connection(upass=upass)
+        except:
+            upass = getpass()
+
+
     Task = TodayTasks()
     Task_v2 = TodayTasksV2(upass=upass)
 
