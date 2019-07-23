@@ -1,5 +1,6 @@
 from time import sleep
 from getpass import getpass
+from psycopg2 import OperationalError
 from datetime import datetime, timedelta
 from RasAsiVer2.Google.GoogleGmail import GoogleGmail
 from RasAsiVer2.Time_Packeg.TodayTasks import TodayTasks
@@ -22,7 +23,7 @@ class TimeManagement:
     while not test_connection_ok:
         try:
             test_connection_ok = test_connection(upass=upass)
-        except:
+        except OperationalError:
             upass = getpass()
 
 
