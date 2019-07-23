@@ -29,7 +29,7 @@ def add_awesome_stuff(city_weather, city_num, upass):
     cur.execute("""CREATE TABLE IF NOT EXISTS my_place (
     id_place serial PRIMARY KEY,
     country varchar(20), 
-    city varchar(30) UNIQUE)""")
+    place varchar(30) UNIQUE)""")
 
     cur.execute("""INSERT INTO my_place (country, city) VALUES ('Russia', 'Krasnoyarsk') ON CONFLICT (city) DO NOTHING""")
     cur.execute("""INSERT INTO my_place (country, city) VALUES ('Russia', 'Novosibirsk') ON CONFLICT (city) DO NOTHING""")
