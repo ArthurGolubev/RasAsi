@@ -11,7 +11,7 @@ def id_city(place, upass):
     id_city = cur.fetchone()
 
     if not id_city:
-        cur.execute("""INSERT INTO my_city (country, city) VALUES (%s, %s) RETURNING id_city""", ('some place', place))
+        cur.execute("""INSERT INTO my_place (country, place) VALUES (%s, %s) RETURNING id_place""", ('some place', place))
         id_city = cur.fetchone()[0]
         conn.commit()
     else:

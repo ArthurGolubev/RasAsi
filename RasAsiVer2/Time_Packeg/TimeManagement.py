@@ -1,6 +1,5 @@
 from time import sleep
 from getpass import getpass
-from psycopg2 import OperationalError
 from datetime import datetime, timedelta
 from RasAsiVer2.Google.GoogleGmail import GoogleGmail
 from RasAsiVer2.Time_Packeg.TodayTasks import TodayTasks
@@ -10,27 +9,28 @@ from RasAsiVer2.Time_Packeg.TransportCard import TransportCard
 from RasAsiVer2.Decorators.Decorators import logging_decorator
 from RasAsiVer2.Weather_Packeg.WeatherToday import WeatherToday
 from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
-from RasAsiVer2.Database_Scripts.test_connect import test_connection
-from RasAsiVer2.Database_Scripts.dump_database import dump_rasasi_database
+from RasAsiVer2.Database_Scripts.RasAsiDatabase import RasAsiDatabase
+# from RasAsiVer2.Database_Scripts.dump_database import dump_rasasi_database
 from RasAsiVer2.addiction_support.psutil_temperature import TemperatureSensor
+from psycopg2 import OperationalError
 
 
 class TimeManagement:
     temp = TemperatureSensor()
-    test_connection_ok = 0
-    upass = getpass()
+    RAD = RasAsiDatabase()
 
-    while not test_connection_ok:
+    upass = getpass()
+    _test_connection_ok = 0
+    while not _test_connection_ok:
         try:
-            test_connection_ok = test_connection(upass=upass)
+            _test_connection_ok = RAD.test_connection(upass=upass)
             print('password is correct 😁👍')
         except OperationalError:
             print('incorrect password 🤯, try again 😓')
             upass = getpass()
 
-
     Task = TodayTasks()
-    Task_v2 = TodayTasksV2(upass=upass)
+    Task_v2 = TodayTasksV2(upass=upass)  # TODO Перевести в RAD?
 
     def __init__(self):
         self.messages = {}
@@ -87,7 +87,7 @@ class TimeManagement:
             elif cTime.hour == 0:
                 if cTime.minute in [8, 9, 10] and not self.cache_variables['00:00']:
                     self.cache_variables['00:00'] = 1
-                    dump_rasasi_database()
+                    self.RAD.dump_rasasi_database()
             elif cTime.hour == 1:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['01:00']:
                     self.cache_variables['01:00'] = 1

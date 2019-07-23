@@ -3,7 +3,7 @@ from psycopg2.extras import execute_values
 from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
 
 
-def add_awesome_stuff(city_weather, city_num, upass):
+def migration_weather_journal(city_weather, city_num, upass):
 
     some_some_dict = []
     for i in city_weather['values'][1:]:
@@ -62,5 +62,5 @@ if __name__ == '__main__':
     n = GoogleSpreadsheet().get_spreadsheets_values(spreadsheet_id='1LZF9yopCmDpUUkjSPSu4krwwJ0IFOHV7Qioz_4SuFm0',
                                                     range_name='Лист1')
     print(k['values'][1])
-    add_awesome_stuff(n, 2, upass=input('pass '))
-    add_awesome_stuff(k, 1, upass=input('pass '))
+    migration_weather_journal(n, 2, upass=input('pass '))
+    migration_weather_journal(k, 1, upass=input('pass '))

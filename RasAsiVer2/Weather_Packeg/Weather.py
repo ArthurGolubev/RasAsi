@@ -4,7 +4,8 @@ from datetime import datetime, timedelta
 from RasAsiVer2.Weather_Packeg.GetWeather import GetWeather
 from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
 from RasAsiVer2.addiction_support.psutil_temperature import TemperatureSensor
-from RasAsiVer2.Database_Scripts.append_today_weather import append_today_weather
+# from RasAsiVer2.Database_Scripts.append_today_weather import append_today_weather
+from RasAsiVer2.Database_Scripts.RasAsiDatabase import RasAsiDatabase
 
 
 class Weather:
@@ -68,8 +69,11 @@ class Weather:
             range_name=range_)
 
     def append_database(self):
-        append_today_weather(values=self._weather.database_list_formation(place=self.place, upass=self.upass),
-                             upass=self.upass)
+        RasAsiDatabase().append_database_today_weather(values=self._weather.database_list_formation(
+            place=self.place,
+            upass=self.upass), upass=self.upass)
+        # append_today_weather(values=self._weather.database_list_formation(place=self.place, upass=self.upass),
+        #                      upass=self.upass)
 
     def get_weather_data_set(self, spreadsheetId):
         weather_data_set = self._table.get_spreadsheets_values(

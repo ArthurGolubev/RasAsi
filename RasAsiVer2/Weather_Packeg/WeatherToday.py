@@ -1,7 +1,6 @@
 from RasAsiVer2.Weather_Packeg.Weather import Weather
 from RasAsiVer2.Decorators.Decorators import logging_decorator
 from RasAsiVer2.Weather_Packeg.WeatherChart import WeatherChart
-from RasAsiVer2.Database_Scripts.append_today_weather import append_today_weather
 
 
 class WeatherToday:
