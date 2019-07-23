@@ -23,7 +23,9 @@ class TimeManagement:
     while not test_connection_ok:
         try:
             test_connection_ok = test_connection(upass=upass)
+            print('password is correct 😁👍')
         except OperationalError:
+            print('incorrect password, try again 🤯😓')
             upass = getpass()
 
 
