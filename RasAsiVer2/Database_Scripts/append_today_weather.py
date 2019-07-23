@@ -16,7 +16,7 @@ def append_today_weather(upass, values):
 
     execute_values(cur,
                    """INSERT INTO "weather_journal" (
-                   id_city, time, Wind_mps, Precipitation_mm, Temperature_c, Cloudiness_percent, 
+                   id_place, time, Wind_mps, Precipitation_mm, Temperature_c, Cloudiness_percent, 
                    Humidity_percent, Atmosphere_pressure_hpa, Atmosphere_pressure_mmhg
                    ) VALUES %s""",
                    values)

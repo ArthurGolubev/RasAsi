@@ -25,7 +25,7 @@ class TimeManagement:
             test_connection_ok = test_connection(upass=upass)
             print('password is correct 😁👍')
         except OperationalError:
-            print('incorrect password, try again 🤯😓')
+            print('incorrect password 🤯, try again 😓')
             upass = getpass()
 
 
