@@ -15,11 +15,11 @@ class WeatherToday:
     def weather_today(self):
         Krasnoyarsk = Weather(place='krasnoyarsk', upass=self.upass)
         Krasnoyarsk.get_weather()
-        Krasnoyarsk.append_spreadsheet(spreadsheet_id=self.Krasnoyarsk_spreadsheetId)
+        # Krasnoyarsk.append_spreadsheet(spreadsheet_id=self.Krasnoyarsk_spreadsheetId)  # TODO Разкоментировать
 
         Novosibirsk = Weather(place='novosibirsk', upass=self.upass)
         Novosibirsk.get_weather()
-        Novosibirsk.append_spreadsheet(spreadsheet_id=self.Novosibirsk_spreadsheetId)
+        # Novosibirsk.append_spreadsheet(spreadsheet_id=self.Novosibirsk_spreadsheetId)  # TODO Разкоментировать
 
         Krasnoyarsk.append_database()
         Novosibirsk.append_database()
@@ -28,7 +28,7 @@ class WeatherToday:
 
     @logging_decorator
     def today_place(self, place):  # TODO Доделать
-        spec_place = Weather(place=place)
+        spec_place = Weather(place=place, upass=input('pass '))
         spec_place.get_weather()
         spec_place.make_spreadsheet()
         # spec_place.append_spreadsheet(spreadsheet_id=self.spec_place_spreadsheetId, values=spec_place.day_weather[1:])
