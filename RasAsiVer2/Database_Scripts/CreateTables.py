@@ -61,7 +61,7 @@ class CreateTables:
 
         cur.execute("""CREATE TABLE IF NOT EXISTS "weather_journal" (
         id_weather_journal serial PRIMARY KEY, 
-        id_city integer REFERENCES my_place,  
+        id_place integer REFERENCES my_place,  
         time timestamp, 
         wind_mps integer, 
         precipitation_mm real, 
@@ -72,7 +72,7 @@ class CreateTables:
         atmosphere_pressure_mmhg integer)""")
 
         execute_values(cur, """INSERT INTO weather_journal (
-        id_city, time, wind_mps, precipitation_mm, temperature_c, cloudiness_percent, humidity_percent, 
+        id_place, time, wind_mps, precipitation_mm, temperature_c, cloudiness_percent, humidity_percent, 
         atmosphere_pressure_hpa, atmosphere_pressure_mmhg) VALUES %s""", some_some_dict)
 
         conn.commit()
