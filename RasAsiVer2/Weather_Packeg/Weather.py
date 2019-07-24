@@ -4,8 +4,8 @@ from datetime import datetime, timedelta
 from RasAsiVer2.Weather_Packeg.GetWeather import GetWeather
 from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
 from RasAsiVer2.addiction_support.psutil_temperature import TemperatureSensor
-# from RasAsiVer2.Database_Scripts.append_today_weather import append_today_weather
-from RasAsiVer2.Database_Scripts.RasAsiDatabase import RasAsiDatabase
+# from RasAsiVer2.Database.append_today_weather import append_today_weather
+from RasAsiVer2.Database.RasAsiDatabase import RasAsiDatabase
 
 
 class Weather:

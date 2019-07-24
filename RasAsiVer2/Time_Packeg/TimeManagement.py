@@ -9,8 +9,8 @@ from RasAsiVer2.Time_Packeg.TransportCard import TransportCard
 from RasAsiVer2.Decorators.Decorators import logging_decorator
 from RasAsiVer2.Weather_Packeg.WeatherToday import WeatherToday
 from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
-from RasAsiVer2.Database_Scripts.RasAsiDatabase import RasAsiDatabase
-# from RasAsiVer2.Database_Scripts.dump_database import dump_rasasi_database
+from RasAsiVer2.Database.RasAsiDatabase import RasAsiDatabase
+# from RasAsiVer2.Database.dump_database import dump_rasasi_database
 from RasAsiVer2.addiction_support.psutil_temperature import TemperatureSensor
 from psycopg2 import OperationalError
 
@@ -66,6 +66,7 @@ class TimeManagement:
                                 self.Task_v2.get_specific_one_v2(int(message['content']))
                             else:
                                 self.Task.give_me_one()
+                                self.Task_v2.refresh_v2()
                                 self.Task_v2.get_3_tasks(n=1)
                         elif message['topic'] == 'Лента':  # TODO Сделать таблицу для Ленты
                             self._lenta_discount(number=message['content'])
@@ -117,10 +118,9 @@ class TimeManagement:
                 if cTime.minute in [50, 51, 52] and not self.cache_variables['23:50']:
                     self.cache_variables['23:50'] = 1
                     self._server_time()
-                    self._Task_check_clean_refresh()
+                    # self._Task_check_clean_refresh()
+                    self.Task_v2.clear_v2()  # TODO проверить
                     self.cache_variables['tasks_taken'] = 0
-                elif cTime.minute in [57, 58, 59]:
-                    pass
 
             self.temp.temperature_sensor()
             sleep(60)

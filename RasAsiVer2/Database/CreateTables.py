@@ -103,7 +103,7 @@ class CreateTables:
         date_added date, 
         content text, 
         completed boolean, 
-        data_completed date NULL, 
+        date_completed date NULL, 
         comment text NULL)""")
 
         test_list = []
@@ -127,8 +127,37 @@ class CreateTables:
         cur.close()
         conn.close()
 
+    def create_daily_ach(self):
+        conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=self.upass, host='localhost')
+        cur = conn.cursor()
+
+        cur.execute("""CREATE TABLE IF NOT EXISTS daily_ach (
+        id_daily_ach serial PRIMARY KEY, 
+        date date, 
+        daily_sp boolean NULL, 
+        daily_rs_ins boolean NULL, 
+        daily_read boolean NULL)""")
+
+        conn.commit()
+        cur.close()
+        conn.close()
+
+    def create_first_tags(self):
+        conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=self.upass, host='localhost')
+        cur = conn.cursor()
+
+        cur.execute("""CREATE TABLE IF NOT EXISTS first_tags (
+        id_tag serial PRIMARY KEY, 
+        rid_my_storage int REFERENCES my_storage, 
+        python boolean, 
+        rs boolean,
+        other boolean)""")
+
+        conn.commit()
+        cur.close()
+        conn.close()
 
 if __name__ == '__main__':
     query = """SELECT"""
     somenum = CreateTables(upass=input('pass ')).connection(somfunc=query)
-print(somenum)
+    print(somenum)

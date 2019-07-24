@@ -1,6 +1,6 @@
 from time import sleep
-# from RasAsiVer2.Database_Scripts.id_city import id_city
-from RasAsiVer2.Database_Scripts.RasAsiDatabase import RasAsiDatabase
+# from RasAsiVer2.Database.id_city import id_city
+from RasAsiVer2.Database.RasAsiDatabase import RasAsiDatabase
 from RasAsiVer2.addiction_support import psutil_temperature
 
 
