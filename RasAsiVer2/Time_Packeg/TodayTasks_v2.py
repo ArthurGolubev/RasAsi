@@ -19,10 +19,10 @@ class TodayTasksV2:
         cur.execute("""SELECT id_storage, content FROM my_storage WHERE (completed = FALSE)""")
         self._snapshot_my_storage = cur.fetchall()
 
-        print(self._snapshot_my_storage)
+        # print(self._snapshot_my_storage)
         cur.close()
         conn.close()
-        input('pause\t')
+        # input('pause\t')
 
     def get_3_tasks(self, n=None):   # TODO может сделать один снимок базы my_storage при инициализации объекта класса?
 
