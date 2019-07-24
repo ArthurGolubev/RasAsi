@@ -61,23 +61,20 @@ class TodayTasksV2:
                                       ).list_tasks(completedMin=today)
 
         for i in completed_tasks:
-            print('title\t', i['title'])
+            comment = ''
+            id_task = None
+
+            for i2 in self._snapshot_my_storage:
+                if i2[1] == i['title']:
+                    id_task = i2[0]
 
             conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=self._upass, host='localhost')
             cur = conn.cursor()
 
-            for i2 in self._snapshot_my_storage:
-                if i2[1] == i['title']:
-                    print('stop - i title - ', i['title'], 'id - ', i2[0])
-                    id_task = i2[0]
-                    print('id- tasks - ', id_task)
-                    input('pauseSTOPE\t')
-                    break
-
-            if i.get('notes'):
+            if i.get('notes') and id_task:
                 tags = i['notes'].split('#')[1:]
                 comment = i['notes'].split('#')[0]
-                print('comment - \t', comment, '\n tag - ', tags)
+
                 for tag in tags:
                     if tag.startswith('daily_sp'):
                         cur.execute("""INSERT INTO daily_ach (date, daily_sp) VALUES (current_date, True)""")
@@ -87,8 +84,6 @@ class TodayTasksV2:
                         cur.execute("""INSERT INTO daily_ach (date, daily_read) VALUES (current_date, True)""")
 
                     elif tag.startswith('python'):
-                        print('python tag')
-                        print('id ', id_task)
                         cur.execute("""INSERT INTO first_tags (python, rid_my_storage) VALUES (%s, %s)""", (True, id_task))
 
                 cur.execute("""UPDATE my_storage SET completed = True, date_completed = current_date, comment = %s 
