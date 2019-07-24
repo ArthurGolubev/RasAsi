@@ -50,7 +50,8 @@ class GoogleDrive:
             metadata = {'name': name}
             if folder_id:
                 metadata.update({'parents': [folder_id]})
-
+            if mimeType:
+                metadata['mimeType'] = mimeType
             respond = self._GoogleDrive.files().create(body=metadata, media_body=filename).execute()
 
             if respond:
