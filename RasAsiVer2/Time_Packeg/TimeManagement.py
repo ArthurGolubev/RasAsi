@@ -119,7 +119,7 @@ class TimeManagement:
                     self.cache_variables['23:50'] = 1
                     self._server_time()
                     # self._Task_check_clean_refresh()
-                    self.Task_v2.clear_v2()  # TODO проверить
+                    # self.Task_v2.clear_v2()  # TODO проверить
                     self.cache_variables['tasks_taken'] = 0
 
             self.temp.temperature_sensor()
@@ -146,7 +146,7 @@ class TimeManagement:
         self.Task.clean()
         self.Task.refresh_tasks()
         # self.Task_v2.refresh_v2()
-        self.Task_v2.clear_v2()
+        # self.Task_v2.clear_v2()
 
     def _lenta_discount(self, number): # TODO Содать вторую версию
         date = datetime.now().strftime('%d.%m.%Y')
