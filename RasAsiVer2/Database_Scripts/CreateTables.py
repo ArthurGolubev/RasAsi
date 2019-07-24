@@ -89,7 +89,7 @@ class CreateTables:
         self._migration_weather_journal(n, 2, upass=self.upass)
         self._migration_weather_journal(k, 1, upass=self.upass)
 
-    def migration_weather_journal(self):
+    def migration_my_storage(self):
         storage_data = GoogleSpreadsheet().get_spreadsheets_values(
             spreadsheet_id='1DvY6qzp32qP_BNTFU2opXlfQ0lpnjs1MnGZ7LWRJIbw',
             range_name='Лист1')['values']

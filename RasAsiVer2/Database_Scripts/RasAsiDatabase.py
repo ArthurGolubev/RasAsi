@@ -13,7 +13,7 @@ class RasAsiDatabase:
         conn.close()
         return 1
 
-    def id_city(self, place, upass):
+    def id_place(self, place, upass):
         place = place.capitalize()
 
         conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=upass, host='localhost')
