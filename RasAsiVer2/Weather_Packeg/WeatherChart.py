@@ -9,17 +9,18 @@ class WeatherChart:
     Krasnoyarsk_spreadsheetId = '1fgjOxFNxjnUIRRIA60xnWCpYyLRg0txuazimsbg1Km4'
     Novosibirsk_spreadsheetId = '1LZF9yopCmDpUUkjSPSu4krwwJ0IFOHV7Qioz_4SuFm0'
 
-    def __init__(self):
+    def __init__(self, upass):
         self.today = datetime.today()
+        self.upass = upass
 
         self.data = []
         self.chart_name = f'ChartWeather 18.03.2019 - {self.today.day}.{self.today.month}.{self.today.year}.html'
 
-        _Novosibirsk = Weather(place='novosibirsk')
+        _Novosibirsk = Weather(upass=self.upass, place='novosibirsk')
         Novosibirsk_data_set = _Novosibirsk.get_weather_data_set(spreadsheetId=self.Novosibirsk_spreadsheetId)
         # print(Novosibirsk_data_set)
 
-        _Krasnoyarsk = Weather(place='krasnoyarsk')
+        _Krasnoyarsk = Weather(upass=self.upass, place='krasnoyarsk')
         Krasnoyarsk_data_set = _Krasnoyarsk.get_weather_data_set(self.Krasnoyarsk_spreadsheetId)
         # print(Krasnoyarsk_data_set)
 

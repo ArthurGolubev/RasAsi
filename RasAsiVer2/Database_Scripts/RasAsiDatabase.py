@@ -99,4 +99,4 @@ class RasAsiDatabase:
         conn.commit()
         cur.close()
         conn.close()
-        print('weather successfully added to database ☁😊')
+        print('weather successfully added to database ☁  😊')
