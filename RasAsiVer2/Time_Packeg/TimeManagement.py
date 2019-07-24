@@ -66,7 +66,7 @@ class TimeManagement:
                                 self.Task_v2.get_specific_one_v2(int(message['content']))
                             else:
                                 self.Task.give_me_one()
-                                self.Task_v2.refresh_v2()
+                                # self.Task_v2.refresh_v2()
                                 self.Task_v2.get_3_tasks(n=1)
                         elif message['topic'] == 'Лента':  # TODO Сделать таблицу для Ленты
                             self._lenta_discount(number=message['content'])
@@ -145,7 +145,7 @@ class TimeManagement:
         self.Task.day_completed()
         self.Task.clean()
         self.Task.refresh_tasks()
-        self.Task_v2.refresh_v2()
+        # self.Task_v2.refresh_v2()
         self.Task_v2.clear_v2()
 
     def _lenta_discount(self, number): # TODO Содать вторую версию
