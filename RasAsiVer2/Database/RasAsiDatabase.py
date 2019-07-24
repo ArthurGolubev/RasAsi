@@ -100,3 +100,13 @@ class RasAsiDatabase:
         cur.close()
         conn.close()
         print('weather successfully added to database ☁  😊')
+
+    def lenta_discount(self, discount, upass):
+        conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=upass, host='localhost')
+        cur = conn.cursor()
+
+        cur.execute("""INSERT INTO lenta_discount (date, discount) VALUES (current_date, %s)""", (discount,))
+
+        conn.commit()
+        cur.close()
+        conn.close()

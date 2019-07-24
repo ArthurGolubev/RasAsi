@@ -157,6 +157,24 @@ class CreateTables:
         cur.close()
         conn.close()
 
+    def create_lenta(self):
+        l = GoogleSpreadsheet().get_spreadsheets_values(spreadsheet_id='1SEOxlcQcaVQAhvzAalPUlgpiRWrG0-ji3M8RrZbMnTE',
+                                                        range_name='Лист1')['values']
+
+        conn =psycopg2.connect(database='rasasi_database', user='rasasi', password=self.upass, host='localhost')
+        cur = conn.cursor()
+
+        cur.execute("""CREATE TABLE IF NOT EXISTS lenta_discount (
+        id_discount serial PRIMARY KEY, 
+        date date, 
+        discount INTEGER)""")
+
+        execute_values(cur, """INSERT INTO lenta_discount (date, discount) VALUES %s""", l)
+        conn.commit()
+        cur.close()
+        conn.close()
+
+
 if __name__ == '__main__':
     query = """SELECT"""
     somenum = CreateTables(upass=input('pass ')).connection(somfunc=query)

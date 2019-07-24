@@ -109,7 +109,7 @@ class TodayTasksV2:
 
         conn.commit()
         cur.close()
-        conn.clos()
+        conn.close()
 
     def clear_v2(self):
         Tasks = GoogleTasks(mainID=self._tasklist_id).list_tasks()
