@@ -46,8 +46,8 @@ class TodayTasksV2:
         :return: Nothing
         """
         for i in self._snapshot_my_storage:
-            print(i, type(i), num, type(num))
-            if i[0] == str(num):
+            print(i[0], type(i), num, type(num))
+            if i[0] == num:
                 GoogleTasks(mainID=self._tasklist_id).insert(task={i[1]})
                 break
 
