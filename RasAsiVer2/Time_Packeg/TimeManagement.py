@@ -57,7 +57,7 @@ class TimeManagement:
 
                         if message['topic'] == 'Время':
                             self._server_time()
-                        elif message['topic'] == 'Хранилище': # TODO опробовать
+                        elif message['topic'] == 'Хранилище':
                             self._Task_put(material=message['content'])
                         elif message['topic'] == 'Дай мне один': # TODO опробовать
                             if len(message['content'].strip()):

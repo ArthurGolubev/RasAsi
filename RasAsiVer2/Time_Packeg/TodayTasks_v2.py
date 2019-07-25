@@ -12,17 +12,17 @@ class TodayTasksV2:
     def __init__(self, upass):
 
         self._upass = upass
+        self.snapshot_my_storage()
 
+    def snapshot_my_storage(self):
         conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=self._upass, host='localhost')
         cur = conn.cursor()
 
         cur.execute("""SELECT id_storage, content FROM my_storage WHERE (completed = FALSE)""")
         self._snapshot_my_storage = cur.fetchall()
 
-        # print(self._snapshot_my_storage)
         cur.close()
         conn.close()
-        # input('pause\t')
 
     def get_3_tasks(self, n=None):   # TODO может сделать один снимок базы my_storage при инициализации объекта класса?
 
@@ -46,10 +46,11 @@ class TodayTasksV2:
         :return: Nothing
         """
         for i in self._snapshot_my_storage:
-            if i[0] == num:
+            if i[0] == str(num):
                 GoogleTasks(mainID=self._tasklist_id).insert(task={i[1]})
+                break
 
-    def refresh_v2(self):  # TODO метод ещё не сделан
+    def refresh_v2(self):
         """
         Shows completed today (from 00:00 today). Checks for tags. Marks the event in the corresponding tag table
         :return:
@@ -67,6 +68,7 @@ class TodayTasksV2:
             for i2 in self._snapshot_my_storage:
                 if i2[1] == i['title']:
                     id_task = i2[0]
+                    break
 
             conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=self._upass, host='localhost')
             cur = conn.cursor()
@@ -77,11 +79,14 @@ class TodayTasksV2:
 
                 for tag in tags:
                     if tag.startswith('daily_sp'):
-                        cur.execute("""INSERT INTO daily_ach (date, daily_sp) VALUES (current_date, True)""")
+                        cur.execute("""INSERT INTO daily_ach (date, daily_sp) VALUES (current_date, True) 
+                        ON CONFLICT (date) DO UPDATE SET daily_sp = True""")
                     elif tag.startswith('daily_rs_ins'):
-                        cur.execute("""INSERT INTO daily_ach (date, daily_rs_ins) VALUES (current_date, True)""")
+                        cur.execute("""INSERT INTO daily_ach (date, daily_rs_ins) VALUES (current_date, True) 
+                        ON CONFLICT (date) DO UPDATE SET daily_rs_ins = True""")
                     elif tag.startswith('daily_read'):
-                        cur.execute("""INSERT INTO daily_ach (date, daily_read) VALUES (current_date, True)""")
+                        cur.execute("""INSERT INTO daily_ach (date, daily_read) VALUES (current_date, True) 
+                        ON CONFLICT (date) DO UPDATE SET daily_read = True""")
 
                     elif tag.startswith('python'):
                         cur.execute("""INSERT INTO first_tags (python, rid_my_storage) VALUES (%s, %s)""", (True, id_task))
@@ -119,6 +124,7 @@ class TodayTasksV2:
                 GoogleTasks(mainID=self._tasklist_id).delete_task(task_id=i['id'])
         self._DailyTasks.clear()
         self._snapshot_my_storage.clear()
+        self.snapshot_my_storage()
 
 
 if __name__ == '__main__':
