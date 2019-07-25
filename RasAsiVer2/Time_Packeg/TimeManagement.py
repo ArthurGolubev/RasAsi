@@ -114,6 +114,7 @@ class TimeManagement:
 
                 elif cTime.minute in [5, 6, 7] and not self.cache_variables['weather']:
                     GoogleGmail().send_message(topic='☁🌫 Погода не получена', message_text='Не удолось получить погоду')
+                    self.cache_variables['weather'] = 1
             elif cTime.hour == 23:
                 if cTime.minute in [50, 51, 52] and not self.cache_variables['23:50']:
                     self.cache_variables['23:50'] = 1
