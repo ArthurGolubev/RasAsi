@@ -1,18 +1,19 @@
+ # TODO Сделать ежедневный прогноз (присылать)
+  # сделать формирование ОБЩЕГО отчёта в одном письме
 from time import sleep
 from getpass import getpass
+from psycopg2 import OperationalError
 from datetime import datetime, timedelta
 from RasAsiVer2.Google.GoogleGmail import GoogleGmail
 from RasAsiVer2.Time_Packeg.TodayTasks import TodayTasks
 from RasAsiVer2.Decorators.Decorators import time_decorator
+from RasAsiVer2.Database.RasAsiDatabase import RasAsiDatabase
 from RasAsiVer2.Time_Packeg.TodayTasks_v2 import TodayTasksV2
 from RasAsiVer2.Time_Packeg.TransportCard import TransportCard
 from RasAsiVer2.Decorators.Decorators import logging_decorator
 from RasAsiVer2.Weather_Packeg.WeatherToday import WeatherToday
 from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
-from RasAsiVer2.Database.RasAsiDatabase import RasAsiDatabase
-# from RasAsiVer2.Database.dump_database import dump_rasasi_database
 from RasAsiVer2.addiction_support.psutil_temperature import TemperatureSensor
-from psycopg2 import OperationalError
 
 
 class TimeManagement:
@@ -59,13 +60,11 @@ class TimeManagement:
                             self._server_time()
                         elif message['topic'] == 'Хранилище':
                             self._Task_put(material=message['content'])
-                        elif message['topic'] == 'Дай мне один': # TODO опробовать
+                        elif message['topic'] == 'Дай мне один':
                             if len(message['content'].strip()):
                                 print(message['content'])
-                                # self.Task.give_me_specific_one(message['content'])
                                 self.Task_v2.get_specific_one_v2(int(message['content']))
                             else:
-                                self.Task.give_me_one()
                                 self.Task_v2.refresh_v2()
                                 self.Task_v2.get_3_tasks(n=1)
                         elif message['topic'] == 'Лента':  # TODO Сделать таблицу для Ленты
@@ -101,7 +100,7 @@ class TimeManagement:
             elif cTime.hour == 8:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['tasks_taken']:
                     self.cache_variables['tasks_taken'] = 1
-                    self.Task.take_tasks()
+                    # self.Task.take_tasks()
                     self.Task_v2.get_3_tasks()
 
                     today = datetime.today()
@@ -120,7 +119,7 @@ class TimeManagement:
                     self.cache_variables['23:50'] = 1
                     self._server_time()
                     # self._Task_check_clean_refresh()
-                    # self.Task_v2.clear_v2()  # TODO проверить
+                    self.Task_v2.clear_v2()
                     self.cache_variables['tasks_taken'] = 0
 
             self.temp.temperature_sensor()
@@ -138,22 +137,23 @@ class TimeManagement:
             topic='Server time ☁', message_text=f'🎉👌 Время работы сервера:\t {cTime}')
 
     def _Task_put(self, material):
-        self.Task.put(material=material.strip())
+        self.Task.put(material=material.strip())  # TODO Дублирующий метод пока v2 не отработан
         self.Task_v2.put_v2(content=material.strip())
 
     def _Task_check_clean_refresh(self):
-        self.Task.check()
-        self.Task.day_completed()
-        self.Task.clean()
-        self.Task.refresh_tasks()
+        # self.Task.check()
+        # self.Task.day_completed()
+        # self.Task.clean()
+        # self.Task.refresh_tasks()
         self.Task_v2.refresh_v2()
-        # self.Task_v2.clear_v2()
+        self.Task_v2.clear_v2()
 
-    def _lenta_discount(self, number): # TODO Содать вторую версию
+    def _lenta_discount(self, number):
         date = datetime.now().strftime('%d.%m.%Y')
         GoogleSpreadsheet().append_spreadsheets_values(values=[[date, int(number)]],
                                                        spreadsheet_id='1SEOxlcQcaVQAhvzAalPUlgpiRWrG0-ji3M8RrZbMnTE',
                                                        range_name='Лист1')
+        RasAsiDatabase().lenta_discount(upass=self.upass, discount=int(number))
 
     def _unsupported_command(self, command, content=None):
         GoogleGmail().send_message(topic='🤢 Неподдерживаемая команда 🤯',

@@ -101,7 +101,7 @@ class RasAsiDatabase:
         conn.close()
         print('weather successfully added to database ☁  😊')
 
-    def lenta_discount(self, discount, upass):
+    def lenta_discount(self, upass, discount):
         conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=upass, host='localhost')
         cur = conn.cursor()
 
