@@ -87,7 +87,7 @@ class TimeManagement:
                 self.cache_variables['weather'] = 0     # nullification (new day)
                 self.cache_variables['today_id'] = 0    # nullification (new day)
 
-            elif cTime.hour == 13:  # TODO Указать время 00:00
+            elif cTime.hour == 0:
                 if cTime.minute in [8, 9, 10] and not self.cache_variables['00:00']:
                     self.cache_variables['00:00'] = 1
                     self.RAD.dump_rasasi_database()

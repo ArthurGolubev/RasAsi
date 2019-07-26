@@ -4,6 +4,7 @@ import subprocess
 from sys import platform
 from psycopg2.extras import execute_values
 from RasAsiVer2.Google.GoogleDrive import GoogleDrive
+from RasAsiVer2.Google.GoogleGmail import GoogleGmail
 
 
 class RasAsiDatabase:
@@ -53,31 +54,65 @@ class RasAsiDatabase:
 
         :return: список с ['датавремя - осадки',]
         """
-        precipitation_forecast = []
+        forecast = []
+        precipitation_forecast= []
+        temperature_forecast = []
+        wind_forecast = []
+
         conn = psycopg2.connect(dbname='rasasi_database', user='rasasi', password=upass, host='localhost')
         cur = conn.cursor()
 
         cur.execute(
             """SELECT * FROM "weather_journal" WHERE (
-            "time" >= %s AND 
-            "time" < %s AND 
-            "precipitation_mm" > 0 AND 
+            "time" >= %s AND
+            "time" < %s AND
+            "precipitation_mm" > 0 AND
             "id_place" = 1)""", (
             datetime.datetime.today().date(),
             datetime.datetime.today().date()+datetime.timedelta(days=1)))
-        response = cur.fetchall()
 
-        for i in response:
-            precipitation_forecast.append(str(i[3]) + ' - ' + str(i[5]) + ' мм 🌧')
+        # cur.execute(
+        #     """SELECT * FROM weather_journal WHERE (
+        #     time >= '2019-07-01' AND
+        #     time < '2019-07-02' AND
+        #     id_place = 1)"""
+        # )
+        response = cur.fetchall()
 
         cur.close()
         conn.close()
 
-        if precipitation_forecast:
-            return precipitation_forecast
-        else:
+        for i in response:
+            if i[4] > 0:
+                precipitation_forecast.append(str(i[2]).split(' ')[1] + ' - ' + str(i[4]) + ' мм 🌧')
+            if i[3] > 4:
+                wind_forecast.append(str(i[2]).split(' ')[1] + ' - ' + str(i[3]) + ' м/с 🌫')
+            temperature_forecast.append(str(i[2]).split(' ')[1] + ' - ' + str(i[5]) + ' C ☀')
+
+        if not precipitation_forecast:
             precipitation_forecast.append('Без осадков☀☺')
-            return precipitation_forecast
+        if not wind_forecast:
+            wind_forecast.append('Безветренно 🌫☺')
+
+        precipitation_forecast = '\n'.join(precipitation_forecast)
+        temperature_forecast = '\n'.join(temperature_forecast)
+        wind_forecast = '\n'.join(wind_forecast)
+
+        print('\nОсадки:\n', precipitation_forecast)
+        print('\nТемпература:\n', temperature_forecast)
+        print('\nСкорость ветра:\n', wind_forecast)
+
+        # weather_forecast = f'Погода на {datetime.datetime.today().date()}\n\n' \
+        #     f'Осадки:\n{precipitation_forecast}\n\n' \
+        #     f'Температура:\n{temperature_forecast}\n\n' \
+        #     f'Скорость ветра:\n{wind_forecast}'
+        # return weather_forecast
+
+        GoogleGmail().send_message(topic=f'Погода на {datetime.datetime.today().date()}',
+                                   message_text=f'Осадки:\n{precipitation_forecast}\n\n'
+                                   f'Температура:\n{temperature_forecast}\n\n'
+                                   f'Скорость ветра:\n{wind_forecast}')
+
 
     def append_database_today_weather(self, values, upass):
 
