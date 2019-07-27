@@ -162,7 +162,9 @@ class RasAsiDatabase:
         count2 = cur.fetchone()[0]
         count = count1 + count2
         GoogleGmail().send_message(topic=f'Выполненных за сегодня {datetime.datetime.today().date()}',
-                                   message_text=f'{count} 👌☺')
+                                   message_text=f"Выполнено daily'ков {count2}\n"
+                                   f"Выполнено задач {count1}\n"
+                                   f"Выполнено в общем {count} 👌☺")
 
         cur.close()
         conn.close()
