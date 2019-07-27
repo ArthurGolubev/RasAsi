@@ -89,6 +89,12 @@ class TodayTasksV2:
 
                     elif tag.startswith('python'):
                         cur.execute("""INSERT INTO first_tags (python, rid_my_storage) VALUES (%s, %s)""", (True, id_task))
+                    elif tag.startswith('rs'):
+                        cur.execute("""INSERT INTO first_tags (rs, rid_my_storage) VALUES (%s, %s)""", (True, id_task))
+                    elif tag.startswith('other'):
+                        cur.execute("""INSERT INTO first_tags (other, rid_my_storage) VALUES (%s, %s)""", (True, id_task))
+
+
 
                 cur.execute("""UPDATE my_storage SET completed = True, date_completed = current_date, comment = %s 
                                 WHERE (id_storage = %s)""", (comment, id_task))             # обновление my_storage
@@ -109,7 +115,19 @@ class TodayTasksV2:
         conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=self._upass, host='localhost')
         cur = conn.cursor()
 
-        cur.execute("""INSERT INTO my_storage (date_added, content) VALUES (current_date, %s)""", (content,))
+        cur.execute("""INSERT INTO my_storage (date_added, content) VALUES (current_date, %s) RETURNING id_storage""",
+                    (content,))
+        id_task = cur.fetchone()[0]
+
+        tags = content.split('#')
+        if len(tags) > 1:
+            for tag in tags[1:]:
+                if tag.startswith('python'):
+                    cur.execute("""INSERT INTO first_tags (python, rid_my_storage) VALUES (%s, %s)""", (True, id_task))
+                elif tag.startswith('rs'):
+                    cur.execute("""INSERT INTO first_tags (rs, rid_my_storage) VALUES (%s, %s)""", (True, id_task))
+                elif tag.startswith('other'):
+                    cur.execute("""INSERT INTO first_tags (other, rid_my_storage) VALUES (%s, %s)""", (True, id_task))
 
         conn.commit()
         cur.close()
