@@ -102,7 +102,7 @@ class CreateTables:
         id_storage serial PRIMARY KEY, 
         date_added date, 
         content text, 
-        completed boolean, 
+        completed boolean DEFAULT False, 
         date_completed date NULL, 
         comment text NULL)""")
 
