@@ -157,9 +157,12 @@ class RasAsiDatabase:
         cur.execute("""INSERT INTO daily_ach (date) VALUES (current_date) ON CONFLICT (date) DO NOTHING""")
         cur.execute("""SELECT COUNT(id_storage) FROM my_storage WHERE(
         date_completed >= current_date)""")
-        count1 = cur.fetchone()[0]
+        count1 = cur.fetchone()
+        print(count1)
         cur.execute("""SELECT * FROM daily_ach WHERE (date = current_date)""")
-        count2 = cur.fetchone()[0]
+        count2 = cur.fetchone()
+        print(count2)
+        input('pause\t')
         count = count1 + count2
         GoogleGmail().send_message(topic=f'Выполненных за сегодня {datetime.datetime.today().date()}',
                                    message_text=f"Выполнено daily'ков {count2}\n"
