@@ -47,10 +47,7 @@ class TodayTasksV2:
         :return: Nothing
         """
         for i in self._snapshot_my_storage:
-            print('i[0] - ', type(i[0]))
-            print(i[0], ' - ', num)
             if i[0] == num:
-                input('pause\t')
                 GoogleTasks(mainID=self._tasklist_id).insert(task={'title': i[1]})
                 break
 
@@ -59,9 +56,7 @@ class TodayTasksV2:
         Shows completed today (from 00:00 today). Checks for tags. Marks the event in the corresponding tag table
         :return:
         """
-        print('len before - ', len(self._snapshot_my_storage))
         self.snapshot_my_storage()
-        print('len after - ', len(self._snapshot_my_storage))
         cTime = datetime.now().time()
         today = (datetime.utcnow() - timedelta(hours=cTime.hour, minutes=cTime.minute, seconds=cTime.second)
                  ).isoformat('T') + 'Z'

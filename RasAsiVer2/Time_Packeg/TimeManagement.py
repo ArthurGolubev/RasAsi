@@ -66,7 +66,6 @@ class TimeManagement:
                         elif message['topic'] == 'Дай мне один':
                             if len(message['content'].strip()):
                                 print(message['content'])
-                                self.Task_v2.refresh_v2()
                                 self.Task_v2.get_specific_one_v2(int(message['content']))
                             else:
                                 self.Task_v2.refresh_v2()
