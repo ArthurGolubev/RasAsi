@@ -157,8 +157,8 @@ class RasAsiDatabase:
         cur.execute("""SELECT COUNT(id_storage) FROM my_storage WHERE(
         date_completed >= current_date)""")
         count = cur.fetchone()[0]
-        print(count)
-        GoogleGmail().send_message(topic='Выполненных за сегодня', message_text=f'{count} 👌☺')
+        GoogleGmail().send_message(topic=f'Выполненных за сегодня {datetime.datetime.today().date()}',
+                                   message_text=f'{count} 👌☺')
 
         cur.close()
         conn.close()
