@@ -70,12 +70,14 @@ class TimeManagement:
                             else:
                                 self.Task_v2.refresh_v2()
                                 self.Task_v2.get_3_tasks(n=1)
-                        elif message['topic'] == 'Лента':  # TODO Сделать таблицу для Ленты
+                        elif message['topic'] == 'Лента':
                             self._lenta_discount(number=message['content'])
                         elif message['topic'] == 'Проездной':
                             TransportCard(who='me').transport_card()
                         elif message['topic'] == 'Погода':
                             WeatherToday(upass=self.upass).weather_today()
+                        elif message['topic'] == 'Прогноз':
+                            RasAsiDatabase().daily_forecast(upass=self.upass)
                         else:
                             self._unsupported_command(message['topic'], message['content'])
 
@@ -113,7 +115,7 @@ class TimeManagement:
                     else:
                         nday = 365 - int(day)
                     GoogleGmail().send_message(topic=f'День {day} ☀🔆 осталось {nday}', message_text='😗☺')
-
+                    RasAsiDatabase().daily_forecast(upass=self.upass)
                 elif cTime.minute in [5, 6, 7] and not self.cache_variables['weather']:
                     GoogleGmail().send_message(topic='☁🌫 Погода не получена', message_text='Не удолось получить погоду')
                     self.cache_variables['weather'] = 1
