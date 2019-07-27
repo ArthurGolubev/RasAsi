@@ -123,8 +123,8 @@ class TimeManagement:
                 if cTime.minute in [50, 51, 52] and not self.cache_variables['23:50']:
                     self.cache_variables['23:50'] = 1
                     self._server_time()
-                    # self._Task_check_clean_refresh()
-                    self.Task_v2.clear_v2()
+                    self._Task_check_clean_refresh()
+                    # self.Task_v2.clear_v2()
                     self.cache_variables['tasks_taken'] = 0
 
             self.temp.temperature_sensor()

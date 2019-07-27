@@ -112,8 +112,8 @@ class RasAsiDatabase:
 
         GoogleGmail().send_message(topic=f'Погода на {datetime.datetime.today().date()}',
                                    message_text=f'Осадки:\n{precipitation_forecast}\n\n'
-                                   f'Скорость ветра:\n{wind_forecast}'
-                                   f'Температура:\n{temperature_forecast}\n\n'
+                                   f'Скорость ветра:\n{wind_forecast}\n\n'
+                                   f'Температура:\n{temperature_forecast}'
                                    )
 
 
