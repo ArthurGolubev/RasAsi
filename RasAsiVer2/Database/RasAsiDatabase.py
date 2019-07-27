@@ -160,7 +160,7 @@ class RasAsiDatabase:
         count1 = cur.fetchone()[0]
         cur.execute("""SELECT * FROM daily_ach WHERE (date = current_date)""")
         count2 = cur.fetchone()[0]
-        count = count1 + len(count2)
+        count = count1 + count2
         GoogleGmail().send_message(topic=f'Выполненных за сегодня {datetime.datetime.today().date()}',
                                    message_text=f'{count} 👌☺')
 
