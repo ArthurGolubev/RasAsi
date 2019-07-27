@@ -91,7 +91,7 @@ class TimeManagement:
                 self.cache_variables['today_id'] = 0    # nullification (new day)
 
             elif cTime.hour == 23:  # TODO ВРЕМЯ
-                if cTime.minute in [8, 9, 25] and not self.cache_variables['00:00']:
+                if cTime.minute in [8, 9, 35] and not self.cache_variables['00:00']:
                     self.cache_variables['00:00'] = 1
                     # self.RAD.dump_rasasi_database(upass=self.upass)  # TODO Разкоментировать
                     self.RAD.task_completed_today(upass=self.upass)
