@@ -66,7 +66,8 @@ class RasAsiDatabase:
             """SELECT * FROM "weather_journal" WHERE (
             "time" >= %s AND
             "time" < %s AND
-            "precipitation_mm" > 0 AND
+            "precipitation_mm" > 0 AND 
+            "wind_mps" > 4 AND 
             "id_place" = 1)""", (
             datetime.datetime.today().date(),
             datetime.datetime.today().date()+datetime.timedelta(days=1)))
@@ -83,11 +84,9 @@ class RasAsiDatabase:
         conn.close()
 
         for i in response:
-            if i[4] > 0:
-                precipitation_forecast.append(str(i[2]).split(' ')[1] + ' - ' + str(i[4]) + ' мм 🌧')
-            if i[3] > 4:
-                wind_forecast.append(str(i[2]).split(' ')[1] + ' - ' + str(i[3]) + ' м/с 🌫')
+            precipitation_forecast.append(str(i[2]).split(' ')[1] + ' - ' + str(i[4]) + ' мм 🌧')
             temperature_forecast.append(str(i[2]).split(' ')[1] + ' - ' + str(i[5]) + ' C ☀')
+            wind_forecast.append(str(i[2]).split(' ')[1] + ' - ' + str(i[3]) + ' м/с 🌫')
 
         if not precipitation_forecast:
             precipitation_forecast.append('Без осадков☀☺')
