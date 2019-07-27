@@ -36,15 +36,19 @@ class RasAsiDatabase:
 
         return id_place
 
-    def dump_rasasi_database(self):
+    def dump_rasasi_database(self, upass):
         if platform == 'linux':
             cTime = datetime.datetime.now().date() - datetime.timedelta(days=1)
             path = fr'/home/rasasi/dump_database_rasasi/{cTime}.sql'
             with subprocess.Popen(fr'pg_dump rasasi_database > {path}', shell=True, executable='/bin/bash'):
-            # process.terminate()
-                print(1)
+                print('DATABASE DUMP WAS SUCCESS')
+            with subprocess.Popen(fr'7z a -mx0 -p{upass} -sdel {cTime}.7z {path}'):
+                print('ARCHIVED WITH PASSWORD')
+                path = fr'/home/rasasi/dump_database_rasasi/{cTime}.7z'
+
             GoogleDrive().upload(files=path, folder_id='1CpsaUbjn2_4Zm6Sog05BBQwf3MEqQ2Vk')
-            print('DATABASE DUMP WAS SUCCESS')
+            print('UPLOAD DUMP TO THE CLOUD')
+            print('DATABASE DUMP WAS SUCCESS 👌')
         else:
             print(f'Платформа {platform} не поддерживается\nБэкап базы данных не совершён')
 
