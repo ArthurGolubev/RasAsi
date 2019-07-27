@@ -149,3 +149,15 @@ class RasAsiDatabase:
         conn.commit()
         cur.close()
         conn.close()
+
+    def task_completed_today(self, upass):
+        conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=upass, host='localhost')
+        cur = conn.cursor()
+
+        cur.execute("""SELECT COUNT(id_storage) FROM my_storage WHERE(
+        date_completed >= current_date)""")
+        count = cur.fetchone()[0]
+        GoogleGmail().send_message(topic='Выполненных за сегодня', message_text=f'{count} 👌☺')
+
+        cur.close()
+        conn.close()
