@@ -42,7 +42,7 @@ class RasAsiDatabase:
             path = fr'/home/rasasi/dump_database_rasasi/{cTime}.sql'
             with subprocess.Popen(fr'pg_dump rasasi_database > {path}', shell=True, executable='/bin/bash'):
                 print('DATABASE DUMP WAS SUCCESS')
-            subprocess.Popen(fr'7z a -mx0 -sdel -mhe=on -p123 2019-07-26.7z /home/rasasi/dump_database_rasasi/2019-07-26.sql', shell=True, executable='/usr/bin/7z')
+            subprocess.Popen(fr'7z a -mx0 -sdel -mhe=on -p123 2019-07-26.7z /home/rasasi/dump_database_rasasi/2019-07-26.sql', executable='/usr/bin/7z')
             print('ARCHIVED WITH PASSWORD')
             path = fr'/home/rasasi/dump_database_rasasi/{cTime}.7z'
 
