@@ -180,7 +180,6 @@ class CreateTables:
         self.create_first_tags()
         self.create_daily_ach()
         self.ct_m_weather_journal()
-        self.ct_m_weather_journal()
 
 if __name__ == '__main__':
     query = """SELECT"""
