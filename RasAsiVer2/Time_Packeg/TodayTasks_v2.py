@@ -55,6 +55,7 @@ class TodayTasksV2:
         Shows completed today (from 00:00 today). Checks for tags. Marks the event in the corresponding tag table
         :return:
         """
+        self.snapshot_my_storage()
         cTime = datetime.now().time()
         today = (datetime.utcnow() - timedelta(hours=cTime.hour, minutes=cTime.minute, seconds=cTime.second)
                  ).isoformat('T') + 'Z'
