@@ -26,13 +26,13 @@ class CreateTables:
         conn.close()
         return respond
 
-    def _migration_weather_journal(self, city_weather, city_num, upass):
+    def _migration_weather_journal(self, place_weather, place_num, upass):
 
         some_some_dict = []
-        for i in city_weather['values'][1:]:
+        for i in place_weather['values'][1:]:
             some_dict = []
             temp_dict = []
-            temp_dict.append(city_num)
+            temp_dict.append(place_num)
             temp_dict.append(i[0])
             for i2 in i[1:6]:
                 t = i2.split(' ')[0].replace(',', '.')
@@ -55,9 +55,9 @@ class CreateTables:
         place varchar(30) UNIQUE)""")
 
         cur.execute(
-            """INSERT INTO my_place (country, city) VALUES ('Russia', 'Krasnoyarsk') ON CONFLICT (city) DO NOTHING""")
+            """INSERT INTO my_place (country, place) VALUES ('Russia', 'Krasnoyarsk') ON CONFLICT (place) DO NOTHING""")
         cur.execute(
-            """INSERT INTO my_place (country, city) VALUES ('Russia', 'Novosibirsk') ON CONFLICT (city) DO NOTHING""")
+            """INSERT INTO my_place (country, place) VALUES ('Russia', 'Novosibirsk') ON CONFLICT (place) DO NOTHING""")
 
         cur.execute("""CREATE TABLE IF NOT EXISTS "weather_journal" (
         id_weather_journal serial PRIMARY KEY, 
