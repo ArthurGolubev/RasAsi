@@ -40,7 +40,6 @@ class TodayTasksV2:
         print('3 Tasks\t', self._DailyTasks)
 
     def get_specific_one_v2(self, num):
-        print('num is - ', num, '\ntyp - ', type(num))
         """
 
         :param num: id specific entry
