@@ -39,12 +39,12 @@ class RasAsiDatabase:
     def dump_rasasi_database(self, upass):
         if platform == 'linux':
             cTime = datetime.datetime.now().date() - datetime.timedelta(days=1)
-            path = fr'/home/rasasi/dump_database_rasasi/{cTime}.sql'
-            # with subprocess.Popen(fr'pg_dump rasasi_database > {path}', shell=True, executable='/bin/bash'):
-            #     print('DATABASE DUMP WAS SUCCESS')
-            subprocess.Popen(fr'7z a -mx0 -sdel -mhe=on -p123 2019-07-26.7z /home/rasasi/dump_database_rasasi/2019-07-26.sql', shell=True)
-            print('ARCHIVED WITH PASSWORD')
-            path = fr'/home/rasasi/dump_database_rasasi/{cTime}.7z'
+            path = fr'/home/rasasi/dump_database_rasasi/{cTime}'
+            with subprocess.Popen(fr'pg_dump rasasi_database > {path}.sql', shell=True, executable='/bin/bash'):  # TODO МОЖНО ЛИ ОБОЙТИСЬ БЕЗ executeble?
+                print('DATABASE DUMP WAS SUCCESS')
+            with subprocess.Popen(fr'7z a -mx0 -sdel -mhe=on -p{upass} {path}.7z {path}.sql', shell=True):
+                print('ARCHIVED WITH PASSWORD')
+            path = fr'{path}.7z'
 
             GoogleDrive().upload(files=path, folder_id='1CpsaUbjn2_4Zm6Sog05BBQwf3MEqQ2Vk')
             print('UPLOAD DUMP TO THE CLOUD 👌')
