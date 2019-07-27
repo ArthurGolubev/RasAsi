@@ -84,7 +84,7 @@ class RasAsiDatabase:
         for i in response:
             if i[4] > 0:
                 precipitation_forecast.append(str(i[2]).split(' ')[1] + ' - ' + str(i[4]) + ' мм 🌧')
-            if i[3] > 4:
+            if i[3] >= 4:
                 wind_forecast.append(str(i[2]).split(' ')[1] + ' - ' + str(i[3]) + ' м/с 🌫')
             temperature_forecast.append(str(i[2]).split(' ')[1] + ' - ' + str(i[5]) + ' C ☀')
 
@@ -109,8 +109,9 @@ class RasAsiDatabase:
 
         GoogleGmail().send_message(topic=f'Погода на {datetime.datetime.today().date()}',
                                    message_text=f'Осадки:\n{precipitation_forecast}\n\n'
+                                   f'Скорость ветра:\n{wind_forecast}'
                                    f'Температура:\n{temperature_forecast}\n\n'
-                                   f'Скорость ветра:\n{wind_forecast}')
+                                   )
 
 
     def append_database_today_weather(self, values, upass):
