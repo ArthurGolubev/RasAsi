@@ -62,7 +62,6 @@ class TodayTasksV2:
                                       ).list_tasks(completedMin=today)
 
         for i in completed_tasks:
-            comment = ''
             id_task = None
 
             for i2 in self._snapshot_my_storage:
