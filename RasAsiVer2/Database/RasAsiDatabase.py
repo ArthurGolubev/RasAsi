@@ -155,6 +155,7 @@ class RasAsiDatabase:
         cur = conn.cursor()
 
         cur.execute("""INSERT INTO daily_ach (date) VALUES (current_date) ON CONFLICT (date) DO NOTHING""")
+        conn.commit()
         cur.execute("""SELECT COUNT(id_storage) FROM my_storage WHERE(
         date_completed >= current_date)""")
         count1 = cur.fetchone()
