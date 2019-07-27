@@ -24,7 +24,7 @@ class TodayTasksV2:
         cur.close()
         conn.close()
 
-    def get_3_tasks(self, n=None):   # TODO может сделать один снимок базы my_storage при инициализации объекта класса?
+    def get_3_tasks(self, n=None):
 
         if not n:
             n = 3
@@ -40,12 +40,14 @@ class TodayTasksV2:
         print('3 Tasks\t', self._DailyTasks)
 
     def get_specific_one_v2(self, num):
+        print('num is - ', num, '\ntyp - ', type(num))
         """
 
         :param num: id specific entry
         :return: Nothing
         """
         for i in self._snapshot_my_storage:
+            print('i[0] - ', type(i[0]))
             if i[0] == num:
                 GoogleTasks(mainID=self._tasklist_id).insert(task={'title': i[1]})
                 break
