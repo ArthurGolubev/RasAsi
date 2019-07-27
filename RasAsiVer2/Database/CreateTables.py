@@ -174,6 +174,12 @@ class CreateTables:
         cur.close()
         conn.close()
 
+    def create_all(self):
+        self.create_lenta()
+        self.migration_my_storage()
+        self.create_first_tags()
+        self.create_daily_ach()
+        self.ct_m_weather_journal()
 
 if __name__ == '__main__':
     query = """SELECT"""

@@ -40,7 +40,7 @@ class RasAsiDatabase:
         if platform == 'linux':
             cTime = datetime.datetime.now().date() - datetime.timedelta(days=1)
             path = fr'/home/rasasi/dump_database_rasasi/{cTime}'
-            with subprocess.Popen(fr'pg_dump rasasi_database > {path}.sql', shell=True):  # TODO МОЖНО ЛИ ОБОЙТИСЬ БЕЗ executeble?
+            with subprocess.Popen(fr'pg_dump rasasi_database > {path}.sql', shell=True):
                 print('DATABASE DUMP WAS SUCCESS')
             with subprocess.Popen(fr'7z a -mx0 -sdel -mhe=on -p{upass} {path}.7z {path}.sql', shell=True):
                 print('ARCHIVED WITH PASSWORD')
