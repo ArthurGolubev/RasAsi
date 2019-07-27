@@ -120,7 +120,7 @@ class CreateTables:
             test_list.append(tuple(i))
 
         execute_values(cur,
-                       """INSERT INTO my_storage(date_added, content, completed, data_completed, comment) VALUES %s""",
+                       """INSERT INTO my_storage(date_added, content, completed, date_completed, comment) VALUES %s""",
                        test_list)
 
         conn.commit()
@@ -174,11 +174,12 @@ class CreateTables:
         cur.close()
         conn.close()
 
-    def create_all(self):
+    def create_all_tables(self):
         self.create_lenta()
         self.migration_my_storage()
         self.create_first_tags()
         self.create_daily_ach()
+        self.ct_m_weather_journal()
         self.ct_m_weather_journal()
 
 if __name__ == '__main__':
