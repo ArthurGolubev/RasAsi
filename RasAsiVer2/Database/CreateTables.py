@@ -134,9 +134,9 @@ class CreateTables:
         cur.execute("""CREATE TABLE IF NOT EXISTS daily_ach (
         id_daily_ach serial PRIMARY KEY, 
         date date UNIQUE, 
-        daily_sp boolean NULL, 
-        daily_rs_ins boolean NULL, 
-        daily_read boolean NULL)""")
+        daily_sp boolean NULL DEFAULT False, 
+        daily_rs_ins boolean NULL DEFAULT False, 
+        daily_read boolean NULL DEFAULT False)""")
 
         conn.commit()
         cur.close()

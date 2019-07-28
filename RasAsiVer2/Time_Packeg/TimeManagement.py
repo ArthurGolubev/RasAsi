@@ -90,8 +90,8 @@ class TimeManagement:
                 self.cache_variables['weather'] = 0     # nullification (new day)
                 self.cache_variables['today_id'] = 0    # nullification (new day)
 
-            elif cTime.hour == 8:
-                if cTime.minute in [8, 9, 51] and not self.cache_variables['00:00']:
+            elif cTime.hour == 9:
+                if cTime.minute in [8, 9, 38] and not self.cache_variables['00:00']:
                     self.cache_variables['00:00'] = 1
                     # self.RAD.dump_rasasi_database(upass=self.upass)  # TODO Разкоментировать
                     self.RAD.task_completed_today(upass=self.upass)
