@@ -117,7 +117,7 @@ class RasAsiDatabase:
                                    )
 
 
-    def append_database_today_weather(self, values, upass):
+    def append_database_today_weather(self, values, upass):  # TODO Сделать плейсхолдер в какую таблицу записывать (сегодня/завтра)
 
         """
 

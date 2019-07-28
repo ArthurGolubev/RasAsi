@@ -1,5 +1,3 @@
- # TODO Сделать ежедневный прогноз (присылать)
- # TODO сделать формирование ОБЩЕГО отчёта в одном письме
  # TODO сделать метод и соответствующую таблицу для сбора погоды на следующий день
   # потом можно будет сделать график, который сравнивает отличия прогноза на сегодня и прогноза на день вперёд
   # (текущего дня и сделанного вчера прогноза на сегодня)
@@ -34,7 +32,7 @@ class TimeManagement:
             upass = getpass()
 
     Task = TodayTasks()
-    Task_v2 = TodayTasksV2(upass=upass)  # TODO Перевести в RAD?
+    Task_v2 = TodayTasksV2(upass=upass)
 
     def __init__(self):
         self.messages = {}
@@ -57,7 +55,7 @@ class TimeManagement:
             self.messages = self._view_messages()
             if self.messages:
                 for message in self.messages:
-                    if message['from_person'] == 'zabavniy7@gmail.com': # TODO проверка должна проводится в 26 строке. Если отправил RasAsi для RasAsi - out of range
+                    if message['from_person'] == 'zabavniy7@gmail.com':
 
                         if message['topic'] == 'Время':
                             self._server_time()
@@ -90,11 +88,10 @@ class TimeManagement:
                 self.cache_variables['weather'] = 0     # nullification (new day)
                 self.cache_variables['today_id'] = 0    # nullification (new day)
 
-            elif cTime.hour == 9:
-                if cTime.minute in [8, 9, 45] and not self.cache_variables['00:00']:
+            elif cTime.hour == 0:
+                if cTime.minute in [8, 9, 10] and not self.cache_variables['00:00']:
                     self.cache_variables['00:00'] = 1
-                    # self.RAD.dump_rasasi_database(upass=self.upass)  # TODO Разкоментировать
-                    self.RAD.task_completed_today(upass=self.upass)
+                    self.RAD.dump_rasasi_database(upass=self.upass)
             elif cTime.hour == 1:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['01:00']:
                     self.cache_variables['01:00'] = 1
@@ -126,7 +123,7 @@ class TimeManagement:
                     self.cache_variables['23:50'] = 1
                     self._server_time()
                     self._Task_check_clean_refresh()
-                    # self.Task_v2.clear_v2()
+                    self.RAD.task_completed_today(upass=self.upass)
                     self.cache_variables['tasks_taken'] = 0
 
             self.temp.temperature_sensor()

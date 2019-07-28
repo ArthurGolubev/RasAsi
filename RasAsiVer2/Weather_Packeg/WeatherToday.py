@@ -11,14 +11,15 @@ class WeatherToday:
         self.upass = upass
 
     # @logging_decorator
-    def weather_today(self):
+    def weather_today(self):  # TODO передавать параметр в кокую таблицу погоды записывать (сегодня/завтра)
+         # TODO Передавать параметр, какой сборшик погоды запускать (сегодня/завтра)
         Krasnoyarsk = Weather(place='krasnoyarsk', upass=self.upass)
         Krasnoyarsk.get_weather()
-        Krasnoyarsk.append_spreadsheet(spreadsheet_id=self.Krasnoyarsk_spreadsheetId)  # TODO Разкоментировать
+        Krasnoyarsk.append_spreadsheet(spreadsheet_id=self.Krasnoyarsk_spreadsheetId)
 
         Novosibirsk = Weather(place='novosibirsk', upass=self.upass)
         Novosibirsk.get_weather()
-        Novosibirsk.append_spreadsheet(spreadsheet_id=self.Novosibirsk_spreadsheetId)  # TODO Разкоментировать
+        Novosibirsk.append_spreadsheet(spreadsheet_id=self.Novosibirsk_spreadsheetId)
 
         Krasnoyarsk.append_database()
         Novosibirsk.append_database()
@@ -33,7 +34,3 @@ class WeatherToday:
         # spec_place.append_spreadsheet(spreadsheet_id=self.spec_place_spreadsheetId, values=spec_place.day_weather[1:])
 
 
-if __name__ == '__main__':
-    WeatherToday(upass='').weather_today() # TODO удалить
-else:
-    print(f'Подключен модуль {__name__}')

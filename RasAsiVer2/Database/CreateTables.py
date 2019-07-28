@@ -26,7 +26,7 @@ class CreateTables:
         conn.close()
         return respond
 
-    def _migration_weather_journal(self, place_weather, place_num, upass):
+    def _migration_weather_journal(self, place_weather, place_num, upass):  # TODO создать таблицу для завтрашней погоды
 
         some_some_dict = []
         for i in place_weather['values'][1:]:
