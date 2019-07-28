@@ -86,10 +86,10 @@ class RasAsiDatabase:
 
         for i in response:
             if i[4] > 0:
-                precipitation_forecast.append(str(i[2]).split(' ')[1] + ' - ' + str(i[4]) + ' мм 🌧')
+                precipitation_forecast.append(str(i[2]) + ' - ' + str(i[4]) + ' мм 🌧')
             if i[3] >= 4:
-                wind_forecast.append(str(i[2]).split(' ')[1] + ' - ' + str(i[3]) + ' м/с 🌫')
-            temperature_forecast.append(str(i[2]).split(' ')[1] + ' - ' + str(i[5]) + ' C ☀')
+                wind_forecast.append(str(i[2]) + ' - ' + str(i[3]) + ' м/с 🌫')
+            temperature_forecast.append(str(i[2]) + ' - ' + str(i[5]) + ' C ☀')
 
         if not precipitation_forecast:
             precipitation_forecast.append('Без осадков☀☺')
