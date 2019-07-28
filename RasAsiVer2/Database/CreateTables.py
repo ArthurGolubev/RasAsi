@@ -136,7 +136,8 @@ class CreateTables:
         date date UNIQUE, 
         daily_sp boolean NULL DEFAULT False, 
         daily_rs_ins boolean NULL DEFAULT False, 
-        daily_read boolean NULL DEFAULT False)""")
+        daily_read boolean NULL DEFAULT False, 
+        daily_f boolean NULL DEFAULT False)""")
 
         conn.commit()
         cur.close()

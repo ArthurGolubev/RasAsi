@@ -87,6 +87,9 @@ class TodayTasksV2:
                     elif tag.startswith('daily_read'):
                         cur.execute("""INSERT INTO daily_ach (date, daily_read) VALUES (current_date, True) 
                         ON CONFLICT (date) DO UPDATE SET daily_read = True""")
+                    elif tag.startswith('daily_f'):
+                        cur.execute("""INSERT INTO daily_ach (date, daily_f) VALUES (current_date, True) 
+                        ON CONFLICT (date) DO UPDATE SET daily_read = True""")
 
                     elif tag.startswith('python') and id_task:
                         cur.execute("""INSERT INTO first_tags (python, rid_my_storage) VALUES (%s, %s)""", (True, id_task))
@@ -94,6 +97,7 @@ class TodayTasksV2:
                         cur.execute("""INSERT INTO first_tags (rs, rid_my_storage) VALUES (%s, %s)""", (True, id_task))
                     elif tag.startswith('other') and id_task:
                         cur.execute("""INSERT INTO first_tags (other, rid_my_storage) VALUES (%s, %s)""", (True, id_task))
+
 
 
                 cur.execute("""UPDATE my_storage SET completed = True, date_completed = current_date, comment = %s 
