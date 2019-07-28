@@ -74,7 +74,7 @@ class TodayTasksV2:
             conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=self._upass, host='localhost')
             cur = conn.cursor()
 
-            if i.get('notes') and id_task:
+            if i.get('notes'):
                 tags = i['notes'].split('#')[1:]
                 comment = i['notes'].split('#')[0]
 
@@ -93,11 +93,11 @@ class TodayTasksV2:
                         cur.execute("""INSERT INTO daily_ach (date, daily_read) VALUES (current_date, True) 
                         ON CONFLICT (date) DO UPDATE SET daily_read = True""")
 
-                    elif tag.startswith('python'):
+                    elif tag.startswith('python') and id_task:
                         cur.execute("""INSERT INTO first_tags (python, rid_my_storage) VALUES (%s, %s)""", (True, id_task))
-                    elif tag.startswith('rs'):
+                    elif tag.startswith('rs') and id_task:
                         cur.execute("""INSERT INTO first_tags (rs, rid_my_storage) VALUES (%s, %s)""", (True, id_task))
-                    elif tag.startswith('other'):
+                    elif tag.startswith('other') and id_task:
                         cur.execute("""INSERT INTO first_tags (other, rid_my_storage) VALUES (%s, %s)""", (True, id_task))
 
 
