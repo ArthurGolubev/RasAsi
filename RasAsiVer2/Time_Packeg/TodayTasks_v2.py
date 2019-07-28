@@ -94,7 +94,7 @@ class TodayTasksV2:
                         cur.execute("""INSERT INTO first_tags (rs, rid_my_storage) VALUES (%s, %s)""", (True, id_task))
                     elif tag.startswith('other'):
                         cur.execute("""INSERT INTO first_tags (other, rid_my_storage) VALUES (%s, %s)""", (True, id_task))
-
+                    conn.commit()
 
 
                 cur.execute("""UPDATE my_storage SET completed = True, date_completed = current_date, comment = %s 
