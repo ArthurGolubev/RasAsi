@@ -79,12 +79,15 @@ class TodayTasksV2:
 
                 for tag in tags:
                     if tag.startswith('daily_sp'):
+                        print('daily_sp - ok')
                         cur.execute("""INSERT INTO daily_ach (date, daily_sp) VALUES (current_date, True) 
                         ON CONFLICT (date) DO UPDATE SET daily_sp = True""")
                     elif tag.startswith('daily_rs_ins'):
+                        print('daily_rs_ins - ok')
                         cur.execute("""INSERT INTO daily_ach (date, daily_rs_ins) VALUES (current_date, True) 
                         ON CONFLICT (date) DO UPDATE SET daily_rs_ins = True""")
                     elif tag.startswith('daily_read'):
+                        print('daily_read - ok')
                         cur.execute("""INSERT INTO daily_ach (date, daily_read) VALUES (current_date, True) 
                         ON CONFLICT (date) DO UPDATE SET daily_read = True""")
 
@@ -94,7 +97,6 @@ class TodayTasksV2:
                         cur.execute("""INSERT INTO first_tags (rs, rid_my_storage) VALUES (%s, %s)""", (True, id_task))
                     elif tag.startswith('other'):
                         cur.execute("""INSERT INTO first_tags (other, rid_my_storage) VALUES (%s, %s)""", (True, id_task))
-                    conn.commit()
 
 
                 cur.execute("""UPDATE my_storage SET completed = True, date_completed = current_date, comment = %s 
