@@ -63,7 +63,6 @@ class TodayTasksV2:
                                       ).list_tasks(completedMin=today)
 
         for i in completed_tasks:
-            print('completed_task - ', i)
             id_task = None
 
             for i2 in self._snapshot_my_storage:
@@ -79,17 +78,13 @@ class TodayTasksV2:
                 comment = i['notes'].split('#')[0]
 
                 for tag in tags:
-                    print(f'tag - {tag}')
                     if tag.startswith('daily_sp'):
-                        print('daily_sp - ok')
                         cur.execute("""INSERT INTO daily_ach (date, daily_sp) VALUES (current_date, True) 
                         ON CONFLICT (date) DO UPDATE SET daily_sp = True""")
                     elif tag.startswith('daily_rs_ins'):
-                        print('daily_rs_ins - ok')
                         cur.execute("""INSERT INTO daily_ach (date, daily_rs_ins) VALUES (current_date, True) 
                         ON CONFLICT (date) DO UPDATE SET daily_rs_ins = True""")
                     elif tag.startswith('daily_read'):
-                        print('daily_read - ok')
                         cur.execute("""INSERT INTO daily_ach (date, daily_read) VALUES (current_date, True) 
                         ON CONFLICT (date) DO UPDATE SET daily_read = True""")
 

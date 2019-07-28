@@ -149,9 +149,9 @@ class CreateTables:
         cur.execute("""CREATE TABLE IF NOT EXISTS first_tags (
         id_tag serial PRIMARY KEY, 
         rid_my_storage int REFERENCES my_storage, 
-        python boolean, 
-        rs boolean,
-        other boolean)""")
+        python boolean DEFAULT False, 
+        rs boolean DEFAULT False,
+        other boolean DEFAULT False)""")
 
         conn.commit()
         cur.close()
