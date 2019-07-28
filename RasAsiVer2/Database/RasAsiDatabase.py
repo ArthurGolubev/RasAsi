@@ -158,11 +158,11 @@ class RasAsiDatabase:
         conn.commit()
         cur.execute("""SELECT COUNT(id_storage) FROM my_storage WHERE(
         date_completed >= current_date)""")
-        count1 = cur.fetchone()
-        count1 = count1[0]
+        count1 = cur.fetchone()[0]
+        # count1 = count1[0]
         cur.execute("""SELECT * FROM daily_ach WHERE (date = current_date)""")
-        t = cur.fetchone()
-        count2 = sum(t[2:])
+        count2 = sum(cur.fetchone()[2:])
+        # count2 = sum(t[2:])
         count = count1 + count2
         GoogleGmail().send_message(topic=f'Выполненных за сегодня {datetime.datetime.today().date()}',
                                    message_text=f"Выполнено daily'ков {count2}\n"
