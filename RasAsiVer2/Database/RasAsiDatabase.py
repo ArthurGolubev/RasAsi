@@ -160,8 +160,10 @@ class RasAsiDatabase:
         date_completed >= current_date)""")
         count1 = cur.fetchone()
         print(count1)
+        count1 = count1[0]
         cur.execute("""SELECT * FROM daily_ach WHERE (date = current_date)""")
-        count2 = sum(cur.fetchone()[2:])
+        t = cur.fetchone()
+        count2 = sum(t[2:])
         print(count2)
         input('pause\t')
         count = count1 + count2
