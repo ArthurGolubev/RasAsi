@@ -78,6 +78,7 @@ class TodayTasksV2:
                 comment = i['notes'].split('#')[0]
 
                 for tag in tags:
+                    print(f'tag - {tag}')
                     if tag.startswith('daily_sp'):
                         print('daily_sp - ok')
                         cur.execute("""INSERT INTO daily_ach (date, daily_sp) VALUES (current_date, True) 
