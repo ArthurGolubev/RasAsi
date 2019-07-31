@@ -62,53 +62,54 @@ class TodayTasksV2:
         completed_tasks = GoogleTasks(mainID='MDE2MzQwNDIxMTc3NjI1NjYwMTY6NjU5MTE0NDY0NzQyODU1Njow'
                                       ).list_tasks(completedMin=today)
 
-        for i in completed_tasks:
-            id_task = None
+        if completed_tasks:
+            for i in completed_tasks:
+                id_task = None
 
-            for i2 in self._snapshot_my_storage:
-                if i2[1] == i['title']:
-                    id_task = i2[0]
-                    break
+                for i2 in self._snapshot_my_storage:
+                    if i2[1] == i['title']:
+                        id_task = i2[0]
+                        break
 
-            conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=self._upass, host='localhost')
-            cur = conn.cursor()
+                conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=self._upass, host='localhost')
+                cur = conn.cursor()
 
-            if i.get('notes'):
-                tags = i['notes'].split('#')[1:]
-                comment = i['notes'].split('#')[0]
+                if i.get('notes'):
+                    tags = i['notes'].split('#')[1:]
+                    comment = i['notes'].split('#')[0]
 
-                for tag in tags:
-                    if tag.startswith('daily_sp'):
-                        cur.execute("""INSERT INTO daily_ach (date, daily_sp) VALUES (current_date, True) 
-                        ON CONFLICT (date) DO UPDATE SET daily_sp = True""")
-                    elif tag.startswith('daily_rs_ins'):
-                        cur.execute("""INSERT INTO daily_ach (date, daily_rs_ins) VALUES (current_date, True) 
-                        ON CONFLICT (date) DO UPDATE SET daily_rs_ins = True""")
-                    elif tag.startswith('daily_read'):
-                        cur.execute("""INSERT INTO daily_ach (date, daily_read) VALUES (current_date, True) 
-                        ON CONFLICT (date) DO UPDATE SET daily_read = True""")
-                    elif tag.startswith('daily_f'):
-                        cur.execute("""INSERT INTO daily_ach (date, daily_f) VALUES (current_date, True) 
-                        ON CONFLICT (date) DO UPDATE SET daily_read = True""")
+                    for tag in tags:
+                        if tag.startswith('daily_sp'):
+                            cur.execute("""INSERT INTO daily_ach (date, daily_sp) VALUES (current_date, True) 
+                            ON CONFLICT (date) DO UPDATE SET daily_sp = True""")
+                        elif tag.startswith('daily_rs_ins'):
+                            cur.execute("""INSERT INTO daily_ach (date, daily_rs_ins) VALUES (current_date, True) 
+                            ON CONFLICT (date) DO UPDATE SET daily_rs_ins = True""")
+                        elif tag.startswith('daily_read'):
+                            cur.execute("""INSERT INTO daily_ach (date, daily_read) VALUES (current_date, True) 
+                            ON CONFLICT (date) DO UPDATE SET daily_read = True""")
+                        elif tag.startswith('daily_f'):
+                            cur.execute("""INSERT INTO daily_ach (date, daily_f) VALUES (current_date, True) 
+                            ON CONFLICT (date) DO UPDATE SET daily_read = True""")
 
-                    elif tag.startswith('python') and id_task:
-                        cur.execute("""INSERT INTO first_tags (python, rid_my_storage) VALUES (%s, %s)""", (True, id_task))
-                    elif tag.startswith('rs') and id_task:
-                        cur.execute("""INSERT INTO first_tags (rs, rid_my_storage) VALUES (%s, %s)""", (True, id_task))
-                    elif tag.startswith('other') and id_task:
-                        cur.execute("""INSERT INTO first_tags (other, rid_my_storage) VALUES (%s, %s)""", (True, id_task))
+                        elif tag.startswith('python') and id_task:
+                            cur.execute("""INSERT INTO first_tags (python, rid_my_storage) VALUES (%s, %s)""", (True, id_task))
+                        elif tag.startswith('rs') and id_task:
+                            cur.execute("""INSERT INTO first_tags (rs, rid_my_storage) VALUES (%s, %s)""", (True, id_task))
+                        elif tag.startswith('other') and id_task:
+                            cur.execute("""INSERT INTO first_tags (other, rid_my_storage) VALUES (%s, %s)""", (True, id_task))
 
 
 
-                cur.execute("""UPDATE my_storage SET completed = True, date_completed = current_date, comment = %s 
-                                WHERE (id_storage = %s)""", (comment, id_task))             # обновление my_storage
-            else:
-                cur.execute("""UPDATE my_storage SET completed = True, date_completed = current_date 
-                WHERE (id_storage = %s)""", (id_task,))                                     # обновление my_storage
+                    cur.execute("""UPDATE my_storage SET completed = True, date_completed = current_date, comment = %s 
+                                    WHERE (id_storage = %s)""", (comment, id_task))             # обновление my_storage
+                else:
+                    cur.execute("""UPDATE my_storage SET completed = True, date_completed = current_date 
+                    WHERE (id_storage = %s)""", (id_task,))                                     # обновление my_storage
 
-            conn.commit()
-            cur.close()
-            conn.close()
+                conn.commit()
+                cur.close()
+                conn.close()
 
     def put_v2(self, content):
         """
