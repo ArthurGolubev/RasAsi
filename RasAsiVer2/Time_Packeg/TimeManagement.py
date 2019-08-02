@@ -12,7 +12,7 @@ from RasAsiVer2.Database.RasAsiDatabase import RasAsiDatabase
 from RasAsiVer2.Time_Packeg.TodayTasks_v2 import TodayTasksV2
 from RasAsiVer2.Time_Packeg.TransportCard import TransportCard
 from RasAsiVer2.Decorators.Decorators import logging_decorator
-from RasAsiVer2.Weather_Packeg.WeatherToday import WeatherToday
+from RasAsiVer2.Weather_Packeg.WeatherForecast import WeatherForecast
 from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
 from RasAsiVer2.addiction_support.psutil_temperature import TemperatureSensor
 
@@ -43,6 +43,7 @@ class TimeManagement:
             'weather': None,        # switch
             '00:00': None,          # switch
             '01:00': None,          # switch
+            '01:10': None,          # switch
             '03:00': None,          # switch
             '23:50': None,          # switch
 
@@ -74,15 +75,18 @@ class TimeManagement:
                         elif message['topic'] == 'Проездной':
                             TransportCard(who='me').transport_card()
                         elif message['topic'] == 'Погода':
-                            WeatherToday(upass=self.upass).weather_today()
+                            WeatherForecast(upass=self.upass).weather_today()
                         elif message['topic'] == 'Прогноз':
                             RasAsiDatabase().daily_forecast(upass=self.upass)
+                        elif message['topic'] == 'Прогноз завтра':
+                            RasAsiDatabase().daily_forecast(upass=self.upass, tomorrow=True)
                         else:
                             self._unsupported_command(message['topic'], message['content'])
 
             if cTime.hour == 0 and cTime.minute in [0, 1, 2]:
                 self.cache_variables['00:00'] = 0       # nullification (new day)
                 self.cache_variables['01:00'] = 0       # nullification (new day)
+                self.cache_variables['01:10'] = 0       # nullification (new day)
                 self.cache_variables['03:00'] = 0       # nullification (new day)
                 self.cache_variables['23:50'] = 0       # nullification (new day)
                 self.cache_variables['weather'] = 0     # nullification (new day)
@@ -96,10 +100,13 @@ class TimeManagement:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['01:00']:
                     self.cache_variables['01:00'] = 1
                     TransportCard(who='me').transport_card()
+                elif cTime.minute in [8, 9, 10] and not self.cache_variables['01:10']:
+                    self.cache_variables['01:10'] = 1
+                    WeatherForecast(upass=self.upass).weather_today(tomorrow=True)
             elif cTime.hour == 3:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['03:00']:
                     self.cache_variables['03:00'] = 1
-                    WeatherToday(upass=self.upass).weather_today()
+                    WeatherForecast(upass=self.upass).weather_today()
                     self.cache_variables['weather'] = 1
             elif cTime.hour == 8:
                 if cTime.minute in [0, 1, 2] and not self.cache_variables['tasks_taken']:

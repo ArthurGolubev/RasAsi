@@ -51,34 +51,36 @@ class RasAsiDatabase:
         else:
             print(f'Платформа {platform} не поддерживается\nБэкап базы данных не совершён')
 
-    def daily_forecast(self, upass):
+    def daily_forecast(self, upass, tomorrow=False):
 
         """
 
         :return: список с ['датавремя - осадки',]
         """
-        forecast = []
-        precipitation_forecast= []
+        precipitation_forecast = []
         temperature_forecast = []
         wind_forecast = []
 
         conn = psycopg2.connect(dbname='rasasi_database', user='rasasi', password=upass, host='localhost')
         cur = conn.cursor()
 
-        cur.execute(
-            """SELECT * FROM "weather_journal" WHERE (
-            "time" >= %s AND
-            "time" < %s AND
-            "id_place" = 1)""", (
-            datetime.datetime.today().date(),
-            datetime.datetime.today().date()+datetime.timedelta(days=1)))
+        if not tomorrow:
+            cur.execute(
+                """SELECT * FROM "weather_journal" WHERE (
+                "time" >= %s AND
+                "time" < %s AND
+                "id_place" = 1)""", (
+                datetime.datetime.today().date(),
+                datetime.datetime.today().date()+datetime.timedelta(days=1)))
+        else:
+            cur.execute(
+                """SELECT * FROM "weather_journal_tomorrow" WHERE (
+                "time" >= %s AND
+                "time" < %s AND
+                "id_place" = 1)""", (
+                    datetime.datetime.today().date() + datetime.timedelta(days=1),
+                    datetime.datetime.today().date() + datetime.timedelta(days=2)))
 
-        # cur.execute(
-        #     """SELECT * FROM weather_journal WHERE (
-        #     time >= '2019-07-01' AND
-        #     time < '2019-07-02' AND
-        #     id_place = 1)"""
-        # )
         response = cur.fetchall()
 
         cur.close()
@@ -116,11 +118,12 @@ class RasAsiDatabase:
                                    f'Температура:\n{temperature_forecast}'
                                    )
 
-
-    def append_database_today_weather(self, values, upass):  # TODO Сделать плейсхолдер в какую таблицу записывать (сегодня/завтра)
+    def append_database_weather(self, values, upass, tomorrow=False):
 
         """
 
+        :param upass: database password
+        :param tomorrow: add date to table weather_journal or weather_journal_tomorrow
         :param values: [(1, 1, datetime.datetime(2019, 7, 13, 23, 46, 34, 360336), 4, 0.2, 32, 90, 10, 1017, 768), (...)]
         :return: Nothing
         """
@@ -128,13 +131,22 @@ class RasAsiDatabase:
         conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=upass, host='localhost')
         cur = conn.cursor()
 
-        execute_values(cur,
-                       """INSERT INTO "weather_journal" (
-                       id_place, time, Wind_mps, Precipitation_mm, Temperature_c, Cloudiness_percent, 
-                       Humidity_percent, Atmosphere_pressure_hpa, Atmosphere_pressure_mmhg
-                       ) VALUES %s""",
-                       values)
-
+        if tomorrow:
+            execute_values(cur,
+                           """INSERT INTO "weather_journal_tomorrow" (
+                           id_place, time, Wind_mps, Precipitation_mm, Temperature_c, Cloudiness_percent, 
+                           Humidity_percent, Atmosphere_pressure_hpa, Atmosphere_pressure_mmhg
+                           ) VALUES %s""",
+                           values)
+            print('tomorrow_weather')
+        else:
+            execute_values(cur,
+                           """INSERT INTO "weather_journal" (
+                           id_place, time, Wind_mps, Precipitation_mm, Temperature_c, Cloudiness_percent, 
+                           Humidity_percent, Atmosphere_pressure_hpa, Atmosphere_pressure_mmhg
+                           ) VALUES %s""",
+                           values)
+            print('today_weather')
         conn.commit()
         cur.close()
         conn.close()
@@ -159,10 +171,8 @@ class RasAsiDatabase:
         cur.execute("""SELECT COUNT(id_storage) FROM my_storage WHERE(
         date_completed >= current_date)""")
         count1 = cur.fetchone()[0]
-        # count1 = count1[0]
         cur.execute("""SELECT * FROM daily_ach WHERE (date = current_date)""")
         count2 = sum(cur.fetchone()[2:])
-        # count2 = sum(t[2:])
         count = count1 + count2
         GoogleGmail().send_message(topic=f'Выполненных за сегодня {datetime.datetime.today().date()}',
                                    message_text=f"Выполнено daily'ков {count2}\n"

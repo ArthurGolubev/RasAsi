@@ -175,12 +175,33 @@ class CreateTables:
         cur.close()
         conn.close()
 
+    def create_weather_journal_tomorrow(self):
+        conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=self.upass, host='localhost')
+        cur = conn.cursor()
+
+        cur.execute("""CREATE TABLE IF NOT EXISTS "weather_journal_tomorrow" (
+                id_weather_journal serial PRIMARY KEY, 
+                id_place integer REFERENCES my_place,  
+                time timestamp, 
+                wind_mps integer, 
+                precipitation_mm real, 
+                temperature_c integer, 
+                cloudiness_percent integer, 
+                humidity_percent integer, 
+                atmosphere_pressure_hpa integer, 
+                atmosphere_pressure_mmhg integer)""")
+
+        conn.commit()
+        cur.close()
+        conn.close()
+
     def create_all_tables(self):
         self.create_lenta()
         self.migration_my_storage()
         self.create_first_tags()
         self.create_daily_ach()
         self.ct_m_weather_journal()
+        self.create_weather_journal_tomorrow()
 
 if __name__ == '__main__':
     query = """SELECT"""

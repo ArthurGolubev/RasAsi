@@ -20,15 +20,17 @@ class Weather:
 
     temp = TemperatureSensor()
 
-    def __init__(self, place, upass, feature=None, spreadsheetId=None):
+    def __init__(self, place, upass, feature=None, tomorrow=False):
+        self.tomorrow=tomorrow
         self.upass = upass
         self._table = GoogleSpreadsheet()
-        self.spreadsheetId = spreadsheetId
         self.place = place
-        # self.date = (datetime.now()+timedelta(1)).strftime('%d.%m.%Y')      # next day weather
-        self.date = datetime.now().strftime('%d.%m.%Y')                     # today weather
-        # self.tomorrow = (datetime.now()+timedelta(1)).date().day            # next day weather
-        self.tomorrow = datetime.now().date().day                           # today  weather
+        if not tomorrow:
+            self.date = datetime.now().strftime('%d.%m.%Y')                     # today weather
+            self.tomorrow = datetime.now().date().day                           # today  weather
+        else:
+            self.date = (datetime.now()+timedelta(1)).strftime('%d.%m.%Y')      # next day weather
+            self.tomorrow = (datetime.now()+timedelta(1)).date().day            # next day weather
 
         if not feature:
             self.feature = ["Скорость ветра", "Осадки", "Температура",
@@ -68,10 +70,10 @@ class Weather:
             values=self._weather.GoogleSpreadsheet_dict_formation()[1:],
             range_name=range_)
 
-    def append_database(self):
-        RasAsiDatabase().append_database_today_weather(values=self._weather.database_list_formation(
+    def append_database(self, tomorrow=False):
+        RasAsiDatabase().append_database_weather(values=self._weather.database_list_formation(
             place=self.place,
-            upass=self.upass), upass=self.upass)
+            upass=self.upass), upass=self.upass, tomorrow=tomorrow)
         # append_today_weather(values=self._weather.database_list_formation(place=self.place, upass=self.upass),
         #                      upass=self.upass)
 

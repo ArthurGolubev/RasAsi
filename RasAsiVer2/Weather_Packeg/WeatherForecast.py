@@ -3,7 +3,7 @@ from RasAsiVer2.Decorators.Decorators import logging_decorator
 from RasAsiVer2.Weather_Packeg.WeatherChart import WeatherChart
 
 
-class WeatherToday:
+class WeatherForecast:
     Krasnoyarsk_spreadsheetId = '1fgjOxFNxjnUIRRIA60xnWCpYyLRg0txuazimsbg1Km4'
     Novosibirsk_spreadsheetId = '1LZF9yopCmDpUUkjSPSu4krwwJ0IFOHV7Qioz_4SuFm0'
 
@@ -11,18 +11,16 @@ class WeatherToday:
         self.upass = upass
 
     # @logging_decorator
-    def weather_today(self):  # TODO передавать параметр в кокую таблицу погоды записывать (сегодня/завтра)
-         # TODO Передавать параметр, какой сборшик погоды запускать (сегодня/завтра)
-        Krasnoyarsk = Weather(place='krasnoyarsk', upass=self.upass)
+    def weather_today(self, tomorrow=False):
+        Krasnoyarsk = Weather(place='krasnoyarsk', upass=self.upass, tomorrow=tomorrow)
         Krasnoyarsk.get_weather()
         Krasnoyarsk.append_spreadsheet(spreadsheet_id=self.Krasnoyarsk_spreadsheetId)
+        Krasnoyarsk.append_database(tomorrow=tomorrow)
 
-        Novosibirsk = Weather(place='novosibirsk', upass=self.upass)
+        Novosibirsk = Weather(place='novosibirsk', upass=self.upass, tomorrow=tomorrow)
         Novosibirsk.get_weather()
         Novosibirsk.append_spreadsheet(spreadsheet_id=self.Novosibirsk_spreadsheetId)
-
-        Krasnoyarsk.append_database()
-        Novosibirsk.append_database()
+        Novosibirsk.append_database(tomorrow=tomorrow)
 
         WeatherChart(upass=self.upass).chart()
 
