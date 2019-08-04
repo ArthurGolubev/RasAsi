@@ -78,7 +78,7 @@ class TimeManagement:
                             WeatherForecast(upass=self.upass).weather_today()
                         elif message['topic'] == 'Прогноз':
                             RasAsiDatabase().daily_forecast(upass=self.upass)
-                        elif message['topic'] == 'Прогноз завтра':
+                        elif message['topic'] == 'Прогноз на завтра':
                             RasAsiDatabase().daily_forecast(upass=self.upass, tomorrow=True)
                         else:
                             self._unsupported_command(message['topic'], message['content'])
