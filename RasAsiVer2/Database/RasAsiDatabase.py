@@ -195,7 +195,7 @@ class RasAsiDatabase:
         cur = conn.cursor()
 
         cur.execute("""INSERT INTO map_location (latitude, longitude, date) VALUES (%s, %s, current_date)""",
-                    (location[0], location[1]))
+                    (float(location[0]), (float(location[1]))))
 
         conn.commit()
         cur.close()

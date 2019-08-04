@@ -43,6 +43,7 @@ class GoogleDrive:
         :param files: files = (('/path/to/file', None), ('/path/to/file', application/vnd.google-apps.document), (...))
         :return: Nothing
         """
+
         name = os.path.basename(files)
         print(name)
         files = ((files, None),)
