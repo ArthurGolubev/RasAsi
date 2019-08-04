@@ -80,6 +80,8 @@ class TimeManagement:
                             RasAsiDatabase().daily_forecast(upass=self.upass)
                         elif message['topic'] == 'Прогноз на завтра':
                             RasAsiDatabase().daily_forecast(upass=self.upass, tomorrow=True)
+                        elif message['topic'] == 'Локация':
+                            RasAsiDatabase().add_map_location(location=message['content'], upass=self.upass)
                         else:
                             self._unsupported_command(message['topic'], message['content'])
 

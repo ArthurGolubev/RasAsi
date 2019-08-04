@@ -8,7 +8,7 @@ from RasAsiVer2.addiction_support.psutil_temperature import TemperatureSensor
 from RasAsiVer2.Database.RasAsiDatabase import RasAsiDatabase
 
 
-class Weather:
+class Weather:  # TODO сделать наследование от GetWeather
 
     if platform == 'win32':
         executable_path = r'C:\PycharmProjects\RasAsi\credentials\geckodriver.exe'  # Laptop

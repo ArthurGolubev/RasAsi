@@ -181,3 +181,40 @@ class RasAsiDatabase:
 
         cur.close()
         conn.close()
+
+    def add_map_location(self, location, upass):
+        location = location.split(' ')
+
+        """
+
+        :param location: (int(x), int(y))
+        :param upass: db password
+        :return:
+        """
+        conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=upass, host='localhost')
+        cur = conn.cursor()
+
+        cur.execute("""INSERT INTO map_location (latitude, longitude, date) VALUES (%s, %s, current_date)""",
+                    (location[0], location[1]))
+
+        conn.commit()
+        cur.close()
+        conn.close()
+
+    def get_map_location(self, upass):
+
+        """
+
+        :param upass: db password
+        :return: [(id_location, decimal, decimal, datetime.date), ]
+        """
+        conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=upass, host='localhost')
+        cur = conn.cursor()
+
+        cur.execute("""SELECT * FROM map_location""")
+        locations = cur.fetchall()
+
+        cur.close()
+        conn.close()
+
+        return locations

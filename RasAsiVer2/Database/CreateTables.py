@@ -195,6 +195,20 @@ class CreateTables:
         cur.close()
         conn.close()
 
+    def create_location(self):
+        conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=self.upass, host='localhost')
+        cur = conn.cursor()
+
+        cur.execute("""CREATE TABLE IF NOT EXISTS map_location (
+        id_location serial PRIMARY KEY, 
+        latitude numeric, 
+        longitude numeric, 
+        date date)""")
+
+        conn.commit()
+        cur.close()
+        conn.close()
+
     def create_all_tables(self):
         self.create_lenta()
         self.migration_my_storage()
@@ -202,6 +216,8 @@ class CreateTables:
         self.create_daily_ach()
         self.ct_m_weather_journal()
         self.create_weather_journal_tomorrow()
+        self.create_location()
+
 
 if __name__ == '__main__':
     query = """SELECT"""
