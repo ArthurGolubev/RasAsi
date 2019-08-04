@@ -1,8 +1,6 @@
- # TODO сделать метод и соответствующую таблицу для сбора погоды на следующий день
-  # потом можно будет сделать график, который сравнивает отличия прогноза на сегодня и прогноза на день вперёд
-  # (текущего дня и сделанного вчера прогноза на сегодня)
 from time import sleep
 from getpass import getpass
+from RasAsiVer2.Map.Map import Map
 from psycopg2 import OperationalError
 from datetime import datetime, timedelta
 from RasAsiVer2.Google.GoogleGmail import GoogleGmail
@@ -12,10 +10,9 @@ from RasAsiVer2.Database.RasAsiDatabase import RasAsiDatabase
 from RasAsiVer2.Time_Packeg.TodayTasks_v2 import TodayTasksV2
 from RasAsiVer2.Time_Packeg.TransportCard import TransportCard
 from RasAsiVer2.Decorators.Decorators import logging_decorator
-from RasAsiVer2.Weather_Packeg.WeatherForecast import WeatherForecast
 from RasAsiVer2.Google.GoogleSpreadsheets import GoogleSpreadsheet
+from RasAsiVer2.Weather_Packeg.WeatherForecast import WeatherForecast
 from RasAsiVer2.addiction_support.psutil_temperature import TemperatureSensor
-
 
 class TimeManagement:
     temp = TemperatureSensor()
@@ -82,6 +79,8 @@ class TimeManagement:
                             RasAsiDatabase().daily_forecast(upass=self.upass, tomorrow=True)
                         elif message['topic'] == 'Локация':
                             RasAsiDatabase().add_map_location(location=message['content'], upass=self.upass)
+                        elif message['topic'] == 'Карта':
+                            Map().show_places(upass=self.upass)
                         else:
                             self._unsupported_command(message['topic'], message['content'])
 
