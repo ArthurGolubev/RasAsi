@@ -73,6 +73,8 @@ class TimeManagement:
                             TransportCard(who='me').transport_card()
                         elif message['topic'] == 'Погода':
                             WeatherForecast(upass=self.upass).weather_today()
+                        elif message['topic'] == 'Погода на завтра':
+                            WeatherForecast(upass=self.upass).weather_today(tomorrow=True)
                         elif message['topic'] == 'Прогноз':
                             RasAsiDatabase().daily_forecast(upass=self.upass)
                         elif message['topic'] == 'Прогноз на завтра':

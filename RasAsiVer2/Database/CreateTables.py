@@ -195,7 +195,7 @@ class CreateTables:
         cur.close()
         conn.close()
 
-    def create_location(self):
+    def create_map_location(self):
         conn = psycopg2.connect(database='rasasi_database', user='rasasi', password=self.upass, host='localhost')
         cur = conn.cursor()
 
@@ -216,7 +216,7 @@ class CreateTables:
         self.create_daily_ach()
         self.ct_m_weather_journal()
         self.create_weather_journal_tomorrow()
-        self.create_location()
+        self.create_map_location()
 
 
 if __name__ == '__main__':
