@@ -83,6 +83,8 @@ class TimeManagement:
                             RasAsiDatabase().add_map_location(location=message['content'], upass=self.upass)
                         elif message['topic'] == 'Карта':
                             Map().show_places(upass=self.upass)
+                        elif message['topic'] == 'Дай мне место':
+                            Map().get_place()
                         else:
                             self._unsupported_command(message['topic'], message['content'])
 

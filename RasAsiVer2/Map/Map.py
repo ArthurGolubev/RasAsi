@@ -8,7 +8,7 @@ from RasAsiVer2.Database.RasAsiDatabase import RasAsiDatabase
 
 class Map:
 
-    def get_map(self):
+    def get_place(self):
         x = random.uniform(0, 80)
         y = random.uniform(0, 180)
 
